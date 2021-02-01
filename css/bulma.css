@@ -2,3 +2,8 @@
     background-color: lightgray;
     
 }
+
+.invis {
+    visibility: hidden;
+    display: none;
+}

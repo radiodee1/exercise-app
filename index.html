@@ -145,7 +145,7 @@
 
       <div id="listing">
         <ul>
-          <li v-for="(article, index) in feed">
+          <li v-for="(article, index) in feed" v-bind:key="index">
             {{ article.message }}  {{ index }}
           
 
@@ -168,7 +168,7 @@
           </div>
         </div>
         <!-- three contents -->
-        <div class="content" v-if="article.show_exercise" >
+        <div class="content" v-if="article.show_exercise" v-bind:class=" [article.show_exercise ? '' : 'invis' ]">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Phasellus nec iaculis mauris. <a>@bulmaio</a>.
           <a href="#">#css</a> <a href="#">#responsive</a>
@@ -176,7 +176,7 @@
           <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
         </div>
 
-        <div class="content" v-if="article.show_message">
+        <div class="content" v-if="article.show_message" v-bind:class="[ 'article.show_message' ? '' : 'invis' ]">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Phasellus nec iaculis mauris. <a>@bulmaio</a>.
           <a href="#">#css</a> <a href="#">#responsive</a>
@@ -184,7 +184,7 @@
           <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
         </div>
 
-        <div class="content" v-if="article.show_workout">
+        <div class="content" v-if="article.show_workout" v-bind:class="[ 'article.show_workout' ? '' : 'invis' ]">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Phasellus nec iaculis mauris. <a>@bulmaio</a>.
           <a href="#">#css</a> <a href="#">#responsive</a>

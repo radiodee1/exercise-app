@@ -14,7 +14,12 @@ function doLoad() {
 
       listing = new Vue({
         el: '#listing',
-        data: data
+        data: data,
+        methods: {
+          addNewFeed: function () {
+            data.feed.push(tree);
+          }
+        }
       });
 
       visibility = new Vue({
@@ -28,8 +33,8 @@ function doLoad() {
         }
       });
 
-      listing.feed[0].show_workout = true;
-
+      //listing.feed[0].show_workout = true;
+      listing.$forceUpdate();
   }
     
   $(document).ready(function() {
