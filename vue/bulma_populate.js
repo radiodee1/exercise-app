@@ -2,6 +2,7 @@
 
 
 tree = {
+    index_item: 0,
 
     feed: 
     [ // list of feed items...

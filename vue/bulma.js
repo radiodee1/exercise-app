@@ -17,8 +17,37 @@ function doLoad() {
         data: data,
         methods: {
           addNewFeed: function () {
-            data.feed.push(tree);
+            data.feed.push(tree2.feed[0]);
+            console.log(data.feed.length + " is length.");
+          },
+          forceUpdate: function () {
+            this.$forceUpdate();
+            console.log("at force update...");
+            this.index_item += 1;
+          },
+          
+          classWorkout: function (i) {
+            //console.log(i);
+            var x = Boolean(i.show_workout);
+            if (x === true) return 'visi';
+            else return 'invis';
+          },
+          classMessage: function (i) {
+            //console.log(i);
+            var x = Boolean(i.show_message);
+            if (x === true) return 'visi';
+            else return 'invis';
+          },
+          classExercise: function (i) {
+            //console.log(i);
+            var x = Boolean(i.show_exercise);
+            if (x === true) return 'visi';
+            else return 'invis';
           }
+          
+        },
+        computed: {
+          // none here
         }
       });
 
@@ -34,13 +63,13 @@ function doLoad() {
       });
 
       //listing.feed[0].show_workout = true;
-      listing.$forceUpdate();
+      //listing.$forceUpdate();
   }
     
-  $(document).ready(function() {
+  //$(document).ready(function() {
       /* new app(); */
-      doLoad();
-  })
+  doLoad();
+  //})
       
   function focusRegister() {
     visibility.register = true;

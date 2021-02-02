@@ -6,10 +6,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
   <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script -->
   <script src="vue/bulma_populate.js"></script>
 
-  <script src="vue/bulma.js"></script>
+  <!-- script src="vue/bulma.js"></script -->
 
   <link rel="stylesheet" href="css/bulma.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -99,45 +99,13 @@
 <section class="section" v-if="newsfeed">
 <div class="columns">
   <div class="column">
-    First column
+    
     <!-- blank column-->
     <!-- end blank column -->
   </div>
-  <div class="column  ">
-    Second column
-    <!-- start card column 2-->
-    <div class="card">
-      <div class="card-image">
-        <figure class="image is-4by3">
-          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-        </figure>
-      </div>
-      <div class="card-content">
-        <div class="media">
-          <div class="media-left">
-            <figure class="image is-48x48">
-              <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-            </figure>
-          </div>
-          <div class="media-content">
-            <p class="title is-4">John Smith</p>
-            <p class="subtitle is-6">@johnsmith</p>
-          </div>
-        </div>
-    
-        <div class="content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-          <a href="#">#css</a> <a href="#">#responsive</a>
-          <br>
-          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-        </div>
-      </div>
-    </div>
-    <!-- end card column 2 -->
-  </div>
+  
   <div class="column is-half">
-    Third column
+    Second column
     <!-- vue start -->
     <div id="app">
         {{ message }}
@@ -168,7 +136,10 @@
           </div>
         </div>
         <!-- three contents -->
-        <div class="content" v-if="article.show_exercise" v-bind:class=" [article.show_exercise ? 'visi' : 'invis' ]">
+        {{classExercise(article)}} {{article.show_exercise}} ;
+        {{classMessage(article)}} {{article.show_message}} ;
+        {{classWorkout(article)}} {{article.show_workout}} ;
+        <div class="content"  v-bind:class=" classExercise(article)">
           exercise - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Phasellus nec iaculis mauris. <a>@bulmaio</a>.
           <a href="#">#css</a> <a href="#">#responsive</a>
@@ -176,7 +147,7 @@
           <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
         </div>
 
-        <div class="content" v-if="article.show_message" v-bind:class="[ 'article.show_message' ? 'visi' : 'invis' ]">
+        <div class="content"  v-bind:class=" classMessage(article)">
           message - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Phasellus nec iaculis mauris. <a>@bulmaio</a>.
           <a href="#">#css</a> <a href="#">#responsive</a>
@@ -184,7 +155,7 @@
           <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
         </div>
 
-        <div class="content" v-if="article.show_workout" v-bind:class="[ 'article.show_workout' ? 'visi' : 'invis' ]">
+        <div class="content"  v-bind:class=" classWorkout(article)">
           workout - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Phasellus nec iaculis mauris. <a>@bulmaio</a>.
           <a href="#">#css</a> <a href="#">#responsive</a>
@@ -199,6 +170,7 @@
       </div>
 <!-- vue end -->
   </div>
+  <div class="column"></div>
 </div>  
 </section>
 <!-- end news feed -->
@@ -421,6 +393,6 @@
 </div>
 
 </body>
-<!-- script src="vue/bulma.js"></script -->
+<script src="vue/bulma.js"></script>
 
   </html>
