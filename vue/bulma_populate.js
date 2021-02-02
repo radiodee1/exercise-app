@@ -1,12 +1,15 @@
 
 
+// hard coded output
 
 tree = {
-    index_item: 0,
+    //index_item: 0,
 
     feed: 
     [ // list of feed items...
       {
+        visible: true,
+
         show_message: true,
         show_exercise: true,
         show_workout: false,
@@ -41,54 +44,27 @@ tree = {
     
   };
 
-  tree2 = {
+  
 
-    feed: 
-    [ // list of feed items...
-      {
-        show_message: true,
-        show_exercise: true,
-        show_workout: false,
-        
-        picture_large: null,
-        picture_small: null,
+tree2 = JSON.stringify(tree);
+subtree = JSON.stringify(tree.feed[0]);
+tree2 = JSON.parse(tree2);
+subtree = JSON.parse(subtree);
 
-        message: "hello-world",
-
-        messsage_obj : { //big message
-          from: "",
-          to: "",
-          message: ""
-        },
-        exercise_obj : { //exercise post
-          reps: "",
-          weight: "",
-          label: ""
-        },
-        workout_obj: { // combined exercises
-          exercise_list: [
-            { exercise_id: 0 , reps: "", weight: "", label: ""},
-            { exercise_id: 1 , reps: "", weight: "", label: ""}
-          ]
-        },
-        message_list: [ // little messages
-          { message: "one message." },
-          { message: "another message."}
-        ]
-      }
-    ]
-    
-  };
-
-
+subtree.visible = false;
+for (var x = 0; x < 20; x ++) {
+  tree.feed.push(subtree);
+};
 
 data = tree;
-data.feed.push(tree2.feed[0]);
+data.feed[3] = tree2.feed[0];
 data.feed[0].show_workout = true;
 
 //console.log(data.feed);
 
-Vue.component('feed-item', {
+/*
+
+compFeed = Vue.component('feed-item', {
   name: 'feed-item',
   data: function () {
     return {
@@ -178,4 +154,13 @@ Vue.component('feed-item', {
 </div>`
 });
 
-//components = new Vue({ el: '#components' });
+vm = new Vue({
+  el: "#components",
+  data: {}
+})
+
+//compFeed.$mount();
+
+//this.$refs.components.appendChild(compFeed.$el);
+
+*/

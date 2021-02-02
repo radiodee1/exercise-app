@@ -4,23 +4,25 @@
 //console.log(data);
 
 function doLoad() {
-
+    /*
     var app = new Vue({
       el: '#app',
       data: {
         message: 'Hello World!'
       }
     });
+    */
 
       listing = new Vue({
         el: '#listing',
         data: data,
         methods: {
           addNewFeed: function () {
-            data.feed.push(tree2.feed[0]);
+            this.$data.feed.push(tree2.feed[0]);
             console.log(data.feed.length + " is length.");
           },
           forceUpdate: function () {
+            
             this.$forceUpdate();
             console.log("at force update...");
             this.index_item += 1;
@@ -43,6 +45,12 @@ function doLoad() {
             var x = Boolean(i.show_exercise);
             if (x === true) return 'visi';
             else return 'invis';
+          },
+          classCard: function (i) {
+            //console.log(i);
+            var x = Boolean(i.visible);
+            if (x === true) return 'visi';
+            else return 'invis';
           }
           
         },
@@ -62,9 +70,11 @@ function doLoad() {
         }
       });
 
-      listing.feed.push(tree2.feed[0]);
+      listing.addNewFeed();
       //listing.feed[0].show_workout = true;
       listing.forceUpdate();
+      
+      //listing.$set(this.data, 'newid', tree2);
   }
     
   //$(document).ready(function() {
