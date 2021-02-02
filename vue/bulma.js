@@ -1,7 +1,7 @@
 
 //const data = require("./bulma_populate.js");
 
-console.log(data);
+//console.log(data);
 
 function doLoad() {
 
@@ -62,8 +62,9 @@ function doLoad() {
         }
       });
 
+      listing.feed.push(tree2.feed[0]);
       //listing.feed[0].show_workout = true;
-      //listing.$forceUpdate();
+      listing.forceUpdate();
   }
     
   //$(document).ready(function() {
@@ -99,4 +100,3 @@ function doLoad() {
     visibility.home = true;
     visibility.banner = true;
   }
-

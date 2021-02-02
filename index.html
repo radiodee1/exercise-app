@@ -111,11 +111,15 @@
         {{ message }}
       </div>
 
+      <div id="components">
+        <feed-item></feed-item>  
+      </div>  
       <div id="listing">
         <ul>
           <li v-for="(article, index) in feed" v-bind:key="index">
             {{ article.message }}  {{ index }}
-          
+
+    
 
     <div class="card">
       <div class="card-image">
