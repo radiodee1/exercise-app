@@ -67,49 +67,7 @@ data.feed[0].show_workout = true;
 
 //console.log(data.feed);
 
-/*
-
-compFeed = Vue.component('feed-item', {
-  name: 'feed-item',
-  data: function () {
-    return {
-      article: tree2.feed[0]
-      
-    }
-  },
-  //props: ['article', 'message'],
-  methods: {
-    addNewFeed: function () {
-      data.feed.push(tree2.feed[0]);
-      console.log(data.feed.length + " is length.");
-    },
-    forceUpdate: function () {
-      this.$forceUpdate();
-      console.log("at force update...");
-      this.index_item += 1;
-    },
-    
-    classWorkout: function (i) {
-      //console.log(i);
-      var x = Boolean(i.show_workout);
-      if (x === true) return 'visi';
-      else return 'invis';
-    },
-    classMessage: function (i) {
-      //console.log(i);
-      var x = Boolean(i.show_message);
-      if (x === true) return 'visi';
-      else return 'invis';
-    },
-    classExercise: function (i) {
-      //console.log(i);
-      var x = Boolean(i.show_exercise);
-      if (x === true) return 'visi';
-      else return 'invis';
-    }
-    
-  },
-  template: `<div class="card">
+template = `<div class="card">
   <div class="card-image">
     <figure class="image is-4by3">
       <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
@@ -157,6 +115,48 @@ compFeed = Vue.component('feed-item', {
     <!-- end three contents -->
   </div>
 </div>`
+
+compFeed = Vue.component('feed-item', {
+  name: 'feed-item',
+  data: function () {
+    return {
+      article: tree2.feed[0]
+      
+    }
+  },
+  //props: ['article', 'message'],
+  methods: {
+    addNewFeed: function () {
+      data.feed.push(tree2.feed[0]);
+      console.log(data.feed.length + " is length.");
+    },
+    forceUpdate: function () {
+      this.$forceUpdate();
+      console.log("at force update...");
+      this.index_item += 1;
+    },
+    
+    classWorkout: function (i) {
+      //console.log(i);
+      var x = Boolean(i.show_workout);
+      if (x === true) return 'visi';
+      else return 'invis';
+    },
+    classMessage: function (i) {
+      //console.log(i);
+      var x = Boolean(i.show_message);
+      if (x === true) return 'visi';
+      else return 'invis';
+    },
+    classExercise: function (i) {
+      //console.log(i);
+      var x = Boolean(i.show_exercise);
+      if (x === true) return 'visi';
+      else return 'invis';
+    }
+    
+  },
+  template: template
 });
 
 vm = new Vue({
@@ -168,4 +168,3 @@ vm = new Vue({
 
 //this.$refs.components.appendChild(compFeed.$el);
 
-*/

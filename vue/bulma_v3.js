@@ -1,8 +1,4 @@
 
-//const data = require("./bulma_populate.js");
-
-//console.log(data);
-
 function doLoad() {
     
 
@@ -79,7 +75,53 @@ function doLoad() {
       const subVisibility = Vue.createApp(visibility);
       appVisibility = subVisibility.mount('#visibility');
 
+      vm = Vue.createApp({});
+      
+      vm.component('feedtemplate', {
+        data() {
+          return {
+            article: tree.feed[0]
+          }
+        },
+        methods: {
+          addNewFeed: function () {
+            data.feed.push(tree2.feed[0]);
+            console.log(data.feed.length + " is length.");
+          },
+          forceUpdate: function () {
+            this.$forceUpdate();
+            console.log("at force update...");
+            this.index_item += 1;
+          },
+          
+          classWorkout: function (i) {
+            //console.log(i);
+            var x = Boolean(i.show_workout);
+            if (x === true) return 'visi';
+            else return 'invis';
+          },
+          classMessage: function (i) {
+            //console.log(i);
+            var x = Boolean(i.show_message);
+            if (x === true) return 'visi';
+            else return 'invis';
+          },
+          classExercise: function (i) {
+            //console.log(i);
+            var x = Boolean(i.show_exercise);
+            if (x === true) return 'visi';
+            else return 'invis';
+          }
+          
+        },
+        template: template 
+      });
+      appVm = vm.mount('#feeditem');
+      
+      
 
+
+     
       appListing.addNewFeed();
       //listing.feed[0].show_workout = true;
       
