@@ -6,29 +6,31 @@
 function doLoad() {
     
 
-      listing = new Vue({
-        el: '#listing',
-        data: data,
+      const listing = {
+        
+        data() { return data } ,
         methods: {
           addNewFeed: function () {
             this.$data.feed.push(tree2.feed[0]);
             console.log(data.feed.length + " is length.");
           },
-          forceUpdate: function () {
+          
+          doUpdate: function () {
             this.message = "";
             
             this.$forceUpdate();
             console.log("at force update...");
           },
+          
           watchFeed: function () {
             z = [];
-            for( x = 0; x < this.feed.length; x ++) {
-              z.push(this.feed[x])
+            for( x = 0; x < this.$data.feed.length; x ++) {
+              z.push(this.$data.feed[x])
               //this.$watch(() => this.feed[x], this.forceUpdate);
             }
             console.log(z);
             
-            this.$watch(() => z, this.forceUpdate);
+            this.$watch(() => z, this.doUpdate);
           },
           classWorkout: function (i) {
             //console.log(i);
@@ -59,23 +61,30 @@ function doLoad() {
         computed: {
           // none here
         }
-      });
+      };
+      const subListing = Vue.createApp(listing);
+      appListing = subListing.mount('#listing');
 
-      visibility = new Vue({
-        el: '#visibility',
-        data: {
+      
+      const visibility = {
+        data() { return  {
           login: false,
           register: false,
           newsfeed: false,
           home: true,
           banner: true
-        }
-      });
+        } }
+      };
 
-      //listing.addNewFeed();
+      const subVisibility = Vue.createApp(visibility);
+      appVisibility = subVisibility.mount('#visibility');
+
+
+      appListing.addNewFeed();
       //listing.feed[0].show_workout = true;
-      listing.watchFeed();
-      listing.forceUpdate();
+      
+      appListing.watchFeed();
+      appListing.doUpdate();
       
       //listing.$set(this.data, 'newid', tree2);
   }
@@ -86,30 +95,30 @@ function doLoad() {
   //})
       
   function focusRegister() {
-    visibility.register = true;
-    visibility.login = false;
-    visibility.newsfeed = false;
-    visibility.home = false;
+    appVisibility.$data.register = true;
+    appVisibility.$data.login = false;
+    appVisibility.$data.newsfeed = false;
+    appVisibility.$data.home = false;
   }
 
   function focusLogin() {
-    visibility.login = true;
-    visibility.register = false;
-    visibility.newsfeed = false;
-    visibility.home = false;
+    appVisibility.$data.login = true;
+    appVisibility.$data.register = false;
+    appVisibility.$data.newsfeed = false;
+    appVisibility.$data.home = false;
   }
 
   function focusNews() {
-    visibility.login = false;
-    visibility.register = false;
-    visibility.newsfeed = true;
-    visibility.home = false;
+    appVisibility.$data.login = false;
+    appVisibility.$data.register = false;
+    appVisibility.$data.newsfeed = true;
+    appVisibility.$data.home = false;
   }
   
   function focusReset() {
-    visibility.login = false;
-    visibility.register = false;
-    visibility.newsfeed = false;
-    visibility.home = true;
-    visibility.banner = true;
+    appVisibility.$data.login = false;
+    appVisibility.$data.register = false;
+    appVisibility.$data.newsfeed = false;
+    appVisibility.$data.home = true;
+    appVisibility.$data.banner = true;
   }

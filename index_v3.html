@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Practice Bulma Web Page v3</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+  <!-- script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script -->
+  <script src="https://unpkg.com/vue@next"></script>
+
+  <script src="vue/bulma_populate.js"></script>
+
+  <script src="vue/bulma_v3.js"></script>
+
+  <link rel="stylesheet" href="css/bulma.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+</head>
+
+<body>
+  <nav class="navbar gray" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="">
+        <img src="pic/app.png" width="56" height="56">
+      </a>
+  
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item">
+          Exercise
+        </a>
+  
+        <a class="navbar-item">
+          Workout
+        </a>
+  
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More
+          </a>
+  
+          <div class="navbar-dropdown">
+            <a class="navbar-item">
+              About
+            </a>
+            <a class="navbar-item">
+              Jobs
+            </a>
+            <a class="navbar-item">
+              Contact
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item">
+              Report an issue
+            </a>
+          </div>
+        </div>
+      </div>
+  
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-primary" onclick="focusRegister();">
+              <strong>Sign up</strong>
+            </a>
+            <a class="button is-light" onclick="focusLogin()">
+              Log in
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div id="visibility">
+
+<!-- hello world section -->
+
+  <section class="section" v-if="banner">
+    <div class="container">
+      <h1 class="title">
+        Exercise App
+      </h1>
+      <p class="subtitle">
+        Keep track of your workouts with <strong>Exercise App</strong>!
+      </p>
+    </div>
+  </section>
+
+  
+
+<!-- start news feed -->
+<section class="section" v-if="newsfeed">
+<div class="columns">
+  <div class="column">
+    
+    <!-- blank column-->
+    <!-- end blank column -->
+  </div>
+  
+  <div class="column is-half">
+
+    <!-- vue start -->
+    <!-- div id="app">
+        {{ message }}
+    </div -->
+
+      <div id="components" ref="components">
+        <!-- feed-item></feed-item -->  
+      </div>  
+      <div id="listing">
+        <ul>
+          <template v-for="(article, index) in feed">
+          <li class="" v-bind:class="classCard(article)"> 
+            {{ article.message }}  {{ index }}
+
+    
+
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-4by3">
+          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+        </figure>
+      </div>
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4">John Smith: {{ article.message }} </p>
+            <p class="subtitle is-6">@johnsmith</p>
+          </div>
+        </div>
+        <!-- three contents -->
+        {{classExercise(article)}} {{article.show_exercise}} ;
+        {{classMessage(article)}} {{article.show_message}} ;
+        {{classWorkout(article)}} {{article.show_workout}} ;
+        <div class="content"  v-bind:class=" classExercise(article)">
+          exercise - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+          <a href="#">#css</a> <a href="#">#responsive</a>
+          <br>
+          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+        </div>
+
+        <div class="content"  v-bind:class=" classMessage(article)">
+          message - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+          <a href="#">#css</a> <a href="#">#responsive</a>
+          <br>
+          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+        </div>
+
+        <div class="content"  v-bind:class=" classWorkout(article)">
+          workout - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+          <a href="#">#css</a> <a href="#">#responsive</a>
+          <br>
+          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+        </div>
+        <!-- end three contents -->
+      </div>
+    </div>
+          </li>
+        </template>
+        </ul>
+      </div>
+<!-- vue end -->
+  </div>
+  <div class="column"></div>
+</div>  
+</section>
+<!-- end news feed -->
+
+
+<!-- start register -->
+<section class="section gray" v-if="register">
+    <div class="columns">
+    <!-- firstname -->
+
+        <div class="field column">
+
+        <div class="control has-icons-left has-icons-right">
+
+            <input class="input is-medium" type="text" placeholder="Firstnname:"> 
+          <span class="icon is-medium is-left">
+            <i class="fas "></i>
+          </span>
+          <span class="icon is-medium is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+
+      <!-- lastname -->
+      <div class="field column">
+    
+
+        <div class="control has-icons-left has-icons-right">
+            
+
+            <input class="input is-medium" type="text" placeholder="Lastname">
+          <span class="icon is-medium is-left">
+            <i class="fas "></i>
+          </span>
+          <span class="icon is-medium is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns">
+      <!-- address -->
+      <div class="field column">
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-medium" type="text" placeholder="Address">
+          <span class="icon is-medium is-left">
+            <i class="fas "></i>
+          </span>
+          <span class="icon is-medium is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+      <!-- city -->
+      <div class="field column">
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-medium" type="text" placeholder="City">
+          <span class="icon is-medium is-left">
+            <i class="fas "></i>
+          </span>
+          <span class="icon is-medium is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+
+    </div>
+    <div class="columns" >
+      <!-- state -->
+      <div class="field column">
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-medium" type="text" placeholder="State">
+          <span class="icon is-medium is-left">
+            <i class="fas "></i>
+          </span>
+          <span class="icon is-medium is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+      <!-- zip -->
+      <div class="field column">
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-medium" type="text" placeholder="Zip Code">
+          <span class="icon is-medium is-left">
+            <i class="fas "></i>
+          </span>
+          <span class="icon is-medium is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+      <!-- email -->
+      <div class="field">
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-medium" type="email" placeholder="email">
+          <span class="icon is-medium is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <span class="icon is-medium is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="columns" >
+      <!-- username -->
+      <div class="field column">
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-medium" type="text" placeholder="Username">
+          <span class="icon is-medium is-left">
+            <i class="fas "></i>
+          </span>
+          <span class="icon is-medium is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+      <!-- password -->
+      <div class="field column">
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-medium" type="password" placeholder="Password">
+          <span class="icon is-medium is-left">
+            <i class="fas "></i>
+          </span>
+          <span class="icon is-medium is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns">
+    <div class="field column is-half ">
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-medium" type="password" placeholder="Password again">
+          <span class="icon is-medium is-left">
+            <i class="fas "></i>
+          </span>
+          <span class="icon is-medium is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+
+<div>
+    <div class="field is-grouped">
+        <p class="control">
+          <a class="button is-primary" onclick="focusNews();">
+            Submit
+          </a>
+        </p>
+        <p class="control">
+          <a class="button is-light" onclick="focusReset();">
+            Cancel
+          </a>
+        </p>
+      </div>
+</div>
+</section>
+<!-- end register -->
+<!-- start login-->
+<section class="section gray" v-if="login">
+
+  <div class="columns" >
+    <!-- username -->
+    <div class="field column">
+      <div class="control has-icons-left has-icons-right">
+        <input class="input is-medium" type="text" placeholder="Username">
+        <span class="icon is-medium is-left">
+          <i class="fas "></i>
+        </span>
+        <span class="icon is-medium is-right">
+          <i class="fas fa-check"></i>
+        </span>
+      </div>
+    </div>
+    <!-- password -->
+    <div class="field column">
+      <div class="control has-icons-left has-icons-right">
+        <input class="input is-medium" type="password" placeholder="Password">
+        <span class="icon is-medium is-left">
+          <i class="fas "></i>
+        </span>
+        <span class="icon is-medium is-right">
+          <i class="fas fa-check"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="field is-grouped">
+        <p class="control">
+          <a class="button is-primary" onclick="focusNews();">
+            Submit
+          </a>
+        </p>
+        <p class="control">
+          <a class="button is-light" onclick="focusReset();">
+            Cancel
+          </a>
+        </p>
+      </div>
+</div>
+</section>
+<!-- /div -->
+
+<!-- end login -->
+<!-- start home -->
+<section class="section" v-if="home" >
+
+  Login or register!
+</section>
+<!-- end home -->
+</div>
+
+</body>
+<!-- 
+<script src="vue/bulma_populate.js"></script>
+
+<script src="vue/bulma.js"></script>
+-->
+  </html>
