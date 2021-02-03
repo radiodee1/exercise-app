@@ -1,0 +1,131 @@
+
+
+// hard coded output
+
+tree = {
+    //index_item: 0,
+
+    feed: 
+    [ // list of feed items...
+      {
+        visible: true,
+
+        show_message: true,
+        show_exercise: true,
+        show_workout: false,
+        
+        picture_large: null,
+        picture_small: null,
+
+        message: "hello-world",
+
+        messsage_obj : { //big message
+          from: "",
+          to: "",
+          message: "",
+          date: ""
+        },
+        exercise_obj : { //exercise post
+          reps: "",
+          weight: "",
+          label: "",
+          date: ""
+        },
+        workout_obj: { // combined exercises
+          date: "",
+          exercise_list: [
+            { exercise_id: 0 , reps: "", weight: "", label: ""},
+            { exercise_id: 1 , reps: "", weight: "", label: ""}
+          ]
+        },
+        message_list: [ // little messages
+          { message: "one message." },
+          { message: "another message."}
+        ]
+      }
+    ]
+    
+  };
+
+  
+
+tree2 = JSON.stringify(tree);
+subtreeStr = JSON.stringify(tree.feed[0]);
+tree2 = JSON.parse(tree2);
+//subtree = JSON.parse(subtree);
+
+for (var x = 0; x < 10; x ++) {
+  subtree = JSON.parse(subtreeStr);
+  subtree.visible = true;
+  tree.feed.push(subtree);
+  if (x > 4) tree.feed[x].visible = true;
+};
+
+data = tree;
+data.feed[3] = tree2.feed[0];
+data.feed[0].show_workout = true;
+
+//console.log(data.feed);
+
+
+  template = `<div class="card">
+  <div class="card-image">
+    <figure class="image is-4by3">
+      <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+    </figure>
+  </div>
+  <div class="card-content">
+    <div class="media">
+      <div class="media-left">
+        <figure class="image is-48x48">
+          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+        </figure>
+      </div>
+      <div class="media-content">
+        <p class="title is-4">John Smith: </p>
+        <p class="subtitle is-6">@johnsmith</p>
+      </div>
+    </div>
+    <!-- three contents -->
+    feed-item
+    <br>
+    {{classExercise(article)}} {{article.show_exercise}} ;
+    {{classMessage(article)}} {{article.show_message}} ;
+    {{classWorkout(article)}} {{article.show_workout}} ;
+    <div class="content"  v-bind:class=" classExercise(article)">
+      exercise - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+      <a href="#">#css</a> <a href="#">#responsive</a>
+      <br>
+      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+    </div>
+
+    <div class="content"  v-bind:class=" classMessage(article)">
+      message - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+      <a href="#">#css</a> <a href="#">#responsive</a>
+      <br>
+      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+    </div>
+
+    <div class="content"  v-bind:class=" classWorkout(article)">
+      workout - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+      <a href="#">#css</a> <a href="#">#responsive</a>
+      <br>
+      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+    </div>
+    <!-- end three contents -->
+  </div>
+</div>`;
+
+
+
+
+  
+
+
+//compFeed.$mount();
+
+//this.$refs.components.appendChild(compFeed.$el);
+
