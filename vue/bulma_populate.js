@@ -1,5 +1,5 @@
 
-
+feed_limit = 10;
 // hard coded output
 
 tree = {
@@ -47,6 +47,38 @@ tree = {
     
   };
 
+  single_div =  {
+    id: "",
+    instance: null,
+    messages : [
+      {
+        id: "",
+        instance: null
+      }, 
+      {
+        id: "",
+        instance: null
+      }, 
+      {
+        id: "",
+        instance: null
+      }, 
+      {
+        id: "",
+        instance: null
+      }, 
+      {
+        id: "",
+        instance: null
+      }, 
+      {
+        id: "",
+        instance: null
+      }
+    ]
+  };
+
+  feed_divs = [];
   
 
 tree2 = JSON.stringify(tree);
@@ -54,18 +86,23 @@ subtreeStr = JSON.stringify(tree.feed[0]);
 tree2 = JSON.parse(tree2);
 //subtree = JSON.parse(subtree);
 
-for (var x = 0; x < 10; x ++) {
+subtree_div_string = JSON.stringify(single_div);
+
+for (var x = 0; x < feed_limit; x ++) {
   subtree = JSON.parse(subtreeStr);
   subtree.visible = true;
   tree.feed.push(subtree);
   if (x > 4) tree.feed[x].visible = true;
+
+  subtree_div = JSON.parse(subtree_div_string);
+  feed_divs.push(subtree_div);
 };
 
 data = tree;
 data.feed[3] = tree2.feed[0];
 data.feed[0].show_workout = true;
 
-//console.log(data.feed);
+console.log(feed_divs);
 
 template = `<div class="card">
   <div class="card-image">
