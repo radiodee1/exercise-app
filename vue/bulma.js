@@ -4,14 +4,7 @@
 //console.log(data);
 
 function doLoad() {
-    /*
-    var app = new Vue({
-      el: '#app',
-      data: {
-        message: 'Hello World!'
-      }
-    });
-    */
+    
 
       listing = new Vue({
         el: '#listing',
@@ -22,12 +15,21 @@ function doLoad() {
             console.log(data.feed.length + " is length.");
           },
           forceUpdate: function () {
+            this.message = "";
             
             this.$forceUpdate();
             console.log("at force update...");
-            this.index_item += 1;
           },
-          
+          watchFeed: function () {
+            z = [];
+            for( x = 0; x < this.feed.length; x ++) {
+              z.push('this.feed[x].visible')
+              //this.$watch(() => this.feed[x], this.forceUpdate);
+            }
+            console.log(z);
+            
+            this.$watch(() => z, this.forceUpdate);
+          },
           classWorkout: function (i) {
             //console.log(i);
             var x = Boolean(i.show_workout);
@@ -70,8 +72,9 @@ function doLoad() {
         }
       });
 
-      listing.addNewFeed();
+      //listing.addNewFeed();
       //listing.feed[0].show_workout = true;
+      listing.watchFeed();
       listing.forceUpdate();
       
       //listing.$set(this.data, 'newid', tree2);
@@ -79,7 +82,7 @@ function doLoad() {
     
   //$(document).ready(function() {
       /* new app(); */
-  doLoad();
+  window.onload = doLoad;
   //})
       
   function focusRegister() {

@@ -22,14 +22,17 @@ tree = {
         messsage_obj : { //big message
           from: "",
           to: "",
-          message: ""
+          message: "",
+          date: ""
         },
         exercise_obj : { //exercise post
           reps: "",
           weight: "",
-          label: ""
+          label: "",
+          date: ""
         },
         workout_obj: { // combined exercises
+          date: "",
           exercise_list: [
             { exercise_id: 0 , reps: "", weight: "", label: ""},
             { exercise_id: 1 , reps: "", weight: "", label: ""}
@@ -47,13 +50,15 @@ tree = {
   
 
 tree2 = JSON.stringify(tree);
-subtree = JSON.stringify(tree.feed[0]);
+subtreeStr = JSON.stringify(tree.feed[0]);
 tree2 = JSON.parse(tree2);
-subtree = JSON.parse(subtree);
+//subtree = JSON.parse(subtree);
 
-subtree.visible = false;
-for (var x = 0; x < 20; x ++) {
+for (var x = 0; x < 10; x ++) {
+  subtree = JSON.parse(subtreeStr);
+  subtree.visible = true;
   tree.feed.push(subtree);
+  if (x > 4) tree.feed[x].visible = true;
 };
 
 data = tree;
