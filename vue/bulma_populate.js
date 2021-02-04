@@ -8,9 +8,9 @@ tree = {
     feed: 
     [ // list of feed items...
       {
-        visible: true,
+        visible: false,
 
-        num: null,
+        num: 0,
 
         show_message: true,
         show_exercise: true,
@@ -81,9 +81,9 @@ tree = {
   feed_divs = [];
   
 
-tree2 = JSON.stringify(tree);
+//tree2 = JSON.stringify(tree);
 subtreeStr = JSON.stringify(tree.feed[0]);
-tree2 = JSON.parse(tree2);
+//tree2 = JSON.parse(tree2);
 //subtree = JSON.parse(subtree);
 
 subtree_div_string = JSON.stringify(single_div);
@@ -100,9 +100,9 @@ for (var x = 0; x < feed_limit; x ++) {
 };
 
 data = tree;
-data.feed[0].show_workout = true;
+//data.feed[0].show_workout = true;
 
-data = data.feed.reverse();
+//data = data.feed.reverse();
 
 function makeId(num, prefix="feed-num-") {
   return prefix + num;
@@ -137,6 +137,7 @@ function makeTemplate (id) {
       {{classMessage(article)}} {{article.show_message}} ;
       {{classWorkout(article)}} {{article.show_workout}} ;
       -->
+      {{ article.visible }}
       <div class="content"  v-bind:class=" classExercise(article)">
         exercise - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Phasellus nec iaculis mauris. <a>@bulmaio</a>.
@@ -172,7 +173,7 @@ function makeTemplateList() {
     xx = tree.feed[x].num;
 
     z += "<li>";
-    z += makeTemplate(xx);
+    z += makeTemplate(x);
     z += "</li>";
   }
   z += "</ul>";
@@ -257,5 +258,63 @@ function makeInvocation() {
 
 }
 
-//this.$refs.components.appendChild(compFeed.$el);
+function listSwap(pos1, pos2) {
+  p1 = JSON.stringify(tree.feed[pos1]);
+  p2 = JSON.stringify(tree.feed[pos2]);
+  tree.feed[pos1] = JSON.parse(p2);
+  tree.feed[pos2] = JSON.parse(p1);
+  console.log('swap ' + pos1 + " " + pos2);
+}
 
+function listMaint() {
+  if (tree.feed[0].visible = true) {
+    //move all down 1
+    for (var x = 0 ; x < feed_limit - 2; x ++) {
+      listSwap(x, x + 1);
+      tree.feed[x ].visible = true;
+    }
+    tree.feed[0].visible = false;
+  } 
+  
+}
+
+function insertFeed(dict) {
+  // insert message in db here.
+  listMaint();
+
+  tree.feed[0] = dict;
+  return;
+  
+}
+
+function setMessage(obj, msg="message here.") {
+  subtree = obj;// JSON.parse(subtreeStr);
+  subtree.show_message = true;
+  subtree.messsage_obj_message = msg;
+  subtree.message = msg;
+  subtree.visible = true;
+  return subtree;
+}
+
+function setExercise(msg="exerccise here.") {
+  subtree = JSON.parse(subtreeStr);
+  subtree.show_exercise = true;
+  subtree.exercise_obj_label = msg;
+  subtree.message = msg;
+  subtree.visible = true;
+  return subtree;
+}
+
+function setWorkout(msg="workout here.") {
+  subtree = JSON.parse(subtreeStr);
+  subtree.show_workout = true;
+  //subtree.workout_obj_date = msg;
+  subtree.message = msg;
+  subtree.visible = true;
+  return subtree;
+}
+
+function testInsert() {
+  obj = setMessage();
+  insertFeed(obj);
+}
