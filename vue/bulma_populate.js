@@ -10,6 +10,8 @@ tree = {
       {
         visible: true,
 
+        num: null,
+
         show_message: true,
         show_exercise: true,
         show_workout: false,
@@ -19,25 +21,22 @@ tree = {
 
         message: "hello-world",
 
-        messsage_obj : { //big message
-          from: "",
-          to: "",
-          message: "",
-          date: ""
-        },
-        exercise_obj : { //exercise post
-          reps: "",
-          weight: "",
-          label: "",
-          date: ""
-        },
-        workout_obj: { // combined exercises
-          date: "",
-          exercise_list: [
-            { exercise_id: 0 , reps: "", weight: "", label: ""},
-            { exercise_id: 1 , reps: "", weight: "", label: ""}
-          ]
-        },
+        messsage_obj_from: "",
+        messsage_obj_to: "",
+        messsage_obj_message: "",
+        messsage_obj_date: "",
+        
+        exercise_obj_reps: "",
+        exercise_obj_weight: "",
+        exercise_obj_label: "",
+        exercise_obj_date: "",
+        
+        workout_obj_date: "",
+        workout_obj_exercise_list: [
+          { exercise_id: 0 , reps: "", weight: "", label: ""},
+          { exercise_id: 1 , reps: "", weight: "", label: ""}
+        ],
+        //},
         message_list: [ // little messages
           { message: "one message." },
           { message: "another message."}
@@ -92,18 +91,18 @@ subtree_div_string = JSON.stringify(single_div);
 for (var x = 0; x < feed_limit; x ++) {
   subtree = JSON.parse(subtreeStr);
   subtree.visible = true;
+  subtree.num = x;
   tree.feed.push(subtree);
-  if (x > 4) tree.feed[x].visible = true;
+  
 
   subtree_div = JSON.parse(subtree_div_string);
   feed_divs.push(subtree_div);
 };
 
 data = tree;
-data.feed[3] = tree2.feed[0];
 data.feed[0].show_workout = true;
 
-console.log(feed_divs);
+data = data.feed.reverse();
 
 function makeId(num, prefix="feed-num-") {
   return prefix + num;
@@ -130,9 +129,14 @@ function makeTemplate (id) {
         </div>
       </div>
       <!-- three contents -->
+      ` 
+      + id +
+      `
+      <!-- 
       {{classExercise(article)}} {{article.show_exercise}} ;
       {{classMessage(article)}} {{article.show_message}} ;
       {{classWorkout(article)}} {{article.show_workout}} ;
+      -->
       <div class="content"  v-bind:class=" classExercise(article)">
         exercise - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Phasellus nec iaculis mauris. <a>@bulmaio</a>.
@@ -165,8 +169,10 @@ function makeTemplate (id) {
 function makeTemplateList() {
   z = "<ul> ";
   for (var x = 0; x < feed_limit; x ++) {
+    xx = tree.feed[x].num;
+
     z += "<li>";
-    z += makeTemplate(x);
+    z += makeTemplate(xx);
     z += "</li>";
   }
   z += "</ul>";
@@ -186,7 +192,7 @@ function makeFeedComponent() {
 function makeInvocation() {
   for (var x = 0; x < feed_limit; x ++) {
     z = {
-      article: data.feed[x]
+      article: tree.feed[x]
     };
 
     console.log(z);
