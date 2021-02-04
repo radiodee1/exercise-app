@@ -101,6 +101,7 @@ for (var x = 0; x < feed_limit; x ++) {
 
 data = tree;
 //data.feed[0].show_workout = true;
+subtree = JSON.parse(subtreeStr);
 
 //data = data.feed.reverse();
 
