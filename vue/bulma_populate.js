@@ -316,6 +316,6 @@ function setWorkout(msg="workout here.") {
 }
 
 function testInsert() {
-  obj = setMessage();
+  obj = setMessage(tree.feed[0]);
   insertFeed(obj);
 }
