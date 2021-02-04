@@ -90,7 +90,7 @@ subtree_div_string = JSON.stringify(single_div);
 
 for (var x = 0; x < feed_limit; x ++) {
   subtree = JSON.parse(subtreeStr);
-  subtree.visible = true;
+  subtree.visible = false;
   subtree.num = x;
   tree.feed.push(subtree);
   
@@ -110,7 +110,7 @@ function makeId(num, prefix="feed-num-") {
 
 function makeTemplate (id) {
 
-  template_00 = `<div id="`+ makeId(id) +`" class="card">
+  template_00 = `<div id="`+ makeId(id) +`" class="card" v-bind:class="classCard(article)">
     <div class="card-image">
       <figure class="image is-4by3">
         <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
