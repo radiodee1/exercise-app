@@ -97,7 +97,7 @@
   
 
 <!-- start news feed -->
-<section class="section" v-if="newsfeed">
+<section class="section "  v-bind:class="classOption(newsfeed)">
 <div class="columns">
   <div class="column">
     
@@ -112,17 +112,17 @@
         {{ message }}
     </div -->
 
-      <div id="components" ref="components">
-        <feed-item></feed-item>  
+      <div id="components" >
+        <!-- feed-item></feed-item -->  
       </div>  
       <div id="listing">
         <ul>
-          <template v-for="(article, index) in feed">
+          <!-- template v-for="(article, index) in feed">
           <li class="" v-bind:class="classCard(article)"> 
             {{ article.message }}  {{ index }}
 
     
-    <!-- 
+    
     <div class="card">
       <div class="card-image">
         <figure class="image is-4by3">
@@ -171,9 +171,9 @@
         
       </div>
     </div>
-    -->
+    
           </li>
-        </template>
+        </template -->
         </ul>
       </div>
 <!-- vue end -->

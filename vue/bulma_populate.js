@@ -50,6 +50,7 @@ tree = {
   single_div =  {
     id: "",
     instance: null,
+    mount: null,
     messages : [
       {
         id: "",
@@ -104,104 +105,151 @@ data.feed[0].show_workout = true;
 
 console.log(feed_divs);
 
-template = `<div class="card">
-  <div class="card-image">
-    <figure class="image is-4by3">
-      <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-    </figure>
-  </div>
-  <div class="card-content">
-    <div class="media">
-      <div class="media-left">
-        <figure class="image is-48x48">
-          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-        </figure>
+function makeId(num, prefix="feed-num-") {
+  return prefix + num;
+}
+
+function makeTemplate (id) {
+
+  template_00 = `<div id="`+ makeId(id) +`" class="card">
+    <div class="card-image">
+      <figure class="image is-4by3">
+        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+      </figure>
+    </div>
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="title is-4">John Smith: {{ article.message }} </p>
+          <p class="subtitle is-6">@johnsmith</p>
+        </div>
       </div>
-      <div class="media-content">
-        <p class="title is-4">John Smith: {{ article.message }} </p>
-        <p class="subtitle is-6">@johnsmith</p>
+      <!-- three contents -->
+      {{classExercise(article)}} {{article.show_exercise}} ;
+      {{classMessage(article)}} {{article.show_message}} ;
+      {{classWorkout(article)}} {{article.show_workout}} ;
+      <div class="content"  v-bind:class=" classExercise(article)">
+        exercise - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+        <a href="#">#css</a> <a href="#">#responsive</a>
+        <br>
+        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
       </div>
-    </div>
-    <!-- three contents -->
-    {{classExercise(article)}} {{article.show_exercise}} ;
-    {{classMessage(article)}} {{article.show_message}} ;
-    {{classWorkout(article)}} {{article.show_workout}} ;
-    <div class="content"  v-bind:class=" classExercise(article)">
-      exercise - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-      <a href="#">#css</a> <a href="#">#responsive</a>
-      <br>
-      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-    </div>
 
-    <div class="content"  v-bind:class=" classMessage(article)">
-      message - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-      <a href="#">#css</a> <a href="#">#responsive</a>
-      <br>
-      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-    </div>
+      <div class="content"  v-bind:class=" classMessage(article)">
+        message - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+        <a href="#">#css</a> <a href="#">#responsive</a>
+        <br>
+        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+      </div>
 
-    <div class="content"  v-bind:class=" classWorkout(article)">
-      workout - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-      <a href="#">#css</a> <a href="#">#responsive</a>
-      <br>
-      <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+      <div class="content"  v-bind:class=" classWorkout(article)">
+        workout - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+        <a href="#">#css</a> <a href="#">#responsive</a>
+        <br>
+        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+      </div>
+      <!-- end three contents -->
     </div>
-    <!-- end three contents -->
-  </div>
-</div>`
+  </div>`
+  return template_00;
+}
 
-compFeed = Vue.component('feed-item', {
-  name: 'feed-item',
-  data: function () {
-    return {
-      article: tree2.feed[0]
+function makeTemplateList() {
+  z = "<ul> ";
+  for (var x = 0; x < feed_limit; x ++) {
+    z += "<li>";
+    z += makeTemplate(x);
+    z += "</li>";
+  }
+  z += "</ul>";
+  return z;
+}
+
+template_list = makeTemplateList();
+
+
+function makeFeedComponent() {
+  var element = document.getElementById("components");
+  element.innerHTML = template_list;
+  //element.value = template_list;
+  
+}
+
+function makeInvocation() {
+  for (var x = 0; x < feed_limit; x ++) {
+    z = {
+      article: data.feed[x]
+    };
+
+    console.log(z);
+    console.log("---");
+    feed_divs[x].id = makeId(x);
+    feed_divs[x].instance = new Vue({
+      el: '#' + makeId(x),
+      data: z , // data.feed[x],
       
-    }
-  },
-  //props: ['article', 'message'],
-  methods: {
-    addNewFeed: function () {
-      data.feed.push(tree2.feed[0]);
-      console.log(data.feed.length + " is length.");
-    },
-    forceUpdate: function () {
-      this.$forceUpdate();
-      console.log("at force update...");
-      this.index_item += 1;
-    },
-    
-    classWorkout: function (i) {
-      //console.log(i);
-      var x = Boolean(i.show_workout);
-      if (x === true) return 'visi';
-      else return 'invis';
-    },
-    classMessage: function (i) {
-      //console.log(i);
-      var x = Boolean(i.show_message);
-      if (x === true) return 'visi';
-      else return 'invis';
-    },
-    classExercise: function (i) {
-      //console.log(i);
-      var x = Boolean(i.show_exercise);
-      if (x === true) return 'visi';
-      else return 'invis';
-    }
-    
-  },
-  template: template
-});
+      methods: {
+        addNewFeed: function () {
+          //this.$data.feed.push(tree2.feed[0]);
+          //console.log(data.feed.length + " is length.");
+        },
+        forceUpdate: function () {
+          this.message = "";
+          
+          //this.$forceUpdate();
+          console.log("at force update...");
+        },
+        watchFeed: function () {
+          z = [];
+          //for( x = 0; x < this.feed.length; x ++) {
+            //z.push(this.feed[x])
+            //this.$watch(() => this.feed[x], this.forceUpdate);
+          //}
+          //console.log(z);
+          
+          //this.$watch(() => z, this.forceUpdate);
+        },
+        classWorkout: function (i) {
+          //console.log(i);
+          var x = Boolean(i.show_workout);
+          if (x === true) return 'visi';
+          else return 'invis';
+        },
+        classMessage: function (i) {
+          //console.log(i);
+          var x = Boolean(i.show_message);
+          if (x === true) return 'visi';
+          else return 'invis';
+        },
+        classExercise: function (i) {
+          //console.log(i);
+          var x = Boolean(i.show_exercise);
+          if (x === true) return 'visi';
+          else return 'invis';
+        },
+        classCard: function (i) {
+          //console.log(i);
+          var x = Boolean(i.visible);
+          if (x === true) return 'visi';
+          else return 'invis';
+        }
+        
+      },
+      computed: {
+        // none here
+      }
+    });
+  }
 
-vm = new Vue({
-  el: "#components",
-  data: {}
-})
-
-//compFeed.$mount();
+}
 
 //this.$refs.components.appendChild(compFeed.$el);
 

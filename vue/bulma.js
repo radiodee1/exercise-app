@@ -1,11 +1,10 @@
 
-//const data = require("./bulma_populate.js");
 
 //console.log(data);
 
 function doLoad() {
     
-
+      /*
       listing = new Vue({
         el: '#listing',
         data: data,
@@ -60,6 +59,7 @@ function doLoad() {
           // none here
         }
       });
+      */
 
       visibility = new Vue({
         el: '#visibility',
@@ -69,13 +69,24 @@ function doLoad() {
           newsfeed: false,
           home: true,
           banner: true
+        },
+        methods: {
+          classOption: function (i) {
+            //console.log(i);
+            var x = Boolean(i);
+            if (x === true) return 'visi';
+            else return 'invis';
+          },
         }
       });
 
+      makeFeedComponent();
+      makeInvocation();
+
       //listing.addNewFeed();
       //listing.feed[0].show_workout = true;
-      listing.watchFeed();
-      listing.forceUpdate();
+      //listing.watchFeed();
+      //listing.forceUpdate();
       
       //listing.$set(this.data, 'newid', tree2);
   }
