@@ -21,10 +21,10 @@ tree = {
 
         message: "hello-world",
 
-        messsage_obj_from: "",
-        messsage_obj_to: "",
-        messsage_obj_message: "",
-        messsage_obj_date: "",
+        message_obj_from: "",
+        message_obj_to: "",
+        message_obj_message: "",
+        message_obj_date: "",
         
         exercise_obj_reps: "",
         exercise_obj_weight: "",
@@ -36,7 +36,7 @@ tree = {
           { exercise_id: 0 , reps: "", weight: "", label: ""},
           { exercise_id: 1 , reps: "", weight: "", label: ""}
         ],
-        //},
+        
         message_list: [ // little messages
           { message: "one message." },
           { message: "another message."}
@@ -49,33 +49,9 @@ tree = {
   single_div =  {
     id: "",
     instance: null,
-    mount: null,
-    messages : [
-      {
-        id: "",
-        instance: null
-      }, 
-      {
-        id: "",
-        instance: null
-      }, 
-      {
-        id: "",
-        instance: null
-      }, 
-      {
-        id: "",
-        instance: null
-      }, 
-      {
-        id: "",
-        instance: null
-      }, 
-      {
-        id: "",
-        instance: null
-      }
-    ]
+    //mount: null,
+    messages : null
+    
   };
 
   feed_divs = [];
@@ -171,7 +147,7 @@ function makeTemplate (id) {
 function makeTemplateList() {
   z = "<ul> ";
   for (var x = 0; x < feed_limit; x ++) {
-    xx = tree.feed[x].num;
+    //xx = tree.feed[x].num;
 
     z += "<li>";
     z += makeTemplate(x);
@@ -186,9 +162,7 @@ template_list = makeTemplateList();
 
 function makeFeedComponent() {
   var element = document.getElementById("components");
-  element.innerHTML = template_list;
-  //element.value = template_list;
-  
+  element.innerHTML = template_list;  
 }
 
 function makeInvocation() {
@@ -199,8 +173,10 @@ function makeInvocation() {
 
     console.log(z);
     console.log("---");
+
     feed_divs[x].id = makeId(x);
     feed_divs[x].instance = new Vue({
+      
       el: '#' + makeId(x),
       data: z , // data.feed[x],
       
@@ -210,20 +186,10 @@ function makeInvocation() {
           //console.log(data.feed.length + " is length.");
         },
         forceUpdate: function () {
-          this.message = "";
+          //this.message = "";
           
           //this.$forceUpdate();
           console.log("at force update...");
-        },
-        watchFeed: function () {
-          z = [];
-          //for( x = 0; x < this.feed.length; x ++) {
-            //z.push(this.feed[x])
-            //this.$watch(() => this.feed[x], this.forceUpdate);
-          //}
-          //console.log(z);
-          
-          //this.$watch(() => z, this.forceUpdate);
         },
         classWorkout: function (i) {
           //console.log(i);
@@ -250,29 +216,27 @@ function makeInvocation() {
           else return 'invis';
         }
         
-      },
-      computed: {
-        // none here
       }
     });
   }
 
 }
 
-function listSwap(pos1, pos2) {
-  p1 = JSON.stringify(tree.feed[pos1]);
-  p2 = JSON.stringify(tree.feed[pos2]);
-  tree.feed[pos1] = JSON.parse(p2);
-  tree.feed[pos2] = JSON.parse(p1);
-  console.log('swap ' + pos1 + " " + pos2);
+function listSwap(pos2, pos1) {
+  tree.feed[pos1] = tree.feed[pos2]; 
+  for (var key in tree.feed[pos1]) {
+    tree.feed[pos1][key] = tree.feed[pos2][key];
+
+    //console.log(key);
+  }
+  //console.log('swap ' + pos1 + " " + tree.feed[pos1]);
 }
 
 function listMaint() {
   if (tree.feed[0].visible = true) {
     //move all down 1
-    for (var x = 0 ; x < feed_limit - 2; x ++) {
-      listSwap(x, x + 1);
-      tree.feed[x ].visible = true;
+    for (var x = feed_limit - 2 ; x >= 0; x --) {
+      listSwap(x + 1, x);
     }
     tree.feed[0].visible = false;
   } 
@@ -282,23 +246,23 @@ function listMaint() {
 function insertFeed(dict) {
   // insert message in db here.
   listMaint();
-
   tree.feed[0] = dict;
   return;
-  
 }
 
 function setMessage(obj, msg="message here.") {
-  subtree = obj;// JSON.parse(subtreeStr);
+  var subtree = obj;
   subtree.show_message = true;
+  subtree.show_workout = false;
+  subtree.show_exercise = false;
   subtree.messsage_obj_message = msg;
   subtree.message = msg;
   subtree.visible = true;
   return subtree;
 }
 
-function setExercise(msg="exerccise here.") {
-  subtree = JSON.parse(subtreeStr);
+function setExercise(obj, msg="exerccise here.") {
+  var subtree = obj; //JSON.parse(subtreeStr);
   subtree.show_exercise = true;
   subtree.exercise_obj_label = msg;
   subtree.message = msg;
@@ -306,8 +270,8 @@ function setExercise(msg="exerccise here.") {
   return subtree;
 }
 
-function setWorkout(msg="workout here.") {
-  subtree = JSON.parse(subtreeStr);
+function setWorkout(obj, msg="workout here.") {
+  var subtree = obj; // JSON.parse(subtreeStr);
   subtree.show_workout = true;
   //subtree.workout_obj_date = msg;
   subtree.message = msg;
@@ -316,6 +280,7 @@ function setWorkout(msg="workout here.") {
 }
 
 function testInsert() {
-  obj = setMessage(tree.feed[1]);
+  obj = setMessage(tree.feed[0]);
   insertFeed(obj);
+  
 }
