@@ -1,5 +1,5 @@
 
-feed_limit = 10;
+const feed_limit = 10;
 // hard coded output
 
 tree = {
@@ -49,18 +49,14 @@ tree = {
   single_div =  {
     id: "",
     instance: null,
-    //mount: null,
+
     messages : null
     
   };
 
-  feed_divs = [];
+feed_divs = [];
   
-
-//tree2 = JSON.stringify(tree);
 subtreeStr = JSON.stringify(tree.feed[0]);
-//tree2 = JSON.parse(tree2);
-//subtree = JSON.parse(subtree);
 
 subtree_div_string = JSON.stringify(single_div);
 
@@ -221,74 +217,38 @@ function makeInvocation() {
 
 }
 
-function listSwap(pos2, pos1) {
-  //feed_divs[pos1].instance = feed_divs[pos2].instance;
-  if (feed_divs[pos2].instance == null || feed_divs[pos2].instance.visible == false) {
-    console.log(pos2 + " <++");
-    return ;
-  }
 
-  console.log(pos1 + " <--")
-  feed_divs[pos1].instance = null;
-  feed_divs[pos1].instance = {};
-  feed_divs[pos1].instance = feed_divs[pos2].instance;
-  
-  feed_divs[pos2].instance = null;
-  
-  //tree.feed[pos1] = tree.feed[pos2]; 
-  //Vue.set(feed_divs[pos1].instance, makeId(pos1), feed_divs[pos2].instance);
-  
-  //for (var key in tree.feed[pos2]) {
-    //feed_divs[pos1].instance[key] = feed_divs[pos2].instance[key];
-    
-    //feed_divs[pos1].instance[key] = tree.feed[pos2][key]; //feed_divs[pos2].instance[key];
-    //Vue.set(feed_divs[pos1].instance[key], makeId(pos1), feed_divs[pos2].instance[key]);
-    //console.log(key);
-  //}
-  //console.log('swap ' + pos1 + " " + tree.feed[pos1]);
-  //feed_divs[pos1].instance.article.$forceUpdate();
-  //feed_divs[pos1].instance.num ++;
+function listMaint(dict) {
 
-}
+   //move all down 1
+  tree.feed.unshift(dict);
+  console.log(tree.feed.length + " len 1");
 
-function listMaint() {
-  
+  tree.feed.pop();
+  console.log(tree.feed.length + " len 2");
 
   if ( true) {
-    //move all down 1
-    tree.feed.pop();
+   
 
     for (var x = feed_limit - 1; x >= 0; x --) {
-      //listSwap(x , x + 1);
       
-      //feed_divs[x].instance = tree.feed[x];
       for (var key in tree.feed[x]) {
-    //feed_divs[pos1].instance[key] = feed_divs[pos2].instance[key];
     
-        feed_divs[x].instance[key] = tree.feed[x][key]; //feed_divs[pos2].instance[key];
-    //Vue.set(feed_divs[pos1].instance[key], makeId(pos1), feed_divs[pos2].instance[key]);
-    //console.log(key);
+        feed_divs[x].instance[key] = tree.feed[x][key]; 
+    
       }
+      feed_divs[x].instance = tree.feed[x];
     }
-    //tree.feed[0].visible = false;
-    //feed_divs[0].instance.visible = false;
+    
   } 
   
 }
 
 function insertFeed(dict) {
   // insert message in db here.
-  tree.feed.unshift(dict);
 
-  listMaint();
-  //tree.feed[0] = null;
+  listMaint(dict);
   
-  //tree.feed[0] = dict;
-  
-  //feed_divs[0] = null;
-
-  //feed_divs[0].instance = dict;
-  //feed_divs[0].instance.visible = true;
   return;
 }
 
@@ -304,7 +264,7 @@ function setMessage(obj, msg="message here.") {
 }
 
 function setExercise(obj, msg="exerccise here.") {
-  var subtree = obj; //JSON.parse(subtreeStr);
+  var subtree = obj; 
   subtree.show_exercise = true;
   subtree.exercise_obj_label = msg;
   subtree.message = msg;
@@ -313,16 +273,16 @@ function setExercise(obj, msg="exerccise here.") {
 }
 
 function setWorkout(obj, msg="workout here.") {
-  var subtree = obj; // JSON.parse(subtreeStr);
+  var subtree = obj; 
   subtree.show_workout = true;
-  //subtree.workout_obj_date = msg;
+  
   subtree.message = msg;
   subtree.visible = true;
   return subtree;
 }
 
 function testInsert() {
-  obj = setMessage(feed_divs[0].instance);
+  obj = setMessage(subtree); 
   insertFeed(obj);
   
 }
