@@ -266,6 +266,8 @@ function setMessage(obj, msg="message here.") {
 function setExercise(obj, msg="exercise here.") {
   var subtree = obj; 
   subtree.show_exercise = true;
+  subtree.show_message = false;
+  subtree.show_workout = false;
   subtree.exercise_obj_label = msg;
   subtree.message = msg;
   subtree.visible = true;
@@ -275,7 +277,8 @@ function setExercise(obj, msg="exercise here.") {
 function setWorkout(obj, msg="workout here.") {
   var subtree = obj; 
   subtree.show_workout = true;
-  
+  subtree.show_message = false;
+  subtree.show_exercise = false;
   subtree.message = msg;
   subtree.visible = true;
   return subtree;
