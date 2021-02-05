@@ -263,7 +263,7 @@ function setMessage(obj, msg="message here.") {
   return subtree;
 }
 
-function setExercise(obj, msg="exerccise here.") {
+function setExercise(obj, msg="exercise here.") {
   var subtree = obj; 
   subtree.show_exercise = true;
   subtree.exercise_obj_label = msg;
@@ -281,8 +281,20 @@ function setWorkout(obj, msg="workout here.") {
   return subtree;
 }
 
-function testInsert() {
+function testInsertMsg() {
   obj = setMessage(subtree); 
+  insertFeed(obj);
+  
+}
+
+function testInsertWorkout() {
+  obj = setWorkout(subtree); 
+  insertFeed(obj);
+  
+}
+
+function testInsertExercise() {
+  obj = setExercise(subtree); 
   insertFeed(obj);
   
 }
