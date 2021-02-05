@@ -82,6 +82,7 @@ function doLoad() {
 
       makeFeedComponent();
       makeInvocation();
+      console.log(feed_divs);
 
       //listing.addNewFeed();
       //listing.feed[0].show_workout = true;

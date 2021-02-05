@@ -87,7 +87,7 @@ function makeId(num, prefix="feed-num-") {
 
 function makeTemplate (id) {
 
-  template_00 = `<div id="`+ makeId(id) +`" class="card" v-bind:class="classCard(article)">
+  template_00 = `<div id="`+ makeId(id) +`" class="card"  v-show="visible">
     <div class="card-image">
       <figure class="image is-4by3">
         <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
@@ -101,7 +101,7 @@ function makeTemplate (id) {
           </figure>
         </div>
         <div class="media-content">
-          <p class="title is-4">John Smith: {{ article.message }} </p>
+          <p class="title is-4">John Smith: {{ message }} </p>
           <p class="subtitle is-6">@johnsmith</p>
         </div>
       </div>
@@ -110,12 +110,10 @@ function makeTemplate (id) {
       + id +
       `
       <!-- 
-      {{classExercise(article)}} {{article.show_exercise}} ;
-      {{classMessage(article)}} {{article.show_message}} ;
-      {{classWorkout(article)}} {{article.show_workout}} ;
+      
       -->
-      {{ article.visible }}
-      <div class="content"  v-bind:class=" classExercise(article)">
+      {{ visible }}
+      <div class="content"  v-bind:class=" classExercise(show_exercise)">
         exercise - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Phasellus nec iaculis mauris. <a>@bulmaio</a>.
         <a href="#">#css</a> <a href="#">#responsive</a>
@@ -123,7 +121,7 @@ function makeTemplate (id) {
         <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
       </div>
 
-      <div class="content"  v-bind:class=" classMessage(article)">
+      <div class="content"  v-bind:class=" classMessage(show_message)">
         message - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Phasellus nec iaculis mauris. <a>@bulmaio</a>.
         <a href="#">#css</a> <a href="#">#responsive</a>
@@ -131,7 +129,7 @@ function makeTemplate (id) {
         <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
       </div>
 
-      <div class="content"  v-bind:class=" classWorkout(article)">
+      <div class="content"  v-bind:class=" classWorkout(show_workout)">
         workout - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Phasellus nec iaculis mauris. <a>@bulmaio</a>.
         <a href="#">#css</a> <a href="#">#responsive</a>
@@ -167,19 +165,20 @@ function makeFeedComponent() {
 
 function makeInvocation() {
   for (var x = 0; x < feed_limit; x ++) {
-    z = {
-      article: tree.feed[x]
-    };
-
-    console.log(z);
+    
+    console.log(tree.feed[x]);
     console.log("---");
 
     feed_divs[x].id = makeId(x);
     feed_divs[x].instance = new Vue({
       
       el: '#' + makeId(x),
-      data: z , // data.feed[x],
-      
+      data: tree.feed[x], // z
+      watch: {
+        num: function(){
+          //console.log(this.article);
+        }
+      },
       methods: {
         addNewFeed: function () {
           //this.$data.feed.push(tree2.feed[0]);
@@ -193,25 +192,25 @@ function makeInvocation() {
         },
         classWorkout: function (i) {
           //console.log(i);
-          var x = Boolean(i.show_workout);
+          var x = Boolean ( i);
           if (x === true) return 'visi';
           else return 'invis';
         },
         classMessage: function (i) {
           //console.log(i);
-          var x = Boolean(i.show_message);
+          var x = Boolean( i);
           if (x === true) return 'visi';
           else return 'invis';
         },
         classExercise: function (i) {
           //console.log(i);
-          var x = Boolean(i.show_exercise);
+          var x = Boolean( i);
           if (x === true) return 'visi';
           else return 'invis';
         },
         classCard: function (i) {
           //console.log(i);
-          var x = Boolean(i.visible);
+          var x = Boolean( i);
           if (x === true) return 'visi';
           else return 'invis';
         }
@@ -223,30 +222,73 @@ function makeInvocation() {
 }
 
 function listSwap(pos2, pos1) {
-  tree.feed[pos1] = tree.feed[pos2]; 
-  for (var key in tree.feed[pos1]) {
-    tree.feed[pos1][key] = tree.feed[pos2][key];
-
-    //console.log(key);
+  //feed_divs[pos1].instance = feed_divs[pos2].instance;
+  if (feed_divs[pos2].instance == null || feed_divs[pos2].instance.visible == false) {
+    console.log(pos2 + " <++");
+    return ;
   }
+
+  console.log(pos1 + " <--")
+  feed_divs[pos1].instance = null;
+  feed_divs[pos1].instance = {};
+  feed_divs[pos1].instance = feed_divs[pos2].instance;
+  
+  feed_divs[pos2].instance = null;
+  
+  //tree.feed[pos1] = tree.feed[pos2]; 
+  //Vue.set(feed_divs[pos1].instance, makeId(pos1), feed_divs[pos2].instance);
+  
+  //for (var key in tree.feed[pos2]) {
+    //feed_divs[pos1].instance[key] = feed_divs[pos2].instance[key];
+    
+    //feed_divs[pos1].instance[key] = tree.feed[pos2][key]; //feed_divs[pos2].instance[key];
+    //Vue.set(feed_divs[pos1].instance[key], makeId(pos1), feed_divs[pos2].instance[key]);
+    //console.log(key);
+  //}
   //console.log('swap ' + pos1 + " " + tree.feed[pos1]);
+  //feed_divs[pos1].instance.article.$forceUpdate();
+  //feed_divs[pos1].instance.num ++;
+
 }
 
 function listMaint() {
-  if (tree.feed[0].visible = true) {
+  
+
+  if ( true) {
     //move all down 1
-    for (var x = feed_limit - 2 ; x >= 0; x --) {
-      listSwap(x + 1, x);
+    tree.feed.pop();
+
+    for (var x = feed_limit - 1; x >= 0; x --) {
+      //listSwap(x , x + 1);
+      
+      //feed_divs[x].instance = tree.feed[x];
+      for (var key in tree.feed[x]) {
+    //feed_divs[pos1].instance[key] = feed_divs[pos2].instance[key];
+    
+        feed_divs[x].instance[key] = tree.feed[x][key]; //feed_divs[pos2].instance[key];
+    //Vue.set(feed_divs[pos1].instance[key], makeId(pos1), feed_divs[pos2].instance[key]);
+    //console.log(key);
+      }
     }
-    tree.feed[0].visible = false;
+    //tree.feed[0].visible = false;
+    //feed_divs[0].instance.visible = false;
   } 
   
 }
 
 function insertFeed(dict) {
   // insert message in db here.
+  tree.feed.unshift(dict);
+
   listMaint();
-  tree.feed[0] = dict;
+  //tree.feed[0] = null;
+  
+  //tree.feed[0] = dict;
+  
+  //feed_divs[0] = null;
+
+  //feed_divs[0].instance = dict;
+  //feed_divs[0].instance.visible = true;
   return;
 }
 
@@ -280,7 +322,7 @@ function setWorkout(obj, msg="workout here.") {
 }
 
 function testInsert() {
-  obj = setMessage(tree.feed[0]);
+  obj = setMessage(feed_divs[0].instance);
   insertFeed(obj);
   
 }
