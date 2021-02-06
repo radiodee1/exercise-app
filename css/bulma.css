@@ -13,3 +13,8 @@
     visibility: visible;
     display: block;
 }
+
+.local-msg {
+    width: 50%;
+    height: 50%;
+}

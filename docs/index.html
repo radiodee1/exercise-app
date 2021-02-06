@@ -334,7 +334,33 @@
 </section>
 <!-- end home -->
 </div>
+
+<!-- start inputform -->
+<div class="visi">
+<div class="columns">
+<div class="column"></div>
+<div class="column is-half ">
+  <article class="message box" v-if="form_message">
+  <div class="message-header">
+    <p>Public Message</p>
+    <button class="delete" aria-label="delete"></button>
+  </div>
+  <div class="message-body gray" >
+    <textarea class="textarea" placeholder="What's on your mind?!" rows="10"></textarea>
+    <div class="control">
+      <button class="button is-primary" onclick="focusNews()">Submit</button>
+    </div>
+
+  </div>
+</article>
 </div>
+<div class="column"></div>
+
+</div>
+</div>
+<!-- end inputform -->
+
+</div> <!-- this div for vue visibility obj -->
 </body>
 
   <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>

@@ -8,7 +8,7 @@ tree = {
 
 
 tree_feed_dict = {
-  
+
   visible: false,
 
   num: 0,
@@ -221,10 +221,10 @@ function listMaint(dict) {
 
    //move all down 1
   tree.feed.unshift(dict);
-  console.log(tree.feed.length + " len 1");
+  //console.log(tree.feed.length + " len 1");
 
   tree.feed.pop();
-  console.log(tree.feed.length + " len 2");
+  //console.log(tree.feed.length + " len 2");
 
   if ( true) {
    
@@ -284,18 +284,21 @@ function setWorkout(obj, msg="workout here.") {
 }
 
 function testInsertMsg() {
+  focusFormMessage();
   obj = setMessage(subtree); 
   insertFeed(obj);
   
 }
 
 function testInsertWorkout() {
+  focusFormWorkout();
   obj = setWorkout(subtree); 
   insertFeed(obj);
   
 }
 
 function testInsertExercise() {
+  focusFormExercise();
   obj = setExercise(subtree); 
   insertFeed(obj);
   

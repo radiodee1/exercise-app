@@ -13,7 +13,10 @@ function doLoad() {
           register: false,
           newsfeed: false,
           home: true,
-          banner: true
+          banner: true,
+          form_message: false,
+          form_exercise: false,
+          form_workout: false
         },
         methods: {
           classOption: function (i) {
@@ -42,6 +45,9 @@ function doLoad() {
     visibility.login = false;
     visibility.newsfeed = false;
     visibility.home = false;
+    visibility.form_exercise = false;
+    visibility.form_message = false;
+    visibility.form_workout = false;
   }
 
   function focusLogin() {
@@ -49,6 +55,9 @@ function doLoad() {
     visibility.register = false;
     visibility.newsfeed = false;
     visibility.home = false;
+    visibility.form_exercise = false;
+    visibility.form_message = false;
+    visibility.form_workout = false;
   }
 
   function focusNews() {
@@ -56,6 +65,9 @@ function doLoad() {
     visibility.register = false;
     visibility.newsfeed = true;
     visibility.home = false;
+    visibility.form_exercise = false;
+    visibility.form_message = false;
+    visibility.form_workout = false;
   }
   
   function focusReset() {
@@ -64,4 +76,40 @@ function doLoad() {
     visibility.newsfeed = false;
     visibility.home = true;
     visibility.banner = true;
+    visibility.form_exercise = false;
+    visibility.form_message = false;
+    visibility.form_workout = false;
+  }
+
+  function focusFormExercise() {
+    visibility.login = false;
+    visibility.register = false;
+    visibility.newsfeed = false;
+    visibility.home = false;
+    visibility.banner = false;
+    visibility.form_exercise = true;
+    visibility.form_message = false;
+    visibility.form_workout = false;
+  }
+
+  function focusFormMessage() {
+    visibility.login = false;
+    visibility.register = false;
+    visibility.newsfeed = false;
+    visibility.home = false;
+    visibility.banner = false;
+    visibility.form_exercise = false;
+    visibility.form_message = true;
+    visibility.form_workout = false;
+  }
+
+  function focusFormWorkout() {
+    visibility.login = false;
+    visibility.register = false;
+    visibility.newsfeed = false;
+    visibility.home = false;
+    visibility.banner = false;
+    visibility.form_exercise = false;
+    visibility.form_message = false;
+    visibility.form_workout = true;
   }
