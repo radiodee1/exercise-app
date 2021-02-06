@@ -11,29 +11,48 @@
 </head>
 
 <body>
+  <div id="visibility">
   <nav class="navbar gray" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="">
         <img src="../pic/app.png" width="56" height="56">
       </a>
+  <!-- always there -->
   
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+
+  <!-- always there -->
+
+      <a role="button" class="navbar-burger " aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
+        
+        
       </a>
+      <div class="navbar-menu " id="navMenu">
+        <!-- navbar-start, navbar-end... -->
+        
+
+        <!-- navbar start, navbar end -->
+      </div>        
+
     </div>
   
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item">
+    <div id="navbarBasicExample" class="navbar-menu is-active" v-if="newsfeed">
+      <div class="navbar-start" >
+        <a class="navbar-item" onclick="testInsertExercise()">
           Exercise
         </a>
   
-        <a class="navbar-item">
+        <a class="navbar-item" onclick="testInsertWorkout()">
           Workout
         </a>
   
+        <a class="navbar-item" onclick="testInsertMsg()">
+          Message
+        </a>
+        <!-- 
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
             More
@@ -41,38 +60,33 @@
   
           <div class="navbar-dropdown">
             <a class="navbar-item">
-              About
+              Something
             </a>
             <a class="navbar-item">
-              Jobs
+              Something Else
             </a>
             <a class="navbar-item">
               Contact
             </a>
             <hr class="navbar-divider">
             <a class="navbar-item">
-              Report an issue
+              Final
             </a>
           </div>
         </div>
+      -->
       </div>
   
       <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            <a class="button is-primary" onclick="focusRegister();">
-              <strong>Sign up</strong>
-            </a>
-            <a class="button is-light" onclick="focusLogin()">
-              Log in
-            </a>
-          </div>
-        </div>
+        
       </div>
+
     </div>
+
+
   </nav>
 
-  <div id="visibility">
+  <div >
 
 <!-- hello world section -->
 
@@ -99,16 +113,14 @@
   </div>
   
   <div class="column is-half">
-    <div class="control">
+    <!-- div class="control">
       <button class="button is-primary" onclick="testInsertMsg()">Test Submit Msg.</button>
       <button class="button is-primary" onclick="testInsertExercise()">Test Submit Exercise.</button>
       <button class="button is-primary" onclick="testInsertWorkout()">Test Submit Workout.</button>
-    </div>
-    <!-- vue start -->
-    <!-- div id="app">
-        {{ message }}
     </div -->
 
+    <!-- vue start -->
+    
       <div id="components" >
         <!-- template here ? -->  
       </div>  
@@ -334,13 +346,20 @@
 
 <!-- end login -->
 <!-- start home -->
-<section class="section" v-if="home" >
-
+<section class="section gray" v-if="home" >
+  <div class="buttons">
+    <a class="button is-primary" onclick="focusRegister();">
+      <strong>Sign up</strong>
+    </a>
+    <a class="button is-light" onclick="focusLogin()">
+      Log in
+    </a>
+  </div>
   Login or register!
 </section>
 <!-- end home -->
 </div>
-
+</div>
 </body>
 
   <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>

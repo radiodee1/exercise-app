@@ -3,48 +3,47 @@ const feed_limit = 10;
 // hard coded output
 
 tree = {
-    //index_item: 0,
+  feed: []
+}
 
-    feed: 
-    [ // list of feed items...
-      {
-        visible: false,
 
-        num: 0,
+tree_feed_dict = {
+  
+  visible: false,
 
-        show_message: true,
-        show_exercise: true,
-        show_workout: false,
-        
-        picture_large: null,
-        picture_small: null,
+  num: 0,
 
-        message: "hello-world",
+  show_message: true,
+  show_exercise: true,
+  show_workout: false,
+  
+  picture_large: null,
+  picture_small: null,
 
-        message_obj_from: "",
-        message_obj_to: "",
-        message_obj_message: "",
-        message_obj_date: "",
-        
-        exercise_obj_reps: "",
-        exercise_obj_weight: "",
-        exercise_obj_label: "",
-        exercise_obj_date: "",
-        
-        workout_obj_date: "",
-        workout_obj_exercise_list: [
-          { exercise_id: 0 , reps: "", weight: "", label: ""},
-          { exercise_id: 1 , reps: "", weight: "", label: ""}
-        ],
-        
-        message_list: [ // little messages
-          { message: "one message." },
-          { message: "another message."}
-        ]
-      }
-    ]
-    
-  };
+  message: "hello-world",
+
+  message_obj_from: "",
+  message_obj_to: "",
+  message_obj_message: "",
+  message_obj_date: "",
+  
+  exercise_obj_reps: "",
+  exercise_obj_weight: "",
+  exercise_obj_label: "",
+  exercise_obj_date: "",
+  
+  workout_obj_date: "",
+  workout_obj_exercise_list: [
+    { exercise_id: 0 , reps: "", weight: "", label: ""},
+    { exercise_id: 1 , reps: "", weight: "", label: ""}
+  ],
+  
+  message_list: [ // little messages
+    { message: "one message." },
+    { message: "another message."}
+  ]
+}
+
 
   single_div =  {
     id: "",
@@ -56,7 +55,7 @@ tree = {
 
 feed_divs = [];
   
-subtreeStr = JSON.stringify(tree.feed[0]);
+subtreeStr = JSON.stringify(tree_feed_dict);
 
 subtree_div_string = JSON.stringify(single_div);
 
