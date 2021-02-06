@@ -60,7 +60,8 @@ function doLoad() {
     visibility.form_workout = false;
   }
 
-  function focusNews() {
+  function focusNews(obj=null) {
+    
     visibility.login = false;
     visibility.register = false;
     visibility.newsfeed = true;
@@ -68,6 +69,25 @@ function doLoad() {
     visibility.form_exercise = false;
     visibility.form_message = false;
     visibility.form_workout = false;
+    
+    if (obj !== null) {
+      if (obj.show_message) {
+        //insertFeed(obj);
+        testInsertMsg();
+        return;
+      }
+      if (obj.show_workout) {
+        //insertFeed(obj);
+        testInsertWorkout();
+        return;
+      }
+      if (obj.show_exercise) {
+        //insertFeed(obj);
+        testInsertExercise();
+        return;
+      }
+    }
+    insertFeed(subtree);
   }
   
   function focusReset() {
@@ -84,9 +104,9 @@ function doLoad() {
   function focusFormExercise() {
     visibility.login = false;
     visibility.register = false;
-    visibility.newsfeed = false;
+    visibility.newsfeed = true;
     visibility.home = false;
-    visibility.banner = false;
+    visibility.banner = true;
     visibility.form_exercise = true;
     visibility.form_message = false;
     visibility.form_workout = false;
@@ -97,7 +117,7 @@ function doLoad() {
     visibility.register = false;
     visibility.newsfeed = false;
     visibility.home = false;
-    visibility.banner = false;
+    visibility.banner = true;
     visibility.form_exercise = false;
     visibility.form_message = true;
     visibility.form_workout = false;
@@ -106,9 +126,9 @@ function doLoad() {
   function focusFormWorkout() {
     visibility.login = false;
     visibility.register = false;
-    visibility.newsfeed = false;
+    visibility.newsfeed = true;
     visibility.home = false;
-    visibility.banner = false;
+    visibility.banner = true;
     visibility.form_exercise = false;
     visibility.form_message = false;
     visibility.form_workout = true;

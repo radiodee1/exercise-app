@@ -13,8 +13,8 @@ tree_feed_dict = {
 
   num: 0,
 
-  show_message: true,
-  show_exercise: true,
+  show_message: false,
+  show_exercise: false,
   show_workout: false,
   
   picture_large: null,
@@ -284,7 +284,7 @@ function setWorkout(obj, msg="workout here.") {
 }
 
 function testInsertMsg() {
-  focusFormMessage();
+  //focusFormMessage();
   obj = setMessage(subtree); 
   insertFeed(obj);
   
