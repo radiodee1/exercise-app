@@ -30,7 +30,7 @@ function doLoad() {
 
       makeFeedComponent();
       makeInvocation();
-      console.log(feed_divs.length + " len 0");
+      //console.log(feed_divs.length + " len 0");
 
       
   }
@@ -60,7 +60,7 @@ function doLoad() {
     visibility.form_workout = false;
   }
 
-  function focusNews(obj=null) {
+  function focusNews() {
     
     visibility.login = false;
     visibility.register = false;
@@ -70,24 +70,26 @@ function doLoad() {
     visibility.form_message = false;
     visibility.form_workout = false;
     
+    /*
     if (obj !== null) {
-      if (obj.show_message) {
-        //insertFeed(obj);
-        testInsertMsg();
+      if (obj.show_message == true) {
+        insertFeed(obj);
+        //testInsertMsg();
         return;
       }
-      if (obj.show_workout) {
+      if (obj.show_workout == true) {
         //insertFeed(obj);
         testInsertWorkout();
         return;
       }
-      if (obj.show_exercise) {
+      if (obj.show_exercise == true) {
         //insertFeed(obj);
         testInsertExercise();
         return;
       }
     }
-    insertFeed(subtree);
+    //insertFeed(subtree);
+    */
   }
   
   function focusReset() {
@@ -132,4 +134,34 @@ function doLoad() {
     visibility.form_exercise = false;
     visibility.form_message = false;
     visibility.form_workout = true;
+  }
+
+  function formSubmitMessage() {
+    var msg = document.getElementById("message_txt");
+    //console.log(msg.value);
+    var msg = msg.value;
+    
+    var obj = JSON.parse(subtreeStr);
+
+    obj.show_message = true;
+    obj.show_workout = false;
+    obj.show_exercise = false;
+    obj.visibility = true;
+    obj.message = msg;
+
+    var b = setMessage(obj, msg);
+
+    insertFeed(b);
+    document.getElementById("message_txt").value = "";
+    //console.log(obj);
+    console.log(msg);
+    focusNews();
+  }
+
+  function formSubmitWorkout() {
+
+  }
+
+  function formSubmitExercise() {
+
   }

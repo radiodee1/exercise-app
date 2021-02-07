@@ -48,12 +48,12 @@ tree_feed_dict = {
   single_div =  {
     id: "",
     instance: null,
-
+    update : null,
     messages : null
     
   };
 
-feed_divs = [];
+var feed_divs = [];
   
 subtreeStr = JSON.stringify(tree_feed_dict);
 
@@ -82,7 +82,7 @@ function makeId(num, prefix="feed-num-") {
 
 function makeTemplate (id) {
 
-  template_00 = `<div id="`+ makeId(id) +`" class="card"  v-show="visible">
+  template_00 = `<div id="`+ makeId(id) +`" class="card"  v-show="visible" ref="` + makeId(id, "ref") + `" >
     <div class="card-image">
       <figure class="image is-4by3">
         <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
@@ -161,30 +161,26 @@ function makeFeedComponent() {
 function makeInvocation() {
   for (var x = 0; x < feed_limit; x ++) {
     
-    console.log(tree.feed[x]);
-    console.log("---");
+    //console.log(tree.feed[x]);
+    //console.log("---");
 
     feed_divs[x].id = makeId(x);
     feed_divs[x].instance = new Vue({
       
       el: '#' + makeId(x),
-      data: tree.feed[x], // z
-      watch: {
-        num: function(){
-          //console.log(this.article);
-        }
-      },
+      data: tree.feed[x], 
+      
       methods: {
         addNewFeed: function () {
           //this.$data.feed.push(tree2.feed[0]);
           //console.log(data.feed.length + " is length.");
         },
         forceUpdate: function () {
-          //this.message = "";
           
-          //this.$forceUpdate();
+          this.$forceUpdate();
           console.log("at force update...");
         },
+        
         classWorkout: function (i) {
           //console.log(i);
           var x = Boolean ( i);
@@ -210,8 +206,12 @@ function makeInvocation() {
           else return 'invis';
         }
         
-      }
+      },
+      //data: tree.feed[x], 
+
     });
+    //feed_divs[x].update = new feed_divs[x].instance.forceUpdate;
+    
   }
 
 }
@@ -225,27 +225,36 @@ function listMaint(dict) {
 
   tree.feed.pop();
   //console.log(tree.feed.length + " len 2");
+  console.log("dict msg :" + tree.feed);
 
-  if ( true) {
+  if ( true ) {
    
 
-    for (var x = feed_limit - 1; x >= 0; x --) {
+    for  (var x = feed_limit - 1; x >= 0; x --) {
       
       for (var key in tree.feed[x]) {
     
         feed_divs[x].instance[key] = tree.feed[x][key]; 
-    
+        
+        //Vue.set(feed_divs[x].instance[key], 'x' + x, tree.feed[x][key]);
+        
+        if (key == "message") {
+          console.log('key ' + x + ' :' + tree.feed[x].message + " " + tree.feed[x].visible);
+          console.log('key2 ' + x + ' :' + feed_divs[x].instance.message + ' ' + feed_divs[x].instance.visible);
+        }
       }
-      feed_divs[x].instance = tree.feed[x];
+      //feed_divs[x].instance = tree.feed[x];
+      feed_divs[x].instance.forceUpdate();
+
     }
     
   } 
-  
+  console.log("feed msg :" + feed_divs[0].instance.message);
 }
 
 function insertFeed(dict) {
   // insert message in db here.
-
+  console.log("insert feed :" + dict.message);
   listMaint(dict);
   
   return;
