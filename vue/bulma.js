@@ -142,7 +142,7 @@ function doLoad() {
 
     insertFeed(b);
     document.getElementById("message_txt").value = "";
-    console.log(msg);
+    //console.log(msg);
     focusNews();
   }
 
