@@ -237,7 +237,7 @@ function listMaint(dict) {
     }
     
   } 
-  console.log("feed msg :" + feed_divs[0].instance.message);
+
 }
 
 function insertFeed(dict) {
