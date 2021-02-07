@@ -39,13 +39,13 @@ tree_feed_dict = {
 }
 
 
-  single_div =  {
-    id: "",
-    instance: null,
-    update : null,
-    messages : null
-    
-  };
+single_div =  {
+  id: "",
+  instance: null,
+  update : null,
+  messages : null
+  
+};
 
 var feed_divs = [];
   
@@ -79,7 +79,7 @@ function makeTemplate (id) {
   template_00 = `<div id="`+ makeId(id) +`" class="card"  v-show="visible" ref="` + makeId(id, "ref") + `" >
     <div class="card-image">
       <figure class="image is-4by3">
-        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+        <img src="../pic/app.png" alt="Placeholder image" id="` + makeId(id,'pic') + `">
       </figure>
     </div>
     <div class="card-content">
@@ -90,18 +90,14 @@ function makeTemplate (id) {
           </figure>
         </div>
         <div class="media-content">
-          <p class="title is-4">John Smith: {{ message }} </p>
-          <p class="subtitle is-6">@johnsmith</p>
+          <p class="title is-4"> {{ message_obj_from }} </p>
+          <!-- p class="subtitle is-6">@johnsmith</p -->
         </div>
       </div>
       <!-- three contents -->
-      ` 
+      <!-- ` 
       + id +
-      `
-      <!-- 
-      
-      -->
-      {{ visible }}
+      ` {{ visible }} -->
       <div class="content"  v-bind:class=" classExercise(show_exercise)">
         exercise - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Phasellus nec iaculis mauris. <a>@bulmaio</a>.
@@ -111,9 +107,8 @@ function makeTemplate (id) {
       </div>
 
       <div class="content"  v-bind:class=" classMessage(show_message)">
-        message - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-        <a href="#">#css</a> <a href="#">#responsive</a>
+        message - {{ message_obj_message }} <!-- a>@bulmaio</a>.
+        <a href="#">#css</a> <a href="#">#responsive</a -->
         <br>
         <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
       </div>
@@ -165,10 +160,7 @@ function makeInvocation() {
       data: tree.feed[x], 
       
       methods: {
-        addNewFeed: function () {
-          //this.$data.feed.push(tree2.feed[0]);
-          //console.log(data.feed.length + " is length.");
-        },
+        
         forceUpdate: function () {
           
           this.$forceUpdate();
@@ -201,10 +193,10 @@ function makeInvocation() {
         }
         
       },
-      //data: tree.feed[x], 
 
+      
     });
-    //feed_divs[x].update = new feed_divs[x].instance.forceUpdate;
+
     
   }
 
@@ -215,25 +207,35 @@ function listMaint(dict) {
 
    //move all down 1
   tree.feed.unshift(dict);
-  //console.log(tree.feed.length + " len 1");
 
   tree.feed.pop();
-  //console.log(tree.feed.length + " len 2");
-  //console.log("dict msg :" + tree.feed.length);
-
-
+  
   if ( true ) {
 
     for  (var x = 0; x < feed_full_length; x++ ) { 
 
       for (var key in tree.feed[x]) {
     
-        feed_divs[x].instance[key] = tree.feed[x][key];         
-
+        if (key != "picture_large" && key != "picture_small" ) {
+          feed_divs[x].instance[key] = tree.feed[x][key];         
+        }
+        else {
+          //
+        }
       }
 
       feed_divs[x].instance.forceUpdate();
+      // list of special javascript fn
 
+      if(tree.feed[x].show_message == true ) {
+        document.getElementById(makeId(x, "pic")).src = tree.feed[x].picture_large;
+      }
+      if(tree.feed[x].show_workout == true ) {
+        document.getElementById(makeId(x, "pic")).src = '../pic/app.png'; // tree.feed[x].picture_large;
+      }
+      if(tree.feed[x].show_exercise == true ) {
+        document.getElementById(makeId(x, "pic")).src = '../pic/app.png'; //tree.feed[x].picture_large;
+      }
     }
     
   } 
@@ -244,7 +246,6 @@ function insertFeed(dict) {
   // insert message in db here.
   if (feed_full_length < feed_limit - 1) feed_full_length ++;
 
-  console.log("insert feed :" + dict.message);
   listMaint(dict);
   
   return;
@@ -267,6 +268,8 @@ function setExercise(obj, msg="exercise here.") {
   subtree.show_message = false;
   subtree.show_workout = false;
   subtree.exercise_obj_label = msg;
+  subtree.picture_large = null;
+  subtree.picture_small = null;
   subtree.message = msg;
   subtree.visible = true;
   return subtree;
@@ -277,6 +280,8 @@ function setWorkout(obj, msg="workout here.") {
   subtree.show_workout = true;
   subtree.show_message = false;
   subtree.show_exercise = false;
+  subtree.picture_small = null;
+  subtree.picture_large = null;
   subtree.message = msg;
   subtree.visible = true;
   return subtree;
@@ -293,7 +298,7 @@ function testInsertMsg() {
 
 function testInsertWorkout() {
   var subtree = JSON.parse(subtreeStr);
-
+  subtree.picture_large = null;
   focusFormWorkout();
   obj = setWorkout(subtree); 
   insertFeed(obj);
@@ -302,7 +307,7 @@ function testInsertWorkout() {
 
 function testInsertExercise() {
   var subtree = JSON.parse(subtreeStr);
-
+  subtree.picture_large = null;
   focusFormExercise();
   obj = setExercise(subtree); 
   insertFeed(obj);

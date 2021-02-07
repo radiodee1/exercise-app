@@ -30,6 +30,7 @@ function doLoad() {
 
       makeFeedComponent();
       makeInvocation();
+      //makePicListener();
       //console.log(feed_divs.length + " len 0");
 
       
@@ -121,7 +122,9 @@ function doLoad() {
     var msg = document.getElementById("message_txt");
     //console.log(msg.value);
     var msg = msg.value;
-    
+    var pic = document.getElementById('myImg1');
+    var pic = pic.src;
+
     var obj = JSON.parse(subtreeStr);
 
     obj.show_message = true;
@@ -129,13 +132,16 @@ function doLoad() {
     obj.show_exercise = false;
     obj.visible = true;
     obj.message = msg;
-    console.log(obj.length + " len");
+    obj.message_obj_message = msg;
+    obj.message_obj_from = "John Doe"
+    obj.picture_large = pic;
+
+    //console.log(obj.length + " len");
+    
     var b = setMessage(obj, msg);
-    //if (feed_full_length < feed_limit - 1) feed_full_length ++;
 
     insertFeed(b);
     document.getElementById("message_txt").value = "";
-    //console.log(obj);
     console.log(msg);
     focusNews();
   }
@@ -147,3 +153,16 @@ function doLoad() {
   function formSubmitExercise() {
 
   }
+
+  /* --------- support fn -------------  */
+
+function preview_image(event) {
+  var reader = new FileReader();
+  reader.onload = function(){
+    var output = document.getElementById('myImg1');
+    output.src = reader.result;
+  }
+  reader.readAsDataURL(event.target.files[0]);
+}
+
+  

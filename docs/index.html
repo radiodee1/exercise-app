@@ -335,7 +335,7 @@
 <!-- end home -->
 </div>
 
-<!-- start inputform -->
+<!-- start inputform for message -->
 <div class="visi">
 <div class="columns">
 <div class="column"></div>
@@ -348,9 +348,15 @@
   <div class="message-body gray" >
     <textarea id="message_txt" class="textarea" placeholder="What's on your mind?!" rows="10"></textarea>
     <div class="control">
-      <button class="button is-primary" onclick="formSubmitMessage()">Submit</button> <!-- focusNews() -->
-    </div>
+      <button class="button is-primary" onclick="formSubmitMessage()">Submit</button> 
 
+    </div>
+    <input id="pic-button" type='file' onchange="preview_image(event)"/>
+      
+    <figure class="image is-4by3">
+      <img id="myImg1" src="../pic/app.png">
+      <!-- img src="../pic/app.png" alt="Placeholder image" -->
+    </figure>
   </div>
 </article>
 </div>
@@ -358,7 +364,7 @@
 
 </div>
 </div>
-<!-- end inputform -->
+<!-- end inputform for message -->
 
 </div> <!-- this div for vue visibility obj -->
 </body>
