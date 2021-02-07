@@ -219,33 +219,19 @@ function listMaint(dict) {
 
   tree.feed.pop();
   //console.log(tree.feed.length + " len 2");
-  console.log("dict msg :" + tree.feed.length);
+  //console.log("dict msg :" + tree.feed.length);
 
-  //for (var key in tree.feed[0]) {
-  //  feed_divs[0].instance[key] = tree.feed[0][key]; 
-
-  //}
 
   if ( true ) {
-    //var t = tree.feed.slice();
 
-    for  (var x = 0; x < feed_full_length; x++ ) { //  (var x = feed_limit - 1; x >= 0; x --) {
-      
-      //console.log('tree ' + tree.feed[x]);
+    for  (var x = 0; x < feed_full_length; x++ ) { 
 
       for (var key in tree.feed[x]) {
     
-        feed_divs[x].instance[key] = tree.feed[x][key]; // t[x][key];
-
-        console.log(key + " " + x);    
-        
-        if (key == "message") {
-          console.log('key ' + x + ' :' + tree.feed[x].message + " " + tree.feed[x].visible + ' ' + tree.feed[x].num);
-          console.log('key2 ' + x + ' :' + feed_divs[x].instance.message + ' ' + feed_divs[x].instance.visible + ' ' + feed_divs[x].instance.num);
-        }
+        feed_divs[x].instance[key] = tree.feed[x][key];         
 
       }
-      //feed_divs[x].instance = tree.feed[x];
+
       feed_divs[x].instance.forceUpdate();
 
     }
