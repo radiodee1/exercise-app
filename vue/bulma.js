@@ -70,26 +70,7 @@ function doLoad() {
     visibility.form_message = false;
     visibility.form_workout = false;
     
-    /*
-    if (obj !== null) {
-      if (obj.show_message == true) {
-        insertFeed(obj);
-        //testInsertMsg();
-        return;
-      }
-      if (obj.show_workout == true) {
-        //insertFeed(obj);
-        testInsertWorkout();
-        return;
-      }
-      if (obj.show_exercise == true) {
-        //insertFeed(obj);
-        testInsertExercise();
-        return;
-      }
-    }
-    //insertFeed(subtree);
-    */
+    
   }
   
   function focusReset() {
@@ -146,10 +127,11 @@ function doLoad() {
     obj.show_message = true;
     obj.show_workout = false;
     obj.show_exercise = false;
-    obj.visibility = true;
+    obj.visible = true;
     obj.message = msg;
-
+    console.log(obj.length + " len");
     var b = setMessage(obj, msg);
+    //if (feed_full_length < feed_limit - 1) feed_full_length ++;
 
     insertFeed(b);
     document.getElementById("message_txt").value = "";

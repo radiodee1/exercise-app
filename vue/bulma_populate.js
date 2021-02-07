@@ -1,4 +1,4 @@
-
+feed_full_length = 0;
 const feed_limit = 10;
 // hard coded output
 
@@ -33,15 +33,9 @@ tree_feed_dict = {
   exercise_obj_date: "",
   
   workout_obj_date: "",
-  workout_obj_exercise_list: [
-    { exercise_id: 0 , reps: "", weight: "", label: ""},
-    { exercise_id: 1 , reps: "", weight: "", label: ""}
-  ],
+  workout_obj_exercise_list: "",
   
-  message_list: [ // little messages
-    { message: "one message." },
-    { message: "another message."}
-  ]
+  message_list: "",
 }
 
 
@@ -60,7 +54,7 @@ subtreeStr = JSON.stringify(tree_feed_dict);
 subtree_div_string = JSON.stringify(single_div);
 
 for (var x = 0; x < feed_limit; x ++) {
-  subtree = JSON.parse(subtreeStr);
+  var subtree = JSON.parse(subtreeStr);
   subtree.visible = false;
   subtree.num = x;
   tree.feed.push(subtree);
@@ -225,23 +219,31 @@ function listMaint(dict) {
 
   tree.feed.pop();
   //console.log(tree.feed.length + " len 2");
-  console.log("dict msg :" + tree.feed);
+  console.log("dict msg :" + tree.feed.length);
+
+  //for (var key in tree.feed[0]) {
+  //  feed_divs[0].instance[key] = tree.feed[0][key]; 
+
+  //}
 
   if ( true ) {
-   
+    //var t = tree.feed.slice();
 
-    for  (var x = feed_limit - 1; x >= 0; x --) {
+    for  (var x = 0; x < feed_full_length; x++ ) { //  (var x = feed_limit - 1; x >= 0; x --) {
       
+      //console.log('tree ' + tree.feed[x]);
+
       for (var key in tree.feed[x]) {
     
-        feed_divs[x].instance[key] = tree.feed[x][key]; 
-        
-        //Vue.set(feed_divs[x].instance[key], 'x' + x, tree.feed[x][key]);
+        feed_divs[x].instance[key] = tree.feed[x][key]; // t[x][key];
+
+        console.log(key + " " + x);    
         
         if (key == "message") {
-          console.log('key ' + x + ' :' + tree.feed[x].message + " " + tree.feed[x].visible);
-          console.log('key2 ' + x + ' :' + feed_divs[x].instance.message + ' ' + feed_divs[x].instance.visible);
+          console.log('key ' + x + ' :' + tree.feed[x].message + " " + tree.feed[x].visible + ' ' + tree.feed[x].num);
+          console.log('key2 ' + x + ' :' + feed_divs[x].instance.message + ' ' + feed_divs[x].instance.visible + ' ' + feed_divs[x].instance.num);
         }
+
       }
       //feed_divs[x].instance = tree.feed[x];
       feed_divs[x].instance.forceUpdate();
@@ -254,6 +256,8 @@ function listMaint(dict) {
 
 function insertFeed(dict) {
   // insert message in db here.
+  if (feed_full_length < feed_limit - 1) feed_full_length ++;
+
   console.log("insert feed :" + dict.message);
   listMaint(dict);
   
@@ -293,6 +297,8 @@ function setWorkout(obj, msg="workout here.") {
 }
 
 function testInsertMsg() {
+  var subtree = JSON.parse(subtreeStr);
+
   //focusFormMessage();
   obj = setMessage(subtree); 
   insertFeed(obj);
@@ -300,6 +306,8 @@ function testInsertMsg() {
 }
 
 function testInsertWorkout() {
+  var subtree = JSON.parse(subtreeStr);
+
   focusFormWorkout();
   obj = setWorkout(subtree); 
   insertFeed(obj);
@@ -307,6 +315,8 @@ function testInsertWorkout() {
 }
 
 function testInsertExercise() {
+  var subtree = JSON.parse(subtreeStr);
+
   focusFormExercise();
   obj = setExercise(subtree); 
   insertFeed(obj);
