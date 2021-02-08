@@ -1,4 +1,19 @@
 
+function controlDropdownType() {
+    //var ff = document.getElementById('exercise_type');
+    //f = ff.style.visibility;
+    if (document.getElementById('exercise_type').classList.contains("is-active") ) {
+        console.log('visi');
+        document.getElementById('exercise_type').classList.remove("is-active") ;
+    }
+    else {
+        console.log('invis');
+        document.getElementById('exercise_type').classList.add("is-active");
+    }
+
+}
+
+
   function formSubmitMessage() {
     var msg = document.getElementById("message_txt");
     //console.log(msg.value);
