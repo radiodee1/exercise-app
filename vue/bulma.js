@@ -118,6 +118,7 @@ function doLoad() {
     visibility.form_workout = true;
   }
 
+  /*
   function formSubmitMessage() {
     var msg = document.getElementById("message_txt");
     //console.log(msg.value);
@@ -150,14 +151,15 @@ function doLoad() {
   }
 
   function formSubmitWorkout() {
+    console.log("workout submit");
 
   }
 
   function formSubmitExercise() {
-
+    console.log("exercise submit");
   }
 
-  /* --------- support fn -------------  */
+  // --------- support fn -------------  
 
 function preview_image_msg(event) {
   var reader = new FileReader();
@@ -168,4 +170,13 @@ function preview_image_msg(event) {
   reader.readAsDataURL(event.target.files[0]);
 }
 
-  
+function preview_image_ex(event) {
+  var reader = new FileReader();
+  reader.onload = function(){
+    var output = document.getElementById('myImg2');
+    output.src = reader.result;
+  }
+  reader.readAsDataURL(event.target.files[0]);
+}
+
+*/

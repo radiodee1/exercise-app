@@ -4,31 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    
+    <link rel="stylesheet" href="../css/bulma.css">
+
     <title>Document</title>
 </head>
 <body>
-    HI.
+  <div id="visibility">
+
+    <div id="components" class="invis"></div>
+    HI. This page is for layout of exercise form...
     <!-- start exercise -->
     <div class="visi">
         <div class="columns">
         <div class="column"></div>
         <div class="column is-half ">
-          <article class="message box" v-if="form_message">
+          <article class="message box" v-if="true"> <!-- v-if="form_exercise" -->
           <div class="message-header">
-            <p>Public Message</p>
+            <p>Exercise</p>
             <button class="delete" aria-label="delete"></button>
           </div>
           <div class="message-body gray" >
-            <textarea id="message_txt" class="textarea" placeholder="What's on your mind?!" rows="10"></textarea>
+            <!-- textarea id="message_txt" class="textarea" placeholder="What's on your mind?!" rows="10"></textarea -->
+            <!-- start first dropdown -->
+            <div class="dropdown is-active">
+              <div class="dropdown-trigger">
+                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                  <span>Dropdown button</span>
+                  <span class="icon is-small">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </button>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                <div class="dropdown-content">
+                  <a href="#" class="dropdown-item">
+                    Dropdown item
+                  </a>
+                  <a class="dropdown-item">
+                    Other dropdown item
+                  </a>
+                  <a href="#" class="dropdown-item is-active">
+                    Active dropdown item
+                  </a>
+                  <a href="#" class="dropdown-item">
+                    Other dropdown item
+                  </a>
+                  <hr class="dropdown-divider">
+                  <a href="#" class="dropdown-item">
+                    With a divider
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- end first dropdown-->
             <div class="control">
         
             <nav class="level"><div class="level-left">
-              <button class="button is-primary" onclick="formSubmitMessage()">Submit</button> 
+              <button class="button is-primary" onclick="formSubmitExercise()">Submit</button> 
               
             <div class="file">
               <label class="file-label">
-                <input class="file-input is-primary" type="file" name="resume" id="pic-button" onchange="preview_image_msg(event)">
+                <input class="file-input is-primary" type="file" name="resume" id="pic-button" onchange="preview_image_ex(event)">
                 <span class="file-cta">
                   <span class="file-icon">
                     <i class="fas fa-upload"></i>
@@ -44,7 +80,7 @@
         
           </div>
             <figure class="image is-4by3">
-              <img id="myImg1" src="../pic/app.png">
+              <img id="myImg2" src="../pic/app.png">
 
             </figure>
           </div>
@@ -56,7 +92,13 @@
         </div>
 
         <!-- end exercise -->
-    <!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script -->
-    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+      </div>
+  <!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script -->
+  <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="../vue/bulma_populate.js"></script>
+  <script src="../vue/bulma_controls.js"></script>
+
+  <script src="../vue/bulma.js"></script>
 </body>
 </html>
