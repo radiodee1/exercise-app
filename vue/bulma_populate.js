@@ -13,6 +13,8 @@ tree_feed_dict = {
 
   num: 0,
 
+  date_now: "",
+
   show_message: false,
   show_exercise: false,
   show_workout: false,
@@ -110,7 +112,7 @@ function makeTemplate (id) {
         message - {{ message_obj_message }} <!-- a>@bulmaio</a>.
         <a href="#">#css</a> <a href="#">#responsive</a -->
         <br>
-        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+        <time datetime="">{{ date_now }}</time>
       </div>
 
       <div class="content"  v-bind:class=" classWorkout(show_workout)">

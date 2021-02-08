@@ -125,6 +125,8 @@ function doLoad() {
     var pic = document.getElementById('myImg1');
     var pic = pic.src;
 
+    var d = new Date();//.getMilliseconds();
+
     var obj = JSON.parse(subtreeStr);
 
     obj.show_message = true;
@@ -135,6 +137,7 @@ function doLoad() {
     obj.message_obj_message = msg;
     obj.message_obj_from = "John Doe"
     obj.picture_large = pic;
+    obj.date_now = d;
 
     //console.log(obj.length + " len");
     
@@ -156,7 +159,7 @@ function doLoad() {
 
   /* --------- support fn -------------  */
 
-function preview_image(event) {
+function preview_image_msg(event) {
   var reader = new FileReader();
   reader.onload = function(){
     var output = document.getElementById('myImg1');
