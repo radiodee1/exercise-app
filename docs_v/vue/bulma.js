@@ -39,6 +39,12 @@ instance = new Vue({
       let x = Boolean( i);
       if (x === true) return 'visi';
       else return 'invis';
+    },
+    addToFeed: function (i) {
+      tree.feed.unshift(i);
+
+      tree.feed.pop();
+      this.$forceUpdate();
     }
     
   },

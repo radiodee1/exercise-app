@@ -97,7 +97,7 @@
         
           <li v-for="(article,id) in tree">
             <!-- start li -->
-            <div id="" class="card"  v-show="true" ref="" >
+            <div id="" class="card"  v-show="article.visible" ref="" >
               <div class="card-image">
                 <figure class="image is-4by3">
                   <img src="../pic/app.png" alt="Placeholder image" id="">
@@ -380,10 +380,10 @@
   Login or register!
 </section>
 <!-- end home -->
-<!-- /div -->
+
 
 <!-- start inputform for message -->
-<div class=" " v-if="form_message" v-bind:class="classOption(form_message)">
+<div class=" " v-if="form_message" >
 <div class="columns">
 <div class="column"></div>
 <div class="column is-half ">
