@@ -33,6 +33,7 @@ tree_feed_dict = {
   exercise_obj_weight: "",
   exercise_obj_label: "",
   exercise_obj_date: "",
+  exercise_obj_name: "",
   
   workout_obj_date: "",
   workout_obj_exercise_list: "",
