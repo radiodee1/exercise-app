@@ -9,6 +9,53 @@
 </head>
 <body>
     HI.
+    <!-- start exercise -->
+    <div class="visi">
+        <div class="columns">
+        <div class="column"></div>
+        <div class="column is-half ">
+          <article class="message box" v-if="form_message">
+          <div class="message-header">
+            <p>Public Message</p>
+            <button class="delete" aria-label="delete"></button>
+          </div>
+          <div class="message-body gray" >
+            <textarea id="message_txt" class="textarea" placeholder="What's on your mind?!" rows="10"></textarea>
+            <div class="control">
+        
+            <nav class="level"><div class="level-left">
+              <button class="button is-primary" onclick="formSubmitMessage()">Submit</button> 
+              
+            <div class="file">
+              <label class="file-label">
+                <input class="file-input is-primary" type="file" name="resume" id="pic-button" onchange="preview_image_msg(event)">
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fas fa-upload"></i>
+                  </span>
+                  <span class="file-label">
+                    Choose a file…
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+          </nav>
+        
+          </div>
+            <figure class="image is-4by3">
+              <img id="myImg1" src="../pic/app.png">
+
+            </figure>
+          </div>
+        </article>
+        </div>
+        <div class="column"></div>
+        
+        </div>
+        </div>
+
+        <!-- end exercise -->
     <!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script -->
     <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
 </body>
