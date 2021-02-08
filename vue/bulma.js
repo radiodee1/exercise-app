@@ -21,7 +21,7 @@ function doLoad() {
         methods: {
           classOption: function (i) {
             //console.log(i);
-            var x = Boolean(i);
+            const x = Boolean(i);
             if (x === true) return 'visi';
             else return 'invis';
           },

@@ -50,14 +50,14 @@ single_div =  {
   
 };
 
-var feed_divs = [];
+feed_divs = [];
   
 subtreeStr = JSON.stringify(tree_feed_dict);
 
 subtree_div_string = JSON.stringify(single_div);
 
-for (var x = 0; x < feed_limit; x ++) {
-  var subtree = JSON.parse(subtreeStr);
+for (let x = 0; x < feed_limit; x ++) {
+  let subtree = JSON.parse(subtreeStr);
   subtree.visible = false;
   subtree.num = x;
   tree.feed.push(subtree);
@@ -131,7 +131,7 @@ function makeTemplate (id) {
 
 function makeTemplateList() {
   z = "<ul> ";
-  for (var x = 0; x < feed_limit; x ++) {
+  for (let x = 0; x < feed_limit; x ++) {
     //xx = tree.feed[x].num;
 
     z += "<li>";
@@ -146,12 +146,12 @@ template_list = makeTemplateList();
 
 
 function makeFeedComponent() {
-  var element = document.getElementById("components");
+  let element = document.getElementById("components");
   element.innerHTML = template_list;  
 }
 
 function makeInvocation() {
-  for (var x = 0; x < feed_limit; x ++) {
+  for (let x = 0; x < feed_limit; x ++) {
     
     //console.log(tree.feed[x]);
     //console.log("---");
@@ -172,25 +172,25 @@ function makeInvocation() {
         
         classWorkout: function (i) {
           //console.log(i);
-          var x = Boolean ( i);
+          let x = Boolean ( i);
           if (x === true) return 'visi';
           else return 'invis';
         },
         classMessage: function (i) {
           //console.log(i);
-          var x = Boolean( i);
+          let x = Boolean( i);
           if (x === true) return 'visi';
           else return 'invis';
         },
         classExercise: function (i) {
           //console.log(i);
-          var x = Boolean( i);
+          let x = Boolean( i);
           if (x === true) return 'visi';
           else return 'invis';
         },
         classCard: function (i) {
           //console.log(i);
-          var x = Boolean( i);
+          let x = Boolean( i);
           if (x === true) return 'visi';
           else return 'invis';
         }
@@ -215,9 +215,9 @@ function listMaint(dict) {
   
   if ( true ) {
 
-    for  (var x = 0; x < feed_full_length; x++ ) { 
+    for  (let x = 0; x < feed_full_length; x++ ) { 
 
-      for (var key in tree.feed[x]) {
+      for (let key in tree.feed[x]) {
     
         if (key != "picture_large" && key != "picture_small" ) {
           feed_divs[x].instance[key] = tree.feed[x][key];         
@@ -255,7 +255,7 @@ function insertFeed(dict) {
 }
 
 function setMessage(obj, msg="message here.") {
-  var subtree = obj;
+  let subtree = obj;
   subtree.show_message = true;
   subtree.show_workout = false;
   subtree.show_exercise = false;
@@ -266,7 +266,7 @@ function setMessage(obj, msg="message here.") {
 }
 
 function setExercise(obj, msg="exercise here.") {
-  var subtree = obj; 
+  let subtree = obj; 
   subtree.show_exercise = true;
   subtree.show_message = false;
   subtree.show_workout = false;
@@ -279,7 +279,7 @@ function setExercise(obj, msg="exercise here.") {
 }
 
 function setWorkout(obj, msg="workout here.") {
-  var subtree = obj; 
+  let subtree = obj; 
   subtree.show_workout = true;
   subtree.show_message = false;
   subtree.show_exercise = false;
@@ -291,7 +291,7 @@ function setWorkout(obj, msg="workout here.") {
 }
 
 function testInsertMsg() {
-  var subtree = JSON.parse(subtreeStr);
+  let subtree = JSON.parse(subtreeStr);
 
   //focusFormMessage();
   obj = setMessage(subtree); 
@@ -300,7 +300,7 @@ function testInsertMsg() {
 }
 
 function testInsertWorkout() {
-  var subtree = JSON.parse(subtreeStr);
+  let subtree = JSON.parse(subtreeStr);
   subtree.picture_large = null;
   focusFormWorkout();
   obj = setWorkout(subtree); 
@@ -309,7 +309,7 @@ function testInsertWorkout() {
 }
 
 function testInsertExercise() {
-  var subtree = JSON.parse(subtreeStr);
+  let subtree = JSON.parse(subtreeStr);
   subtree.picture_large = null;
   focusFormExercise();
   obj = setExercise(subtree); 

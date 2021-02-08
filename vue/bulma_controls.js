@@ -1,29 +1,29 @@
 
 function controlDropdownType() {
-    //var ff = document.getElementById('exercise_type');
+    //let ff = document.getElementById('exercise_type');
     //f = ff.style.visibility;
     if (document.getElementById('exercise_type').classList.contains("is-active") ) {
-        console.log('visi');
-        document.getElementById('exercise_type').classList.remove("is-active") ;
+
+      document.getElementById('exercise_type').classList.remove("is-active") ;
     }
     else {
-        console.log('invis');
-        document.getElementById('exercise_type').classList.add("is-active");
+
+      document.getElementById('exercise_type').classList.add("is-active");
     }
 
 }
 
 
   function formSubmitMessage() {
-    var msg = document.getElementById("message_txt");
+    let msg_orig = document.getElementById("message_txt");
     //console.log(msg.value);
-    var msg = msg.value;
-    var pic = document.getElementById('myImg1');
-    var pic = pic.src;
+    let msg = msg_orig.value;
+    let pic_orig = document.getElementById('myImg1');
+    let pic = pic_orig.src;
 
-    var d = new Date();//.getMilliseconds();
+    let d = new Date();
 
-    var obj = JSON.parse(subtreeStr);
+    let obj = JSON.parse(subtreeStr);
 
     obj.show_message = true;
     obj.show_workout = false;
@@ -37,7 +37,7 @@ function controlDropdownType() {
 
     //console.log(obj.length + " len");
     
-    var b = setMessage(obj, msg);
+    let b = setMessage(obj, msg);
 
     insertFeed(b);
     document.getElementById("message_txt").value = "";
@@ -57,9 +57,9 @@ function controlDropdownType() {
   /* --------- support fn -------------  */
 
 function preview_image_msg(event) {
-  var reader = new FileReader();
+  let reader = new FileReader();
   reader.onload = function(){
-    var output = document.getElementById('myImg1');
+    let output = document.getElementById('myImg1');
     output.src = reader.result;
     console.log("get pic");
   }
@@ -67,9 +67,9 @@ function preview_image_msg(event) {
 }
 
 function preview_image_ex(event) {
-  var reader = new FileReader();
+  let reader = new FileReader();
   reader.onload = function(){
-    var output = document.getElementById('myImg2');
+    let output = document.getElementById('myImg2');
     output.src = reader.result;
   }
   reader.readAsDataURL(event.target.files[0]);
