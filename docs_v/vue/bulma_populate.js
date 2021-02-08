@@ -160,7 +160,9 @@ function makeInvocation() {
     feed_divs[x].instance = new Vue({
       
       el: '#' + makeId(x),
-      data: tree.feed[x], 
+      data: {
+        article: tree.feed[x],
+      }, 
       
       methods: {
         

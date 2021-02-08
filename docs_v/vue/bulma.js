@@ -1,8 +1,53 @@
+function doLoad() {
 
+instance = new Vue({
+      
+  el: '#components',
+  data: {
+    tree: tree.feed,
+  },
+  
+  
+  methods: {
+    
+    forceUpdate: function () {
+      
+      this.$forceUpdate();
+      console.log("at force update...");
+    },
+    
+    classWorkout: function (i) {
+      //console.log(i);
+      let x = Boolean ( i);
+      if (x === true) return 'visi';
+      else return 'invis';
+    },
+    classMessage: function (i) {
+      //console.log(i);
+      let x = Boolean( i);
+      if (x === true) return 'visi';
+      else return 'invis';
+    },
+    classExercise: function (i) {
+      //console.log(i);
+      let x = Boolean( i);
+      if (x === true) return 'visi';
+      else return 'invis';
+    },
+    classCard: function (i) {
+      //console.log(i);
+      let x = Boolean( i);
+      if (x === true) return 'visi';
+      else return 'invis';
+    }
+    
+  },
 
+  
+});
 //console.log(data);
 
-function doLoad() {
+//function doLoad() {
     
       
 
@@ -28,10 +73,9 @@ function doLoad() {
         }
       });
 
-      makeFeedComponent();
-      makeInvocation();
-      //makePicListener();
-      //console.log(feed_divs.length + " len 0");
+      //makeFeedComponent(); // docs_v
+      //makeInvocation();
+      
 
       
   }
