@@ -1,7 +1,6 @@
 
 function controlDropdownType() {
-    //let ff = document.getElementById('exercise_type');
-    //f = ff.style.visibility;
+    
     if (document.getElementById('exercise_type').classList.contains("is-active") ) {
 
       document.getElementById('exercise_type').classList.remove("is-active") ;
