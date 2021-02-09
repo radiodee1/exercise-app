@@ -113,7 +113,7 @@ function testInsertMsg() {
   let obj = setMessage(subtree); 
   //insertFeed(obj);
   //instance.addToFeed(obj);
-  feed.push(obj);
+  feed.unshift(obj);
   
 }
 
@@ -124,12 +124,8 @@ function testInsertWorkout() {
   const obj = setWorkout(subtree); 
   //insertFeed(obj);
   //instance.addObjToFeed(obj);
-  feed.push(obj);
-  instance.$watch('tree', function () {
-    //this.tree = feed;//.slice();
-    console.log("watch workout");
-    this.forceUpdate();
-  });
+  feed.unshift(obj);
+  
 }
 
 function testInsertExercise() {
@@ -139,10 +135,6 @@ function testInsertExercise() {
   const obj = setExercise(subtree); 
   //insertFeed(obj);
   //instance.addToFeed(obj);
-  feed.push(obj);
-  instance.$watch('tree', function () {
-    //this.tree = feed;//.slice();
-    console.log("watch exercise");
-    this.forceUpdate();
-  });
+  feed.unshift(obj);
+  
 }

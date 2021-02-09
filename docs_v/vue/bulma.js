@@ -5,22 +5,22 @@ function doLoad() {
         
     el: '#components',
     data:  {
-      tree: feed, //.slice().reverse(), //tree.feed, // [],
-      watch: true,
+      //tree: feed, //.slice().reverse(), //tree.feed, // [],
+      //watch: true,
     },
     watch: {
       
       
     },
-    /*
+    
     computed: {
       tree: function () {
-        //this.iterateFeed();
-        return this.tree;
+        return this.iterateFeed();
+        //return this.tree;
         //return feed.slice();
       }
     },
-    */
+    
     methods: {
       
       forceUpdate: function () {
@@ -58,22 +58,24 @@ function doLoad() {
       
       iterateFeed: function () {
         const copy = feed.slice();
-        const limit = this.tree.length;
-        for (const x = 0; x < limit; x ++) {
-          
+        const limit = copy.length;
+        const out = [];
+        for (let x = 0; x < limit; x ++) {
+          out[x] = {};
           for(key in copy[x]) {
           
             if (typeof copy[x][key] !== "boolean" && copy[x][key] !== null ) {
-              this.tree[x][key] = (' ' + copy[x][key]).slice(1);;
+              out[x][key] = (' ' + copy[x][key]).slice(1);
               //console.log(x + " " + key + " " + feed[x][key] );
             }
             else if (copy[x][key] === null) {
-              this.tree[x][key] = null;
+              out[x][key] = null;
             }
           }
-          this.$forceUpdate();
+          //this.$forceUpdate();
 
         }
+        return out;//.slice();
       }
       
     },
@@ -102,6 +104,12 @@ visibility = new Vue({
       else return 'invis';
     },
   }
+});
+
+instance.$watch('tree', function () {
+  //this.tree = feed;//.slice();
+  console.log("watch exercise");
+  this.forceUpdate();
 });
 
   //makeFeedComponent(); // docs_v
