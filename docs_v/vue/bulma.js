@@ -6,7 +6,12 @@ function doLoad() {
     data:  {
       tree: feed, //tree.feed, // [],
     },
-    
+    watch: {
+      tree: function () { 
+        this.$forceUpdate();
+        console.log('here'); 
+      }
+    },
     
     methods: {
       
@@ -14,6 +19,7 @@ function doLoad() {
         console.log("at force update...");
         let temp = this.tree;
         console.log({temp});
+        self.iterateFeed();
         this.$forceUpdate();
         
       },
