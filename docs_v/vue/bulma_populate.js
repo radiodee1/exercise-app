@@ -62,7 +62,7 @@ subtree_div_string = JSON.stringify(single_div);
 function makePopulate() {
   for (let x = 0; x < feed_limit; x ++) {
     //let subtree = JSON.parse(subtreeStr);
-    let subtree = instance.makeFeedObj();
+    const subtree = instance.makeFeedObj();
     //subtree.visible = true;
     subtree.num = x;
     //tree.feed.push(subtree);

@@ -58,7 +58,7 @@ function doLoad() {
         for (let x = 0; x < this.tree.length; x ++) {
           for(key in feed[x]) {
             this.tree[x][key] = feed[x][key];
-            console.log(x + " " + key + " " + feed[x][key] );
+            //console.log(x + " " + key + " " + feed[x][key] );
             this.$forceUpdate();
           }
         }
