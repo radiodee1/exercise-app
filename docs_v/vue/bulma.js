@@ -92,12 +92,12 @@ visibility = new Vue({
   }
 });
 
-      //makeFeedComponent(); // docs_v
-      //makeInvocation();
+  //makeFeedComponent(); // docs_v
+  //makeInvocation();
       
-      makePopulate();
+  makePopulate();
       
-  }
+}
     
   
   window.onload = doLoad;
