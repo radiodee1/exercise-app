@@ -1,95 +1,107 @@
 function doLoad() {
 
-instance = new Vue({
+  instance = new Vue({
+        
+    el: '#components',
+    data:  {
+      tree: feed, //tree.feed, // [],
+    },
+    
+    
+    methods: {
       
-  el: '#components',
-  data: {
-    tree: tree.feed,
-  },
-  
-  
-  methods: {
-    
-    forceUpdate: function () {
+      forceUpdate: function () {
+        console.log("at force update...");
+        let temp = this.tree;
+        console.log({temp});
+        this.$forceUpdate();
+        
+      },
       
-      this.$forceUpdate();
-      console.log("at force update...");
-    },
-    
-    classWorkout: function (i) {
-      //console.log(i);
-      let x = Boolean ( i);
-      if (x === true) return 'visi';
-      else return 'invis';
-    },
-    classMessage: function (i) {
-      //console.log(i);
-      let x = Boolean( i);
-      if (x === true) return 'visi';
-      else return 'invis';
-    },
-    classExercise: function (i) {
-      //console.log(i);
-      let x = Boolean( i);
-      if (x === true) return 'visi';
-      else return 'invis';
-    },
-    classCard: function (i) {
-      //console.log(i);
-      let x = Boolean( i);
-      if (x === true) return 'visi';
-      else return 'invis';
-    },
-    addToFeed: function (i) {
-      tree.feed.unshift(i);
-
-      tree.feed.pop();
-      this.$forceUpdate();
-    }
-    
-  },
-
-  
-});
-//console.log(data);
-
-//function doLoad() {
-    
-      
-
-      visibility = new Vue({
-        el: '#visibility',
-        data: {
-          login: false,
-          register: false,
-          newsfeed: false,
-          home: true,
-          banner: true,
-          form_message: false,
-          form_exercise: false,
-          form_workout: false
-        },
-        methods: {
-          classOption: function (i) {
-            //console.log(i);
-            const x = Boolean(i);
-            if (x === true) return 'visi';
-            else return 'invis';
-          },
+      classWorkout: function (i) {
+        //console.log(i);
+        let x = Boolean ( i);
+        if (x == true) return 'visi';
+        else return 'invis';
+      },
+      classMessage: function (i) {
+        //console.log(i);
+        let x = Boolean( i);
+        if (x == true) return 'visi';
+        else return 'invis';
+      },
+      classExercise: function (i) {
+        //console.log(i);
+        let x = Boolean( i);
+        if (x == true) return 'visi';
+        else return 'invis';
+      },
+      classCard: function (i) {
+        console.log("card " + i);
+        let x = Boolean( i);
+        if (x == true) return 'visi';
+        else return 'invis';
+      },
+      addToFeed: function (i) {
+        i.visible = true;
+        this.tree.unshift(i);
+        //this.tree.pop();
+        
+        //this.forceUpdate();
+        this.iterateFeed();
+      },
+      makeFeedObj: function () {
+        this.$forceUpdate();
+        return JSON.parse(subtreeStr);
+      },
+      iterateFeed: function () {
+        for (let x = 0; x < this.tree.length; x ++) {
+          for(key in feed[x]) {
+            this.tree[x][key] = feed[x][key];
+            console.log(x + " " + key + " " + feed[x][key] );
+            this.$forceUpdate();
+          }
         }
-      });
+      }
+      
+    },
+
+    
+});
+
+
+visibility = new Vue({
+  el: '#visibility',
+  data: {
+    login: false,
+    register: false,
+    newsfeed: false,
+    home: true,
+    banner: true,
+    form_message: false,
+    form_exercise: false,
+    form_workout: false
+  },
+  methods: {
+    classOption: function (i) {
+      //console.log(i);
+      const x = Boolean(i);
+      if (x === true) return 'visi';
+      else return 'invis';
+    },
+  }
+});
 
       //makeFeedComponent(); // docs_v
       //makeInvocation();
       
-
+      makePopulate();
       
   }
     
-  //$(document).ready(function() {
-      /* new app(); */
+  
   window.onload = doLoad;
-  //})
+  
       
   function focusRegister() {
     visibility.register = true;

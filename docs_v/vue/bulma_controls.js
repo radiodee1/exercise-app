@@ -22,7 +22,8 @@ function controlDropdownType() {
 
     let d = new Date();
 
-    let obj = {... JSON.parse(subtreeStr)};
+    //let obj = {... JSON.parse(subtreeStr)};
+    let obj = {... instance.makeFeedObj()};
 
     obj.show_message = true;
     obj.show_workout = false;

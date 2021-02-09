@@ -91,16 +91,18 @@
     </div -->
 
     <!-- vue start -->
+    <div id="components" >
+
     <ul>
-      <div id="components" >
+      <!-- div id="components" -->
         <!-- template here ? -->  
         
-          <li v-for="(article,id) in tree">
+          <li v-for="(article, id) in tree">
             <!-- start li -->
-            <div id="" class="card"  v-show="article.visible" ref="" >
+            <div id="" class="card"   ref="" >
               <div class="card-image">
                 <figure class="image is-4by3">
-                  <img src="../pic/app.png" alt="Placeholder image" id="">
+                  <img src="../pic/app.png"  alt="Placeholder image" id="">
                 </figure>
               </div>
               <div class="card-content">
@@ -145,6 +147,7 @@
             <!-- end li -->
           </li>
         </ul>
+    </div>
       </div>  
       <div id="listing">
         <ul>
@@ -152,8 +155,9 @@
         </ul>
       </div>
 <!-- vue end -->
-  </div>
+  <!-- /div -->
   <div class="column"></div>
+</div>
 </div>  
 </section>
 <!-- end news feed -->
