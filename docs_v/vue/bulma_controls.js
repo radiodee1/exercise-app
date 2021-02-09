@@ -40,6 +40,7 @@ function controlDropdownType() {
     const b = setMessage(obj, msg);
     //instance.addToFeed(b);
     feed.unshift(b);
+    instance.tree = feed;
     //insertFeed(b);
     document.getElementById("message_txt").value = "";
     //console.log(msg);

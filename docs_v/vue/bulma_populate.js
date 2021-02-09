@@ -3,7 +3,6 @@
 feed_full_length = 0;
 const feed_limit = 10;
 
-
 const feed = [];
 
 const tree_feed_dict = {
@@ -114,7 +113,7 @@ function testInsertMsg() {
   //insertFeed(obj);
   //instance.addToFeed(obj);
   feed.unshift(obj);
-  
+  instance.tree = feed;
 }
 
 function testInsertWorkout() {
@@ -125,7 +124,7 @@ function testInsertWorkout() {
   //insertFeed(obj);
   //instance.addObjToFeed(obj);
   feed.unshift(obj);
-  
+  instance.tree = feed;
 }
 
 function testInsertExercise() {
@@ -136,5 +135,5 @@ function testInsertExercise() {
   //insertFeed(obj);
   //instance.addToFeed(obj);
   feed.unshift(obj);
-  
+  instance.tree = feed; 
 }
