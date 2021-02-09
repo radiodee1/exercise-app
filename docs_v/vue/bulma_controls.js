@@ -14,16 +14,16 @@ function controlDropdownType() {
 
 
   function formSubmitMessage() {
-    let msg_orig = document.getElementById("message_txt");
+    const msg_orig = document.getElementById("message_txt");
     //console.log(msg.value);
-    let msg = msg_orig.value;
-    let pic_orig = document.getElementById('myImg1');
-    let pic = pic_orig.src;
+    const msg = msg_orig.value;
+    const pic_orig = document.getElementById('myImg1');
+    const pic = pic_orig.src;
 
-    let d = new Date();
+    const d = new Date();
 
-    //let obj = {... JSON.parse(subtreeStr)};
-    let obj = {... instance.makeFeedObj()};
+    const obj = {... JSON.parse(subtreeStr)};
+    //const obj = {... instance.makeFeedObj()};
 
     obj.show_message = true;
     obj.show_workout = false;
@@ -37,8 +37,9 @@ function controlDropdownType() {
 
     //console.log(obj.length + " len");
     
-    let b = setMessage(obj, msg);
-    instance.addToFeed(b);
+    const b = setMessage(obj, msg);
+    //instance.addToFeed(b);
+    feed.unshift(b);
     //insertFeed(b);
     document.getElementById("message_txt").value = "";
     //console.log(msg);
@@ -57,9 +58,9 @@ function controlDropdownType() {
   /* --------- support fn -------------  */
 
 function preview_image_msg(event) {
-  let reader = new FileReader();
+  const reader = new FileReader();
   reader.onload = function(){
-    let output = document.getElementById('myImg1');
+    const output = document.getElementById('myImg1');
     output.src = reader.result;
     console.log("get pic");
   }
@@ -67,9 +68,9 @@ function preview_image_msg(event) {
 }
 
 function preview_image_ex(event) {
-  let reader = new FileReader();
+  const reader = new FileReader();
   reader.onload = function(){
-    let output = document.getElementById('myImg2');
+    const output = document.getElementById('myImg2');
     output.src = reader.result;
   }
   reader.readAsDataURL(event.target.files[0]);

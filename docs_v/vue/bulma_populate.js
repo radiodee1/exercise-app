@@ -2,15 +2,11 @@
 
 feed_full_length = 0;
 const feed_limit = 10;
-// hard coded output
 
-tree = {
-  feed: []
-};
 
-feed = [];
+const feed = [];
 
-tree_feed_dict = {
+const tree_feed_dict = {
 
   visible: true,
 
@@ -29,7 +25,7 @@ tree_feed_dict = {
 
   message_obj_from: "",
   message_obj_to: "",
-  message_obj_message: "",
+  message_obj_message: "hi...",
   message_obj_date: "",
   
   exercise_obj_reps: "",
@@ -45,24 +41,17 @@ tree_feed_dict = {
 }
 
 
-single_div =  {
-  id: "",
-  instance: null,
-  update : null,
-  messages : null
-  
-};
 
-feed_divs = [];
+//feed_divs = [];
   
-subtreeStr = JSON.stringify(tree_feed_dict);
+const subtreeStr = JSON.stringify(tree_feed_dict);
 
-subtree_div_string = JSON.stringify(single_div);
+//subtree_div_string = JSON.stringify(single_div);
 
 function makePopulate() {
   for (let x = 0; x < feed_limit; x ++) {
-    //let subtree = JSON.parse(subtreeStr);
-    const subtree = instance.makeFeedObj();
+    const subtree = JSON.parse(subtreeStr);
+    //const subtree = instance.makeFeedObj();
     //subtree.visible = true;
     subtree.num = x;
     //tree.feed.push(subtree);
@@ -75,59 +64,11 @@ function makePopulate() {
   };
 }
 
-data = tree;
+//data = tree;
 //data.feed[0].show_workout = true;
-subtree = JSON.parse(subtreeStr);
+const subtree = JSON.parse(subtreeStr);
 
 
-
-function listMaint(dict) {
-
-   //move all down 1
-  tree.feed.unshift(dict);
-
-  tree.feed.pop();
-  
-  if ( true ) {
-
-    for  (let x = 0; x < feed_full_length; x++ ) { 
-
-      for (let key in tree.feed[x]) {
-    
-        if (key != "picture_large" && key != "picture_small" ) {
-          feed_divs[x].instance[key] = tree.feed[x][key];         
-        }
-        else {
-          //
-        }
-      }
-
-      feed_divs[x].instance.forceUpdate();
-      // list of special javascript fn
-
-      if(tree.feed[x].show_message == true ) {
-        document.getElementById(makeId(x, "pic")).src = tree.feed[x].picture_large;
-      }
-      if(tree.feed[x].show_workout == true ) {
-        document.getElementById(makeId(x, "pic")).src = '../pic/app.png'; // tree.feed[x].picture_large;
-      }
-      if(tree.feed[x].show_exercise == true ) {
-        document.getElementById(makeId(x, "pic")).src = '../pic/app.png'; //tree.feed[x].picture_large;
-      }
-    }
-    
-  } 
-
-}
-
-function insertFeed(dict) {
-  // insert message in db here.
-  if (feed_full_length < feed_limit - 1) feed_full_length ++;
-
-  listMaint(dict);
-  
-  return;
-}
 
 function setMessage(obj, msg="message here.") {
   let subtree = obj;
@@ -171,23 +112,37 @@ function testInsertMsg() {
   //focusFormMessage();
   let obj = setMessage(subtree); 
   //insertFeed(obj);
-  instance.addToFeed(obj);
+  //instance.addToFeed(obj);
+  feed.push(obj);
+  
 }
 
 function testInsertWorkout() {
-  let subtree = JSON.parse(subtreeStr);
+  const subtree = JSON.parse(subtreeStr);
   subtree.picture_large = null;
   focusFormWorkout();
-  let obj = setWorkout(subtree); 
+  const obj = setWorkout(subtree); 
   //insertFeed(obj);
-  instance.addToFeed(obj);
+  //instance.addObjToFeed(obj);
+  feed.push(obj);
+  instance.$watch('tree', function () {
+    //this.tree = feed;//.slice();
+    console.log("watch workout");
+    this.forceUpdate();
+  });
 }
 
 function testInsertExercise() {
-  let subtree = JSON.parse(subtreeStr);
+  const subtree = JSON.parse(subtreeStr);
   subtree.picture_large = null;
   focusFormExercise();
-  let obj = setExercise(subtree); 
+  const obj = setExercise(subtree); 
   //insertFeed(obj);
-  instance.addToFeed(obj);
+  //instance.addToFeed(obj);
+  feed.push(obj);
+  instance.$watch('tree', function () {
+    //this.tree = feed;//.slice();
+    console.log("watch exercise");
+    this.forceUpdate();
+  });
 }

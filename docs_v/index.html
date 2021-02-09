@@ -84,21 +84,17 @@
   </div>
   
   <div class="column is-half">
-    <!-- div class="control">
-      <button class="button is-primary" onclick="testInsertMsg()">Test Submit Msg.</button>
-      <button class="button is-primary" onclick="testInsertExercise()">Test Submit Exercise.</button>
-      <button class="button is-primary" onclick="testInsertWorkout()">Test Submit Workout.</button>
-    </div -->
-
+    
     <!-- vue start -->
     <div id="components" >
 
     <ul>
       <!-- div id="components" -->
         <!-- template here ? -->  
+            <!-- start li -->
         
           <li v-for="(article, id) in tree">
-            <!-- start li -->
+
             <div id="" class="card"   ref="" >
               <div class="card-image">
                 <figure class="image is-4by3">
@@ -117,8 +113,10 @@
                     <!-- p class="subtitle is-6">@johnsmith</p -->
                   </div>
                 </div>
+
+                {{ id }}
                 <!-- three contents -->
-                <!-- {{ visible }} -->
+                
                 <div class="content"  v-bind:class=" classExercise(article.show_exercise)">
                   exercise - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Phasellus nec iaculis mauris. <a>@bulmaio</a>.
@@ -144,8 +142,9 @@
                 <!-- end three contents -->
               </div>
             </div>
-            <!-- end li -->
           </li>
+            <!-- end li -->
+
         </ul>
     </div>
       </div>  
@@ -155,7 +154,7 @@
         </ul>
       </div>
 <!-- vue end -->
-  <!-- /div -->
+  
   <div class="column"></div>
 </div>
 </div>  
