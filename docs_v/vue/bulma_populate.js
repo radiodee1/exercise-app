@@ -114,6 +114,7 @@ function testInsertMsg() {
   //instance.addToFeed(obj);
   feed.unshift(obj);
   instance.tree = feed;
+  instance.trip = false;
 }
 
 function testInsertWorkout() {
@@ -125,6 +126,7 @@ function testInsertWorkout() {
   //instance.addObjToFeed(obj);
   feed.unshift(obj);
   instance.tree = feed;
+  instance.trip = false;
 }
 
 function testInsertExercise() {
@@ -136,4 +138,5 @@ function testInsertExercise() {
   //instance.addToFeed(obj);
   feed.unshift(obj);
   instance.tree = feed; 
+  instance.trip = false;
 }
