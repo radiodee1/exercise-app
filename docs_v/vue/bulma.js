@@ -15,7 +15,7 @@ function doLoad() {
     computed: {
       tree: {
         set: function (value) {
-          tree = value.concat([{ trip: this.trip }]); //[... value, {visible: false} ];
+          tree = this.iterateFeed( value); //.concat([{ trip: this.trip }]); //[... value, {visible: false} ];
           //feed = value;
           console.log("set");
           this.$forceUpdate();
@@ -26,7 +26,7 @@ function doLoad() {
           console.log("get");
           //feed.unshift(value);
           this.$forceUpdate();
-          return feed; //tree = value.concat([{trip: this.trip}]); //[... value, {visible: false} ];
+          return this.iterateFeed(feed); //feed; //tree = value.concat([{trip: this.trip}]); //[... value, {visible: false} ];
 
         }
 
@@ -69,12 +69,16 @@ function doLoad() {
       },
 
 
-      iterateFeed: function () {
-        const copy = feed;//.slice();
+      iterateFeed: function (l_feed) {
+        const copy = l_feed;//.slice();
+        const out = [];
+        for (let i = 0; i < copy.length; i ++) {
+          out[i] = { ... copy[i], trip: this.trip };
 
-        console.log(limit + " here.")
+        }
+        //console.log(limit + " here.")
         this.$forceUpdate();
-        return copy;//out;
+        return out;//out;
       }
 
     },
@@ -105,11 +109,13 @@ function doLoad() {
     }
   });
 
+  /*
   instance.$watch('tree', function () {
     //this.tree = feed;//.slice();
     console.log("watch exercise");
     return this.iterateFeed();
   });
+  */
 
   //makeFeedComponent(); // docs_v
   //makeInvocation();
