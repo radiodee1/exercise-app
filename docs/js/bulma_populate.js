@@ -82,7 +82,7 @@ function makeTemplate (id) {
   template_00 = `<div id="`+ makeId(id) +`" class="card"  v-show="visible" ref="` + makeId(id, "ref") + `" >
     <div class="card-image">
       <figure class="image is-4by3">
-        <img src="../pic/app.png" alt="Placeholder image" id="` + makeId(id,'pic') + `">
+        <img src="./pic/app.png" alt="Placeholder image" id="` + makeId(id,'pic') + `">
       </figure>
     </div>
     <div class="card-content">
@@ -167,7 +167,7 @@ function makeInvocation() {
         forceUpdate: function () {
           
           this.$forceUpdate();
-          console.log("at force update...");
+          console.log("at force update.");
         },
         
         classWorkout: function (i) {
@@ -234,10 +234,10 @@ function listMaint(dict) {
         document.getElementById(makeId(x, "pic")).src = tree.feed[x].picture_large;
       }
       if(tree.feed[x].show_workout == true ) {
-        document.getElementById(makeId(x, "pic")).src = '../pic/app.png'; // tree.feed[x].picture_large;
+        document.getElementById(makeId(x, "pic")).src = './pic/app.png'; // tree.feed[x].picture_large;
       }
       if(tree.feed[x].show_exercise == true ) {
-        document.getElementById(makeId(x, "pic")).src = '../pic/app.png'; //tree.feed[x].picture_large;
+        document.getElementById(makeId(x, "pic")).src = './pic/app.png'; //tree.feed[x].picture_large;
       }
     }
     
