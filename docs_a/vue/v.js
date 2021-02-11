@@ -4,6 +4,13 @@
 
 function doLoad() {
 
+
+  propsx = [];
+  for(key in tree_feed_dict) {
+    propsx.push(key);
+  }
+  console.log(propsx);
+
   inx = [];
   for (let x = 0; x < feed_limit; x++) {
     inx.push(x);
@@ -24,7 +31,7 @@ function doLoad() {
         form_exercise: false,
         form_workout: false,
 
-        message: "",
+        //message: "",
         listx: inx
       }
       
@@ -39,7 +46,8 @@ function doLoad() {
       makeId: function (num, prefix="feed_num_") {
         return prefix + num;
       }
-    }
+    },
+    props: propsx
   });
 
   //makeFeedComponent();

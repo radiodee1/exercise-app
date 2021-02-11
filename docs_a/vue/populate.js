@@ -51,6 +51,7 @@ single_div =  {
 };
 
 feed_divs = [];
+
   
 subtreeStr = JSON.stringify(tree_feed_dict);
 
@@ -76,11 +77,6 @@ function makeId (num, prefix="feed_num_") {
   return prefix + num;
 }
 
-function makeid (num, prefix="feed_num_") {
-  console.log(num + " here. lower.")
-  return prefix + num;
-}
-
 
 function makeInvocation() {
 
@@ -92,13 +88,16 @@ function makeInvocation() {
     //console.log("--- "+ makeId(x) + " ---");
 
     feed_divs[x].id = this.makeId(x);
-    feed_divs[x].instance = new Vue({
+    feed_divs[x].instance = Vue.component("script_tag",{
       
-      el: '#' + makeId(x),
+      template: '#script_tag',
       data: function () {
         return tree.feed[x]
-      }, //tree.feed[x], 
+      }, 
+      //data: tree.feed[x], 
       
+      //props: propsx,
+
       methods: {
         
         forceUpdate: function () {
@@ -163,8 +162,8 @@ function listMaint(dict) {
           //
         }
       }
-
-      feed_divs[x].instance.forceUpdate();
+      /*
+      feed_divs[x].instance.forceUpdate(); // <-- not for component ??
       // list of special javascript fn
 
       if(tree.feed[x].show_message == true ) {
@@ -176,6 +175,7 @@ function listMaint(dict) {
       if(tree.feed[x].show_exercise == true ) {
         document.getElementById(makeId(x, "pic")).src = '../pic/app.png'; //tree.feed[x].picture_large;
       }
+      */
     }
     
   } 

@@ -84,16 +84,24 @@
           </div>
 
           <div class="column is-half">
-            
+
 
             <!-- vue start -->
 
             <div id="">
               <!-- template here ? -->
+
+
               <ul id="">
-                
                 <li v-for="pop in listx" :key="pop.id"> {{pop}}
-                  <div  class="card"  :id="makeId(pop)"  >
+                  <div :id="makeId(pop)">
+                    <script_tag></script_tag>
+                  </div>
+                </li>
+              </ul>
+
+              <script type="text/html" id="script_tag">
+                  <div  class="card"  >
                     <div class="card-image">
                       <figure class="image is-4by3">
                         <img src="../pic/app.png" alt="Placeholder image" id="">
@@ -112,7 +120,8 @@
                         </div>
                       </div>
                       <!-- three contents -->
-                    <!-- {{ visible }} 
+                    <!-- ## visible ## -->
+                    <div  >
                       <div class="content" v-bind:class="classExercise(show_exercise)">
                         exercise - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Phasellus nec iaculis mauris. <a>@bulmaio</a>.
@@ -135,14 +144,16 @@
                         <br>
                         <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
                       </div>
-                    -->
-                      <!-- end three contents -->
+                    </div>
+                  
+
+                    <!-- end three contents -->
                     </div>
                   </div>
-                </li>
-              </ul>
+                </script>
+
             </div>
-            
+
             <!-- vue end -->
           </div>
           <div class="column"></div>
@@ -425,11 +436,11 @@
 
   </div> <!-- this div for vue visibility obj -->
 
-<script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-<script src="./vue/populate.js"></script>
-<script src="./vue/controls.js"></script>
-<script src="./vue/v.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="./vue/populate.js"></script>
+  <script src="./vue/controls.js"></script>
+  <script src="./vue/v.js"></script>
 </body>
 
 </html>
