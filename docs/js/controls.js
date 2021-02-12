@@ -98,7 +98,7 @@ function formSubmitExercise() {
   obj.visible = true;
   obj.message = msg;
   obj.exercise_obj_message = msg;
-  obj.exercise_obj_from = "John Doe"
+  obj.message_obj_from = "John Doe"
   obj.picture_large = pic;
   obj.date_now = d;
 
