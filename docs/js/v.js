@@ -28,16 +28,13 @@ function doLoad() {
 
       makeFeedComponent();
       makeInvocation();
-      //makePicListener();
-      //console.log(feed_divs.length + " len 0");
-
+      
       
   }
     
-  //$(document).ready(function() {
-      /* new app(); */
+  
   window.onload = doLoad;
-  //})
+  
       
   function focusRegister() {
     visibility.register = true;
