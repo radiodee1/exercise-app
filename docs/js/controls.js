@@ -97,14 +97,14 @@ function formSubmitExercise() {
   obj.show_exercise = true;
   obj.visible = true;
   obj.message = msg;
-  obj.message_obj_message = msg;
-  obj.message_obj_from = "John Doe"
+  obj.exercise_obj_message = msg;
+  obj.exercise_obj_from = "John Doe"
   obj.picture_large = pic;
   obj.date_now = d;
 
   //console.log(obj.length + " len");
 
-  const b = setMessage(obj, msg);
+  const b = setExercise(obj, msg);
 
   insertFeed(b);
   focusNews();

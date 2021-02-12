@@ -34,6 +34,8 @@ tree_feed_dict = {
   exercise_obj_label: "",
   exercise_obj_date: "",
   exercise_obj_name: "",
+  exercise_obj_message: "",
+  exercise_obj_from:"",
   
   workout_obj_date: "",
   workout_obj_exercise_list: "",
@@ -102,11 +104,11 @@ function makeTemplate (id) {
       + id +
       ` {{ visible }} -->
       <div class="content"  v-bind:class=" classExercise(show_exercise)">
-        exercise - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+        <pre>{{exercise_obj_message}}</pre>
+        <a>@bulmaio</a>.
         <a href="#">#css</a> <a href="#">#responsive</a>
         <br>
-        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+        <time datetime="">{{ date_now }}</time>
       </div>
 
       <div class="content"  v-bind:class=" classMessage(show_message)">
@@ -121,7 +123,7 @@ function makeTemplate (id) {
         Phasellus nec iaculis mauris. <a>@bulmaio</a>.
         <a href="#">#css</a> <a href="#">#responsive</a>
         <br>
-        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+        <time datetime="">{{ date_now }}</time>
       </div>
       <!-- end three contents -->
     </div>

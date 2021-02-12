@@ -83,7 +83,7 @@ function doLoad() {
   function focusFormExercise() {
     visibility.login = false;
     visibility.register = false;
-    visibility.newsfeed = true;
+    visibility.newsfeed = false;
     visibility.home = false;
     visibility.banner = true;
     visibility.form_exercise = true;
