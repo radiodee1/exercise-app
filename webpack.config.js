@@ -1,25 +1,19 @@
-const path = require('path');
- const HtmlWebpackPlugin = require('html-webpack-plugin');
- const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
- module.exports = {
-   mode: 'development',
-   entry: {
-     index: './src/index.js'
-   },
-   devtool: 'inline-source-map',
-  devServer: {
-    contentBase: './dist',
+module.exports = {
+  entry: './src/main.js',
+  module: {
+    rules: [
+      { test: /\.js$/, use: 'babel-loader' },
+      { test: /\.vue$/, use: 'vue-loader' },
+      { test: /\.css$/, use: ['vue-style-loader', 'css-loader']},
+    ]
   },
-   plugins: [
-     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
-     new HtmlWebpackPlugin({
-       title: 'Development',
-     }),
-   ],
-   output: {
-     filename: '[name].bundle.js',
-     path: path.resolve(__dirname, 'dist'),
-   },
- };
-
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+    }),
+    new VueLoaderPlugin(),
+  ]
+};

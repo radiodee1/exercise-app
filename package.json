@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "serve": "webpack-dev-server --mode development",
+    
     "start": "webpack serve --open "
   },
   "dependencies": {},
@@ -22,8 +22,8 @@
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.12",
     "webpack": "^5.21.2",
-    "webpack-cli": "4.5.0",
-    "webpack-dev-server": "3.7.1"
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "browserslist": [
     "> 1%",
@@ -31,5 +31,6 @@
     "not ie <= 8"
   ],
   "keywords": [],
-  "description": "Hello.vue single-file components example using a .vue extension."
+  "description": "Hello.vue single-file components example using a .vue extension.",
+  "main": "./src/main.js"
 }
