@@ -4,8 +4,6 @@
 
 function doLoad() {
     
-      
-
       visibility = new Vue({
         el: '#visibility',
         data: {

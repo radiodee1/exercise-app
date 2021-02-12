@@ -57,7 +57,7 @@ subtreeStr = JSON.stringify(tree_feed_dict);
 subtree_div_string = JSON.stringify(single_div);
 
 for (let x = 0; x < feed_limit; x ++) {
-  let subtree = JSON.parse(subtreeStr);
+  const subtree = JSON.parse(subtreeStr);
   subtree.visible = false;
   subtree.num = x;
   tree.feed.push(subtree);
@@ -146,7 +146,7 @@ template_list = makeTemplateList();
 
 
 function makeFeedComponent() {
-  let element = document.getElementById("components");
+  const element = document.getElementById("components");
   element.innerHTML = template_list;  
 }
 
@@ -172,25 +172,25 @@ function makeInvocation() {
         
         classWorkout: function (i) {
           //console.log(i);
-          let x = Boolean ( i);
+          const x = Boolean ( i);
           if (x === true) return 'visi';
           else return 'invis';
         },
         classMessage: function (i) {
           //console.log(i);
-          let x = Boolean( i);
+          const x = Boolean( i);
           if (x === true) return 'visi';
           else return 'invis';
         },
         classExercise: function (i) {
           //console.log(i);
-          let x = Boolean( i);
+          const x = Boolean( i);
           if (x === true) return 'visi';
           else return 'invis';
         },
         classCard: function (i) {
           //console.log(i);
-          let x = Boolean( i);
+          const x = Boolean( i);
           if (x === true) return 'visi';
           else return 'invis';
         }
@@ -255,7 +255,7 @@ function insertFeed(dict) {
 }
 
 function setMessage(obj, msg="message here.") {
-  let subtree = obj;
+  const subtree = obj;
   subtree.show_message = true;
   subtree.show_workout = false;
   subtree.show_exercise = false;
@@ -266,7 +266,7 @@ function setMessage(obj, msg="message here.") {
 }
 
 function setExercise(obj, msg="exercise here.") {
-  let subtree = obj; 
+  const subtree = obj; 
   subtree.show_exercise = true;
   subtree.show_message = false;
   subtree.show_workout = false;
@@ -279,7 +279,7 @@ function setExercise(obj, msg="exercise here.") {
 }
 
 function setWorkout(obj, msg="workout here.") {
-  let subtree = obj; 
+  const subtree = obj; 
   subtree.show_workout = true;
   subtree.show_message = false;
   subtree.show_exercise = false;
@@ -291,7 +291,7 @@ function setWorkout(obj, msg="workout here.") {
 }
 
 function testInsertMsg() {
-  let subtree = JSON.parse(subtreeStr);
+  const subtree = JSON.parse(subtreeStr);
 
   //focusFormMessage();
   obj = setMessage(subtree); 
@@ -300,7 +300,7 @@ function testInsertMsg() {
 }
 
 function testInsertWorkout() {
-  let subtree = JSON.parse(subtreeStr);
+  const subtree = JSON.parse(subtreeStr);
   subtree.picture_large = null;
   focusFormWorkout();
   obj = setWorkout(subtree); 
@@ -309,7 +309,7 @@ function testInsertWorkout() {
 }
 
 function testInsertExercise() {
-  let subtree = JSON.parse(subtreeStr);
+  const subtree = JSON.parse(subtreeStr);
   subtree.picture_large = null;
   focusFormExercise();
   obj = setExercise(subtree); 

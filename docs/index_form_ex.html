@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <link rel="stylesheet" href="./css/bulma.css">
 
-    <title>Document</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  <link rel="stylesheet" href="./css/bulma.css">
+
+  <title>Document</title>
 </head>
+
 <body>
   <div id="visibility">
 
@@ -15,90 +17,147 @@
     HI. This page is for layout of exercise form.
     <!-- start exercise -->
     <div class="visi">
-        <div class="columns">
+      <div class="columns">
         <div class="column"></div>
         <div class="column is-half ">
-          <article class="message box" v-if="true"> <!-- v-if="form_exercise" -->
-          <div class="message-header">
-            <p>Exercise</p>
-            <button class="delete" aria-label="delete"></button>
-          </div>
-          <div class="message-body gray" >
+          <article class="message box" v-if="true">
+            <!-- v-if="form_exercise" -->
+            <div class="message-header">
+              <p>Exercise</p>
+              <button class="delete" aria-label="delete"></button>
+            </div>
+            <div class="message-body gray">
 
-            <!-- start first dropdown -->
-            <div class="dropdown " id="exercise_type"> <!-- class="is-active" -->
-              <div class="dropdown-trigger">
-                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu" onclick="controlDropdownType()">
-                  <span>Exercise Type</span>
-                  <span class="icon is-small">
-                    <i class="fas fa-angle-down" aria-hidden="true"></i>
-                  </span>
-                </button>
-              </div>
-              <div class="dropdown-menu" id="dropdown-menu" role="menu"  >
-                <div class="dropdown-content">
-                  <a href="#" class="dropdown-item">
-                    reps
-                  </a>
-                  <a class="dropdown-item">
-                    miles
-                  </a>
-                  <a class="dropdown-item">
-                    kilometers
-                  </a>
-                  <a class="dropdown-item">
-                    steps
-                  </a>
-                  <a class="dropdown-item">
-                    laps
-                  </a>
-                  <a class="dropdown-item">
-                    lbs
-                  </a>
-                  <a class="dropdown-item">
-                    kg
-                  </a>
-                  
+              <!-- start first dropdown -->
+              <div class="dropdown " id="exercise_type">
+                <!-- class="is-active" -->
+                <div class="dropdown-trigger">
+                  <button class="button" aria-haspopup="true" aria-controls="dropdown-menu"
+                    onclick="controlDropdownType()">
+                    <span id='exercise_type_label'>Exercise Type</span>
+                    <span class="icon is-small">
+                      <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                  </button>
+                </div>
+                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                  <div class="dropdown-content">
+                    <a href="#" class="dropdown-item" onclick="formChooseType('reps')">
+                      reps
+                    </a>
+                    <a class="dropdown-item" onclick="formChooseType('miles')">
+                      miles
+                    </a>
+                    <a class="dropdown-item" onclick="formChooseType('kilometers')">
+                      kilometers
+                    </a>
+                    <a class="dropdown-item" onclick="formChooseType('steps')">
+                      steps
+                    </a>
+                    <a class="dropdown-item" onclick="formChooseType('laps')">
+                      laps
+                    </a>
+                    <a class="dropdown-item" onclick="formChooseType('lbs')">
+                      lbs
+                    </a>
+                    <a class="dropdown-item" onclick="formChooseType('kg')">
+                      kg
+                    </a>
+
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- end first dropdown-->
-            <div class="control">
-        
-            <nav class="level"><div class="level-left">
-              <button class="button is-primary" onclick="formSubmitExercise()">Submit</button> 
-              
-            <div class="file">
-              <label class="file-label">
-                <input class="file-input is-primary" type="file" name="resume" id="pic-button" onchange="preview_image_ex(event)">
-                <span class="file-cta">
-                  <span class="file-icon">
-                    <i class="fas fa-upload"></i>
-                  </span>
-                  <span class="file-label">
-                    Choose a file…
-                  </span>
-                </span>
-              </label>
-            </div>
-          </div>
-          </nav>
-        
-          </div>
-            <figure class="image is-4by3">
-              <img id="myImg2" src="./pic/app.png">
+              <!-- end first dropdown-->
+              <!-- start second dropdown -->
+              <div class="dropdown " id="exercise_type_deet">
+                <!-- class="is-active" -->
+                <div class="dropdown-trigger">
+                  <button class="button" aria-haspopup="true" aria-controls="dropdown-menu"
+                    onclick="controlDropdownDeet()">
+                    <span id="exercise_type_deet_label">Exercise Details</span>
+                    <span class="icon is-small">
+                      <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                  </button>
+                </div>
+                <div class="dropdown-menu" id="dropdown-menu-deet" role="menu">
+                  <div class="dropdown-content">
+                    <a href="#" class="dropdown-item" onclick="formChooseDeet('running')">
+                      running
+                    </a>
+                    <a class="dropdown-item" onclick="formChooseDeet('walking')">
+                      walking
+                    </a>
+                    <a class="dropdown-item" onclick="formChooseDeet('swimming')">
+                      swimming
+                    </a>
+                    <a class="dropdown-item" onclick="formChooseDeet('cycling')">
+                      cycling
+                    </a>
+                    <a class="dropdown-item" onclick="formChooseDeet('curls')">
+                      curls
+                    </a>
+                    <a class="dropdown-item" onclick="formChooseDeet('pushups')">
+                      pushups
+                    </a>
+                    <a class="dropdown-item" onclick="formChooseDeet('chinups')">
+                      chinups
+                    </a>
+                    <a class="dropdown-item" onclick="formChooseDeet('lifts')">
+                      lifts
+                    </a>
 
-            </figure>
-          </div>
-        </article>
+                  </div>
+                </div>
+              </div>
+              <!-- end second dropdown-->
+
+              <input class="input" type="number" placeholder="repeat" style="width: 100px;" min="0" id="exercise_num">
+
+              <button class="button is-primary" onclick="formFinishExercise()">Finish</button>
+              <pre id="exercise_pre" style="visibility: hidden;"></pre>
+
+              <div class="invis">
+                <textarea id="message_txt" class="textarea" placeholder="What's on your mind?!" rows="5" ></textarea>
+              </div>
+              <div class="control">
+
+                <nav class="level">
+                  <div class="level-left">
+                    <button class="button is-primary" id="exercise_submit" style="visibility: hidden;" onclick="formSubmitExercise()">Submit</button>
+
+                    <div class="file">
+                      <label class="file-label">
+                        <input class="file-input is-primary" type="file" name="resume" id="pic-button"
+                          onchange="preview_image_ex(event)">
+                        <span class="file-cta">
+                          <span class="file-icon">
+                            <i class="fas fa-upload"></i>
+                          </span>
+                          <span class="file-label">
+                            Choose a picture
+                          </span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </nav>
+
+              </div>
+              <figure class="image is-4by3">
+                <img id="myImg2" src="./pic/app.png" class="invis">
+
+              </figure>
+            </div>
+          </article>
         </div>
         <div class="column"></div>
-        
-        </div>
-        </div>
 
-        <!-- end exercise -->
       </div>
+    </div>
+
+    <!-- end exercise -->
+  </div>
   <!-- script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script -->
   <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -107,4 +166,5 @@
 
   <script src="./js/v.js"></script>
 </body>
+
 </html>
