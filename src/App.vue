@@ -1,13 +1,14 @@
 <template>
   <div id="visibility" >
-    
+    {{ message }}
     <bannercomponent></bannercomponent>
+    <feedcontainer></feedcontainer>
   </div>
 </template>
 
 <script>
 import bannercomponent from "./Banner.vue";
-
+import feedcontainer from "./FeedContainer.vue";
 
 export default {
   data() {
@@ -17,7 +18,8 @@ export default {
     };
   },
   components: {
-    bannercomponent
+    bannercomponent,
+    feedcontainer
   }
 };
 </script>

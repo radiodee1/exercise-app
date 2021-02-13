@@ -15,7 +15,8 @@ module.exports = {
             loader: 'file-loader',
             options: {
               regExp: /\/([a-z0-9]+)\/[a-z0-9]+\.png$/i,
-              name: '[1]-[name].[ext]',
+              name: '[1]-[name].[ext]'
+
             },
           },
         ],
