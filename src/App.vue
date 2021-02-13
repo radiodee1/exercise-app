@@ -1,12 +1,14 @@
 <template>
-  <div id="app" class="box">
-    <div v-for="i in l" :key="i" :id="'key-'+ i">
-    {{ message }}
-    </div>
+  <div id="visibility" >
+    
+    <bannercomponent></bannercomponent>
   </div>
 </template>
 
 <script>
+import bannercomponent from "./Banner.vue";
+
+
 export default {
   data() {
     return {
@@ -15,7 +17,7 @@ export default {
     };
   },
   components: {
-
+    bannercomponent
   }
 };
 </script>
