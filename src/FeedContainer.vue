@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="feedcomponent">
   <!-- start news feed -->
   <section class="section" v-bind:class="classOption(newsfeed)">
     <div class="columns">
@@ -41,5 +41,9 @@ export default {
   data() {
     return {};
   },
+  props: {
+    newsfeed: Boolean,
+    classOption: Function
+  }
 };
 </script>

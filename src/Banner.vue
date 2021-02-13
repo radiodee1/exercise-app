@@ -55,5 +55,11 @@ export default {
   data() {
     return {};
   },
+  props: {
+    banner : Boolean, 
+    newsfeed: Boolean , 
+    classOption: Function
+  }
+
 };
 </script>

@@ -1,13 +1,13 @@
 import Vue from "vue";
 import App from "./App.vue";
 
-//Vue.config.productionTip = false;
+Vue.config.productionTip = false;
 
 new Vue({
-  el: "#app",
+  //el: "#app",
 
   render: function(f) {
       return f(App);
   },
   
-});
+}).$mount("#app");

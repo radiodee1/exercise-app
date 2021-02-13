@@ -2,7 +2,7 @@
   <div id="visibility" >
     {{ message }}
     <bannercomponent></bannercomponent>
-    <feedcontainer></feedcontainer>
+    <feedcontainer></feedcontainer> 
   </div>
 </template>
 
@@ -18,9 +18,15 @@ export default {
     };
   },
   components: {
-    bannercomponent,
-    feedcontainer
-  }
+    "bannercomponent" : bannercomponent,
+    "feedcontainer" : feedcontainer
+  },
+  props: {
+    banner : Boolean, 
+    newsfeed: Boolean , 
+    classOption: Function
+  },
+  
 };
 </script>
 
