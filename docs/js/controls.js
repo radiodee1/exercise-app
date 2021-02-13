@@ -29,7 +29,9 @@ function formFinishExercise() {
   const type = document.getElementById('exercise_type_label').textContent;
   const deet = document.getElementById('exercise_type_deet_label').textContent;
   const num = document.getElementById('exercise_num').value;
-  const i = `Exercise Report:\nExercise Type: ${type}\nExercise Details: ${deet}\nRepitions: ${num}\n`;
+  const weight = document.getElementById('exercise_weight').value;
+  console.log(weight);
+  const i = `Exercise Report:\nExercise Type: ${type}\nExercise Details: ${deet}\nRepitions: ${num}\nWeight: ${weight} LBS\n`;
   document.getElementById('exercise_pre').textContent = i;
   document.getElementById('exercise_pre').style.visibility = "visible";
   document.getElementById('exercise_submit').style.visibility = "visible";
