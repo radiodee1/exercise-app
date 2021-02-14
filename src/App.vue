@@ -9,6 +9,7 @@
 <script>
 import bannercomponent from "./Banner.vue";
 import feedcontainer from "./FeedContainer.vue";
+//import styles from "./css/bulma.css";
 
 export default {
   data() {
@@ -31,9 +32,5 @@ export default {
 </script>
 
 <style>
-#app {
-  font-size: 58px;
-  font-family: 'Roboto', sans-serif;
-  color: blue;
-}
+
 </style>

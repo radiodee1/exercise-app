@@ -7,7 +7,7 @@ module.exports = {
     rules: [
       { test: /\.js$/, use: 'babel-loader' },
       { test: /\.vue$/, use: 'vue-loader' },
-      { test: /\.css$/, use: ['vue-style-loader', 'css-loader']},
+      /* { test: /\.css$/, use: ['vue-style-loader', 'css-loader']}, */
       {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
@@ -21,6 +21,34 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.css$/,
+        use: [
+          'vue-style-loader',
+          {
+            loader: 'css-loader',
+            options: { modules: true }
+          },
+          'css-loader'
+        ]
+      }
+      /*
+      {
+        test: /\.css$/,
+        use: [
+          'vue-style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              // enable CSS Modules
+              modules: true,
+              // customize generated class names
+              //localIdentName: '[local]_[hash:base64:8]'
+            }
+          }
+        ]
+      } 
+      */
     ]
   },
   plugins: [
