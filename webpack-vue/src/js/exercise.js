@@ -28,8 +28,8 @@ let tree_feed_dict = {
   show_message: false,
   show_exercise: false,
   show_workout: false,
-  
-  picture_large: null,
+
+  picture_large: '../assets/app.png',
   picture_small: null,
 
   message: "hello-world",
@@ -38,44 +38,44 @@ let tree_feed_dict = {
   message_obj_to: "",
   message_obj_message: "",
   message_obj_date: "",
-  
+
   exercise_obj_reps: "",
   exercise_obj_weight: "",
   exercise_obj_label: "",
   exercise_obj_date: "",
   exercise_obj_name: "",
   exercise_obj_message: "",
-  exercise_obj_from:"",
-  
+  exercise_obj_from: "",
+
   workout_obj_date: "",
   workout_obj_exercise_list: "",
-  
+
   message_list: "",
 }
 
 
-let single_div =  {
+let single_div = {
   id: "",
   instance: null,
-  update : null,
-  messages : null
-  
+  update: null,
+  messages: null
+
 };
 
 export let feed_divs = [];
-  
+
 export let subtreeStr = JSON.stringify(tree_feed_dict);
 
 let subtree_div_string = JSON.stringify(single_div);
 
 export let subtree_div = "";
 
-for (let x = 0; x < feed_limit; x ++) {
+for (let x = 0; x < feed_limit; x++) {
   const subtree = JSON.parse(subtreeStr);
   subtree.visible = false;
   subtree.num = x;
   tree.feed.push(subtree);
-  
+
 
   subtree_div = JSON.parse(subtree_div_string);
   feed_divs.push(subtree_div);
@@ -88,63 +88,63 @@ for (let x = 0; x < feed_limit; x ++) {
 
 //data = data.feed.reverse();
 
-function makeId(num, prefix="feed-num-") {
+function makeId(num, prefix = "feed-num-") {
   return prefix + num;
 }
 
 
 
 export function makeInvocation() {
-  for (let x = 0; x < feed_limit; x ++) {
-    
+  for (let x = 0; x < feed_limit; x++) {
+
     //console.log(tree.feed[x]);
     //console.log("---");
 
     feed_divs[x].id = makeId(x);
     feed_divs[x].instance = new Vue({
-      
+
       el: '#' + makeId(x),
-      data: tree.feed[x], 
-      
+      data: tree.feed[x],
+
       methods: {
-        
+
         forceUpdate: function () {
-          
+
           this.$forceUpdate();
           console.log("at force update.");
         },
-        
+
         classWorkout: function (i) {
           //console.log(i);
-          const x = Boolean ( i);
+          const x = Boolean(i);
           if (x === true) return 'visi';
           else return 'invis';
         },
         classMessage: function (i) {
           //console.log(i);
-          const x = Boolean( i);
+          const x = Boolean(i);
           if (x === true) return 'visi';
           else return 'invis';
         },
         classExercise: function (i) {
           //console.log(i);
-          const x = Boolean( i);
+          const x = Boolean(i);
           if (x === true) return 'visi';
           else return 'invis';
         },
         classCard: function (i) {
           //console.log(i);
-          const x = Boolean( i);
+          const x = Boolean(i);
           if (x === true) return 'visi';
           else return 'invis';
         }
-        
+
       },
 
-      
+
     });
 
-    
+
   }
   return feed_divs;
 }
@@ -153,19 +153,19 @@ let do_loop = true;
 
 function listMaint(dict, feed_divs, tree) {
 
-   //move all down 1
+  //move all down 1
   tree.feed.unshift(dict);
 
   tree.feed.pop();
-  
-  if ( do_loop ) {
 
-    for  (let x = 0; x < feed_full_length; x++ ) { 
+  if (do_loop) {
+
+    for (let x = 0; x < feed_full_length; x++) {
 
       for (let key in tree.feed[x]) {
-    
-        if (key != "picture_large" && key != "picture_small" ) {
-          feed_divs[x].instance[key] = tree.feed[x][key];         
+
+        if (key != "picture_large" && key != "picture_small") {
+          feed_divs[x].instance[key] = tree.feed[x][key];
         }
         else {
           //
@@ -175,31 +175,34 @@ function listMaint(dict, feed_divs, tree) {
       feed_divs[x].instance.forceUpdate();
       // list of special javascript fn
 
-      if(tree.feed[x].show_message == true ) {
-        document.getElementById(makeId(x, "pic")).src = tree.feed[x].picture_large;
+      if (tree.feed[x].picture_large != null && document.getElementById(makeId(x,"pic")) != null) {
+        if (tree.feed[x].show_message == true) {
+          document.getElementById(makeId(x, "pic")).src = tree.feed[x].picture_large;
+        }
+        if (tree.feed[x].show_workout == true) {
+          document.getElementById(makeId(x, "pic")).src = tree.feed[x].picture_large;
+        }
+        if (tree.feed[x].show_exercise == true) {
+          document.getElementById(makeId(x, "pic")).src = tree.feed[x].picture_large;
+        }
       }
-      if(tree.feed[x].show_workout == true ) {
-        document.getElementById(makeId(x, "pic")).src = tree.feed[x].picture_large;
-      }
-      if(tree.feed[x].show_exercise == true ) {
-        document.getElementById(makeId(x, "pic")).src = tree.feed[x].picture_large; 
-      }
+
     }
-    
-  } 
+
+  }
 
 }
 
 export function insertFeed(dict, feed_divs, tree) {
   // insert message in db here.
-  if (feed_full_length < feed_limit - 1) feed_full_length ++;
+  if (feed_full_length < feed_limit - 1) feed_full_length++;
 
   listMaint(dict, feed_divs, tree);
-  
+
   return;
 }
 
-export function setMessage(obj, msg="message here.") {
+export function setMessage(obj, msg = "message here.") {
   const subtree = obj;
   subtree.show_message = true;
   subtree.show_workout = false;
@@ -210,8 +213,8 @@ export function setMessage(obj, msg="message here.") {
   return subtree;
 }
 
-export function setExercise(obj, msg="exercise here.") {
-  const subtree = obj; 
+export function setExercise(obj, msg = "exercise here.") {
+  const subtree = obj;
   subtree.show_exercise = true;
   subtree.show_message = false;
   subtree.show_workout = false;
@@ -223,8 +226,8 @@ export function setExercise(obj, msg="exercise here.") {
   return subtree;
 }
 
-export function setWorkout(obj, msg="workout here.") {
-  const subtree = obj; 
+export function setWorkout(obj, msg = "workout here.") {
+  const subtree = obj;
   subtree.show_workout = true;
   subtree.show_message = false;
   subtree.show_exercise = false;
@@ -238,30 +241,41 @@ export function setWorkout(obj, msg="workout here.") {
 
 
 /* ---------------- controls next ---------------- */
+function setPic(pic_orig) {
+  let pic = null;
+  if (pic_orig != null && pic_orig.src != null) {
+    pic = pic_orig.src;
+  }
+  else {
+    pic = "../assets/app.png";
+  }
+  //console.log("p "+pic);
+  return pic;
+}
 
 
 export function formSubmitMessage(feed_divs, tree, ob = null) {
   //let feed = this.value;
-  
+
   const msg_orig = document.getElementById("message_txt");
   //console.log(msg_orig.value);
   const msg = msg_orig.value;
   const pic_orig = document.getElementById('myImg1');
-  const pic = pic_orig.src;
+  //const pic = pic_orig.src;
   //console.log("here 2");
+  const pic = setPic(pic_orig);
 
   const d = new Date();
   //console.log("here 3");
 
   let obj = null;
-  
+
   if (ob == null) {
     obj = JSON.parse(subtreeStr);
   }
   else {
     obj = ob;
   }
-
 
   obj.show_message = true;
   obj.show_workout = false;
@@ -273,21 +287,19 @@ export function formSubmitMessage(feed_divs, tree, ob = null) {
   obj.picture_large = pic;
   obj.date_now = d;
 
-  //console.log(obj + " len");
-
   const b = setMessage(obj, msg);
 
   insertFeed(b, feed_divs, tree);
   document.getElementById("message_txt").value = "";
-  //console.log(msg);
-  //focusNews();
+  
 }
 
 function formSubmitWorkout(msg, feed_divs, tree, ob = null) {
-  console.log("workout submit + "+ msg);
+  console.log("workout submit + " + msg);
   //const msg = document.getElementById('workout_hidden').textContent;
   const pic_orig = document.getElementById('myImg3');
-  const pic = pic_orig.src;
+  //const pic = pic_orig.src;
+  const pic = setPic(pic_orig);
 
   const d = new Date();
 
@@ -322,20 +334,14 @@ function formSubmitExercise(feed_divs, tree, ob = null) {
   const msg = document.getElementById('exercise_pre').textContent;
   const pic_orig = document.getElementById('myImg2');
 
-  let pic = null;
-  if (pic_orig != null) {
-    pic = pic_orig.src;
-  }
-  else {
-    pic = "../assets/app.png";
-  }
-  
-  //const pic = pic_orig.src;
+  // <---
+
+  const pic = setPic(pic_orig);
 
   const d = new Date();
 
   let obj = null;
-  
+
   if (ob == null) {
     obj = JSON.parse(subtreeStr);
   }
@@ -372,8 +378,6 @@ export function preview_image_msg(event) {
     output.src = reader.result;
     console.log("get pic");
   }
-  //const f = visibility.$refs.picButton.files;
-  //const ff = f[0];
   reader.readAsDataURL(event.target.files[0]);
 }
 
@@ -402,7 +406,7 @@ export function preview_image_wrk(event) {
 let visibility = null;
 
 var feed_array = [];
-for (var x = 0; x < feed_limit; x ++) {
+for (var x = 0; x < feed_limit; x++) {
   feed_array.push(x);
 }
 
@@ -446,7 +450,7 @@ export function doLoad() {
         else return 'invis';
       },
 
-      
+
       focusRegister: function () {
         this.register = true;
         this.login = false;
@@ -466,7 +470,7 @@ export function doLoad() {
         this.form_message = false;
         this.form_workout = false;
       },
-      
+
       focusNews: function () {
 
         this.login = false;
@@ -540,14 +544,14 @@ export function doLoad() {
         const obj = JSON.parse(subtreeStr);
         obj.message_obj_from = this.user.firstname + " " + this.user.lastname;
         formSubmitMessage(feed_divs, tree, obj);
-        
+
       },
       useFormSubmitExercise: function (feed_divs, tree) {
         const obj = JSON.parse(subtreeStr);
         obj.message_obj_from = this.user.firstname + " " + this.user.lastname;
 
         formSubmitExercise(feed_divs, tree, obj);
-        
+
       },
       useFormSubmitWorkout: function (msg, feed_divs, tree) {
         const obj = JSON.parse(subtreeStr);
@@ -555,7 +559,7 @@ export function doLoad() {
         obj.message_obj_from = this.user.firstname + " " + this.user.lastname;
 
         formSubmitWorkout(msg, feed_divs, tree, obj);
-        
+
       },
       preview_image_msg: function (e) {
         preview_image_msg(e);

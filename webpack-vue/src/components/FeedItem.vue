@@ -3,7 +3,7 @@
   <div :id="makeId(i)" class="card"  v-show="visible" :ref="makeId(i)" > 
     
     <div class="card-image">
-      <figure class="image is-4by3">
+      <figure class="image is-4by3" v-show="show_pic()">
         <img src="../assets/app.png" alt="Placeholder image" :id="makeId(i, 'pic')">
       </figure>
     </div>
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { feed_divs } from '../js/exercise';
+//import { feed_divs } from '../js/exercise';
 
 export default {
   name: "item",
@@ -88,8 +88,24 @@ export default {
         return msg_lst;
       },
 
-      visible: function () {return this.feed_divs[ + this.i].instance.visible;}
+      visible: function () {return this.feed_divs[ + this.i].instance.visible;},
+      show_picx: function () {
+        //const id = this.makeId(i, "pic");
+        const t = this.feed_divs[this.i].instance.picture_large;
+        const d = document.getElementById(this.makeId(this.i, "pic"));
+        console.log(d + " src");
+        console.log('t '+t);
+        if (t == null || d == null || typeof d == 'undefined' || d.src === null ) {
+          console.log(this.i + ' ' + "false");
+          return false;
+        } 
+        else {
+          return true;
+        }
+      }
+  
   },
+  //watch: { show_pic },
   props: {
     newsfeed: Boolean,
     makeId: Function,
@@ -113,8 +129,22 @@ export default {
     classWorkout: function (x) {
       return this.classOption(x);
     },
-    
+    show_pic: function () {
+        //const id = this.makeId(i, "pic");
+        const t = this.feed_divs[this.i].instance.picture_large;
+        const d = document.getElementById(this.makeId(this.i, "pic"));
+        console.log(d + " src");
+        console.log('t '+t);
+        if (t === null || d === null ){ // || typeof d === 'undefined' || d.src === null ) {
+          console.log(this.i + ' ' + "false");
+          return false;
+        } 
+        else {
+          return true;
+        }
+      }
 
   },
+  
 };
 </script>
