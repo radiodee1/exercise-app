@@ -58,12 +58,13 @@ export default {
   data() {
     return {
       list: this.makeList(),
+      show_friends: this.form_friends
     };
   },
   props: {
     //newsfeed: Boolean,
     form_friends: Boolean,
-
+    focusNews: Function
     //classOption: Function
   },
   methods: {
@@ -104,6 +105,9 @@ export default {
       //dict.firstname = "Dave";
       l.push(dict2);
       return l;
+    },
+    cancel: function () {
+      this.focusNews();
     },
   },
 };

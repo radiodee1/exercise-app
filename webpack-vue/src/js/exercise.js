@@ -321,7 +321,16 @@ function formSubmitExercise(feed_divs, tree, ob = null) {
   console.log("exercise submit");
   const msg = document.getElementById('exercise_pre').textContent;
   const pic_orig = document.getElementById('myImg2');
-  const pic = pic_orig.src;
+
+  let pic = null;
+  if (pic_orig != null) {
+    pic = pic_orig.src;
+  }
+  else {
+    pic = "../assets/app.png";
+  }
+  
+  //const pic = pic_orig.src;
 
   const d = new Date();
 
@@ -467,7 +476,7 @@ export function doLoad() {
         this.form_exercise = false;
         this.form_message = false;
         this.form_workout = false;
-
+        this.form_friends = false;
 
       },
 
