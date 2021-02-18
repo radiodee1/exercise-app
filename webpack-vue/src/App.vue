@@ -288,7 +288,7 @@ import exercise from "./components/Exercise.vue";
 import workout from "./components/Workout.vue";
 import friends from "./components/Friends.vue";
 
-import {  makeInvocation, makeUser } from "./js/exercise.js";
+import {  makeInvocation } from "./js/exercise.js";
 
 export default {
   name: "appx",

@@ -1,4 +1,7 @@
 import Vue from "vue";
+//import Vue from 'vue'
+//import App from '../App.vue'
+import router from '../router'
 
 import appx from "../App.vue";
 
@@ -78,9 +81,10 @@ for (let x = 0; x < feed_limit; x ++) {
   feed_divs.push(subtree_div);
 }
 
-let data = tree;
+//let data = tree;
+
 //data.feed[0].show_workout = true;
-let subtree = JSON.parse(subtreeStr);
+//let subtree = JSON.parse(subtreeStr);
 
 //data = data.feed.reverse();
 
@@ -386,6 +390,8 @@ export function preview_image_wrk(event) {
 
 /* --------------- vue functions ------------------- */
 
+let visibility = null;
+
 var feed_array = [];
 for (var x = 0; x < feed_limit; x ++) {
   feed_array.push(x);
@@ -393,8 +399,9 @@ for (var x = 0; x < feed_limit; x ++) {
 
 export function doLoad() {
 
-  let visibility = new Vue({
+  visibility = new Vue({
     el: '#app',
+    router,
     render: h => h(appx),
     data() {
       return {
@@ -430,7 +437,7 @@ export function doLoad() {
         else return 'invis';
       },
 
-
+      
       focusRegister: function () {
         this.register = true;
         this.login = false;
@@ -450,7 +457,7 @@ export function doLoad() {
         this.form_message = false;
         this.form_workout = false;
       },
-
+      
       focusNews: function () {
 
         this.login = false;
@@ -574,6 +581,7 @@ export function classOption(i) {
   else return 'invis';
 }
 
+/*
 function focusRegister() {
   visibility.register = true;
   visibility.login = false;
@@ -584,6 +592,7 @@ function focusRegister() {
   visibility.form_workout = false;
 }
 
+
 function focusLogin() {
   visibility.login = true;
   visibility.register = false;
@@ -593,6 +602,7 @@ function focusLogin() {
   visibility.form_message = false;
   visibility.form_workout = false;
 }
+*/
 
 export function focusNews() {
 
@@ -607,6 +617,7 @@ export function focusNews() {
 
 }
 
+/*
 function focusReset() {
   visibility.login = false;
   visibility.register = false;
@@ -617,6 +628,7 @@ function focusReset() {
   visibility.form_message = false;
   visibility.form_workout = false;
 }
+*/
 
 export function focusFormExercise() {
   visibility.login = false;
@@ -629,6 +641,7 @@ export function focusFormExercise() {
   visibility.form_workout = false;
 }
 
+/*
 function focusFormMessage() {
   visibility.login = false;
   visibility.register = false;
@@ -639,6 +652,7 @@ function focusFormMessage() {
   visibility.form_message = true;
   visibility.form_workout = false;
 }
+*/
 
 export function focusFormWorkout() {
   visibility.login = false;
