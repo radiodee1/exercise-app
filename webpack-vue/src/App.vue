@@ -7,7 +7,7 @@
       :register="register"
       :home="home"
       :form_message="form_message"
-      :form_exercise="form_exercise" 
+      :form_exercise="form_exercise"
       :form_workout="form_workout"
       :focusRegister="focusRegister"
       :focusNews="focusNews"
@@ -28,7 +28,6 @@
       :useFormSubmitWorkout="useFormSubmitWorkout"
       :focusFormFriends="focusFormFriends"
       :form_friends="form_friends"
-
     ></bannercomponent>
     <feedcontainer
       :newsfeed="newsfeed"
@@ -37,7 +36,7 @@
       :register="register"
       :home="home"
       :form_message="form_message"
-      :form_exercise="form_exercise" 
+      :form_exercise="form_exercise"
       :form_workout="form_workout"
       :focusRegister="focusRegister"
       :focusNews="focusNews"
@@ -58,7 +57,6 @@
       :useFormSubmitWorkout="useFormSubmitWorkout"
       :focusFormFriends="focusFormFriends"
       :form_friends="form_friends"
-
     ></feedcontainer>
     <register
       :newsfeed="newsfeed"
@@ -67,7 +65,7 @@
       :register="register"
       :home="home"
       :form_message="form_message"
-      :form_exercise="form_exercise" 
+      :form_exercise="form_exercise"
       :form_workout="form_workout"
       :focusRegister="focusRegister"
       :focusNews="focusNews"
@@ -88,7 +86,6 @@
       :useFormSubmitWorkout="useFormSubmitWorkout"
       :focusFormFriends="focusFormFriends"
       :form_friends="form_friends"
-
     ></register>
     <login
       :newsfeed="newsfeed"
@@ -97,7 +94,7 @@
       :register="register"
       :home="home"
       :form_message="form_message"
-      :form_exercise="form_exercise" 
+      :form_exercise="form_exercise"
       :form_workout="form_workout"
       :focusRegister="focusRegister"
       :focusNews="focusNews"
@@ -118,7 +115,6 @@
       :useFormSubmitWorkout="useFormSubmitWorkout"
       :focusFormFriends="focusFormFriends"
       :form_friends="form_friends"
-
     ></login>
     <home
       :newsfeed="newsfeed"
@@ -127,7 +123,7 @@
       :register="register"
       :home="home"
       :form_message="form_message"
-      :form_exercise="form_exercise" 
+      :form_exercise="form_exercise"
       :form_workout="form_workout"
       :focusRegister="focusRegister"
       :focusNews="focusNews"
@@ -148,7 +144,6 @@
       :useFormSubmitWorkout="useFormSubmitWorkout"
       :focusFormFriends="focusFormFriends"
       :form_friends="form_friends"
-
     ></home>
     <message
       :newsfeed="newsfeed"
@@ -157,7 +152,7 @@
       :register="register"
       :home="home"
       :form_message="form_message"
-      :form_exercise="form_exercise" 
+      :form_exercise="form_exercise"
       :form_workout="form_workout"
       :focusRegister="focusRegister"
       :focusNews="focusNews"
@@ -178,7 +173,6 @@
       :useFormSubmitWorkout="useFormSubmitWorkout"
       :focusFormFriends="focusFormFriends"
       :form_friends="form_friends"
-
     ></message>
     <exercise
       :newsfeed="newsfeed"
@@ -187,7 +181,7 @@
       :register="register"
       :home="home"
       :form_message="form_message"
-      :form_exercise="form_exercise" 
+      :form_exercise="form_exercise"
       :form_workout="form_workout"
       :focusRegister="focusRegister"
       :focusNews="focusNews"
@@ -208,7 +202,6 @@
       :useFormSubmitWorkout="useFormSubmitWorkout"
       :focusFormFriends="focusFormFriends"
       :form_friends="form_friends"
-
     ></exercise>
     <workout
       :newsfeed="newsfeed"
@@ -217,7 +210,7 @@
       :register="register"
       :home="home"
       :form_message="form_message"
-      :form_exercise="form_exercise" 
+      :form_exercise="form_exercise"
       :form_workout="form_workout"
       :focusRegister="focusRegister"
       :focusNews="focusNews"
@@ -238,7 +231,6 @@
       :useFormSubmitWorkout="useFormSubmitWorkout"
       :focusFormFriends="focusFormFriends"
       :form_friends="form_friends"
-
     ></workout>
     <friends
       :newsfeed="newsfeed"
@@ -247,7 +239,7 @@
       :register="register"
       :home="home"
       :form_message="form_message"
-      :form_exercise="form_exercise" 
+      :form_exercise="form_exercise"
       :form_workout="form_workout"
       :focusRegister="focusRegister"
       :focusNews="focusNews"
@@ -268,9 +260,7 @@
       :useFormSubmitWorkout="useFormSubmitWorkout"
       :focusFormFriends="focusFormFriends"
       :form_friends="form_friends"
-
     ></friends>
-
   </div>
 </template>
 
@@ -288,14 +278,13 @@ import exercise from "./views/Exercise.vue";
 import workout from "./views/Workout.vue";
 import friends from "./views/Friends.vue";
 
-import {  makeInvocation } from "./js/exercise.js";
+import { makeInvocation } from "./js/exercise.js";
 //import { feed_divs } from "./js/exercise.js";
 
 export default {
   name: "appx",
   data() {
     return {
-
       login: this.$root.login,
       register: this.$root.register,
       home: this.$root.home,
@@ -308,7 +297,7 @@ export default {
 
       items: this.$root.items,
       user: this.$root.user,
-      feed_divs: makeInvocation()
+      feed_divs: makeInvocation(),
     };
   },
   components: {
@@ -320,20 +309,24 @@ export default {
     message: message,
     exercise: exercise,
     workout: workout,
-    friends: friends
+    friends: friends,
   },
 
   mounted() {
-    console.log("appx");
+    //console.log("appx");
     //this.feed_divs = makeInvocation();
+    this.$nextTick(function () {
+      //this.feed_divs = makeInvocation();
+      // Code that will run only after the
+      // entire view has been rendered
+    });
   },
   computed: {
-    
     tree: function () {
       return this.$root.tree;
-    }
+    },
   },
-  
+
   methods: {
     classOption: function (i) {
       //console.log(i);
@@ -341,7 +334,7 @@ export default {
       if (x === true) return "visi";
       else return "invis";
     },
-    copyVals: function() {
+    copyVals: function () {
       this.login = this.$root.login;
       this.register = this.$root.register;
       this.home = this.$root.home;
@@ -352,13 +345,13 @@ export default {
       this.newsfeed = this.$root.newsfeed;
       this.banner = this.$root.banner;
     },
-    focusRegister : function () {
+    focusRegister: function () {
       this.$root.focusRegister();
       this.copyVals();
     },
     focusNews: function () {
       this.$root.focusNews();
-      this.copyVals()
+      this.copyVals();
     },
     focusReset: function () {
       this.$root.focusReset();
@@ -423,19 +416,12 @@ export default {
       this.$root.preview_image_wrk(e);
       this.copyVals();
     },
-    makeId: function (num, prefix="feed-num-") {
+    makeId: function (num, prefix = "feed-num-") {
       return prefix + num;
     },
-    shared_feed: function(feed) {
-      //this.$root.$on('shared_feed', (feed) => {
-      console.log('shared feed');
-      console.log(feed);
-    //});
-    }
+    
   },
-}; 
-
-
+};
 </script>
 
 <style>

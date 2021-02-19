@@ -294,7 +294,7 @@ export function formSubmitMessage(feed_divs, tree, ob = null) {
 }
 
 function formSubmitWorkout(msg, feed_divs, tree, ob = null) {
-  console.log("workout submit + " + msg);
+  //console.log("workout submit + " + msg);
   //const msg = document.getElementById('workout_hidden').textContent;
   const pic_orig = document.getElementById('myImg3');
   //const pic = pic_orig.src;
@@ -327,7 +327,7 @@ function formSubmitWorkout(msg, feed_divs, tree, ob = null) {
 }
 
 function formSubmitExercise(feed_divs, tree, ob = null) {
-  console.log("exercise submit");
+  //console.log("exercise submit");
   const msg = document.getElementById('exercise_pre').textContent;
   const pic_orig = document.getElementById('myImg2');
 
@@ -427,8 +427,8 @@ export function doLoad() {
       };
     },
     mounted() {
-      console.log("mounted");
-      console.log(this);
+      //console.log("mounted");
+      //console.log(this);
       //makeInvocation();
     },
     computed: {

@@ -66,9 +66,9 @@ export default {
     return {};
   },
   mounted() {
-    console.log("here");
-    console.log(this.$el.id);
-    console.log(this.feed_divs[+this.i]);
+    //console.log("here");
+    //console.log(this.$el.id);
+    //console.log(this.feed_divs[+this.i]);
     //this.shareFeed();
   },
   computed: {
@@ -96,7 +96,7 @@ export default {
 
     workout_obj_exercise_list: function () {
       let msg = this.feed_divs[+this.i].instance.workout_obj_exercise_list;
-      console.log(msg + " list");
+      //console.log(msg + " list");
       if (typeof msg === "undefined" || msg == null) {
         msg = "no data";
       }
