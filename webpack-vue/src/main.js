@@ -1,9 +1,11 @@
 //import Vue from "vue";
 
-import './../node_modules/bulma/css/bulma.css';
-import "./../node_modules/@fortawesome/fontawesome-free/js/all.js"
+//import './../node_modules/bulma/css/bulma.css';
+//import "./../node_modules/@fortawesome/fontawesome-free/js/all.js"
 import '@/assets/bulma.css';
 
+import 'bulma/css/bulma.css'
+import "@fortawesome/fontawesome-free/js/all.js"
 
 
 import { doLoad } from "./js/exercise.js";
