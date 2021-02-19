@@ -289,6 +289,7 @@ import workout from "./views/Workout.vue";
 import friends from "./views/Friends.vue";
 
 import {  makeInvocation } from "./js/exercise.js";
+//import { feed_divs } from "./js/exercise.js";
 
 export default {
   name: "appx",
@@ -332,6 +333,7 @@ export default {
       return this.$root.tree;
     }
   },
+  
   methods: {
     classOption: function (i) {
       //console.log(i);
@@ -433,8 +435,7 @@ export default {
   },
 }; 
 
-//console.log(visibility);
-//console.log("here... App.vue");
+
 </script>
 
 <style>

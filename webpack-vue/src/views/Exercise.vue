@@ -141,7 +141,7 @@
                   {{ weight_message }}
                 </div>
             <button class="button " @click="formFinishExercise()">
-              Finish
+              Report
             </button>
             <pre id="exercise_pre" style="visibility: hidden"></pre>
 
