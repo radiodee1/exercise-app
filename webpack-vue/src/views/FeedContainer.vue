@@ -45,7 +45,7 @@
 //require("../js/v.js");
 //import {  doLoad, visibility } from '../js/v.js';
 
-import item from "./FeedItem.vue";
+import item from "../components/FeedItem.vue";
 
 
 export default {

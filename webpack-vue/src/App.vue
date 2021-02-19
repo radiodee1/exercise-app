@@ -278,15 +278,15 @@
 import "./../node_modules/bulma/css/bulma.css";
 import "@/assets/bulma.css";
 
-import bannercomponent from "./components/Banner.vue";
-import feedcontainer from "./components/FeedContainer.vue";
-import register from "./components/Register.vue";
-import home from "./components/Home.vue";
-import login from "./components/Login.vue";
-import message from "./components/Message.vue";
-import exercise from "./components/Exercise.vue";
-import workout from "./components/Workout.vue";
-import friends from "./components/Friends.vue";
+import bannercomponent from "./views/Banner.vue";
+import feedcontainer from "./views/FeedContainer.vue";
+import register from "./views/Register.vue";
+import home from "./views/Home.vue";
+import login from "./views/Login.vue";
+import message from "./views/Message.vue";
+import exercise from "./views/Exercise.vue";
+import workout from "./views/Workout.vue";
+import friends from "./views/Friends.vue";
 
 import {  makeInvocation } from "./js/exercise.js";
 
