@@ -268,7 +268,7 @@
 /* eslint-disable */
 
 
-import "./../node_modules/bulma/css/bulma.css";
+import "bulma/css/bulma.css";
 import "@/assets/bulma.css";
 
 import bannercomponent from "./views/Banner.vue";
