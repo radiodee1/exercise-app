@@ -241,28 +241,27 @@ export function setWorkout(obj, msg = "workout here.") {
 
 
 /* ---------------- controls next ---------------- */
+
 function setPic(pic_orig) {
   let pic = null;
-  if (pic_orig != null && pic_orig.src != null) {
+  if (pic_orig != null && pic_orig.src != null && pic_orig.src != "../assets/app.png") {
     pic = pic_orig.src;
   }
   else {
-    pic = "../assets/app.png";
+    pic = null ; //"../assets/app.png";
   }
-  //console.log("p "+pic);
+  //console.log("p " + pic);
   return pic;
 }
 
 
 export function formSubmitMessage(feed_divs, tree, ob = null) {
-  //let feed = this.value;
 
   const msg_orig = document.getElementById("message_txt");
   //console.log(msg_orig.value);
   const msg = msg_orig.value;
   const pic_orig = document.getElementById('myImg1');
-  //const pic = pic_orig.src;
-  //console.log("here 2");
+
   const pic = setPic(pic_orig);
 
   const d = new Date();
@@ -322,8 +321,6 @@ function formSubmitWorkout(msg, feed_divs, tree, ob = null) {
   obj.picture_large = pic;
   obj.date_now = d;
 
-  //console.log(obj.length + " len");
-
   const b = setWorkout(obj, msg);
 
   insertFeed(b, feed_divs, tree);
@@ -333,8 +330,6 @@ function formSubmitExercise(feed_divs, tree, ob = null) {
   console.log("exercise submit");
   const msg = document.getElementById('exercise_pre').textContent;
   const pic_orig = document.getElementById('myImg2');
-
-  // <---
 
   const pic = setPic(pic_orig);
 
@@ -348,7 +343,6 @@ function formSubmitExercise(feed_divs, tree, ob = null) {
   else {
     obj = ob;
   }
-
 
   obj.show_message = false;
   obj.show_workout = false;
@@ -376,7 +370,6 @@ export function preview_image_msg(event) {
     const output = document.getElementById('myImg1');
     output.style.visibility = "visible";
     output.src = reader.result;
-    console.log("get pic");
   }
   reader.readAsDataURL(event.target.files[0]);
 }
