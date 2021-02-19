@@ -265,6 +265,9 @@
 </template>
 
 <script>
+/* eslint-disable */
+
+
 import "./../node_modules/bulma/css/bulma.css";
 import "@/assets/bulma.css";
 

@@ -5,6 +5,7 @@ import router from '../router'
 
 import appx from "../App.vue";
 
+/* eslint-disable */
 
 /* -------------- populate feed ---------------  */
 

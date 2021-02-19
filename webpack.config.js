@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
-  entry: './src/main.js',
+  entry: './webpack-vue/src/main.js',
   module: {
     rules: [
       { test: /\.js$/, use: 'babel-loader' },
@@ -32,28 +32,12 @@ module.exports = {
           'css-loader'
         ]
       }
-      /*
-      {
-        test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              // enable CSS Modules
-              modules: true,
-              // customize generated class names
-              //localIdentName: '[local]_[hash:base64:8]'
-            }
-          }
-        ]
-      } 
-      */
+      
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './webpack-vue/src/main.js',
     }),
     new VueLoaderPlugin(),
   ]
