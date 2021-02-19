@@ -161,7 +161,7 @@
                   <button
                     class="button is-primary"
                     id="exercise_submit"
-                    style="visibility: hidden"
+                    style="visibility: hidden; display: none"
                     @click="submit()"
                   >
                     Submit
@@ -277,6 +277,7 @@ export default {
       document.getElementById("exercise_pre").textContent = `Exercise Report:\n` +  i;
       document.getElementById("exercise_pre").style.visibility = "visible";
       document.getElementById("exercise_submit").style.visibility = "visible";
+      document.getElementById("exercise_submit").style.display = "block";
     },
     showPicture: function (e) {
       this.show_picture = true;
