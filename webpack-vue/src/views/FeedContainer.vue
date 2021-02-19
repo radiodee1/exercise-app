@@ -9,17 +9,13 @@
       </div>
 
       <div class="column is-half">
-        <!-- div class="control">
-      <button class="button is-primary" onclick="testInsertMsg()">Test Submit Msg.</button>
-      <button class="button is-primary" onclick="testInsertExercise()">Test Submit Exercise.</button>
-      <button class="button is-primary" onclick="testInsertWorkout()">Test Submit Workout.</button>
-    </div -->
+      
 
         <!-- vue start -->
 
-        <div id="components">
-          <!-- template here ? -->
-        </div>
+        <!-- div id="components">
+
+        </div -->
         <div id="listing">
           <ul >
             <!-- template here ? -->
@@ -41,9 +37,6 @@
 
 <script>
 
-
-//require("../js/v.js");
-//import {  doLoad, visibility } from '../js/v.js';
 
 import item from "../components/FeedItem.vue";
 

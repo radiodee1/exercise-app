@@ -324,7 +324,7 @@ export default {
 
   mounted() {
     console.log("appx");
-    
+    //this.feed_divs = makeInvocation();
   },
   computed: {
     
