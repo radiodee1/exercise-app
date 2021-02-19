@@ -269,7 +269,7 @@
 
 
 import "bulma/css/bulma.css";
-import "@/assets/bulma.css";
+import "./assets/bulma.css";
 
 import bannercomponent from "./views/Banner.vue";
 import feedcontainer from "./views/FeedContainer.vue";

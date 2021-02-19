@@ -22,7 +22,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/,
+        test: /\.css$/i,
         use: [
           'vue-style-loader',
           {
