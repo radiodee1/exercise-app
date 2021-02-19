@@ -14,5 +14,3 @@ import { doLoad } from "./js/exercise.js";
 
 doLoad();
 
-//console.log(visibility);
-//console.log("main.js");
