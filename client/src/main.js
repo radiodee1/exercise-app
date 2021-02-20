@@ -1,10 +1,15 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
+//import Vue from "vue";
 
-Vue.config.productionTip = false
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+import './assets/bulma.css';
+
+import 'bulma/css/bulma.css'
+import "@fortawesome/fontawesome-free/js/all.js"
+
+
+import { doLoad } from "./js/exercise.js";
+
+/* eslint-disable */
+
+doLoad();
+
