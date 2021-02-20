@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "start": "cd webpack-vue && vue-cli-service serve ",
-    "build": "cd webpack-vue && vue-cli-service build",
+    "start": "cd client && vue-cli-service serve ",
+    "build": "cd client && vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
