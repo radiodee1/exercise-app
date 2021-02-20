@@ -30,7 +30,7 @@ let tree_feed_dict = {
   show_exercise: false,
   show_workout: false,
 
-  picture_large: '../assets/app.png',
+  picture_large: null, //'../assets/app.png',
   picture_small: null,
 
   message: "hello-world",
@@ -151,6 +151,7 @@ export function makeInvocation() {
 }
 
 let do_loop = true;
+//let do_copy = tree;
 
 function listMaint(dict, feed_divs, tree) {
 
@@ -165,18 +166,19 @@ function listMaint(dict, feed_divs, tree) {
 
       for (let key in tree.feed[x]) {
 
-        if (key != "picture_large" && key != "picture_small") {
+        if ( key != "picture_large" && key != "picture_small") {
           feed_divs[x].instance[key] = tree.feed[x][key];
         }
         else {
-          //
+          
         }
       }
 
       feed_divs[x].instance.forceUpdate();
       // list of special javascript fn
+      document.getElementById(makeId(x, "pic")).src = null;
 
-      if (tree.feed[x].picture_large != null && document.getElementById(makeId(x,"pic")) != null) {
+      if (tree.feed[x].picture_large != null ){//&& document.getElementById(makeId(x,"pic")) != null) {
         if (tree.feed[x].show_message == true) {
           document.getElementById(makeId(x, "pic")).src = tree.feed[x].picture_large;
         }
@@ -245,7 +247,7 @@ export function setWorkout(obj, msg = "workout here.") {
 
 function setPic(pic_orig) {
   let pic = null;
-  if (pic_orig != null && pic_orig.src != null && pic_orig.src != "../assets/app.png") {
+  if (pic_orig != null && pic_orig.src != null) {
     pic = pic_orig.src;
   }
   else {
@@ -372,7 +374,10 @@ export function preview_image_msg(event) {
     output.style.visibility = "visible";
     output.src = reader.result;
   }
+  //console.log(event.target.files[0].name + " name");
+  //if (! event.target.files[0].name.endsWith("app.png")) 
   reader.readAsDataURL(event.target.files[0]);
+  //else reader.feadAsDataURL(null);
 }
 
 export function preview_image_ex(event) {

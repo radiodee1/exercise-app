@@ -104,7 +104,7 @@ export default {
 
       return msg_lst;
     },
-
+    
     visible: function () {
       return this.feed_divs[+this.i].instance.visible;
     },
@@ -134,17 +134,16 @@ export default {
       return this.classOption(x);
     },
     show_pic: function () {
-      //const id = this.makeId(i, "pic");
-      const t = this.feed_divs[this.i].instance.picture_large;
-      const d = document.getElementById(this.makeId(this.i, "pic"));
-      //console.log(d + " src");
-      //console.log('t '+t);
-      if (t === null || d === null) {
-        // || typeof d === 'undefined' || d.src === null ) {
-        //console.log(this.i + ' ' + "false");
-        return false;
-      } else {
+      
+      const t = this.$root.tree.feed[this.i].picture_large; 
+      
+      if (t != null && t.length > 50) {
+        //console.log("true app.png");
         return true;
+      }
+      else {
+        //console.log("false pic " );
+        return false;
       }
     },
   },

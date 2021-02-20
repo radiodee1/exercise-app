@@ -52,7 +52,7 @@
               </nav>
             </div>
             <figure class="image is-4by3" v-show="show_picture">
-              <img id="myImg1" src="../assets/app.png" class="invis" />
+              <img id="myImg1" src="//:0" class="invis" />
               <!-- img src="./pic/app.png" alt="Placeholder image" -->
             </figure>
           </div>
@@ -82,6 +82,7 @@ export default {
   mounted() {
     //console.log("message");
     //console.log(this.feed_divs);
+    //document.getElementById('myImg1').src = null;
   },
 
   methods: {
@@ -93,6 +94,7 @@ export default {
     },
     showPicture: function (e) {
       this.show_picture = true;
+      //console.log(e.inputType + " type");
       this._preview_image_msg(e);
     },
     submit: function () {
@@ -103,6 +105,7 @@ export default {
       this.show_picture = false;
       this.focusNews();
     },
+    
   },
 };
 </script>

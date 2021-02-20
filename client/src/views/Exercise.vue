@@ -188,7 +188,7 @@
               </nav>
             </div>
             <figure class="image is-4by3" v-show="show_picture">
-              <img id="myImg2" src="../assets/app.png" class="invis" />
+              <img id="myImg2" src="//:0" class="invis" />
             </figure>
           </div>
         </article>
