@@ -7,7 +7,8 @@
       </a>
       <a class="button is-light" @click="focusLogin()"> Log in </a>
     </div>
-    Login or register!
+    Login or register! <br><br>
+    <about></about>
   </section>
   <!-- end home -->
 </template>
@@ -18,11 +19,15 @@
 //require("../js/controls.js");
 
 //import { doLoad, visibility, classOption } from "../js/v.js";
+import about from "../components/About.vue";
 
 export default {
   name: "home",
   data() {
     return {};
+  },
+  components: {
+    about: about
   },
   props: {
     home: Boolean,
