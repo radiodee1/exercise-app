@@ -35,7 +35,7 @@
     <div>
       <div class="field is-grouped">
         <p class="control">
-          <a class="button is-primary" @click="focusNews()"> Submit </a>
+          <a class="button is-primary" @click="submit()"> Submit </a>
         </p>
         <p class="control">
           <a class="button is-light" @click="focusReset()"> Cancel </a>
@@ -47,17 +47,25 @@
       <input type="checkbox" />
       Remember me
     </label>
+    
+    <div v-show="show_development">
+      <development></development>
+    </div>
   </section>
 
   <!-- end login -->
 </template>
 
 <script>
+import development from "../components/Development.vue";
+
 
 export default {
   name: "login",
   data() {
-    return {};
+    return {
+      show_development: false,
+    };
   },
   props: {
     newsfeed: Boolean,
@@ -73,6 +81,22 @@ export default {
       if (x === true) return "visi";
       else return "invis";
     },
+    submit: function () {
+      this.login_dev_check();
+
+      if (this.show_development) {
+        return;
+      }
+      this.focusNews();
+    },
+    login_dev_check: function () {
+      //make hardcoded develpment enabled
+      this.show_development = false;
+      
+    },
+  },
+  components: {
+    development: development,
   },
 };
 </script>
