@@ -33,13 +33,13 @@ con.connect(function (err) {
   password (password)
   cookie (for saved logins)
   */
-  var sql = "CREATE TABLE profiles (id INT AUTO_INCREMENT PRIMARY KEY, " +
+  var sql = "CREATE TABLE IF NOT EXISTS profiles (id INT AUTO_INCREMENT PRIMARY KEY, " +
     "firstname VARCHAR(255), lastname VARCHAR(255), " +
     "address VARCHAR(255), city VARCHAR(255), " +
     "state VARCHAR(255), zip VARCHAR(255), " +
     "email VARCHAR(255), username VARCHAR(255), " +
     "password VARCHAR(255) "//, cookie VARCHAR(255) " + 
-  // ", picture BLOB " + 
+  // ", picture LONGBLOB " + 
   " )";
   con.query(sql, function (err, result) {
     if (err) throw err;
@@ -56,7 +56,7 @@ con.connect(function (err) {
   friend_status (some string constant like 'asked', 'confirmed', 'new', 'waiting' ,etc.)
   date (date of association start)
   */
-  var sql = "CREATE TABLE friends (id INT AUTO_INCREMENT PRIMARY KEY, " +
+  var sql = "CREATE TABLE IF NOT EXISTS friends (id INT AUTO_INCREMENT PRIMARY KEY, " +
     "user_id INT, friend_user_id INT, " +
     "friend_status VARCHAR(255), " +
     "date TIMESTAMP " +
@@ -75,7 +75,7 @@ con.connect(function (err) {
   post_id (num copied from post id)
   from_user_id (num copied from num id)
   */
-  var sql = "CREATE TABLE likes (id INT AUTO_INCREMENT PRIMARY KEY, " +
+  var sql = "CREATE TABLE IF NOT EXISTS likes (id INT AUTO_INCREMENT PRIMARY KEY, " +
     "post_id INT, from_user_id INT " +
 
     " )";
@@ -95,7 +95,7 @@ con.connect(function (err) {
   cookie (login cookie)
 
   */
-  var sql = "CREATE TABLE misc (id INT AUTO_INCREMENT PRIMARY KEY, " +
+  var sql = "CREATE TABLE IF NOT EXISTS  misc (id INT AUTO_INCREMENT PRIMARY KEY, " +
     "from_user_id INT, " +
     "height_inches FLOAT, weight FLOAT, " +
     "cookie VARCHAR(255) " +
@@ -127,12 +127,12 @@ con.connect(function (err) {
   workout_obj_exercise_list (workout tab delimited text)
   message_list (optional message list)
   */
-  var sql = "CREATE TABLE feed (id INT AUTO_INCREMENT PRIMARY KEY, " +
+  var sql = "CREATE TABLE IF NOT EXISTS feed (id INT AUTO_INCREMENT PRIMARY KEY, " +
     "complete VARCHAR(255), from_user_id INT " +
 
     "date_now TIMESTAMP, " +
     "show_message VARCHAR(255), show_exercise VARCHAR(255), show_workout VARCHAR(255), " +
-    "picture_large BLOB, picture_small BLOB, " +
+    "picture_large LONGBLOB, picture_small LONGBLOB, " +
     "message VARCHAR(255), " +
     "message_obj_from INT, message_obj_to INT , " +
     "message_obj_message VARCHAR(255) , " +
