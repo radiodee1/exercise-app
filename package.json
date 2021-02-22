@@ -29,7 +29,9 @@
     "sass-loader": "^8.0.2",
     "webpack-cli": "4.5.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mysql": "^2.18.1"
+  },
   "eslintConfig": {
     "root": true,
     "env": {

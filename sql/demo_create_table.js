@@ -38,7 +38,7 @@ con.connect(function (err) {
     "address VARCHAR(255), city VARCHAR(255), " +
     "state VARCHAR(255), zip VARCHAR(255), " +
     "email VARCHAR(255), username VARCHAR(255), " +
-    "password VARCHAR(255) "//, cookie VARCHAR(255) " + 
+    "password VARCHAR(255) " + //, cookie VARCHAR(255) " + 
   // ", picture LONGBLOB " + 
   " )";
   con.query(sql, function (err, result) {
@@ -103,7 +103,7 @@ con.connect(function (err) {
     " )";
   con.query(sql, function (err, result) {
     if (err) throw err;
-    console.log("Table likes created");
+    console.log("Table misc created");
   });
 
   /* 
@@ -128,7 +128,7 @@ con.connect(function (err) {
   message_list (optional message list)
   */
   var sql = "CREATE TABLE IF NOT EXISTS feed (id INT AUTO_INCREMENT PRIMARY KEY, " +
-    "complete VARCHAR(255), from_user_id INT " +
+    "complete VARCHAR(255), from_user_id INT , " +
 
     "date_now TIMESTAMP, " +
     "show_message VARCHAR(255), show_exercise VARCHAR(255), show_workout VARCHAR(255), " +
@@ -142,7 +142,7 @@ con.connect(function (err) {
     " )";
   con.query(sql, function (err, result) {
     if (err) throw err;
-    console.log("Table exercises created");
+    console.log("Table feed created");
   });
   con.end((err) => {
     //end
