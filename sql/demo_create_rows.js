@@ -1,4 +1,4 @@
-const sql = require("./populate.js");
+const sql = require("./sql_populate.js");
 
 //insert
 likes = {
