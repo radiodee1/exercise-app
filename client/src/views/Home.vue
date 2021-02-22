@@ -14,9 +14,7 @@
 </template>
 
 <script>
-//require("../js/v.js");
-//require("../js/populate.js");
-//require("../js/controls.js");
+
 
 //import { doLoad, visibility, classOption } from "../js/v.js";
 import about from "../components/About.vue";
@@ -29,11 +27,26 @@ export default {
   components: {
     about: about
   },
-  props: {
-    home: Boolean,
-    focusRegister: Function,
-    focusLogin: Function
-  },
+  props: [
+    "banner",
+    "newsfeed",
+    "focusFormMessage",
+    "focusFormExercise",
+    "focusFormWorkout",
+    "focusFormFriends",
+    "login", 
+    "home", 
+    "register", 
+    "items" ,
+    "form_message",
+    "form_exercise",
+    "form_workout",
+    "form_friends",
+    'focusNews',
+    'focusReset',
+    'focusLogin',
+    'focusRegister'
+  ],
   methods: {
     classOption: function (i) {
       //console.log(i);
@@ -42,5 +55,8 @@ export default {
       else return "invis";
     },
   },
+  mounted () {
+    console.log(this.home + " home");
+  }
 };
 </script>

@@ -54,6 +54,9 @@
         </p>
       </div>
     </section>
+
+
+
   </div>
 </template>
 
@@ -63,6 +66,7 @@ export default {
   data() {
     return {};
   },
+  
   props: [
     "banner",
     "newsfeed",
@@ -70,7 +74,16 @@ export default {
     "focusFormExercise",
     "focusFormWorkout",
     "focusFormFriends",
+    "login", 
+    "home", 
+    "register", 
+    "items" ,
+    "form_message",
+    "form_exercise",
+    "form_workout",
+    "form_friends"
   ],
+  
 };
 </script>
 
