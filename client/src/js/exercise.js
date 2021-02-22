@@ -30,7 +30,7 @@ let tree_feed_dict = {
   show_exercise: false,
   show_workout: false,
 
-  picture_large: null, //'../assets/app.png',
+  picture_large: null, 
   picture_small: null,
 
   message: "hello-world",
@@ -38,17 +38,17 @@ let tree_feed_dict = {
   message_obj_from: "",
   message_obj_to: "",
   message_obj_message: "",
-  message_obj_date: "",
+  //message_obj_date: "",
 
-  exercise_obj_reps: "",
-  exercise_obj_weight: "",
-  exercise_obj_label: "",
-  exercise_obj_date: "",
-  exercise_obj_name: "",
+  //exercise_obj_reps: "",
+  //exercise_obj_weight: "",
+  //exercise_obj_label: "",
+  //exercise_obj_date: "",
+  //exercise_obj_name: "",
   exercise_obj_message: "",
-  exercise_obj_from: "",
+  //exercise_obj_from: "",
 
-  workout_obj_date: "",
+  //workout_obj_date: "",
   workout_obj_exercise_list: "",
 
   message_list: "",
@@ -58,8 +58,8 @@ let tree_feed_dict = {
 let single_div = {
   id: "",
   instance: null,
-  update: null,
-  messages: null
+  //update: null,
+  //messages: null
 
 };
 
@@ -221,9 +221,9 @@ export function setExercise(obj, msg = "exercise here.") {
   subtree.show_exercise = true;
   subtree.show_message = false;
   subtree.show_workout = false;
-  subtree.exercise_obj_label = msg;
-  //subtree.picture_large = null;
-  //subtree.picture_small = null;
+  //subtree.exercise_obj_label = msg;
+  
+  
   subtree.message = msg;
   subtree.visible = true;
   return subtree;
