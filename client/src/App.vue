@@ -28,6 +28,7 @@
       :useFormSubmitWorkout="useFormSubmitWorkout"
       :focusFormFriends="focusFormFriends"
       :form_friends="form_friends"
+      :fillPictures="fillPictures"
     ></bannercomponent>
 
     <router-view
@@ -58,6 +59,8 @@
       :useFormSubmitWorkout="useFormSubmitWorkout"
       :focusFormFriends="focusFormFriends"
       :form_friends="form_friends"
+      :fillPictures="fillPictures"
+
     ></router-view>
   </div>
 </template>
@@ -71,7 +74,6 @@ import "./assets/bulma.css";
 import bannercomponent from "./views/Banner.vue";
 
 import { makeInvocation } from "./js/exercise.js";
-
 
 export default {
   name: "appx",
@@ -107,7 +109,7 @@ export default {
   },
   props: [],
   mounted() {
-    
+    /*
     this.login = this.$router.app.$root.login;
     this.register = this.$router.app.$root.register;
     this.home = this.$router.app.$root.home;
@@ -120,7 +122,7 @@ export default {
 
     this.items = this.$router.app.$root.items;
     this.user = this.$router.app.$root.user;
-
+    */
   },
   computed: {
     tree: function () {
@@ -148,66 +150,76 @@ export default {
     },
     focusRegister: function () {
       this.$router.app.$root.focusRegister();
-      this.$router.push('/register');
       this.copyVals();
+
+      this.$router.push("/register");
     },
     focusNews: function () {
       this.$router.app.$root.focusNews();
-      this.$router.push('/feed');
       this.copyVals();
+
+      this.$router.push("/feed");
     },
     focusReset: function () {
       this.$router.app.$root.focusReset();
-      this.$router.go(-1);
       this.copyVals();
+
+      this.$router.go(-1);
     },
     focusLogin: function () {
       this.$router.app.$root.focusLogin();
-      this.$router.push('/login');
       this.copyVals();
+
+      this.$router.push("/login");
     },
     focusFormMessage: function () {
       this.$router.app.$root.focusFormMessage();
-      this.$router.push('\message');
       this.copyVals();
+
+      this.$router.push("/message");
     },
     focusFormExercise: function () {
       this.$router.app.$root.focusFormExercise();
-      this.$router.push('\exercise');
       this.copyVals();
+
+      this.$router.push("/exercise");
+
     },
     focusFormWorkout: function () {
       this.$router.app.$root.focusFormWorkout();
-      this.$router.push('\workout');
       this.copyVals();
+
+      this.$router.push("/workout");
     },
     focusFormFriends: function () {
       this.$router.app.$root.focusFormFriends();
-      this.$router.push('\friends');
       this.copyVals();
+
+      this.$router.push("/friends");
     },
     useFormSubmitMessage: function () {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
       this.$router.app.$root.useFormSubmitMessage(feed_divs, tree);
-      this.$router.go(-1);
       this.copyVals();
+      this.$router.push("/feed");
       this.focusNews();
+
     },
     useFormSubmitExercise: function () {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
       this.$router.app.$root.useFormSubmitExercise(feed_divs, tree);
-      this.$router.go(-1);
       this.copyVals();
+      this.$router.push("/feed");
       this.focusNews();
     },
     useFormSubmitWorkout: function (msg) {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
       this.$router.app.$root.useFormSubmitWorkout(msg, feed_divs, tree);
-      this.$router.go(-1);
       this.copyVals();
+      this.$router.push("/feed");
       this.focusNews();
     },
     _preview_image_msg: function (e) {
@@ -231,6 +243,13 @@ export default {
     makeId: function (num, prefix = "feed-num-") {
       return prefix + num;
     },
+    fillPictures: function () {
+      for (const i in this.items) {
+        document.getElementById(this.makeId(i, "pic")).src = this.tree.feed[ + i].picture_large;
+        //console.log("pic" + i);
+      }
+      return true;
+    }
   },
 };
 </script>

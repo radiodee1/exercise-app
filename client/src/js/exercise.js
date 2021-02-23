@@ -176,9 +176,16 @@ function listMaint(dict, feed_divs, tree) {
 
       feed_divs[x].instance.forceUpdate();
       // list of special javascript fn
-      document.getElementById(makeId(x, "pic")).src = null;
 
-      if (tree.feed[x].picture_large != null ){//&& document.getElementById(makeId(x,"pic")) != null) {
+      //let undef = false;
+      //if (typeof document.getElementById(makeId(x,'pic')) == 'undefined') {
+      //  undef = true;
+      //  console.log('pic undefined!!');
+      //}
+
+      //document.getElementById(makeId(x, "pic")).src = null;
+      /*
+      if (tree.feed[x].picture_large != null && undef != true && false){//&& document.getElementById(makeId(x,"pic")) != null) {
         if (tree.feed[x].show_message == true) {
           document.getElementById(makeId(x, "pic")).src = tree.feed[x].picture_large;
         }
@@ -189,6 +196,7 @@ function listMaint(dict, feed_divs, tree) {
           document.getElementById(makeId(x, "pic")).src = tree.feed[x].picture_large;
         }
       }
+      */
 
     }
 
@@ -247,7 +255,7 @@ export function setWorkout(obj, msg = "workout here.") {
 
 function setPic(pic_orig) {
   let pic = null;
-  if (pic_orig != null && pic_orig.src != null) {
+  if (pic_orig != null && pic_orig.src != null && typeof pic_orig !== 'undefined') {
     pic = pic_orig.src;
   }
   else {

@@ -51,7 +51,9 @@ export default {
     newsfeed: Boolean,
     makeId: Function,
     items: Array,
-    feed_divs: Array
+    feed_divs: Array,
+    tree: Object,
+    fillPictures: Function
     //classOption: Function
   },
   components: {
@@ -64,10 +66,12 @@ export default {
       if (x === true) return 'visi';
       else return 'invis';
     },
-    shareFeed: function() {
-      //this.$root.$emit('shared_feed', this.feed_divs);
-    }
+    
+  },
+  mounted: function () {
+       this.fillPictures();
   }
+  
   
 };
 

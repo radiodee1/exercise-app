@@ -103,6 +103,8 @@ export default {
     },
     cancel: function () {
       this.show_picture = false;
+      this.$router.go(-1);
+
       this.focusNews();
     },
     
