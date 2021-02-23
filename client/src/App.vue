@@ -153,10 +153,12 @@ export default {
     },
     focusNews: function () {
       this.$router.app.$root.focusNews();
+      this.$router.push('/feed');
       this.copyVals();
     },
     focusReset: function () {
       this.$router.app.$root.focusReset();
+      this.$router.go(-1);
       this.copyVals();
     },
     focusLogin: function () {
@@ -166,24 +168,29 @@ export default {
     },
     focusFormMessage: function () {
       this.$router.app.$root.focusFormMessage();
+      this.$router.push('\message');
       this.copyVals();
     },
     focusFormExercise: function () {
       this.$router.app.$root.focusFormExercise();
+      this.$router.push('\exercise');
       this.copyVals();
     },
     focusFormWorkout: function () {
       this.$router.app.$root.focusFormWorkout();
+      this.$router.push('\workout');
       this.copyVals();
     },
     focusFormFriends: function () {
       this.$router.app.$root.focusFormFriends();
+      this.$router.push('\friends');
       this.copyVals();
     },
     useFormSubmitMessage: function () {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
       this.$router.app.$root.useFormSubmitMessage(feed_divs, tree);
+      this.$router.go(-1);
       this.copyVals();
       this.focusNews();
     },
@@ -191,6 +198,7 @@ export default {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
       this.$router.app.$root.useFormSubmitExercise(feed_divs, tree);
+      this.$router.go(-1);
       this.copyVals();
       this.focusNews();
     },
@@ -198,6 +206,7 @@ export default {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
       this.$router.app.$root.useFormSubmitWorkout(msg, feed_divs, tree);
+      this.$router.go(-1);
       this.copyVals();
       this.focusNews();
     },
