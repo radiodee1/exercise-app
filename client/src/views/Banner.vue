@@ -7,7 +7,7 @@
       id="banner"
     >
       <div class="navbar-brand">
-        <a class="navbar-item" href="">
+        <a class="navbar-item" href="/">
           <img src="../assets/app.png" width="56" height="56" />
         </a>
 
