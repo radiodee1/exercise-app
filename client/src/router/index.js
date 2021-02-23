@@ -6,6 +6,11 @@ import VueRouter from 'vue-router'
 import home from "../views/Home.vue";
 import login from "../views/Login.vue";
 import register from "../views/Register.vue"
+import feedcontainer from "../views/FeedContainer.vue";
+import exercise from "../views/Exercise.vue";
+import message from "../views/Message.vue";
+import workout from "../views/Workout.vue";
+import friends from "../views/Friends.vue";
 
 Vue.use(VueRouter)
 
@@ -24,6 +29,31 @@ const routes = [
     path: '/register',
     name: 'register',
     component: register,
+  },
+  {
+    path: '/feed',
+    name: 'feed',
+    component: feedcontainer
+  },
+  {
+    path: '/exercise',
+    name: "exercise",
+    component: exercise
+  },
+  {
+    path: '/message',
+    name: 'message',
+    component: message
+  },
+  {
+    path: '/workout',
+    name: 'workout',
+    component: workout
+  },
+  {
+    path: '/friends',
+    name: 'friends',
+    component: friends
   }
 ]
 
