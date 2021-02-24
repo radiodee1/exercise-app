@@ -12,7 +12,7 @@
             <option @click="searchDay(-99)">All Time</option>
           </select>
         </div>
-        <div class="control">
+        <div class="control box">
           <label class="radio">
             <input type="radio" name="foobar" @click="checkType('share')" />
             Share
