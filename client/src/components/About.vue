@@ -31,3 +31,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+li ul {
+  list-style-type: circle ;
+  list-style-position: inside;
+}
+</style>
