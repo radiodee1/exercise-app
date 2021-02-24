@@ -126,7 +126,7 @@ export default {
   },
   mounted() {
     //console.log("message");
-    console.log(this.form_workout+" here w ");
+    //console.log(this.form_workout+" here w ");
   },
 
   methods: {
