@@ -96,33 +96,11 @@ export default {
   },
   components: {
     bannercomponent: bannercomponent,
-    /*
-    feedcontainer: feedcontainer,
-    register: register,
-    home: home,
-    login: login,
-    message: message,
-    exercise: exercise,
-    workout: workout,
-    friends: friends,
-    */
+    
   },
   props: [],
   mounted() {
-    /*
-    this.login = this.$router.app.$root.login;
-    this.register = this.$router.app.$root.register;
-    this.home = this.$router.app.$root.home;
-    this.form_message = this.$router.app.$root.form_message;
-    this.form_exercise = this.$router.app.$root.form_exercise;
-    this.form_workout = this.$router.app.$root.form_workout;
-    this.form_friends = this.$router.app.$root.form_friends;
-    this.newsfeed = this.$router.app.$root.newsfeed;
-    this.banner = this.$router.app.$root.banner;
-
-    this.items = this.$router.app.$root.items;
-    this.user = this.$router.app.$root.user;
-    */
+    
   },
   computed: {
     tree: function () {
