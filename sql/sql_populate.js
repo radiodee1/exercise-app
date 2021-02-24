@@ -1,6 +1,10 @@
+const mysql = require('mysql');
+
 module.exports = {
     makeInsert,
+    makeInsertFormat,
     makeSelect,
+    makeSelectFormat,
     query,
     connection,
     end,
@@ -31,11 +35,11 @@ function connection() {
 function makeInsert(table_name, columns_list , values_list, mult_rows=false){
     
     xx = "";
-    xx = xx + "INSERT INTO ";
-    xx = xx + table_name + " ";
+    xx = xx + "INSERT INTO `";
+    xx = xx + table_name + "` ";
     xx = xx + " ( " ;
     for (var i=0; i < columns_list.length; i ++){
-        xx = xx + " " + columns_list[i];
+        xx = xx + " `" + columns_list[i] + "`";
         if (i < columns_list.length -1) xx = xx + ",";
     } 
     xx = xx + " ) ";
@@ -43,7 +47,7 @@ function makeInsert(table_name, columns_list , values_list, mult_rows=false){
     if (mult_rows == false) {
         xx = xx + " ( ";
         for (var i=0; i < values_list.length; i ++) {
-            xx = xx + " " + values_list[i];
+            xx = xx + " '" + values_list[i] + "'";
             if (i < values_list.length -1) xx = xx + ",";
         }
         xx = xx + " ) "
@@ -52,7 +56,7 @@ function makeInsert(table_name, columns_list , values_list, mult_rows=false){
         for(var j=0; j < values_list.length; j ++) {
             xx = xx + " ( ";
             for (var i=0; i < values_list[j].length; i ++) {
-                xx = xx + " " + values_list[j][i];
+                xx = xx + " '" + values_list[j][i] + "'";
                 if (i < values_list[j].length - 1) xx = xx + ",";
             }
             xx = xx + " ) "
@@ -62,8 +66,46 @@ function makeInsert(table_name, columns_list , values_list, mult_rows=false){
     return xx
 }
 
+function makeInsertFormat(table_name, columns_list , values_list, mult_rows=false){
+    
+    xx = "";
+    xx = xx + "INSERT INTO ";
+    xx = xx + table_name + " ";
+    xx = xx + " ( " ;
+    for (var i=0; i < columns_list.length; i ++){
+        xx = xx + " " + columns_list[i] + "";
+        if (i < columns_list.length -1) xx = xx + ",";
+    } 
+    xx = xx + " ) ";
+    xx = xx + " VALUES (";
+    for (var i = 0; i < columns_list.length; i ++) {
+        xx = xx + " ? ";
+        if (i < columns_list.length -1) xx = xx + ",";
+
+    }
+    xx = xx + " )"
+    console.log(xx);
+    yy = mysql.format(xx, values_list);
+    return yy;
+}
 
 function makeSelect(table_name, columns_list , where_clause='', mult_rows=false){
+    
+    xx = "";
+    xx = xx + "SELECT DISTINCT";
+    
+    for (var i=0; i < columns_list.length; i ++){
+        xx = xx + " " + columns_list[i];
+        if (i < columns_list.length -1) xx = xx + ",";
+    } 
+    
+    xx = xx + " FROM " + table_name + " ";
+    xx = xx + where_clause;
+
+    return xx
+}
+
+function makeSelectFormat(table_name, columns_list , where_clause='', mult_rows=false){
     
     xx = "";
     xx = xx + "SELECT DISTINCT";
