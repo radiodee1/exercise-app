@@ -38,7 +38,7 @@ con.connect(function (err) {
     "address VARCHAR(255), city VARCHAR(255), " +
     "state VARCHAR(255), zip VARCHAR(255), " +
     "email VARCHAR(255), username VARCHAR(255), " +
-    "password VARCHAR(255), " + //, cookie VARCHAR(255) " + 
+    "password VARCHAR(255), cookie VARCHAR(255) ," + 
     "from_user_id INT " +
   // ", picture LONGBLOB " + 
   " )";

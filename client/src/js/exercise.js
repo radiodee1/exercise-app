@@ -706,6 +706,7 @@ export function makeUser() {
     height_inches: 74,
     weight_lbs: 150,
     id: 0,
+    cookie: ""
   };
 
 }
