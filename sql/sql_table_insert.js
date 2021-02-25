@@ -13,6 +13,7 @@ user.email = 'email';
 user.username = 'username';
 user.password = 'password';
 
+
 console.log(user);
 
 const profile = {
@@ -26,7 +27,8 @@ const profile = {
         'zip',
         'email',
         'username',
-        'password'
+        'password',
+        
     ],
     mult_rows: false,
     values_list: [
@@ -53,6 +55,22 @@ const profile2 = {
 };
 
 x = sql.makeSelectFormat(profile2.name, profile2.columns_list, profile2.where_clause, false);
+
+const ob = {
+    firstname: "David",
+    lastname: "Liebman",
+    address: "123 Spruce st.",
+    city: "Kingston",
+    state: "NY",
+    zip: "12401",
+    email: "d.c.l@gmail.com",
+    username: "xliebman",
+    password: "xx"
+};
+
+x = sql.sqlInsertObjJSON(ob,'profiles');
+
+x = sql.sqlSelectObjJSON(ob, 'profiles', "where id=7");
 
 con = sql.connection();
 sql.query(con, x);

@@ -8,8 +8,9 @@ module.exports = {
     query,
     connection,
     end,
-    modSelectFunction
-    
+    modSelectFunction,
+    sqlInsertObjJSON,
+    sqlSelectObjJSON
 }
 
 
@@ -166,4 +167,40 @@ function end(con) {
     con.end((err) => {
         //end connection.
     });
+}
+
+/* ---------------- very specific fn ------------------ */
+
+function sqlInsertObjJSON(obj, table_name) {
+    sql_in = {
+        name: table_name,
+        columns_list: [],
+        values_list: []
+
+    };
+    for (key in obj) {
+        console.log(key);
+        sql_in.columns_list.push(key);
+        sql_in.values_list.push(obj[key]);
+    }
+    console.log(sql_in);
+    x = makeInsertFormat(sql_in.name, sql_in.columns_list, sql_in.values_list, false);
+    return x;
+}
+
+function sqlSelectObjJSON(obj, table_name, where_clause="" ) {
+    sql_in = {
+        name: table_name,
+        columns_list: [],
+        //values_list: []
+
+    };
+    for (key in obj) {
+        console.log(key);
+        sql_in.columns_list.push(key);
+        //sql_in.values_list.push(obj[key]);
+    }
+    console.log(sql_in);
+    x = makeSelectFormat(sql_in.name, sql_in.columns_list, where_clause, false);
+    return x;
 }
