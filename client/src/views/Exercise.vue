@@ -107,6 +107,9 @@
                   <a class="dropdown-item" @click="formChooseDeet('lifts')">
                     lifts
                   </a>
+                  <a class="dropdown-item" @click="formChooseDeet('situps')">
+                    situps
+                  </a>
                 </div>
               </div>
             </div>
