@@ -39,7 +39,7 @@ con.connect(function (err) {
     "state VARCHAR(255), zip VARCHAR(255), " +
     "email VARCHAR(255), username VARCHAR(255), " +
     "password VARCHAR(255), cookie VARCHAR(255) ," + 
-    "from_user_id INT " +
+    "from_user_id INT, height_inches INT, weight_lbs FLOAT " +
   // ", picture LONGBLOB " + 
   " )";
   con.query(sql, function (err, result) {

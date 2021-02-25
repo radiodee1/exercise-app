@@ -70,7 +70,7 @@ const ob = {
 
 x = sql.sqlInsertObjJSON(ob,'profiles');
 
-x = sql.sqlSelectObjJSON(ob, 'profiles', "where id=7");
+//x = sql.sqlSelectObjJSON(ob, 'profiles', "where id=7");
 
 con = sql.connection();
 sql.query(con, x);
