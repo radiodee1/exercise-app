@@ -292,6 +292,7 @@ export default {
         return;
       }
       //check if this (username) already exists!!
+      const id = 0;
 
       const username_taken = false;
       if (username_taken) {
@@ -316,7 +317,7 @@ export default {
       this.$root.user.email = email;
       this.$root.user.username = username;
       this.$root.user.password = password;
-
+      this.$root.user.id = id;
       //save to db!!
 
       this.focusNews();

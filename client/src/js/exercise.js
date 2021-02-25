@@ -35,6 +35,8 @@ let tree_feed_dict = {
 
   message: "hello-world",
 
+  from_user_id: 0,
+
   message_obj_from: "",
   message_obj_to: "",
   message_obj_message: "",
@@ -549,12 +551,14 @@ export function doLoad() {
 
       useFormSubmitMessage: function (feed_divs, tree) {
         const obj = JSON.parse(subtreeStr);
+        obj.from_user_id = this.user.id;
         obj.message_obj_from = this.user.firstname + " " + this.user.lastname;
         formSubmitMessage(feed_divs, tree, obj);
 
       },
       useFormSubmitExercise: function (feed_divs, tree) {
         const obj = JSON.parse(subtreeStr);
+        obj.from_user_id = this.user.id;
         obj.message_obj_from = this.user.firstname + " " + this.user.lastname;
 
         formSubmitExercise(feed_divs, tree, obj);
@@ -563,6 +567,7 @@ export function doLoad() {
       useFormSubmitWorkout: function (msg, feed_divs, tree) {
         const obj = JSON.parse(subtreeStr);
         //console.log(this.user);
+        obj.from_user_id = this.user.id;
         obj.message_obj_from = this.user.firstname + " " + this.user.lastname;
 
         formSubmitWorkout(msg, feed_divs, tree, obj);
