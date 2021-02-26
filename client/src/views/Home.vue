@@ -56,7 +56,7 @@ export default {
     },
   },
   mounted () {
-    console.log(this.home + " home");
+    //console.log(this.home + " home");
   }
 };
 </script>

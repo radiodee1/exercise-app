@@ -24,7 +24,12 @@
       <!-- lastname -->
       <div class="field column">
         <div class="control has-icons-left has-icons-right">
-          <input class="input is-medium" type="text" placeholder="Lastname" id="lastname"/>
+          <input
+            class="input is-medium"
+            type="text"
+            placeholder="Lastname"
+            id="lastname"
+          />
           <span class="icon is-medium is-left">
             <i class="fas"></i>
           </span>
@@ -39,7 +44,12 @@
       <!-- address -->
       <div class="field column">
         <div class="control has-icons-left has-icons-right">
-          <input class="input is-medium" type="text" placeholder="Address" id="address"/>
+          <input
+            class="input is-medium"
+            type="text"
+            placeholder="Address"
+            id="address"
+          />
           <span class="icon is-medium is-left">
             <i class="fas"></i>
           </span>
@@ -51,7 +61,12 @@
       <!-- city -->
       <div class="field column">
         <div class="control has-icons-left has-icons-right">
-          <input class="input is-medium" type="text" placeholder="City" id="city" />
+          <input
+            class="input is-medium"
+            type="text"
+            placeholder="City"
+            id="city"
+          />
           <span class="icon is-medium is-left">
             <i class="fas"></i>
           </span>
@@ -65,7 +80,12 @@
       <!-- state -->
       <div class="field column">
         <div class="control has-icons-left has-icons-right">
-          <input class="input is-medium" type="text" placeholder="State" id="state" />
+          <input
+            class="input is-medium"
+            type="text"
+            placeholder="State"
+            id="state"
+          />
           <span class="icon is-medium is-left">
             <i class="fas"></i>
           </span>
@@ -77,7 +97,12 @@
       <!-- zip -->
       <div class="field column">
         <div class="control has-icons-left has-icons-right">
-          <input class="input is-medium" type="text" placeholder="Zip Code" id="zip" />
+          <input
+            class="input is-medium"
+            type="text"
+            placeholder="Zip Code"
+            id="zip"
+          />
           <span class="icon is-medium is-left">
             <i class="fas"></i>
           </span>
@@ -150,7 +175,12 @@
       <div class="column">
         <div class="field">
           <div class="control has-icons-left has-icons-right">
-            <input class="input is-medium" type="email" placeholder="email" id="email"/>
+            <input
+              class="input is-medium"
+              type="email"
+              placeholder="email"
+              id="email"
+            />
             <span class="icon is-medium is-left">
               <i class="fas fa-envelope"></i>
             </span>
@@ -166,7 +196,12 @@
       <!-- username -->
       <div class="field column">
         <div class="control has-icons-left has-icons-right">
-          <input class="input is-medium" type="text" placeholder="Username" id="username"/>
+          <input
+            class="input is-medium"
+            type="text"
+            placeholder="Username"
+            id="username"
+          />
           <span class="icon is-medium is-left">
             <i class="fas"></i>
           </span>
@@ -224,30 +259,26 @@
       </div>
     </div>
     <label class="checkbox">
-      <input type="checkbox" id="remember-register"/>
+      <input type="checkbox" id="remember-register" />
       Remember me
     </label>
     <div class="red" v-if="message_password_1">
       Passwords must match and not be empty.
     </div>
-    <div class="red" v-if="message_username_1">
-      That user name is not good.
-    </div>
-
+    <div class="red" v-if="message_username_1">That user name is not good.</div>
   </section>
   <!-- end register -->
 </template>
 
 <script>
-
+let axios = require("axios").default;
 
 export default {
-
   name: "register",
   data() {
     return {
-    message_password_1: false,
-    message_username_1: false
+      message_password_1: false,
+      message_username_1: false,
     };
   },
   props: {
@@ -266,6 +297,43 @@ export default {
       if (x === true) return "visi";
       else return "invis";
     },
+    postUsername: function () {
+      let record = {};
+      record.firstname = this.firstname;
+      record.lastname = this.lastname;
+      record.address = this.address;
+      record.city = this.city;
+      record.state = this.state;
+      record.zip = this.zip;
+
+      let num = +this.feet * 12 + +this.inches;
+
+      if (typeof num !== "number") {
+        num = 0;
+      }
+      record.height_inches = this.num;
+      record.weight_lbs = this.lbs;
+
+      record.email = this.email;
+      record.username = this.username;
+      record.password = this.password;
+      //record.id = id;
+      axios
+        .post("http://localhost:" + 3010 + "/users", record)
+        .then(function (response) {
+          // handle success
+
+          console.log(response);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .then(function () {
+          // always executed
+        });
+    },
+
     submit: function () {
       this.message_password_1 = false;
       this.message_username_1 = false;
@@ -286,15 +354,78 @@ export default {
       const password = document.getElementById("password").value;
       const password2 = document.getElementById("password2").value;
 
-      if (password != password2 || password2.length == 0 || password.length == 0) {
+      if (
+        password != password2 ||
+        password2.length == 0 ||
+        password.length == 0
+      ) {
         //show an error message about the password.
         this.message_password_1 = true;
         return;
       }
       //check if this (username) already exists!!
+      let username_taken = false;
+      axios
+        .get("http://localhost:" + 3010 + "/users")
+        .then(function (response) {
+          // handle success
+          for (let i = 0; i < response.data.length; i++) {
+            let username_saved = response.data[i].username;
+            if (username_saved === username) {
+              username_taken = true;
+            }
+          }
+          console.log(response);
+          if (!username_taken) {
+            
+            console.log("post ");
+            const record = {};
+            record.firstname = firstname;
+            record.lastname = lastname;
+            record.address = address;
+            record.city = city;
+            record.state = state;
+            record.zip = zip;
+
+            let num = +feet * 12 + +inches;
+
+            if (typeof num !== "number") {
+              num = 0;
+            }
+            record.height_inches = num;
+            record.weight_lbs = lbs;
+
+            record.email = email;
+            record.username = username;
+            record.password = password;
+
+            axios
+              .post("http://localhost:" + 3010 + "/users", record)
+              .then(function (response) {
+                // handle success
+
+                console.log(response);
+              })
+              .catch(function (error) {
+                // handle error
+                console.log(error);
+              })
+              .then(function () {
+                // always executed
+              });
+            
+          }
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .then(function () {
+          // always executed
+        });
+
       const id = 0;
 
-      const username_taken = false;
       if (username_taken) {
         this.message_username_1 = true;
         return;
@@ -306,9 +437,9 @@ export default {
       this.$root.user.state = state;
       this.$root.user.zip = zip;
 
-      let num =  (+feet * 12) + (+inches);
-      
-      if(typeof num !== "number") {
+      let num = +feet * 12 + +inches;
+
+      if (typeof num !== "number") {
         num = 0;
       }
       this.$root.user.height_inches = num;
@@ -321,7 +452,7 @@ export default {
       //save to db!!
 
       this.focusNews();
-    }
+    },
   },
 };
 </script>

@@ -1,4 +1,6 @@
 const mysql = require('mysql');
+var Promise = require('promise');
+
 
 module.exports = {
     makeInsert,
@@ -6,6 +8,7 @@ module.exports = {
     makeSelect,
     makeSelectFormat,
     query,
+    xquery,
     connection,
     end,
     modSelectFunction,
@@ -124,14 +127,18 @@ function makeSelectFormat(table_name, columns_list , where_clause='', mult_rows=
 
 
 function query(connection, sql, mod=modSelectFunction) {
-    
+    var m = "";
     con = connection;
     if (!connection._connectionCalled) {
         con.query(sql, function (err, result, fields) {
             if (err) throw err;
-            console.log("sql run");
-            
-            mod(result);
+            //console.log("sql run");
+            //console.log(" here " + fields);
+
+            m = mod(result);
+            //console.log(m + " m " + m.length);
+
+            if (m.length > 0) return m;
             
         });
     }
@@ -139,26 +146,79 @@ function query(connection, sql, mod=modSelectFunction) {
 
         con.connect(function(err) {
             if (err) throw err;
-            console.log("Connected!");
+            //console.log("Connected!");
 
             con.query(sql, function (err, result, fields) {
                 if (err) throw err;
-                console.log("sql run");
-
-                mod(result);
-                
+                //console.log("sql run " + result);
+                //console.log("x here " );
+                m = mod(result);
+                //console.log(m + " m " + m.length);
+                if (m.length > 0) return m;
             });
             
             
             
         });
     }
+    //console.log("m " + mm);
+    return mm;
+}
+
+function xquery(connection, sql, mod=modSelectFunction) {
+    var m = "";
+    var mm = "";
+    var promise = null;
+    con = connection;
+    if (!connection._connectionCalled) {
+        promise =  new Promise(function (mresolve, mreject) {
+            con.query(sql, function (err, result, fields) {
+                if (err) throw err;
+                //console.log("sql run 1");
+                //console.log(" here " + fields);
+                m = mod(result);
+                //m = mod(result);
+                //console.log(m + " m " + m.length);
+                mresolve(m);
+                //if (m.length > 0) return m;
+                //return m;
+            });    
+        });
+
+       
+    }
+    else {
+
+        promise =  new Promise(function (mresolve, mreject) {
+            con.connect(function(err) {
+                if (err) throw err;
+                //console.log("Connected!");
     
+                con.query(sql, function (err, result, fields) {
+                    if (err) throw err;
+                    //console.log("sql run 2 " + result);
+                    //console.log("x here " );
+                    m = mod(result);
+                    //console.log(m + " m " + m.length);
+                    //if (m.length > 0) return m;
+                    mresolve(m);
+
+                    //return m;
+                });
+                 
+            });
+
+        });
+
+    }
+    //console.log("m " + m);
+    return promise;//  promise;
 }
 
 function modSelectFunction(i) {
-    i = JSON.parse(JSON.stringify(i));
-    console.log(i);
+    //i = JSON.parse(JSON.stringify(i));
+    
+    return i;
 }
 
 

@@ -1,6 +1,10 @@
 var express = require('express');
-var router = express.Router();
+var usersRouterGet = express.Router();
+var usersRouterPost = express.Router();
 var sql = require('../public/javascripts/sql_populate.js');
+//require('promise');
+
+var app = express();
 
 const user_all = {
   firstname: "John",
@@ -35,15 +39,54 @@ const user_few = {
 };
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
+usersRouterGet.get('/', function (req, res, next) {
+  res.set('Content-Type', 'application/json');
+
   const columns = [];
   for (let i in user_all) {
     columns.push(i);
   }
-  x = sql.makeSelectFormat('profiles', columns, '', false);
+  let x = sql.makeSelect('profiles', columns, '', false);
   let con = sql.connection();
-  y = sql.query(con, x);
-  res.send(y);
+  try {
+    let y = sql.xquery(con, x);
+    y.then(function (value) {
+      console.log(value);
+      let yy = JSON.stringify(value);
+      res.json(yy);
+      sql.end(con);
+
+    });
+  }
+  catch (v) {
+    console.log(v);
+  }
 });
 
-module.exports = router;
+/* POST users listing. */
+usersRouterPost.post('/', function (req, res, next) {
+  res.set('Content-Type', 'application/json');
+
+  console.log(req.data);
+  let x = sql.sqlInsertObjJSON(req.data, 'profiles');
+  let con = sql.connection();
+  try {
+    let y = sql.xquery(con, x);
+    y.then(function (value) {
+      console.log(value);
+      let yy = JSON.stringify(value);
+      res.json(yy);
+      sql.end(con);
+
+    });
+  }
+  catch (v) {
+    console.log(v);
+  }
+});
+
+
+module.exports = {
+  usersRouterGet,
+  usersRouterPost
+}
