@@ -5,6 +5,9 @@ import router from '../router'
 
 import appx from "../App.vue";
 
+let axios = require("axios").default;
+
+
 /* eslint-disable */
 
 /* -------------- populate feed ---------------  */
@@ -30,7 +33,7 @@ let tree_feed_dict = {
   show_exercise: false,
   show_workout: false,
 
-  picture_large: null, 
+  picture_large: null,
   picture_small: null,
 
   message: "hello-world",
@@ -168,11 +171,11 @@ function listMaint(dict, feed_divs, tree) {
 
       for (let key in tree.feed[x]) {
 
-        if ( key != "picture_large" && key != "picture_small") {
+        if (key != "picture_large" && key != "picture_small") {
           feed_divs[x].instance[key] = tree.feed[x][key];
         }
         else {
-          
+
         }
       }
 
@@ -212,6 +215,32 @@ export function insertFeed(dict, feed_divs, tree) {
 
   listMaint(dict, feed_divs, tree);
 
+  const port = visibility.backend_port;
+  dict.from_user_id = visibility.user.id;
+
+  console.log(port + " port");
+  axios
+    .post("http://localhost:" + port + "/feed", dict)
+    .then(function (response) {
+      // handle success
+      const response_raw = response;
+      //console.log(response_raw.data);
+      const response_out = JSON.parse(response_raw.data);
+
+      if (typeof response_out === 'undefined') {
+        console.log("undefined");
+      }
+      else {
+        console.log(response_out);
+      }
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
   return;
 }
 
@@ -220,7 +249,7 @@ export function setMessage(obj, msg = "message here.") {
   subtree.show_message = true;
   subtree.show_workout = false;
   subtree.show_exercise = false;
-  subtree.messsage_obj_message = msg;
+  subtree.message_obj_message = msg;
   subtree.message = msg;
   subtree.visible = true;
   return subtree;
@@ -232,8 +261,8 @@ export function setExercise(obj, msg = "exercise here.") {
   subtree.show_message = false;
   subtree.show_workout = false;
   //subtree.exercise_obj_label = msg;
-  
-  
+
+
   subtree.message = msg;
   subtree.visible = true;
   return subtree;
@@ -261,7 +290,7 @@ function setPic(pic_orig) {
     pic = pic_orig.src;
   }
   else {
-    pic = null ; //"../assets/app.png";
+    pic = null; //"../assets/app.png";
   }
   //console.log("p " + pic);
   return pic;
@@ -303,7 +332,7 @@ export function formSubmitMessage(feed_divs, tree, ob = null) {
 
   insertFeed(b, feed_divs, tree);
   document.getElementById("message_txt").value = "";
-  
+
 }
 
 function formSubmitWorkout(msg, feed_divs, tree, ob = null) {

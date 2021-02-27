@@ -114,6 +114,7 @@ con.connect(function (err) {
   id
   complete (a boolean or enumeration for whether an exercise is done)
   from_user_id (the user id of the exerciser)
+  visible (string)
   date_now (date)
   show_message (which message to show)
   show_exercise (which message to show)
@@ -130,7 +131,7 @@ con.connect(function (err) {
   */
   var sql = "CREATE TABLE IF NOT EXISTS feed (id INT AUTO_INCREMENT PRIMARY KEY, " +
     "complete VARCHAR(255), from_user_id INT , " +
-
+    "visible VARCHAR(255), num INT, " +
     "date_now TIMESTAMP, " +
     "show_message VARCHAR(255), show_exercise VARCHAR(255), show_workout VARCHAR(255), " +
     "picture_large LONGBLOB, picture_small LONGBLOB, " +
