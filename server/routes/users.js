@@ -22,21 +22,7 @@ const user_all = {
   cookie: ""
 };
 
-const user_few = {
-  firstname: "John",
-  lastname: "Doe",
-  //address: "",
-  //city: "",
-  //state: "",
-  //zip: "",
-  //email: "",
-  username: "",
-  password: "",
-  height_inches: 74,
-  weight_lbs: 150,
-  id: 0,
-  cookie: ""
-};
+
 
 /* GET users listing. */
 usersRouterGet.get('/', function (req, res, next) {
