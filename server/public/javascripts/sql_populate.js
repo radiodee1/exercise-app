@@ -23,7 +23,7 @@ function connection() {
 
     const config = require('../../../mysql-login.json')
 
-    console.log(config)
+    //console.log(config)
 
     var con = mysql.createConnection({
         host: config.host,
@@ -89,7 +89,7 @@ function makeInsertFormat(table_name, columns_list, values_list, mult_rows = fal
 
     }
     xx = xx + " )"
-    console.log(xx);
+    //console.log(xx);
     yy = mysql.format(xx, values_list);
     return yy;
 }
@@ -232,8 +232,8 @@ function end(con) {
 /* ---------------- very specific fn ------------------ */
 
 function sqlInsertObjJSON(obj, table_name) {
-    console.log(obj);
-    console.log("----");
+    //console.log(obj);
+    //console.log("----");
     sql_in = {
         name: table_name,
         columns_list: [],
@@ -241,11 +241,11 @@ function sqlInsertObjJSON(obj, table_name) {
 
     };
     for (key in obj) {
-        console.log(key);
+        //console.log(key);
         sql_in.columns_list.push(key);
         sql_in.values_list.push(obj[key]);
     }
-    console.log(sql_in);
+    //console.log(sql_in);
     x = makeInsertFormat(sql_in.name, sql_in.columns_list, sql_in.values_list, false);
     return x;
 }
@@ -258,11 +258,11 @@ function sqlSelectObjJSON(obj, table_name, where_clause = "") {
 
     };
     for (key in obj) {
-        console.log(key);
+        //console.log(key);
         sql_in.columns_list.push(key);
         //sql_in.values_list.push(obj[key]);
     }
-    console.log(sql_in);
+    //console.log(sql_in);
     x = makeSelectFormat(sql_in.name, sql_in.columns_list, where_clause, false);
     return x;
 }

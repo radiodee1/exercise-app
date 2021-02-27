@@ -32,11 +32,11 @@ const friends_all = {
 /* GET friends listing. */
 friendRouterGet.get('/', function (req, res, next) {
     res.set('Content-Type', 'application/json');
-    console.log(req);
-    console.log("---");
+    //console.log(req);
+    //console.log("---");
 
     let id = req.query.id;
-    console.log(id);
+    //console.log(id);
     //save for later??
 
     const columns_profile = [];
@@ -50,7 +50,7 @@ friendRouterGet.get('/', function (req, res, next) {
     }
 
     let x = sql.selectLeftOuterJoin("profiles", "friends", columns_profile, columns_friends, "profiles.id = friends.user_id");
-    console.log(x);
+    //console.log(x);
 
     let con = sql.connection();
     try {
@@ -72,13 +72,13 @@ friendRouterGet.get('/', function (req, res, next) {
 friendRouterPost.post('/', function (req, res, next) {
     res.set('Content-Type', 'application/json');
 
-    console.log(req.body);
+    //console.log(req.body);
     let x = sql.sqlInsertObjJSON(req.body, 'friends');
     let con = sql.connection();
     try {
         let y = sql.xquery(con, x);
         y.then(function (value) {
-            console.log(value);
+            //console.log(value);
             let yy = JSON.stringify(value);
             res.json(yy);
             sql.end(con);
