@@ -99,7 +99,7 @@ export default {
       }
       const port = this.backend_port;
       const vm = this;
-
+      let success = false;
       axios
         .get("http://localhost:" + port + "/users")
         .then(function (response_raw) {
@@ -120,6 +120,7 @@ export default {
               username_saved.trim() === username.trim() &&
               password_saved.trim() === password.trim()
             ) {
+              success = true;
               vm.$root.user.firstname = response[i].firstname;
               vm.$root.user.lastname = response[i].lastname;
               vm.$root.user.address = response[i].address;
@@ -145,9 +146,10 @@ export default {
         .then(function () {
           // always executed
           //focusNewsx();
-          console.log(vm.$root.user.id);
-          vm.focusNews();
-
+          if(success) {
+            console.log(vm.$root.user.id);
+            vm.focusNews();
+          }
         });
       //this.focusNews();
     },

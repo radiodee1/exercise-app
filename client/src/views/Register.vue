@@ -289,7 +289,7 @@ export default {
     focusNews: Function,
     focusReset: Function,
     //classOption: Function
-    backend_port: Number
+    backend_port: Number,
   },
 
   methods: {
@@ -302,6 +302,7 @@ export default {
     //focusNewsx: function () { this.focusNews();},
     submit: function () {
       const vm = this;
+      let success = false;
 
       this.message_password_1 = false;
       this.message_username_1 = false;
@@ -357,7 +358,7 @@ export default {
       this.$root.user.username = username;
       this.$root.user.password = password;
       this.$root.user.id = id;
-      
+
       //var focusNewsx = this.focusNews
       //check if this (username) already exists!!
       let username_taken = false;
@@ -373,13 +374,12 @@ export default {
               username_saved = "";
             }
             //console.log(username_saved + " " + username);
-            if (username_saved.trim() === username.trim() ) {
+            if (username_saved.trim() === username.trim()) {
               username_taken = true;
             }
           }
           //console.log(response);
           if (!username_taken) {
-            
             console.log("post ");
             const record = {};
             record.firstname = firstname;
@@ -410,7 +410,7 @@ export default {
                 response = JSON.parse(response_raw.data);
                 vm.$root.user.id = response.insertId;
                 console.log(vm.$root.user.id);
-
+                success = true;
               })
               .catch(function (error) {
                 // handle error
@@ -418,8 +418,10 @@ export default {
               })
               .then(function () {
                 // always executed
+                if (success) {
+                  vm.focusNews();
+                }
               });
-            
           }
         })
         .catch(function (error) {
@@ -428,11 +430,8 @@ export default {
         })
         .then(function () {
           // always executed
-          
           //focusNewsx();
         });
-      this.focusNews();
-      
     },
   },
 };
