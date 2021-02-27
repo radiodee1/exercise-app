@@ -29,6 +29,7 @@
       :focusFormFriends="focusFormFriends"
       :form_friends="form_friends"
       :fillPictures="fillPictures"
+      :backend_port="backend_port"
     ></bannercomponent>
 
     <router-view
@@ -60,6 +61,7 @@
       :focusFormFriends="focusFormFriends"
       :form_friends="form_friends"
       :fillPictures="fillPictures"
+      :backend_port="backend_port"
 
     ></router-view>
   </div>
@@ -88,6 +90,8 @@ export default {
       form_friends: this.$router.app.$root.form_friends,
       newsfeed: this.$router.app.$root.newsfeed,
       banner: this.$router.app.$root.banner,
+
+      backend_port: this.$router.app.$root.backend_port,
 
       items: this.$router.app.$root.items,
       user: this.$router.app.$root.user,

@@ -67,8 +67,8 @@ usersRouterGet.get('/', function (req, res, next) {
 usersRouterPost.post('/', function (req, res, next) {
   res.set('Content-Type', 'application/json');
 
-  console.log(req.data);
-  let x = sql.sqlInsertObjJSON(req.data, 'profiles');
+  console.log(req.body);
+  let x = sql.sqlInsertObjJSON(req.body, 'profiles');
   let con = sql.connection();
   try {
     let y = sql.xquery(con, x);

@@ -232,6 +232,8 @@ function end(con) {
 /* ---------------- very specific fn ------------------ */
 
 function sqlInsertObjJSON(obj, table_name) {
+    console.log(obj);
+    console.log("----");
     sql_in = {
         name: table_name,
         columns_list: [],

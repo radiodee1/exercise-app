@@ -437,6 +437,8 @@ export function doLoad() {
         form_workout: false,
         form_friends: false,
 
+        backend_port: 3010,
+
         items: feed_array,
         tree: tree,
         user: this.makeUser()

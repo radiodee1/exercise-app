@@ -83,10 +83,12 @@ export default {
     },
     submit: function () {
       this.login_dev_check();
-
       if (this.show_development) {
         return;
       }
+      
+
+
       this.focusNews();
     },
     login_dev_check: function () {

@@ -271,6 +271,7 @@
 </template>
 
 <script>
+//import { focusNews } from '../js/exercise';
 let axios = require("axios").default;
 
 export default {
@@ -288,6 +289,7 @@ export default {
     focusNews: Function,
     focusReset: Function,
     //classOption: Function
+    backend_port: Number
   },
 
   methods: {
@@ -297,43 +299,7 @@ export default {
       if (x === true) return "visi";
       else return "invis";
     },
-    postUsername: function () {
-      let record = {};
-      record.firstname = this.firstname;
-      record.lastname = this.lastname;
-      record.address = this.address;
-      record.city = this.city;
-      record.state = this.state;
-      record.zip = this.zip;
-
-      let num = +this.feet * 12 + +this.inches;
-
-      if (typeof num !== "number") {
-        num = 0;
-      }
-      record.height_inches = this.num;
-      record.weight_lbs = this.lbs;
-
-      record.email = this.email;
-      record.username = this.username;
-      record.password = this.password;
-      //record.id = id;
-      axios
-        .post("http://localhost:" + 3010 + "/users", record)
-        .then(function (response) {
-          // handle success
-
-          console.log(response);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .then(function () {
-          // always executed
-        });
-    },
-
+    //focusNewsx: function () { this.focusNews();},
     submit: function () {
       this.message_password_1 = false;
       this.message_username_1 = false;
@@ -354,6 +320,7 @@ export default {
       const password = document.getElementById("password").value;
       const password2 = document.getElementById("password2").value;
 
+      const port = this.backend_port;
       if (
         password != password2 ||
         password2.length == 0 ||
@@ -363,19 +330,52 @@ export default {
         this.message_password_1 = true;
         return;
       }
+      const id = 0;
+
+      if (username_taken) {
+        this.message_username_1 = true;
+        return;
+      }
+      this.$root.user.firstname = firstname;
+      this.$root.user.lastname = lastname;
+      this.$root.user.address = address;
+      this.$root.user.city = city;
+      this.$root.user.state = state;
+      this.$root.user.zip = zip;
+
+      let num = +feet * 12 + +inches;
+
+      if (typeof num !== "number") {
+        num = 0;
+      }
+      this.$root.user.height_inches = num;
+      this.$root.user.weight_lbs = lbs;
+
+      this.$root.user.email = email;
+      this.$root.user.username = username;
+      this.$root.user.password = password;
+      this.$root.user.id = id;
+      
+      //var focusNewsx = this.focusNews
       //check if this (username) already exists!!
       let username_taken = false;
       axios
-        .get("http://localhost:" + 3010 + "/users")
-        .then(function (response) {
+        .get("http://localhost:" + port + "/users")
+        .then(function (response_raw) {
           // handle success
-          for (let i = 0; i < response.data.length; i++) {
-            let username_saved = response.data[i].username;
-            if (username_saved === username) {
+          //console.log(response);
+          let response = JSON.parse(response_raw.data);
+          for (let i = 0; i < response.length; i++) {
+            let username_saved = response[i].username;
+            if (username_saved === null || username_saved === undefined) {
+              username_saved = "";
+            }
+            //console.log(username_saved + " " + username);
+            if (username_saved.trim() === username.trim() ) {
               username_taken = true;
             }
           }
-          console.log(response);
+          //console.log(response);
           if (!username_taken) {
             
             console.log("post ");
@@ -400,7 +400,7 @@ export default {
             record.password = password;
 
             axios
-              .post("http://localhost:" + 3010 + "/users", record)
+              .post("http://localhost:" + port + "/users", record)
               .then(function (response) {
                 // handle success
 
@@ -422,8 +422,11 @@ export default {
         })
         .then(function () {
           // always executed
+          
+          //focusNewsx();
         });
-
+      this.focusNews();
+      /*
       const id = 0;
 
       if (username_taken) {
@@ -450,8 +453,10 @@ export default {
       this.$root.user.password = password;
       this.$root.user.id = id;
       //save to db!!
+      //this.$router.push("/feed");
 
       this.focusNews();
+      */
     },
   },
 };
