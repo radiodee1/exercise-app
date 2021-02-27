@@ -301,6 +301,8 @@ export default {
     },
     //focusNewsx: function () { this.focusNews();},
     submit: function () {
+      const vm = this;
+
       this.message_password_1 = false;
       this.message_username_1 = false;
       const firstname = document.getElementById("firstname").value;
@@ -401,10 +403,14 @@ export default {
 
             axios
               .post("http://localhost:" + port + "/users", record)
-              .then(function (response) {
+              .then(function (response_raw) {
                 // handle success
 
-                console.log(response);
+                console.log(response_raw.data);
+                response = JSON.parse(response_raw.data);
+                vm.$root.user.id = response.insertId;
+                console.log(vm.$root.user.id);
+
               })
               .catch(function (error) {
                 // handle error
@@ -426,37 +432,7 @@ export default {
           //focusNewsx();
         });
       this.focusNews();
-      /*
-      const id = 0;
-
-      if (username_taken) {
-        this.message_username_1 = true;
-        return;
-      }
-      this.$root.user.firstname = firstname;
-      this.$root.user.lastname = lastname;
-      this.$root.user.address = address;
-      this.$root.user.city = city;
-      this.$root.user.state = state;
-      this.$root.user.zip = zip;
-
-      let num = +feet * 12 + +inches;
-
-      if (typeof num !== "number") {
-        num = 0;
-      }
-      this.$root.user.height_inches = num;
-      this.$root.user.weight_lbs = lbs;
-
-      this.$root.user.email = email;
-      this.$root.user.username = username;
-      this.$root.user.password = password;
-      this.$root.user.id = id;
-      //save to db!!
-      //this.$router.push("/feed");
-
-      this.focusNews();
-      */
+      
     },
   },
 };
