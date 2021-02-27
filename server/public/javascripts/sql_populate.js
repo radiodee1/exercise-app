@@ -7,13 +7,14 @@ module.exports = {
     makeInsertFormat,
     makeSelect,
     makeSelectFormat,
-    query,
+    //query,
     xquery,
     connection,
     end,
     modSelectFunction,
     sqlInsertObjJSON,
-    sqlSelectObjJSON
+    sqlSelectObjJSON,
+    selectLeftOuterJoin
 }
 
 
@@ -36,55 +37,55 @@ function connection() {
 }
 
 
-function makeInsert(table_name, columns_list , values_list, mult_rows=false){
-    
+function makeInsert(table_name, columns_list, values_list, mult_rows = false) {
+
     xx = "";
     xx = xx + "INSERT INTO `";
     xx = xx + table_name + "` ";
-    xx = xx + " ( " ;
-    for (var i=0; i < columns_list.length; i ++){
+    xx = xx + " ( ";
+    for (var i = 0; i < columns_list.length; i++) {
         xx = xx + " `" + columns_list[i] + "`";
-        if (i < columns_list.length -1) xx = xx + ",";
-    } 
+        if (i < columns_list.length - 1) xx = xx + ",";
+    }
     xx = xx + " ) ";
     xx = xx + " VALUES ";
     if (mult_rows == false) {
         xx = xx + " ( ";
-        for (var i=0; i < values_list.length; i ++) {
+        for (var i = 0; i < values_list.length; i++) {
             xx = xx + " '" + values_list[i] + "'";
-            if (i < values_list.length -1) xx = xx + ",";
+            if (i < values_list.length - 1) xx = xx + ",";
         }
         xx = xx + " ) "
     }
     else {
-        for(var j=0; j < values_list.length; j ++) {
+        for (var j = 0; j < values_list.length; j++) {
             xx = xx + " ( ";
-            for (var i=0; i < values_list[j].length; i ++) {
+            for (var i = 0; i < values_list[j].length; i++) {
                 xx = xx + " '" + values_list[j][i] + "'";
                 if (i < values_list[j].length - 1) xx = xx + ",";
             }
             xx = xx + " ) "
-            if (j < values_list.length -1) xx = xx + ", "
+            if (j < values_list.length - 1) xx = xx + ", "
         }
     }
     return xx
 }
 
-function makeInsertFormat(table_name, columns_list , values_list, mult_rows=false){
-    
+function makeInsertFormat(table_name, columns_list, values_list, mult_rows = false) {
+
     xx = "";
     xx = xx + "INSERT INTO ";
     xx = xx + table_name + " ";
-    xx = xx + " ( " ;
-    for (var i=0; i < columns_list.length; i ++){
+    xx = xx + " ( ";
+    for (var i = 0; i < columns_list.length; i++) {
         xx = xx + " " + columns_list[i] + "";
-        if (i < columns_list.length -1) xx = xx + ",";
-    } 
+        if (i < columns_list.length - 1) xx = xx + ",";
+    }
     xx = xx + " ) ";
     xx = xx + " VALUES (";
-    for (var i = 0; i < columns_list.length; i ++) {
+    for (var i = 0; i < columns_list.length; i++) {
         xx = xx + " ? ";
-        if (i < columns_list.length -1) xx = xx + ",";
+        if (i < columns_list.length - 1) xx = xx + ",";
 
     }
     xx = xx + " )"
@@ -93,39 +94,39 @@ function makeInsertFormat(table_name, columns_list , values_list, mult_rows=fals
     return yy;
 }
 
-function makeSelect(table_name, columns_list , where_clause='', mult_rows=false){
-    
+function makeSelect(table_name, columns_list, where_clause = '', mult_rows = false) {
+
     xx = "";
     xx = xx + "SELECT DISTINCT";
-    
-    for (var i=0; i < columns_list.length; i ++){
+
+    for (var i = 0; i < columns_list.length; i++) {
         xx = xx + " " + columns_list[i];
-        if (i < columns_list.length -1) xx = xx + ",";
-    } 
-    
+        if (i < columns_list.length - 1) xx = xx + ",";
+    }
+
     xx = xx + " FROM " + table_name + " ";
     xx = xx + where_clause;
 
     return xx
 }
 
-function makeSelectFormat(table_name, columns_list , where_clause='', mult_rows=false){
-    
+function makeSelectFormat(table_name, columns_list, where_clause = '', mult_rows = false) {
+
     xx = "";
     xx = xx + "SELECT DISTINCT";
-    
-    for (var i=0; i < columns_list.length; i ++){
+
+    for (var i = 0; i < columns_list.length; i++) {
         xx = xx + " " + columns_list[i];
-        if (i < columns_list.length -1) xx = xx + ",";
-    } 
-    
+        if (i < columns_list.length - 1) xx = xx + ",";
+    }
+
     xx = xx + " FROM " + table_name + " ";
     xx = xx + where_clause;
 
     return xx
 }
 
-
+/*
 function query(connection, sql, mod=modSelectFunction) {
     var m = "";
     con = connection;
@@ -164,14 +165,15 @@ function query(connection, sql, mod=modSelectFunction) {
     //console.log("m " + mm);
     return mm;
 }
+*/
 
-function xquery(connection, sql, mod=modSelectFunction) {
+function xquery(connection, sql, mod = modSelectFunction) {
     var m = "";
     var mm = "";
     var promise = null;
     con = connection;
     if (!connection._connectionCalled) {
-        promise =  new Promise(function (mresolve, mreject) {
+        promise = new Promise(function (mresolve, mreject) {
             con.query(sql, function (err, result, fields) {
                 if (err) throw err;
                 //console.log("sql run 1");
@@ -182,18 +184,18 @@ function xquery(connection, sql, mod=modSelectFunction) {
                 mresolve(m);
                 //if (m.length > 0) return m;
                 //return m;
-            });    
+            });
         });
 
-       
+
     }
     else {
 
-        promise =  new Promise(function (mresolve, mreject) {
-            con.connect(function(err) {
+        promise = new Promise(function (mresolve, mreject) {
+            con.connect(function (err) {
                 if (err) throw err;
                 //console.log("Connected!");
-    
+
                 con.query(sql, function (err, result, fields) {
                     if (err) throw err;
                     //console.log("sql run 2 " + result);
@@ -205,7 +207,7 @@ function xquery(connection, sql, mod=modSelectFunction) {
 
                     //return m;
                 });
-                 
+
             });
 
         });
@@ -216,8 +218,6 @@ function xquery(connection, sql, mod=modSelectFunction) {
 }
 
 function modSelectFunction(i) {
-    //i = JSON.parse(JSON.stringify(i));
-    
     return i;
 }
 
@@ -250,7 +250,7 @@ function sqlInsertObjJSON(obj, table_name) {
     return x;
 }
 
-function sqlSelectObjJSON(obj, table_name, where_clause="" ) {
+function sqlSelectObjJSON(obj, table_name, where_clause = "") {
     sql_in = {
         name: table_name,
         columns_list: [],
@@ -265,4 +265,28 @@ function sqlSelectObjJSON(obj, table_name, where_clause="" ) {
     console.log(sql_in);
     x = makeSelectFormat(sql_in.name, sql_in.columns_list, where_clause, false);
     return x;
+}
+
+function selectLeftOuterJoin(table_name_left, table_name_right, table_name_left_columns, table_name_right_columns, on_clause) {
+    columns_list = [];
+    for (let i = 0; i < table_name_left_columns.length; i++) {
+        columns_list.push(table_name_left + "." + table_name_left_columns[i]);
+    }
+    for (let i = 0; i < table_name_right_columns.length; i++) {
+        columns_list.push(table_name_right + "." + table_name_right_columns[i]);
+    }
+
+    let xx = "";
+    xx = xx + "SELECT " ;
+    for (let i = 0; i < columns_list.length; i ++ ) {
+        xx = xx + columns_list[i] ;
+        if (i < columns_list.length - 1){
+            xx = xx + ", ";
+        }
+    }
+    xx = xx + " ";
+    xx = xx + "FROM " + table_name_left + " LEFT JOIN " + table_name_right + " ON ";
+    xx = xx + on_clause;
+
+    return xx;
 }

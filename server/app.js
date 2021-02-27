@@ -9,6 +9,7 @@ require('promise');
 var indexRouterGet = require('./routes/index.js');
 var {usersRouterGet, usersRouterPost} = require('./routes/users.js');
 var {feedRouterGet, feedRouterPost} = require("./routes/feed.js");
+var {friendRouterGet, friendRouterPost} = require("./routes/friends.js");
 
 var app = express();
 
@@ -52,6 +53,9 @@ app.use('/users', usersRouterPost);
 
 app.use('/feed', feedRouterGet);
 app.use('/feed', feedRouterPost);
+
+app.use('/friends', friendRouterGet);
+app.use('/friends', friendRouterPost);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
