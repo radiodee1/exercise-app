@@ -134,13 +134,13 @@ export default {
       this.$router.app.$root.focusRegister();
       this.copyVals();
 
-      this.$router.push("/register");
+      this.$router.push("/register").catch(err => {});
     },
     focusNews: function () {
       this.$router.app.$root.focusNews();
       this.copyVals();
 
-      this.$router.push("/feed");
+      this.$router.push("/feed").catch(err => {});
     },
     focusReset: function () {
       this.$router.app.$root.focusReset();
@@ -152,39 +152,39 @@ export default {
       this.$router.app.$root.focusLogin();
       this.copyVals();
 
-      this.$router.push("/login");
+      this.$router.push("/login").catch(err => {});
     },
     focusFormMessage: function () {
       this.$router.app.$root.focusFormMessage();
       this.copyVals();
 
-      this.$router.push("/message");
+      this.$router.push("/message").catch(err => {});
     },
     focusFormExercise: function () {
       this.$router.app.$root.focusFormExercise();
       this.copyVals();
 
-      this.$router.push("/exercise");
+      this.$router.push("/exercise").catch(err => {});
 
     },
     focusFormWorkout: function () {
       this.$router.app.$root.focusFormWorkout();
       this.copyVals();
 
-      this.$router.push("/workout");
+      this.$router.push("/workout").catch(err => {});
     },
     focusFormFriends: function () {
       this.$router.app.$root.focusFormFriends();
       this.copyVals();
 
-      this.$router.push("/friends");
+      this.$router.push("/friends").catch(err => {});
     },
     useFormSubmitMessage: function () {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
       this.$router.app.$root.useFormSubmitMessage(feed_divs, tree);
       this.copyVals();
-      this.$router.push("/feed");
+      this.$router.push("/feed").catch(err => {});
       this.focusNews();
 
     },
@@ -193,7 +193,7 @@ export default {
       var feed_divs = this.feed_divs;
       this.$router.app.$root.useFormSubmitExercise(feed_divs, tree);
       this.copyVals();
-      this.$router.push("/feed");
+      this.$router.push("/feed").catch(err => {});
       this.focusNews();
     },
     useFormSubmitWorkout: function (msg) {
@@ -201,7 +201,7 @@ export default {
       var feed_divs = this.feed_divs;
       this.$router.app.$root.useFormSubmitWorkout(msg, feed_divs, tree);
       this.copyVals();
-      this.$router.push("/feed");
+      this.$router.push("/feed").catch(err => {});
       this.focusNews();
     },
     _preview_image_msg: function (e) {
