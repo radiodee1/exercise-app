@@ -14,7 +14,8 @@ module.exports = {
     modSelectFunction,
     sqlInsertObjJSON,
     sqlSelectObjJSON,
-    selectLeftOuterJoin
+    selectLeftOuterJoin,
+    sqlMakeUpdate
 }
 
 
@@ -268,25 +269,88 @@ function sqlSelectObjJSON(obj, table_name, where_clause = "") {
 }
 
 function selectLeftOuterJoin(table_name_left, table_name_right, table_name_left_columns, table_name_right_columns, on_clause) {
-    columns_list = [];
+    let columns_list_left = [];
+    let columns_list_right = [];
+    let table_name_left_short ="t1";
+    let table_name_right_short = "t2";
     for (let i = 0; i < table_name_left_columns.length; i++) {
-        columns_list.push(table_name_left + "." + table_name_left_columns[i]);
+        columns_list_left.push(table_name_left_short + "." + table_name_left_columns[i]);
     }
     for (let i = 0; i < table_name_right_columns.length; i++) {
-        columns_list.push(table_name_right + "." + table_name_right_columns[i]);
+        columns_list_right.push( table_name_right_columns[i]);
+        //columns_list_left.push(table_name_right_short + "." + table_name_right_columns[i]);
+
     }
 
     let xx = "";
     xx = xx + "SELECT " ;
-    for (let i = 0; i < columns_list.length; i ++ ) {
-        xx = xx + columns_list[i] ;
-        if (i < columns_list.length - 1){
+    for (let i = 0; i < columns_list_left.length; i ++ ) {
+        xx = xx + columns_list_left[i] ;
+        if (i < columns_list_left.length - 1){
             xx = xx + ", ";
         }
     }
     xx = xx + " ";
-    xx = xx + "FROM " + table_name_left + " LEFT JOIN " + table_name_right + " ON ";
+    xx = xx + "FROM " + table_name_left + " AS t1 LEFT JOIN " ;//+ table_name_right + " ON ";
+    xx = xx + "( " ;
+    xx = xx + " SELECT DISTINCT ";
+
+    for (let i = 0; i < columns_list_right.length; i ++ ) {
+        xx = xx + columns_list_right[i] ;
+        if (i < columns_list_right.length - 1){
+            xx = xx + ", ";
+        }
+    }
+    xx = xx + " FROM " + table_name_right + " ";
+    xx = xx + " ) AS t2 ON " ;
     xx = xx + on_clause;
 
+    return xx;
+}
+
+function sqlMakeUpdate ( table_name, obj_identity, obj_change) {
+    let xx = "";
+    xx = xx + "UPDATE " + table_name + " SET ";
+
+    let column_name = [];
+    let column_value = [];
+    for (let i in obj_change) {
+        column_name.push(i);
+        column_value.push(obj_change[i]);
+    }
+    for (let i = 0; i < column_value.length; i ++) {
+        xx = xx + " `" + column_name[i] + "` = "  ;
+        if (typeof column_value[i] != "number") {
+            xx = xx + " '" + column_value[i] + "' ";
+        }
+        else {
+            xx = xx + " " + column_value[i] + " ";
+        }
+        if( i < column_value.length - 1) {
+            xx = xx + " , ";
+        }
+    }
+
+    xx = xx + " WHERE " ;
+    let change_name = [];
+    let change_value = [];
+    for (let i in obj_identity) {
+        change_name.push(i);
+        change_value.push(obj_identity[i]);
+    }
+    for(let i = 0; i < change_value.length; i ++) {
+        xx = xx + " `" + change_name[i] + "` = " ;
+        if (typeof change_value[i] != "number") {
+            xx = xx + " '" + change_value[i] + "' ";
+        }
+        else {
+            xx = xx + " " + change_value[i] + " ";
+        }
+        if (i < change_value.length - 1 ) {
+            xx = xx + " AND "
+        }
+    }
+
+    console.log(xx);
     return xx;
 }

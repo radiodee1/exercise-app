@@ -33,13 +33,13 @@
                   </button>
                   <button
                     class="button is-primary is-small"
-                    v-if="l.status === 'waiting'"
+                    v-if="l.status === 'asked'"
                     @click="confirm(k)"
                   >
                     Approve
                   </button>
                   <span v-if="l.status === 'confirmed'">Confirmed</span>
-                  <span v-if="l.status === 'asked'">Waiting</span>
+                  <span v-if="l.status === 'waiting'">Waiting</span>
                 </td>
               </tr>
             </table>
@@ -89,11 +89,11 @@ export default {
       const port = this.backend_port;
       const user_id = this.$root.user.id;
 
-      this.list[num].status = "asked";
+      this.list[num].status = "asked"; // <-- asked???
 
       const f_obj = {
-        user_id: this.list[num].id,
-        friend_user_id: user_id,// this.list[num].id,
+        user_id: user_id,// this.list[num].id,
+        friend_user_id:  this.list[num].id,
         friend_status: this.list[num].status,
         date: this.list[num].date,
       };
@@ -124,8 +124,45 @@ export default {
     },
     confirm: function (num) {
       //console.log(num);
+      const port = this.backend_port;
+      //const user_id = this.$root.user.id;
+
+      const f_obj = {
+        change: {
+          friend_status: "confirmed",
+        },
+        ident: {
+          user_id: this.list[num].id,
+          friend_user_id: this.list[num].friend_user_id,
+        },
+
+        //date: this.list[num].date,
+      };
+      console.log(f_obj);
+      console.log("----");
       this.list[num].status = "confirmed";
       // patch friend request here -- update db
+      axios
+        .patch("http://localhost:" + port + "/friends", f_obj)
+        .then(function (response) {
+          // handle success
+
+          console.log(response.data);
+          response = JSON.parse(response.data);
+          //vm.$root.user.id = response.insertId;
+          //console.log(vm.$root.user.id);
+          //success = true;
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .then(function () {
+          // always executed
+          //if (success) {
+          //vm.focusNews();
+          //}
+        });
     },
     refresh: function () {
       this.list = this.makeList();
@@ -146,7 +183,7 @@ export default {
         .then(function (response) {
           // handle success
           //const response_raw = response;
-          
+
           response = JSON.parse(response.data);
           //console.log(response);
           for (let i = 0; i < response.length; i++) {
@@ -155,8 +192,20 @@ export default {
             dict1.lastname = response[i].lastname;
             dict1.username = response[i].username;
             dict1.status = response[i].friend_status;
-            dict1.friend_user_id = response[i].id;
+            dict1.friend_user_id = response[i].friend_user_id;
             dict1.id = response[i].id;
+            dict1.user_id = response[i].user_id;
+
+            if (dict1.friend_user_id !== user_id ) {
+              //dict1.status = "new";
+              console.log(dict1.status  + " " + i);
+            }
+            if ( dict1.friend_user_id === user_id  && dict1.status === "waiting") {  // this is the same ID!!
+              dict1.status = "asked";
+            } else
+            if ( dict1.friend_user_id !== user_id && dict1.status === "asked" ) {  // this is not the ID!!
+              dict1.status = "waiting";
+            }
 
             const test_for_status = true;
             if (
@@ -169,15 +218,22 @@ export default {
               dict1.status = "new";
               //console.log("i new " + i);
             }
+            /*
+            if (dict1.status === "asked") {
+              dict1.status = "waiting";
+            } else if (dict1.status === "waiting") {
+              dict1.status = "asked";
+            }
+            */
             if (
-              dict1.username != null &&
+              ( dict1.username != null &&
               typeof dict1.username == "string" &&
               typeof vm.$root.user.username == "string" &&
-              dict1.username.trim() != vm.$root.user.username.trim()
+              dict1.username.trim() != vm.$root.user.username.trim() ) // ||
+              //dict1.status === "new"
             ) {
               l.push(dict1);
               //console.log({ zero: dict1, "i": i });
-
             }
           }
 
