@@ -200,13 +200,15 @@ export default {
 
             console.log(i+" "+ user_id + " " + dict1.username+ " " + dict1.user_id + " " + dict1.friend_user_id);
             //const skip_test_for_username = false;
+            //d[dict1.username] = dict1;
+
             if (
               (dict1.username != null &&
               typeof dict1.username == "string" &&
               typeof vm.$root.user.username == "string" &&
-              dict1.username.trim() != vm.$root.user.username.trim() &&
+              dict1.username.trim() != vm.$root.user.username.trim()) &&
               (dict1.friend_user_id === user_id || dict1.user_id === user_id || dict1.user_id === null)
-              )  //&&
+                //&&
               //( dict1.friend_user_id !== user_id && dict1.user_id !== user_id )//||
               //skip_test_for_username
               
