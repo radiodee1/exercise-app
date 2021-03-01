@@ -247,6 +247,15 @@ export default {
                 //console.log("i new " + i);
               }
             }
+            else if (dict1.user_id != user_id && dict1.friend_user_id != user_id && dict1.username.trim() != vm.$root.user.username.trim()) {
+              dict1.status = "new";
+              dict1.user_id = user_id;
+              d[dict1.username] = dict1;
+              console.log( "blank " + i+" "+ user_id + " " + dict1.username+ " " + dict1.user_id + " " + dict1.friend_user_id);
+
+            }
+
+
           }
           console.log({ d: d });
           for (let key in d) {
