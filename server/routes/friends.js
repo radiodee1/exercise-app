@@ -50,15 +50,15 @@ friendRouterGet.get('/', function (req, res, next) {
         columns_friends.push(i);
     }
 
-    let x = sql.selectLeftOuterJoin("profiles", "friends", columns_profile, columns_friends, "t1.id = t2.friend_user_id ");//AND friends.friend_user_id = " + id);
-    //console.log(x);
+    let x = sql.selectLeftOuterJoin("profiles", "friends", columns_profile, columns_friends, "t1.id = t2.friend_user_id OR t1.id = t2.user_id ");
+    console.log(x);
     //let x = sql.makeSelect('profiles', columns_profile, "", false);
 
     let con = sql.connection();
     try {
         let y = sql.xquery(con, x);
         y.then(function (value) {
-            //console.log(value);
+            console.log(value);
             let yy = JSON.stringify(value);
             res.json(yy);
             sql.end(con);

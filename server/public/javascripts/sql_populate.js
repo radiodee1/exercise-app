@@ -278,7 +278,7 @@ function selectLeftOuterJoin(table_name_left, table_name_right, table_name_left_
     }
     for (let i = 0; i < table_name_right_columns.length; i++) {
         columns_list_right.push( table_name_right_columns[i]);
-        //columns_list_left.push(table_name_right_short + "." + table_name_right_columns[i]);
+        columns_list_left.push(table_name_right_short + "." + table_name_right_columns[i]);
 
     }
 

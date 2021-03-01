@@ -89,11 +89,11 @@ export default {
       const port = this.backend_port;
       const user_id = this.$root.user.id;
 
-      this.list[num].status = "asked"; // <-- asked???
+      this.list[num].status = "waiting"; // <-- asked???
 
       const f_obj = {
-        user_id: user_id,// this.list[num].id,
-        friend_user_id:  this.list[num].id,
+        user_id: user_id, // this.list[num].id,
+        friend_user_id: this.list[num].id,
         friend_status: this.list[num].status,
         date: this.list[num].date,
       };
@@ -171,6 +171,7 @@ export default {
       const port = this.backend_port;
       const user_id = this.$root.user.id;
       let l = [];
+      let d = {};
       const vm = this;
 
       const p_list = {
@@ -195,48 +196,60 @@ export default {
             dict1.friend_user_id = response[i].friend_user_id;
             dict1.id = response[i].id;
             dict1.user_id = response[i].user_id;
+            //let local_username = dict1.username;
 
-            if (dict1.friend_user_id !== user_id ) {
-              //dict1.status = "new";
-              console.log(dict1.status  + " " + i);
-            }
-            if ( dict1.friend_user_id === user_id  && dict1.status === "waiting") {  // this is the same ID!!
-              dict1.status = "asked";
-            } else
-            if ( dict1.friend_user_id !== user_id && dict1.status === "asked" ) {  // this is not the ID!!
-              dict1.status = "waiting";
-            }
-
-            const test_for_status = true;
+            console.log(i+" "+ user_id + " " + dict1.username+ " " + dict1.user_id + " " + dict1.friend_user_id);
+            //const skip_test_for_username = false;
             if (
-              dict1.status !== "confirmed" &&
-              dict1.status !== "asked" &&
-              dict1.status !== "waiting" &&
-              dict1.status !== "new" &&
-              test_for_status
-            ) {
-              dict1.status = "new";
-              //console.log("i new " + i);
-            }
-            /*
-            if (dict1.status === "asked") {
-              dict1.status = "waiting";
-            } else if (dict1.status === "waiting") {
-              dict1.status = "asked";
-            }
-            */
-            if (
-              ( dict1.username != null &&
+              (dict1.username != null &&
               typeof dict1.username == "string" &&
               typeof vm.$root.user.username == "string" &&
-              dict1.username.trim() != vm.$root.user.username.trim() ) // ||
-              //dict1.status === "new"
+              dict1.username.trim() != vm.$root.user.username.trim() &&
+              (dict1.friend_user_id === user_id || dict1.user_id === user_id || dict1.user_id === null)
+              )  //&&
+              //( dict1.friend_user_id !== user_id && dict1.user_id !== user_id )//||
+              //skip_test_for_username
+              
             ) {
-              l.push(dict1);
+              //l.push(dict1);
+              d[dict1.username] = dict1;
+
               //console.log({ zero: dict1, "i": i });
+
+              if (
+                dict1.friend_user_id === user_id &&
+                dict1.status === "waiting"
+              ) {
+                // this is the same ID!!
+                //dict1.status = "asked";
+                d[dict1.username].status = "asked";
+              } else if (
+                dict1.friend_user_id !== user_id &&
+                dict1.status === "asked"
+              ) {
+                // this is not the ID!!
+                //dict1.status = "waiting";
+                d[dict1.username].status = "waiting";
+              }
+
+              const test_for_status = true;
+              if (
+                dict1.status !== "confirmed" &&
+                dict1.status !== "asked" &&
+                dict1.status !== "waiting" &&
+                dict1.status !== "new" &&
+                test_for_status
+              ) {
+                //dict1.status = "new";
+                d[dict1.username].status = "new";
+                //console.log("i new " + i);
+              }
             }
           }
-
+          console.log({ d: d });
+          for (let key in d) {
+            l.push(d[key]);
+          }
           //vm.$root.user.id = response.insertId;
           //console.log(vm.$root.user.id);
           //success = true;
