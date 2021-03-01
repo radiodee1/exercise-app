@@ -30,6 +30,8 @@
       :form_friends="form_friends"
       :fillPictures="fillPictures"
       :backend_port="backend_port"
+      :focusDev="focusDev"
+      :show_development="show_development"
     ></bannercomponent>
 
     <router-view
@@ -62,7 +64,8 @@
       :form_friends="form_friends"
       :fillPictures="fillPictures"
       :backend_port="backend_port"
-
+      :focusDev="focusDev"
+      :show_development="show_development"
     ></router-view>
   </div>
 </template>
@@ -92,6 +95,7 @@ export default {
       banner: this.$router.app.$root.banner,
 
       backend_port: this.$router.app.$root.backend_port,
+      show_development: false,
 
       items: this.$router.app.$root.items,
       user: this.$router.app.$root.user,
@@ -153,6 +157,12 @@ export default {
       this.copyVals();
 
       this.$router.push("/login").catch(err => {});
+    },
+    focusDev: function () {
+      this.show_development = true;
+      console.log("dev here.")
+      this.$router.push("/login").catch(err => {});
+
     },
     focusFormMessage: function () {
       this.$router.app.$root.focusFormMessage();

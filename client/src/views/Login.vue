@@ -1,5 +1,6 @@
 <template>
   <!-- start login-->
+  <div>
   <section class="section gray" v-if="login" id="login">
     <div class="columns">
       <!-- username -->
@@ -53,12 +54,12 @@
       <input type="checkbox" />
       Remember me
     </label>
-
-    <div v-show="show_development">
+</section>
+    <div v-show="show_development" class="box">
       <development></development>
     </div>
-  </section>
-
+  
+  </div>
   <!-- end login -->
 </template>
 
@@ -70,7 +71,7 @@ export default {
   name: "login",
   data() {
     return {
-      show_development: false,
+      //show_development: false,
     };
   },
   props: {
@@ -80,6 +81,7 @@ export default {
     focusReset: Function,
     //classOption: Function
     backend_port: Number,
+    show_development: Boolean
   },
   methods: {
     classOption: function (i) {
@@ -93,10 +95,7 @@ export default {
       const password = document.getElementById("password").value;
       //const password2 = document.getElementById("password2").value;
 
-      this.login_dev_check();
-      if (this.show_development) {
-        return;
-      }
+      
       const port = this.backend_port;
       const vm = this;
       let success = false;
@@ -153,10 +152,10 @@ export default {
         });
       //this.focusNews();
     },
-    login_dev_check: function () {
-      //make hardcoded develpment enabled
-      this.show_development = false;
-    },
+    //login_dev_check: function () {
+    //make hardcoded develpment enabled
+    //this.show_development = true;
+    //},
   },
   components: {
     development: development,

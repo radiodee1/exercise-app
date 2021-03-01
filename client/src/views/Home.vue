@@ -6,6 +6,9 @@
         <strong>Sign up</strong>
       </a>
       <a class="button is-light" @click="focusLogin()"> Log in </a>
+      <a class="button is-light" @click="focusNews()"> Skip Log In </a>
+      <a class="button is-light" @click="focusDev()">  Development </a>
+
     </div>
     Login or register! <br><br>
     <about></about>
@@ -45,7 +48,8 @@ export default {
     'focusNews',
     'focusReset',
     'focusLogin',
-    'focusRegister'
+    'focusRegister',
+    'focusDev'
   ],
   methods: {
     classOption: function (i) {
