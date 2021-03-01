@@ -196,27 +196,21 @@ export default {
             dict1.friend_user_id = response[i].friend_user_id;
             dict1.id = response[i].id;
             dict1.user_id = response[i].user_id;
-            //let local_username = dict1.username;
-
-            console.log(i+" "+ user_id + " " + dict1.username+ " " + dict1.user_id + " " + dict1.friend_user_id);
-            //const skip_test_for_username = false;
-            //d[dict1.username] = dict1;
+            
 
             if (
-              (dict1.username != null &&
+              dict1.username != null &&
               typeof dict1.username == "string" &&
               typeof vm.$root.user.username == "string" &&
-              dict1.username.trim() != vm.$root.user.username.trim()) &&
-              (dict1.friend_user_id === user_id || dict1.user_id === user_id || dict1.user_id === null)
-                //&&
-              //( dict1.friend_user_id !== user_id && dict1.user_id !== user_id )//||
-              //skip_test_for_username
+              dict1.username.trim() != vm.$root.user.username.trim() &&
+              (dict1.friend_user_id === user_id ||
+                dict1.user_id === user_id ||
+                dict1.user_id === null)
               
             ) {
               //l.push(dict1);
               d[dict1.username] = dict1;
 
-              //console.log({ zero: dict1, "i": i });
 
               if (
                 dict1.friend_user_id === user_id &&
@@ -242,28 +236,29 @@ export default {
                 dict1.status !== "new" &&
                 test_for_status
               ) {
-                //dict1.status = "new";
+
                 d[dict1.username].status = "new";
-                //console.log("i new " + i);
+
+}
+            } else if (
+              dict1.user_id != user_id &&
+              dict1.friend_user_id != user_id &&
+              dict1.username.trim() != vm.$root.user.username.trim()
+            ) {
+              //dict1.status = "new";
+              if (dict1.status === null) {
+                dict1.status = "new";
               }
-            }
-            else if (dict1.user_id != user_id && dict1.friend_user_id != user_id && dict1.username.trim() != vm.$root.user.username.trim()) {
-              dict1.status = "new";
+
               dict1.user_id = user_id;
               d[dict1.username] = dict1;
-              console.log( "blank " + i+" "+ user_id + " " + dict1.username+ " " + dict1.user_id + " " + dict1.friend_user_id);
-
+              
             }
-
-
           }
-          console.log({ d: d });
           for (let key in d) {
             l.push(d[key]);
           }
-          //vm.$root.user.id = response.insertId;
-          //console.log(vm.$root.user.id);
-          //success = true;
+          
         })
         .catch(function (error) {
           // handle error
@@ -271,9 +266,7 @@ export default {
         })
         .then(function () {
           // always executed
-          //if (success) {
-          //vm.focusNews();
-          //}
+          
         });
 
       return l;
