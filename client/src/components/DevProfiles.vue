@@ -94,6 +94,10 @@ td,
 th {
   border: solid 1px black;
   padding: 10px;
+  
+}
+table {
+  width: 100%;
 }
 
 .scrollable {
