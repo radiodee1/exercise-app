@@ -13,7 +13,7 @@ let axios = require("axios").default;
 /* -------------- populate feed ---------------  */
 
 export let feed_full_length = 0;
-export const feed_limit = 100;
+export const feed_limit = 1;
 // hard coded output
 
 export let tree = {

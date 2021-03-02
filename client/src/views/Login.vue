@@ -11,6 +11,7 @@
               type="text"
               placeholder="Username"
               id="username"
+              v-model="username"
             />
             <span class="icon is-medium is-left">
               <i class="fas"></i>
@@ -28,6 +29,7 @@
               type="password"
               placeholder="Password"
               id="password"
+              v-model="password"
             />
             <span class="icon is-medium is-left">
               <i class="fas"></i>
@@ -71,6 +73,8 @@ export default {
   data() {
     return {
       //show_development: false,
+      username: "",
+      password: ""
     };
   },
   props: {
@@ -90,9 +94,8 @@ export default {
       else return "invis";
     },
     submit: function () {
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-      //const password2 = document.getElementById("password2").value;
+      const username = this.username;
+      const password = this.password; 
 
       const port = this.backend_port;
       const vm = this;
