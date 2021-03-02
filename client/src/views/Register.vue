@@ -11,6 +11,7 @@
             type="text"
             placeholder="Firstnname:"
             id="firstname"
+            v-model="firstname"
           />
           <span class="icon is-medium is-left">
             <i class="fas"></i>
@@ -29,6 +30,7 @@
             type="text"
             placeholder="Lastname"
             id="lastname"
+            v-model="lastname"
           />
           <span class="icon is-medium is-left">
             <i class="fas"></i>
@@ -49,6 +51,7 @@
             type="text"
             placeholder="Address"
             id="address"
+            v-model="address"
           />
           <span class="icon is-medium is-left">
             <i class="fas"></i>
@@ -66,6 +69,7 @@
             type="text"
             placeholder="City"
             id="city"
+            v-model="city"
           />
           <span class="icon is-medium is-left">
             <i class="fas"></i>
@@ -85,6 +89,7 @@
             type="text"
             placeholder="State"
             id="state"
+            v-model="state"
           />
           <span class="icon is-medium is-left">
             <i class="fas"></i>
@@ -102,6 +107,7 @@
             type="text"
             placeholder="Zip Code"
             id="zip"
+            v-model="zip"
           />
           <span class="icon is-medium is-left">
             <i class="fas"></i>
@@ -124,6 +130,7 @@
                 type="text"
                 placeholder="Height Feet"
                 id="feet"
+                v-model="feet"
               />
               <span class="icon is-medium is-left">
                 <i class="fas"></i>
@@ -140,6 +147,7 @@
                 type="text"
                 placeholder="Height Inches"
                 id="inches"
+                v-model="inches"
               />
               <span class="icon is-medium is-left">
                 <i class="fas"></i>
@@ -159,6 +167,7 @@
             type="text"
             placeholder="Weight in LBS"
             id="lbs"
+            v-model="lbs"
           />
           <span class="icon is-medium is-left">
             <i class="fas"></i>
@@ -180,6 +189,7 @@
               type="email"
               placeholder="email"
               id="email"
+              v-model="email"
             />
             <span class="icon is-medium is-left">
               <i class="fas fa-envelope"></i>
@@ -201,6 +211,7 @@
             type="text"
             placeholder="Username"
             id="username"
+            v-model="username"
           />
           <span class="icon is-medium is-left">
             <i class="fas"></i>
@@ -218,6 +229,7 @@
             type="password"
             placeholder="Password"
             id="password"
+            v-model="password"
           />
           <span class="icon is-medium is-left">
             <i class="fas"></i>
@@ -237,6 +249,7 @@
             type="password"
             placeholder="Password again"
             id="password2"
+            v-model="password2"
           />
           <span class="icon is-medium is-left">
             <i class="fas"></i>
@@ -265,7 +278,7 @@
     <div class="red" v-if="message_password_1">
       Passwords must match and not be empty.
     </div>
-    <div class="red" v-if="message_username_1">That user name is not good.</div>
+    <div class="red" v-if="message_username_1">That user name is taken.</div>
   </section>
   <!-- end register -->
 </template>
@@ -280,6 +293,20 @@ export default {
     return {
       message_password_1: false,
       message_username_1: false,
+      firstname: "",
+      lastname: "",
+      address: "",
+      city: "",
+      state: "",
+      zip: "",
+      feet: "",
+      inches: "",
+      lbs: "",
+      email: "",
+      username: "",
+      password: "",
+      password2: ""
+
     };
   },
   props: {
@@ -306,22 +333,22 @@ export default {
 
       this.message_password_1 = false;
       this.message_username_1 = false;
-      const firstname = document.getElementById("firstname").value;
+      const firstname = this.firstname; 
       //console.log(firstname);
-      const lastname = document.getElementById("lastname").value;
-      const address = document.getElementById("address").value;
-      const city = document.getElementById("city").value;
-      const state = document.getElementById("state").value;
-      const zip = document.getElementById("zip").value;
-      const email = document.getElementById("email").value;
+      const lastname = this.lastname; 
+      const address = this.address; 
+      const city = this.city; 
+      const state = this.state; 
+      const zip = this.zip;
+      const email = this.email;
 
-      const feet = document.getElementById("feet").value;
-      const inches = document.getElementById("inches").value;
-      const lbs = document.getElementById("lbs").value;
+      const feet = this.feet;
+      const inches = this.inches;
+      const lbs = this.lbs;
 
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-      const password2 = document.getElementById("password2").value;
+      const username = this.username;
+      const password = this.password;
+      const password2 = this.password2;
 
       const port = this.backend_port;
       if (
@@ -376,6 +403,7 @@ export default {
             //console.log(username_saved + " " + username);
             if (username_saved.trim() === username.trim()) {
               username_taken = true;
+              vm.message_username_1 = true;
             }
           }
           //console.log(response);
