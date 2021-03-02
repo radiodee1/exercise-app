@@ -78,7 +78,8 @@ import "./assets/bulma.css";
 
 import bannercomponent from "./views/Banner.vue";
 
-import { makeInvocation } from "./js/exercise.js";
+//import { makeInvocation } from "./js/exercise.js";
+import { feed_full_length } from './js/exercise.js';
 
 export default {
   name: "appx",
@@ -99,7 +100,7 @@ export default {
 
       items: this.$router.app.$root.items,
       user: this.$router.app.$root.user,
-      feed_divs: makeInvocation(),
+      feed_divs: []// makeInvocation(),
     };
   },
   components: {
@@ -192,7 +193,8 @@ export default {
     useFormSubmitMessage: function () {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
-      this.$router.app.$root.useFormSubmitMessage(feed_divs, tree);
+      const b = this.$router.app.$root.useFormSubmitMessage(feed_divs, tree);
+      //this.$emit('submitpost', b);
       this.copyVals();
       this.$router.push("/feed").catch(err => {});
       this.focusNews();
@@ -201,7 +203,7 @@ export default {
     useFormSubmitExercise: function () {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
-      this.$router.app.$root.useFormSubmitExercise(feed_divs, tree);
+      const b = this.$router.app.$root.useFormSubmitExercise(feed_divs, tree);
       this.copyVals();
       this.$router.push("/feed").catch(err => {});
       this.focusNews();
@@ -209,7 +211,7 @@ export default {
     useFormSubmitWorkout: function (msg) {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
-      this.$router.app.$root.useFormSubmitWorkout(msg, feed_divs, tree);
+      const b = this.$router.app.$root.useFormSubmitWorkout(msg, feed_divs, tree);
       this.copyVals();
       this.$router.push("/feed").catch(err => {});
       this.focusNews();
@@ -236,7 +238,7 @@ export default {
       return prefix + num;
     },
     fillPictures: function () {
-      for (const i in this.items) {
+      for (let i = 0; i <= feed_full_length; i ++) {
         document.getElementById(this.makeId(i, "pic")).src = this.tree.feed[ + i].picture_large;
         //console.log("pic" + i);
       }

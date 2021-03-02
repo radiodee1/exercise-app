@@ -155,7 +155,7 @@ export function makeInvocation() {
   return feed_divs;
 }
 
-let do_loop = true;
+let do_loop = false;
 //let do_copy = tree;
 
 function listMaint(dict, feed_divs, tree) {
@@ -163,47 +163,11 @@ function listMaint(dict, feed_divs, tree) {
   //move all down 1
   tree.feed.unshift(dict);
 
-  tree.feed.pop();
+  //tree.feed.pop();
 
   if (do_loop) {
 
-    for (let x = 0; x < feed_full_length; x++) {
-
-      for (let key in tree.feed[x]) {
-
-        if (key != "picture_large" && key != "picture_small") {
-          feed_divs[x].instance[key] = tree.feed[x][key];
-        }
-        else {
-
-        }
-      }
-
-      feed_divs[x].instance.forceUpdate();
-      // list of special javascript fn
-
-      //let undef = false;
-      //if (typeof document.getElementById(makeId(x,'pic')) == 'undefined') {
-      //  undef = true;
-      //  console.log('pic undefined!!');
-      //}
-
-      //document.getElementById(makeId(x, "pic")).src = null;
-      /*
-      if (tree.feed[x].picture_large != null && undef != true && false){//&& document.getElementById(makeId(x,"pic")) != null) {
-        if (tree.feed[x].show_message == true) {
-          document.getElementById(makeId(x, "pic")).src = tree.feed[x].picture_large;
-        }
-        if (tree.feed[x].show_workout == true) {
-          document.getElementById(makeId(x, "pic")).src = tree.feed[x].picture_large;
-        }
-        if (tree.feed[x].show_exercise == true) {
-          document.getElementById(makeId(x, "pic")).src = tree.feed[x].picture_large;
-        }
-      }
-      */
-
-    }
+    console.log("old loop location");
 
   }
 
@@ -211,7 +175,8 @@ function listMaint(dict, feed_divs, tree) {
 
 export function insertFeed(dict, feed_divs, tree) {
   // insert message in db here.
-  if (feed_full_length < feed_limit - 1) feed_full_length++;
+  //if (feed_full_length < feed_limit - 1) 
+  feed_full_length++;
 
   listMaint(dict, feed_divs, tree);
 
@@ -332,7 +297,7 @@ export function formSubmitMessage(feed_divs, tree, ob = null) {
 
   insertFeed(b, feed_divs, tree);
   document.getElementById("message_txt").value = "";
-
+  return b;
 }
 
 function formSubmitWorkout(msg, feed_divs, tree, ob = null) {
@@ -366,6 +331,7 @@ function formSubmitWorkout(msg, feed_divs, tree, ob = null) {
   const b = setWorkout(obj, msg);
 
   insertFeed(b, feed_divs, tree);
+  return b;
 }
 
 function formSubmitExercise(feed_divs, tree, ob = null) {
@@ -402,6 +368,7 @@ function formSubmitExercise(feed_divs, tree, ob = null) {
 
   insertFeed(b, feed_divs, tree);
   //focusNews();
+  return b;
 }
 
 /* --------- support fn -------------  */
@@ -584,7 +551,7 @@ export function doLoad() {
         const obj = JSON.parse(subtreeStr);
         obj.from_user_id = this.user.id;
         obj.message_obj_from = this.user.firstname + " " + this.user.lastname;
-        formSubmitMessage(feed_divs, tree, obj);
+        return formSubmitMessage(feed_divs, tree, obj);
 
       },
       useFormSubmitExercise: function (feed_divs, tree) {
@@ -592,7 +559,7 @@ export function doLoad() {
         obj.from_user_id = this.user.id;
         obj.message_obj_from = this.user.firstname + " " + this.user.lastname;
 
-        formSubmitExercise(feed_divs, tree, obj);
+        return formSubmitExercise(feed_divs, tree, obj);
 
       },
       useFormSubmitWorkout: function (msg, feed_divs, tree) {
@@ -601,7 +568,7 @@ export function doLoad() {
         obj.from_user_id = this.user.id;
         obj.message_obj_from = this.user.firstname + " " + this.user.lastname;
 
-        formSubmitWorkout(msg, feed_divs, tree, obj);
+        return formSubmitWorkout(msg, feed_divs, tree, obj);
 
       },
       preview_image_msg: function (e) {
