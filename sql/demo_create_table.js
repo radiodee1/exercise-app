@@ -32,6 +32,7 @@ con.connect(function (err) {
   username (name)
   password (password)
   cookie (for saved logins)
+  date (registration date)
   */
   var sql = "CREATE TABLE IF NOT EXISTS profiles (id INT AUTO_INCREMENT PRIMARY KEY, " +
     "firstname VARCHAR(255), lastname VARCHAR(255), " +
@@ -39,8 +40,9 @@ con.connect(function (err) {
     "state VARCHAR(255), zip VARCHAR(255), " +
     "email VARCHAR(255), username VARCHAR(255), " +
     "password VARCHAR(255), cookie VARCHAR(255) ," + 
-    "from_user_id INT, height_inches INT, weight_lbs FLOAT " +
-  // ", picture LONGBLOB " + 
+    "from_user_id INT, height_inches INT, weight_lbs FLOAT, " +
+    "date TIMESTAMP, " +
+    "picture LONGBLOB " + 
   " )";
   con.query(sql, function (err, result) {
     if (err) throw err;

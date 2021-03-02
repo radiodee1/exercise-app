@@ -19,7 +19,9 @@ const user_all = {
   height_inches: 74,
   weight_lbs: 150,
   id: 0,
-  cookie: ""
+  cookie: "",
+  date: null,
+  picture: null
 };
 
 

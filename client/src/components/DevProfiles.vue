@@ -1,5 +1,6 @@
 <template>
   <div class="">
+    <div class="scrollable">
     <table>
       <tr>
         <th class="">Name</th>
@@ -19,6 +20,7 @@
         </td>
       </tr>
     </table>
+    </div>
     <div>
         <!-- single user detail -->
         <pre>{{single}}</pre>
@@ -56,6 +58,10 @@ export default {
           //console.log(response);
           response = JSON.parse(response_raw.data);
           //console.log(response);
+          for(let i = 0; i < response.length; i ++) {
+            response[i].picture = null;
+          }
+
           vm.items = response;
           //console.log(response);
         })
@@ -88,5 +94,10 @@ td,
 th {
   border: solid 1px black;
   padding: 10px;
+}
+
+.scrollable {
+  overflow-y: scroll;
+  height: 250px;
 }
 </style>
