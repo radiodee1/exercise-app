@@ -238,6 +238,9 @@ export default {
       return prefix + num;
     },
     fillPictures: function () {
+      if (feed_full_length == 0) {
+        return true;
+      }
       for (let i = 0; i <= feed_full_length; i ++) {
         document.getElementById(this.makeId(i, "pic")).src = this.tree.feed[ + i].picture_large;
         //console.log("pic" + i);

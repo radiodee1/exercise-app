@@ -8,12 +8,12 @@ import appx from "../App.vue";
 let axios = require("axios").default;
 
 
-/* eslint-disable */
+/* eslint-disable-x */
 
 /* -------------- populate feed ---------------  */
 
 export let feed_full_length = 0;
-export const feed_limit = 10;
+export const feed_limit = 100;
 // hard coded output
 
 export let tree = {
@@ -59,7 +59,7 @@ let tree_feed_dict = {
   message_list: "",
 }
 
-
+/*
 let single_div = {
   id: "",
   instance: null,
@@ -67,12 +67,13 @@ let single_div = {
   //messages: null
 
 };
+*/
 
-export let feed_divs = [];
+//export let feed_divs = [];
 
 export let subtreeStr = JSON.stringify(tree_feed_dict);
 
-let subtree_div_string = JSON.stringify(single_div);
+//let subtree_div_string = JSON.stringify(single_div);
 
 export let subtree_div = "";
 
@@ -81,10 +82,6 @@ for (let x = 0; x < feed_limit; x++) {
   subtree.visible = false;
   subtree.num = x;
   tree.feed.push(subtree);
-
-
-  subtree_div = JSON.parse(subtree_div_string);
-  feed_divs.push(subtree_div);
 }
 
 //let data = tree;
@@ -93,12 +90,13 @@ for (let x = 0; x < feed_limit; x++) {
 //let subtree = JSON.parse(subtreeStr);
 
 //data = data.feed.reverse();
-
+/*
 function makeId(num, prefix = "feed-num-") {
   return prefix + num;
 }
+*/
 
-
+/*
 
 export function makeInvocation() {
   for (let x = 0; x < feed_limit; x++) {
@@ -154,6 +152,7 @@ export function makeInvocation() {
   }
   return feed_divs;
 }
+*/
 
 let do_loop = false;
 //let do_copy = tree;
