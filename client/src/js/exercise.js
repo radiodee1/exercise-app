@@ -59,21 +59,9 @@ let tree_feed_dict = {
   message_list: "",
 }
 
-/*
-let single_div = {
-  id: "",
-  instance: null,
-  //update: null,
-  //messages: null
-
-};
-*/
-
-//export let feed_divs = [];
 
 export let subtreeStr = JSON.stringify(tree_feed_dict);
 
-//let subtree_div_string = JSON.stringify(single_div);
 
 export let subtree_div = "";
 
@@ -84,75 +72,7 @@ for (let x = 0; x < feed_limit; x++) {
   tree.feed.push(subtree);
 }
 
-//let data = tree;
 
-//data.feed[0].show_workout = true;
-//let subtree = JSON.parse(subtreeStr);
-
-//data = data.feed.reverse();
-/*
-function makeId(num, prefix = "feed-num-") {
-  return prefix + num;
-}
-*/
-
-/*
-
-export function makeInvocation() {
-  for (let x = 0; x < feed_limit; x++) {
-
-    //console.log(tree.feed[x]);
-    //console.log("---");
-
-    feed_divs[x].id = makeId(x);
-    feed_divs[x].instance = new Vue({
-
-      el: '#' + makeId(x),
-      data: tree.feed[x],
-
-      methods: {
-
-        forceUpdate: function () {
-
-          this.$forceUpdate();
-          console.log("at force update.");
-        },
-
-        classWorkout: function (i) {
-          //console.log(i);
-          const x = Boolean(i);
-          if (x === true) return 'visi';
-          else return 'invis';
-        },
-        classMessage: function (i) {
-          //console.log(i);
-          const x = Boolean(i);
-          if (x === true) return 'visi';
-          else return 'invis';
-        },
-        classExercise: function (i) {
-          //console.log(i);
-          const x = Boolean(i);
-          if (x === true) return 'visi';
-          else return 'invis';
-        },
-        classCard: function (i) {
-          //console.log(i);
-          const x = Boolean(i);
-          if (x === true) return 'visi';
-          else return 'invis';
-        }
-
-      },
-
-
-    });
-
-
-  }
-  return feed_divs;
-}
-*/
 
 let do_loop = false;
 //let do_copy = tree;
@@ -603,28 +523,6 @@ export function classOption(i) {
   else return 'invis';
 }
 
-/*
-function focusRegister() {
-  visibility.register = true;
-  visibility.login = false;
-  visibility.newsfeed = false;
-  visibility.home = false;
-  visibility.form_exercise = false;
-  visibility.form_message = false;
-  visibility.form_workout = false;
-}
-
-
-function focusLogin() {
-  visibility.login = true;
-  visibility.register = false;
-  visibility.newsfeed = false;
-  visibility.home = false;
-  visibility.form_exercise = false;
-  visibility.form_message = false;
-  visibility.form_workout = false;
-}
-*/
 
 export function focusNews() {
 
@@ -639,18 +537,7 @@ export function focusNews() {
 
 }
 
-/*
-function focusReset() {
-  visibility.login = false;
-  visibility.register = false;
-  visibility.newsfeed = false;
-  visibility.home = true;
-  visibility.banner = true;
-  visibility.form_exercise = false;
-  visibility.form_message = false;
-  visibility.form_workout = false;
-}
-*/
+
 
 export function focusFormExercise() {
   visibility.login = false;
@@ -663,18 +550,7 @@ export function focusFormExercise() {
   visibility.form_workout = false;
 }
 
-/*
-function focusFormMessage() {
-  visibility.login = false;
-  visibility.register = false;
-  visibility.newsfeed = false;
-  visibility.home = false;
-  visibility.banner = true;
-  visibility.form_exercise = false;
-  visibility.form_message = true;
-  visibility.form_workout = false;
-}
-*/
+
 
 export function focusFormWorkout() {
   visibility.login = false;
