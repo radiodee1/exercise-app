@@ -6,7 +6,7 @@ import VueRouter from 'vue-router'
 import home from "../views/Home.vue";
 import login from "../views/Login.vue";
 import register from "../views/Register.vue"
-import feedcontainer from "../views/FeedContainer.vue";
+//import feedcontainer from "../views/FeedContainer.vue";
 import feedview from "../views/Feed.vue";
 import exercise from "../views/Exercise.vue";
 import message from "../views/Message.vue";
@@ -30,11 +30,6 @@ const routes = [
     path: '/register',
     name: 'register',
     component: register,
-  },
-  {
-    path: '/oldfeed',
-    name: 'oldfeed',
-    component: feedcontainer
   },
   {
     path: '/feed',
