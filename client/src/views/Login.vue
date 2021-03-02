@@ -1,64 +1,63 @@
 <template>
   <!-- start login-->
   <div>
-  <section class="section gray" v-if="login" id="login">
-    <div class="columns">
-      <!-- username -->
-      <div class="field column">
-        <div class="control has-icons-left has-icons-right">
-          <input
-            class="input is-medium"
-            type="text"
-            placeholder="Username"
-            id="username"
-          />
-          <span class="icon is-medium is-left">
-            <i class="fas"></i>
-          </span>
-          <span class="icon is-medium is-right">
-            <i class="fas fa-check"></i>
-          </span>
+    <section class="section gray" v-if="login" id="login">
+      <div class="columns">
+        <!-- username -->
+        <div class="field column">
+          <div class="control has-icons-left has-icons-right">
+            <input
+              class="input is-medium"
+              type="text"
+              placeholder="Username"
+              id="username"
+            />
+            <span class="icon is-medium is-left">
+              <i class="fas"></i>
+            </span>
+            <span class="icon is-medium is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </div>
+        </div>
+        <!-- password -->
+        <div class="field column">
+          <div class="control has-icons-left has-icons-right">
+            <input
+              class="input is-medium"
+              type="password"
+              placeholder="Password"
+              id="password"
+            />
+            <span class="icon is-medium is-left">
+              <i class="fas"></i>
+            </span>
+            <span class="icon is-medium is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </div>
         </div>
       </div>
-      <!-- password -->
-      <div class="field column">
-        <div class="control has-icons-left has-icons-right">
-          <input
-            class="input is-medium"
-            type="password"
-            placeholder="Password"
-            id="password"
-          />
-          <span class="icon is-medium is-left">
-            <i class="fas"></i>
-          </span>
-          <span class="icon is-medium is-right">
-            <i class="fas fa-check"></i>
-          </span>
+
+      <div>
+        <div class="field is-grouped">
+          <p class="control">
+            <a class="button is-primary" @click="submit()"> Submit </a>
+          </p>
+          <p class="control">
+            <a class="button is-light" @click="focusReset()"> Cancel </a>
+          </p>
         </div>
       </div>
-    </div>
 
-    <div>
-      <div class="field is-grouped">
-        <p class="control">
-          <a class="button is-primary" @click="submit()"> Submit </a>
-        </p>
-        <p class="control">
-          <a class="button is-light" @click="focusReset()"> Cancel </a>
-        </p>
-      </div>
-    </div>
-
-    <label class="checkbox">
-      <input type="checkbox" />
-      Remember me
-    </label>
-</section>
+      <label class="checkbox">
+        <input type="checkbox" />
+        Remember me
+      </label>
+    </section>
     <div v-show="show_development" class="box">
-      <development></development>
+      <development :backend_port="backend_port"></development>
     </div>
-  
   </div>
   <!-- end login -->
 </template>
@@ -81,7 +80,7 @@ export default {
     focusReset: Function,
     //classOption: Function
     backend_port: Number,
-    show_development: Boolean
+    show_development: Boolean,
   },
   methods: {
     classOption: function (i) {
@@ -95,7 +94,6 @@ export default {
       const password = document.getElementById("password").value;
       //const password2 = document.getElementById("password2").value;
 
-      
       const port = this.backend_port;
       const vm = this;
       let success = false;
@@ -145,7 +143,7 @@ export default {
         .then(function () {
           // always executed
           //focusNewsx();
-          if(success) {
+          if (success) {
             console.log(vm.$root.user.id);
             vm.focusNews();
           }

@@ -3,13 +3,13 @@
     <table>
       <tr>
         <th class="">Name</th>
-        <th class="">User Name</th>
-        <th class="">Action</th>
+        <th class="">First Week</th>
+        <th class="">Second Week</th>
       </tr>
       <tr>
         <td>David Liebman</td>
-        <td>dcl@google.com</td>
-        <td>Button</td>
+        <td>33 posts</td>
+        <td>4 posts</td>
       </tr>
     </table>
   </div>
@@ -18,7 +18,9 @@
 export default {
     name: "devdata",
     data: function () {
-
+        return {
+            
+        }
     },
     props: {
 
