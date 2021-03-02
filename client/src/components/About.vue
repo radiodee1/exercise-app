@@ -7,6 +7,15 @@
       <li><strong>Workout</strong> - Summarize several Exercises and include them in the news feed. Search through days of exercises.</li>
       <li><strong>Friends</strong> - Approve or deny Friend requests at any time from the Friend control screen.</li>
     </ul>
+    <hr>
+    <p>After login you will see the news feed. Use the Message, Exercise, and Workout buttons at the top of
+      the navigation bar to enter your own Exercise-App story. Use the Friends button to make friends and follow
+      your friends' activities. You are a click away from sharing your workouts with all your friends. </p>
+
+    <hr>
+    <p>Don't use the browser 'back' arrow for site navigation. When you are done with a form, click either
+      the 'submit' button or the smaller 'cancel' button to exit. If you want to go back to the login screen
+      click the Exercise-App icon in the top left of the news feed window. </p>
   </div>
 </template>
 
