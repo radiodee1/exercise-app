@@ -110,13 +110,8 @@ export function insertFeed(dict, feed_divs, tree) {
       const response_raw = response;
       //console.log(response_raw.data);
       const response_out = JSON.parse(response_raw.data);
-
-      if (typeof response_out === 'undefined') {
-        console.log("undefined");
-      }
-      else {
-        console.log(response_out);
-      }
+      console.log(response_out);
+      
     })
     .catch(function (error) {
       // handle error

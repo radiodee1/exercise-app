@@ -109,7 +109,7 @@ export default {
     visible: function () {
       let vis = this.item.visible;
       if (this.i >= feed_full_length) {
-        console.log("no visible checking");
+        //console.log("no visible checking");
         //vis = false;
         //vis = vis
       }
