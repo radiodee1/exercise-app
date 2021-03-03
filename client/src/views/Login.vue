@@ -58,7 +58,7 @@
       </label>
     </section>
     <div v-show="show_development" class="box">
-      <development :backend_port="backend_port"></development>
+      <development :backend_port="backend_port" :backend_url="backend_url" ></development>
     </div>
   </div>
   <!-- end login -->
@@ -84,6 +84,7 @@ export default {
     focusReset: Function,
     //classOption: Function
     backend_port: Number,
+    backend_url : String,
     show_development: Boolean,
   },
   methods: {
@@ -98,10 +99,11 @@ export default {
       const password = this.password; 
 
       const port = this.backend_port;
+      const url = this.backend_url;
       const vm = this;
       let success = false;
       axios
-        .get("http://localhost:" + port + "/users")
+        .get(url + port + "/users")
         .then(function (response_raw) {
           // handle success
           //console.log(response);

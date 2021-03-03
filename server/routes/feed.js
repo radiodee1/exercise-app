@@ -40,12 +40,14 @@ const feed_all = {
 /* GET feed listing. */
 feedRouterGet.get('/', function (req, res, next) {
     res.set('Content-Type', 'application/json');
-  
+    console.log(req + " message");
     const columns = [];
     for (let i in feed_all) {
       columns.push(i);
     }
-    let x = sql.makeSelect('feed', columns, '', false);
+    //let x = sql.makeSelect('feed', columns, 'ORDER BY date_now DESC ', false);
+    let x = sql.sqlMakeFriendFeedSelect(columns, id);
+    console.log(x);
     let con = sql.connection();
     try {
       let y = sql.xquery(con, x);

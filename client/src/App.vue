@@ -30,6 +30,7 @@
       :form_friends="form_friends"
       :fillPictures="fillPictures"
       :backend_port="backend_port"
+      :backend_url="backend_url"
       :focusDev="focusDev"
       :show_development="show_development"
     ></bannercomponent>
@@ -64,6 +65,7 @@
       :form_friends="form_friends"
       :fillPictures="fillPictures"
       :backend_port="backend_port"
+      :backend_url="backend_url"
       :focusDev="focusDev"
       :show_development="show_development"
     ></router-view>
@@ -96,6 +98,7 @@ export default {
       banner: this.$router.app.$root.banner,
 
       backend_port: this.$router.app.$root.backend_port,
+      backend_url: this.$router.app.$root.backend_url,
       show_development: false,
 
       items: this.$router.app.$root.items,

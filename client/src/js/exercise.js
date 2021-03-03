@@ -100,11 +100,13 @@ export function insertFeed(dict, feed_divs, tree) {
   listMaint(dict, feed_divs, tree);
 
   const port = visibility.backend_port;
+  const url = visibility.backend_url;
+
   dict.from_user_id = visibility.user.id;
 
   console.log(port + " port");
   axios
-    .post("http://localhost:" + port + "/feed", dict)
+    .post(url + port + "/feed", dict)
     .then(function (response) {
       // handle success
       const response_raw = response;
@@ -348,6 +350,7 @@ export function doLoad() {
         form_friends: false,
 
         backend_port: 3010,
+        backend_url: "http://localhost:",
 
         items: feed_array,
         tree: tree,

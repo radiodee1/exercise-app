@@ -51,7 +51,7 @@ app.use('/', indexRouterGet);
 app.use('/users', usersRouterGet);
 app.use('/users', usersRouterPost);
 
-app.use('/feed', feedRouterGet);
+app.use('/feed', feedRouterGet); // used??
 app.use('/feed', feedRouterPost);
 
 app.use('/friends', friendRouterGet);

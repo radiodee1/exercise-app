@@ -76,6 +76,7 @@ export default {
     form_friends: Boolean,
     focusNews: Function,
     backend_port: Number,
+    backend_url: String
     //classOption: Function
   },
   methods: {
@@ -87,6 +88,8 @@ export default {
     },
     ask: function (num) {
       const port = this.backend_port;
+      const url = this.backend_url;
+
       const user_id = this.$root.user.id;
 
       this.list[num].status = "waiting"; // <-- asked???
@@ -101,7 +104,7 @@ export default {
 
       // post first friend request here -- insert db
       axios
-        .post("http://localhost:" + port + "/friends", f_obj)
+        .post(url + port + "/friends", f_obj)
         .then(function (response) {
           // handle success
 
@@ -125,6 +128,7 @@ export default {
     confirm: function (num) {
       //console.log(num);
       const port = this.backend_port;
+      const url = this.backend_url;
       //const user_id = this.$root.user.id;
 
       const f_obj = {
@@ -143,7 +147,7 @@ export default {
       this.list[num].status = "confirmed";
       // patch friend request here -- update db
       axios
-        .patch("http://localhost:" + port + "/friends", f_obj)
+        .patch(url + port + "/friends", f_obj)
         .then(function (response) {
           // handle success
 

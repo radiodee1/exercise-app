@@ -317,6 +317,7 @@ export default {
     focusReset: Function,
     //classOption: Function
     backend_port: Number,
+    backend_url: String
   },
 
   methods: {
@@ -351,6 +352,7 @@ export default {
       const password2 = this.password2;
 
       const port = this.backend_port;
+      const url =  this.backend_url;
       if (
         password != password2 ||
         password2.length == 0 ||
@@ -390,7 +392,7 @@ export default {
       //check if this (username) already exists!!
       let username_taken = false;
       axios
-        .get("http://localhost:" + port + "/users")
+        .get(url + port + "/users")
         .then(function (response_raw) {
           // handle success
           //console.log(response);
@@ -430,7 +432,7 @@ export default {
             record.password = password;
 
             axios
-              .post("http://localhost:" + port + "/users", record)
+              .post(url + port + "/users", record)
               .then(function (response_raw) {
                 // handle success
 

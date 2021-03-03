@@ -4,11 +4,11 @@
     <strong>Devel Options:</strong>
     <p>Here we need html and sql that shows an explorer for looking at user data.</p>
     <div class="explorer box">
-      <devprofiles :backend_port="backend_port"></devprofiles>
+      <devprofiles :backend_port="backend_port" :backend_url="backend_url"></devprofiles>
     </div>
     <p>Also we want to do some calculations on site usage.</p>
     <div class="explorer box">
-      <devdata :backend_port="backend_port"></devdata>
+      <devdata :backend_port="backend_port" :backend_url="backend_url"></devdata>
     </div>
   </div>
 </template>
@@ -25,7 +25,8 @@ export default {
   },
   props: {
     newsfeed: Boolean,
-    backend_port: Number
+    backend_port: Number,
+    backend_url: String
     //classOption: Function
   },
   methods: {

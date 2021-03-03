@@ -41,6 +41,7 @@ export default {
   },
   props: {
     backend_port: Number,
+    backend_url: String
   },
   computed: {
     //items: [],//this.getUsers(),
@@ -49,10 +50,11 @@ export default {
     getUsers: function () {
       let response = [];
       const port = this.backend_port;
-
+      const url = this.backend_url;
+      console.log(url+port);
       let vm = this;
       axios
-        .get("http://localhost:" + port + "/users")
+        .get(url + port + "/users")
         .then(function (response_raw) {
           // handle success
           //console.log(response);
