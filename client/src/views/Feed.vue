@@ -123,13 +123,14 @@ export default {
   mounted: function () {
        this.fillPictures();
        console.log(feed_full_length);
+       this.getItems();
   },
   created: function () {
     //this.addNewPost();
     //this.$on('submitpost', function (val) {
     //  this.items.unshift(val);
     //});
-    this.getItems();
+    //this.getItems();
   },
   computed: {
     itemsx: function() {

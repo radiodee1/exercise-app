@@ -42,5 +42,5 @@ const feed_all = [
 ]
 
 //x = sql.selectLeftOuterJoin('profiles', 'friends',update.change, update.ident, 'status = id');
-x = sql.sqlMakeFriendFeedSelect(feed_all, 1);
+x = sql.sqlMakeFriendFeedSelect(feed_all, 25);
 console.log(x);
