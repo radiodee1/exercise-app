@@ -3,7 +3,7 @@
     <div class="card-image">
       <figure class="image is-4by3" v-show="show_pic()">
         <img
-          src="../assets/app.png"
+          :src="picture_large"
           alt="Placeholder image"
           :id="makeId(i, 'pic')"
         />
@@ -136,6 +136,9 @@ export default {
       }
       return vis;// this.item.visible;
     },
+    picture_large: function () {
+      return this.item.picture_large;
+    }
   },
   //watch: { show_pic },
   props: {

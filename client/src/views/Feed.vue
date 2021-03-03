@@ -121,7 +121,7 @@ export default {
     //}
   },
   mounted: function () {
-       this.fillPictures();
+       //this.fillPictures();
        console.log(feed_full_length);
        this.getItems();
   },

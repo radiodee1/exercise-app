@@ -17,7 +17,7 @@ const feed_all = {
     show_exercise: false,
     show_workout: false,
 
-    picture_large: null,
+    'CONVERT(picture_large USING utf8)': null,
     picture_small: null,
 
     message: "hello-world",
