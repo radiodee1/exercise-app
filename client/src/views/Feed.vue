@@ -58,7 +58,7 @@ export default {
     feed_divs: Array,
     tree: Object,
     fillPictures: Function,
-    feed_full_length: Number,
+    //feed_full_length: Number,
     backend_port: Number,
     backend_url: String
     //classOption: Function
@@ -99,6 +99,7 @@ export default {
           vm.items = response;
           console.log(vm.items.length + " len");
           console.log(vm.items[0]);
+          //feed_full_length = vm.items.length;
           //vm.$root.user.id = response.insertId;
           //console.log(vm.$root.user.id);
           //success = true;

@@ -33,6 +33,7 @@
       :backend_url="backend_url"
       :focusDev="focusDev"
       :show_development="show_development"
+      :user="user"
     ></bannercomponent>
 
     <router-view
@@ -68,6 +69,7 @@
       :backend_url="backend_url"
       :focusDev="focusDev"
       :show_development="show_development"
+      :user="user"
     ></router-view>
   </div>
 </template>

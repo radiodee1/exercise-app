@@ -5,7 +5,7 @@
       <div class="column is-half">
         <article class="message box" v-if="form_friends">
           <div class="message-header">
-            <p>Friend Management</p>
+            <p>Friend Management {{ user.name }} </p>
             <button
               class="delete"
               aria-label="delete"
@@ -76,7 +76,8 @@ export default {
     form_friends: Boolean,
     focusNews: Function,
     backend_port: Number,
-    backend_url: String
+    backend_url: String,
+    user: Object
     //classOption: Function
   },
   methods: {
