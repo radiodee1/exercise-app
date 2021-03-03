@@ -40,7 +40,8 @@ const feed_all = {
 /* GET feed listing. */
 feedRouterGet.get('/', function (req, res, next) {
     res.set('Content-Type', 'application/json');
-    console.log(req + " message");
+    //console.log(res.req.query);
+    const id = res.req.query.id;
     const columns = [];
     for (let i in feed_all) {
       columns.push(i);

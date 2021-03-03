@@ -245,8 +245,8 @@ export default {
         return true;
       }
       for (let i = 0; i <= feed_full_length; i ++) {
-        document.getElementById(this.makeId(i, "pic")).src = this.tree.feed[ + i].picture_large;
-        //console.log("pic" + i);
+        //document.getElementById(this.makeId(i, "pic")).src = this.tree.feed[ + i].picture_large;
+        console.log("pic" + i);
       }
       return true;
     }

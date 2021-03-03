@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { feed_full_length } from '../js/exercise';
+//import { feed_full_length } from '../js/exercise';
 //import { feed_divs } from '../js/exercise';
 
 export default {
@@ -74,25 +74,43 @@ export default {
   },
   computed: {
     show_workout: function () {
-      return this.item.show_workout;
+
+      const z = this.item.show_workout;
+      if (z == "1") return true;
+      else return false;
+
     },
     show_exercise: function () {
-      return this.item.show_exercise;
+      const z = this.item.show_exercise;
+      if (z == "1") return true;
+      else return false;
     },
     show_message: function () {
-      return this.item.show_message;
+      const z =  this.item.show_message;
+      if (z == "1") return true;
+      else return false;
     },
     date_now: function () {
-      return this.item.date_now;
+      const z =  this.item.date_now;
+      return z;
+      //if (z == "1") return true;
+      //else return false;
     },
     message_obj_from: function () {
-      return this.item.message_obj_from;
+      const z =  this.item.message_obj_from;
+      return z;
+      //if (z == "1") return true;
+      //else return false;
     },
     message_obj_message: function () {
-      return this.item.message_obj_message;
+      const z =  this.item.message_obj_message;
+      return z;
     },
     exercise_obj_message: function () {
-      return this.item.exercise_obj_message;
+      const z =  this.item.exercise_obj_message;
+      return z;
+      //if (z == "1") return true;
+      //else return false;
     },
 
     workout_obj_exercise_list: function () {
@@ -108,10 +126,13 @@ export default {
     
     visible: function () {
       let vis = this.item.visible;
-      if (this.i >= feed_full_length) {
-        //console.log("no visible checking");
-        //vis = false;
+      if (vis == "1") {
+        console.log("no visible checking");
+        vis = true;
         //vis = vis
+      }
+      else {
+        vis = false;
       }
       return vis;// this.item.visible;
     },

@@ -138,7 +138,7 @@ con.connect(function (err) {
     "show_message VARCHAR(255), show_exercise VARCHAR(255), show_workout VARCHAR(255), " +
     "picture_large LONGBLOB, picture_small LONGBLOB, " +
     "message VARCHAR(255), " +
-    "message_obj_from INT, message_obj_to INT , " +
+    "message_obj_from VARCHAR(255), message_obj_to INT , " +
     "message_obj_message VARCHAR(255) , " +
     "exercise_obj_message VARCHAR(255),  " +
     "workout_obj_exercise_list VARCHAR(255) , " +

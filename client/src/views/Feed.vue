@@ -40,6 +40,7 @@
 
 import inner from "../components/FeedInner.vue";
 import { feed_full_length } from '../js/exercise';
+let axios = require("axios").default;
 
 
 export default {
@@ -47,7 +48,7 @@ export default {
   
   data() {
     return {
-      //items: tree,
+      items: [],
     };
   },
   props: {
@@ -57,7 +58,9 @@ export default {
     feed_divs: Array,
     tree: Object,
     fillPictures: Function,
-    feed_full_length: Number
+    feed_full_length: Number,
+    backend_port: Number,
+    backend_url: String
     //classOption: Function
   },
   components: {
@@ -70,6 +73,47 @@ export default {
       if (x === true) return 'visi';
       else return 'invis';
     },
+    getItems: function () {
+      const port = this.backend_port;
+      const url = this.backend_url;
+      const id = this.$root.user.id;
+      const vm = this;
+
+      if (this.items.length > 0) {
+        return;
+      }
+      const f_obj = {
+        params: {
+          'id': id
+        }
+      }
+
+      axios
+        .get(url + port + "/feed", f_obj)
+        .then(function (response) {
+          // handle success
+
+          console.log(response.data);
+          response = JSON.parse(response.data);
+
+          vm.items = response;
+          console.log(vm.items.length + " len");
+          console.log(vm.items[0]);
+          //vm.$root.user.id = response.insertId;
+          //console.log(vm.$root.user.id);
+          //success = true;
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .then(function () {
+          // always executed
+          //if (success) {
+          //vm.focusNews();
+          //}
+        });
+    }
     //addNewPost: function(val) {
       //console.log("pre submitpost");
       //this.items.unshift(val);
@@ -84,9 +128,10 @@ export default {
     //this.$on('submitpost', function (val) {
     //  this.items.unshift(val);
     //});
+    this.getItems();
   },
   computed: {
-    items: function() {
+    itemsx: function() {
       return this.tree.feed;
       //return this.feed_divs;
     }

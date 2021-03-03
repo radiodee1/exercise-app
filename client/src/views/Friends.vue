@@ -173,6 +173,7 @@ export default {
     },
     makeList: function () {
       const port = this.backend_port;
+      const url = this.backend_url;
       const user_id = this.$root.user.id;
       let l = [];
       let d = {};
@@ -184,7 +185,7 @@ export default {
         },
       };
       axios
-        .get("http://localhost:" + port + "/friends", p_list)
+        .get(url + port + "/friends", p_list)
         .then(function (response) {
           // handle success
           //const response_raw = response;
