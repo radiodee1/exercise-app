@@ -272,44 +272,44 @@ function sqlSelectObjJSON(obj, table_name, where_clause = "") {
 function selectLeftOuterJoin(table_name_left, table_name_right, table_name_left_columns, table_name_right_columns, on_clause) {
     let columns_list_left = [];
     let columns_list_right = [];
-    let table_name_left_short ="t1";
+    let table_name_left_short = "t1";
     let table_name_right_short = "t2";
     for (let i = 0; i < table_name_left_columns.length; i++) {
         columns_list_left.push(table_name_left_short + "." + table_name_left_columns[i]);
     }
     for (let i = 0; i < table_name_right_columns.length; i++) {
-        columns_list_right.push( table_name_right_columns[i]);
+        columns_list_right.push(table_name_right_columns[i]);
         columns_list_left.push(table_name_right_short + "." + table_name_right_columns[i]);
 
     }
 
     let xx = "";
-    xx = xx + "SELECT " ;
-    for (let i = 0; i < columns_list_left.length; i ++ ) {
-        xx = xx + columns_list_left[i] ;
-        if (i < columns_list_left.length - 1){
+    xx = xx + "SELECT ";
+    for (let i = 0; i < columns_list_left.length; i++) {
+        xx = xx + columns_list_left[i];
+        if (i < columns_list_left.length - 1) {
             xx = xx + ", ";
         }
     }
     xx = xx + " ";
-    xx = xx + "FROM " + table_name_left + " AS t1 LEFT JOIN " ;//+ table_name_right + " ON ";
-    xx = xx + "( " ;
+    xx = xx + "FROM " + table_name_left + " AS t1 LEFT JOIN ";//+ table_name_right + " ON ";
+    xx = xx + "( ";
     xx = xx + " SELECT DISTINCT ";
 
-    for (let i = 0; i < columns_list_right.length; i ++ ) {
-        xx = xx + columns_list_right[i] ;
-        if (i < columns_list_right.length - 1){
+    for (let i = 0; i < columns_list_right.length; i++) {
+        xx = xx + columns_list_right[i];
+        if (i < columns_list_right.length - 1) {
             xx = xx + ", ";
         }
     }
     xx = xx + " FROM " + table_name_right + " ";
-    xx = xx + " ) AS t2 ON " ;
+    xx = xx + " ) AS t2 ON ";
     xx = xx + on_clause;
 
     return xx;
 }
 
-function sqlMakeUpdate ( table_name, obj_identity, obj_change) {
+function sqlMakeUpdate(table_name, obj_identity, obj_change) {
     let xx = "";
     xx = xx + "UPDATE " + table_name + " SET ";
 
@@ -319,35 +319,35 @@ function sqlMakeUpdate ( table_name, obj_identity, obj_change) {
         column_name.push(i);
         column_value.push(obj_change[i]);
     }
-    for (let i = 0; i < column_value.length; i ++) {
-        xx = xx + " `" + column_name[i] + "` = "  ;
+    for (let i = 0; i < column_value.length; i++) {
+        xx = xx + " `" + column_name[i] + "` = ";
         if (typeof column_value[i] != "number") {
             xx = xx + " '" + column_value[i] + "' ";
         }
         else {
             xx = xx + " " + column_value[i] + " ";
         }
-        if( i < column_value.length - 1) {
+        if (i < column_value.length - 1) {
             xx = xx + " , ";
         }
     }
 
-    xx = xx + " WHERE " ;
+    xx = xx + " WHERE ";
     let change_name = [];
     let change_value = [];
     for (let i in obj_identity) {
         change_name.push(i);
         change_value.push(obj_identity[i]);
     }
-    for(let i = 0; i < change_value.length; i ++) {
-        xx = xx + " `" + change_name[i] + "` = " ;
+    for (let i = 0; i < change_value.length; i++) {
+        xx = xx + " `" + change_name[i] + "` = ";
         if (typeof change_value[i] != "number") {
             xx = xx + " '" + change_value[i] + "' ";
         }
         else {
             xx = xx + " " + change_value[i] + " ";
         }
-        if (i < change_value.length - 1 ) {
+        if (i < change_value.length - 1) {
             xx = xx + " AND "
         }
     }
@@ -371,21 +371,18 @@ function sqlMakeFriendFeedSelect2(feed_columns, profile_id ) {
 }
 */
 
-function sqlMakeFriendFeedSelect(feed_columns, profile_id ) {
+function sqlMakeFriendFeedSelect(feed_columns, profile_id) {
     tablename_friends = "friends";
     tablename_feed = "feed";
     zz = "";
-    zz = zz + "WHERE feed.from_user_id IN ( SELECT friends.user_id FROM friends WHERE friends.user_id = " + profile_id  + " ";
+    zz = zz + "WHERE feed.from_user_id IN ( SELECT friends.user_id FROM friends WHERE ( friends.user_id = " + profile_id + " OR friends.friend_user_id = " + profile_id + " ) ";
     zz = zz + "AND friends.friend_status = 'confirmed'   ";
 
-    zz = zz + "UNION SELECT friends.friend_user_id FROM friends  WHERE friends.friend_user_id = " + profile_id + " ";
-    zz = zz + "AND friends.friend_status = 'confirmed'   ";
-    zz = zz + "UNION SELECT friends.friend_user_id FROM friends  WHERE friends.user_id = " + profile_id +"  ";
+    zz = zz + "UNION SELECT friends.friend_user_id FROM friends  WHERE ( friends.user_id = " + profile_id + " OR friends.friend_user_id = " + profile_id + " ) ";
     zz = zz + "AND friends.friend_status = 'confirmed'   ";
 
-    zz = zz + "UNION SELECT friends.user_id FROM friends  WHERE friends.friend_user_id = " + profile_id +"  ";
-    zz = zz + "AND friends.friend_status = 'confirmed' ";
-    zz = zz + "UNION SELECT " + profile_id + " FROM friends ) ";// AS friends.user_id 
+
+    zz = zz + " ) ";
     zz = zz + "ORDER BY feed.date_now DESC ";
 
     xx = "";
