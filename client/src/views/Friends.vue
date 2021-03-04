@@ -296,7 +296,7 @@ export default {
                 //dict1.status === "confirmed"
               ) {
                 dict1.status = "new";
-                console.log("new " + dict1.username);
+                //console.log("new " + dict1.username);
               }
               
               ////

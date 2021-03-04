@@ -17,6 +17,7 @@
           aria-label="menu"
           aria-expanded="false"
           data-target="navbarBasicExample"
+          @click="isActive = !isActive"
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -27,21 +28,22 @@
 
       <div
         id="navbarBasicExample"
-        class="navbar-menu is-active"
+        class="navbar-menu"
+        :class="{ 'is-active': isActive }"
         v-if="newsfeed"
       >
-        <div class="navbar-start">
-          <a class="navbar-item" @click="focusFormExercise()"> Exercise </a>
+        <div class="navbar-menu" :class="{ 'is-active': isActive }">
+          <div class="navbar-start">
+            <a class="navbar-item" @click="focusFormExercise()"> Exercise </a>
 
-          <a class="navbar-item" @click="focusFormWorkout()"> Workout </a>
+            <a class="navbar-item" @click="focusFormWorkout()"> Workout </a>
 
-          <a class="navbar-item" @click="focusFormMessage()"> Message </a>
+            <a class="navbar-item" @click="focusFormMessage()"> Message </a>
 
-          <a class="navbar-item" @click="focusFormFriends()"> Friends </a>
-
+            <a class="navbar-item" @click="focusFormFriends()"> Friends </a>
+          </div>
+          <div class="navbar-end"></div>
         </div>
-
-        <div class="navbar-end"></div>
       </div>
     </nav>
 
@@ -54,9 +56,6 @@
         </p>
       </div>
     </section>
-
-
-
   </div>
 </template>
 
@@ -64,9 +63,11 @@
 export default {
   name: "bannercomponent",
   data() {
-    return {};
+    return {
+      isActive: false,
+    };
   },
-  
+
   props: [
     "banner",
     "newsfeed",
@@ -74,16 +75,15 @@ export default {
     "focusFormExercise",
     "focusFormWorkout",
     "focusFormFriends",
-    "login", 
-    "home", 
-    "register", 
-    "items" ,
+    "login",
+    "home",
+    "register",
+    "items",
     "form_message",
     "form_exercise",
     "form_workout",
-    "form_friends"
+    "form_friends",
   ],
-  
 };
 </script>
 
@@ -92,6 +92,4 @@ export default {
   position: fixed;
   width: 100%;
 }
-
-
 </style>
