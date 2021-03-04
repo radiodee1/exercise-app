@@ -96,7 +96,7 @@ export default {
           console.log(response.data);
           response = JSON.parse(response.data);
 
-          vm.items = response;
+          vm.items =[... response];
           console.log(vm.items.length + " len");
           console.log(vm.items[0]);
           //feed_full_length = vm.items.length;
