@@ -289,16 +289,16 @@ export default {
                 dict1.status = "new";
               }
               ////
-              /*
+              
               if (
                 dict1.friend_user_id !== user_id &&
                 dict1.user_id !== user_id //&&
                 //dict1.status === "confirmed"
               ) {
-                //dict1.status = "new";
+                dict1.status = "new";
                 console.log("new " + dict1.username);
               }
-              */
+              
               ////
               dict1.user_id = user_id;
               d[dict1.username] = dict1;
