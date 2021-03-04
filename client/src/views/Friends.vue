@@ -5,7 +5,7 @@
       <div class="column is-half">
         <article class="message box" v-if="form_friends">
           <div class="message-header">
-            <p>Friend Management - {{ user.username }} </p>
+            <p>Friend Management - {{ user.username }}</p>
             <button
               class="delete"
               aria-label="delete"
@@ -77,7 +77,7 @@ export default {
     focusNews: Function,
     backend_port: Number,
     backend_url: String,
-    user: Object
+    user: Object,
     //classOption: Function
   },
   methods: {
@@ -98,6 +98,7 @@ export default {
       const f_obj = {
         user_id: user_id, // this.list[num].id,
         friend_user_id: this.list[num].id,
+        //id: this.list[num].id,
         friend_status: this.list[num].status,
         date: this.list[num].date,
       };
@@ -137,7 +138,8 @@ export default {
           friend_status: "confirmed",
         },
         ident: {
-          user_id: this.list[num].id,
+          user_id: this.list[num].user_id,
+          //id: this.list[num].id,
           friend_user_id: this.list[num].friend_user_id,
         },
 
@@ -178,7 +180,17 @@ export default {
       const user_id = this.$root.user.id;
       let l = [];
       let d = {};
+      let count = [];
       const vm = this;
+
+      const order = {
+        new: 0,
+        asked: 1,
+        waiting: 2,
+        confirmed: 3,
+      };
+
+      const highest = {};
 
       const p_list = {
         params: {
@@ -202,36 +214,57 @@ export default {
             dict1.friend_user_id = response[i].friend_user_id;
             dict1.id = response[i].id;
             dict1.user_id = response[i].user_id;
-            
+
+            count.push([
+              dict1.username,
+              dict1.status,
+              dict1.friend_user_id,
+              dict1.user_id,
+              dict1.id,
+            ]);
+            if (!(dict1.username in highest)) {
+              highest[dict1.username] = `${dict1.status}`;
+              console.log(dict1.username + " " + highest[dict1.username]);
+            } else if (
+              order[highest[dict1.username].status] <= order[dict1.status]
+            ) {
+              console.log(
+                "repeat " +
+                  order[`${highest[dict1.username].status}`] +
+                  " " +
+                  order[dict1.status]
+              );
+              //continue;
+            }
 
             if (
               dict1.username != null &&
               typeof dict1.username == "string" &&
               typeof vm.$root.user.username == "string" &&
               dict1.username.trim() != vm.$root.user.username.trim() &&
-              (dict1.friend_user_id === user_id ||
-                dict1.user_id === user_id ||
-                dict1.user_id === null)
-              
+              (dict1.friend_user_id === user_id || dict1.user_id === user_id) //||
+              // || dict1.user_id === null
             ) {
               //l.push(dict1);
               d[dict1.username] = dict1;
 
-
               if (
-                dict1.friend_user_id === user_id &&
-                dict1.status === "waiting"
+                dict1.friend_user_id === user_id ||
+                dict1.user_id === user_id
               ) {
-                // this is the same ID!!
-                //dict1.status = "asked";
-                d[dict1.username].status = "asked";
-              } else if (
-                dict1.friend_user_id !== user_id &&
-                dict1.status === "asked"
-              ) {
-                // this is not the ID!!
-                //dict1.status = "waiting";
-                d[dict1.username].status = "waiting";
+                if (
+                  dict1.friend_user_id === user_id &&
+                  d[dict1.username].status === "waiting"
+                ) {
+                  // this is the same ID!!
+                  d[dict1.username].status = "asked";
+                } else if (
+                  dict1.friend_user_id !== user_id && // !==
+                  d[dict1.username].status === "asked"
+                ) {
+                  // this is not the ID!!
+                  d[dict1.username].status = "waiting";
+                }
               }
 
               const test_for_status = true;
@@ -242,29 +275,41 @@ export default {
                 dict1.status !== "new" &&
                 test_for_status
               ) {
-
                 d[dict1.username].status = "new";
-
-}
+              }
             } else if (
               dict1.user_id != user_id &&
               dict1.friend_user_id != user_id &&
               dict1.username.trim() != vm.$root.user.username.trim()
             ) {
               //dict1.status = "new";
+              //console.log(dict1);
+
               if (dict1.status === null) {
                 dict1.status = "new";
               }
-
+              ////
+              /*
+              if (
+                dict1.friend_user_id !== user_id &&
+                dict1.user_id !== user_id //&&
+                //dict1.status === "confirmed"
+              ) {
+                //dict1.status = "new";
+                console.log("new " + dict1.username);
+              }
+              */
+              ////
               dict1.user_id = user_id;
               d[dict1.username] = dict1;
-              
             }
           }
           for (let key in d) {
             l.push(d[key]);
           }
-          
+          console.log(user_id + " user");
+          console.log(count);
+          console.log(highest);
         })
         .catch(function (error) {
           // handle error
@@ -272,7 +317,6 @@ export default {
         })
         .then(function () {
           // always executed
-          
         });
 
       return l;
