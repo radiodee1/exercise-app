@@ -114,7 +114,7 @@ export default {
   },
   props: [],
   mounted() {
-    
+    console.log(process.env);
   },
   computed: {
     tree: function () {

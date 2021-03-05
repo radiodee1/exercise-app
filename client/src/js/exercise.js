@@ -7,6 +7,12 @@ import appx from "../App.vue";
 
 let axios = require("axios").default;
 
+//if (process.env.NODE_ENV !== 'production') {
+  //require("dotenv").config();
+  //import  "dotenv/config";
+  //dotenv.config();
+  console.log(process.env.BACKEND_URL);
+//}
 
 /* eslint-disable-x */
 
@@ -349,8 +355,8 @@ export function doLoad() {
         form_workout: false,
         form_friends: false,
 
-        backend_port: 3010,
-        backend_url: "http://localhost:",
+        backend_port: process.env.VUE_APP_BACKEND_PORT || 3010,
+        backend_url: process.env.VUE_APP_BACKEND_URL || "http://localhost:",
 
         items: feed_array,
         tree: tree,
