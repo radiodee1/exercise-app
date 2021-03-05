@@ -66,6 +66,7 @@
 
 <script>
 import development from "../components/Development.vue";
+import Session from "../models/Session.js";
 let axios = require("axios").default;
 
 export default {
