@@ -51,7 +51,7 @@
                 </div>
               </nav>
             </div>
-            <figure class="image is-4by3" v-show="show_picture">
+            <figure class="image " v-show="show_picture">
               <img id="myImg1" src="//:0" class="invis" />
               <!-- img src="./pic/app.png" alt="Placeholder image" -->
             </figure>

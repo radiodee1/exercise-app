@@ -1,7 +1,7 @@
 <template>
   <div :id="makeId(i)" class="card" v-show="visible" :ref="makeId(i)">
     <div class="card-image">
-      <figure class="image is-4by3" v-show="show_pic()">
+      <figure class="image " v-show="show_pic()">
         <img
           :src="picture_large"
           alt="Placeholder image"
