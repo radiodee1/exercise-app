@@ -14,3 +14,17 @@ Make your own one of these! Put it in your project root. Use it with the mysql s
     "password": "password"
 }
 ```
+
+## `.env` file
+
+Maybe make your own one of these too.
+
+```
+export BACKEND_PORT="3010"
+export BACKEND_URL="http://localhost:"
+
+export MYSQL_PORT="3306"
+export MYSQL_USER="root"
+export MYSQL_HOST="http://172.17.0.2:"
+export MYSQL_PASSWORD="droptest2"
+```
