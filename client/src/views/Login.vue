@@ -75,7 +75,8 @@ export default {
     return {
       //show_development: false,
       username: "",
-      password: ""
+      password: "",
+      user: Session.user
     };
   },
   props: {
