@@ -26,5 +26,5 @@ export BACKEND_URL="http://localhost:"
 export MYSQL_PORT="3306"
 export MYSQL_USER="root"
 export MYSQL_HOST="http://172.17.0.2:"
-export MYSQL_PASSWORD="droptest2"
+export MYSQL_PASSWORD="somepass"
 ```
