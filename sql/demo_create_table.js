@@ -141,7 +141,7 @@ con.connect(function (err) {
     "message_obj_from VARCHAR(255), message_obj_to INT , " +
     "message_obj_message VARCHAR(255) , " +
     "exercise_obj_message VARCHAR(255),  " +
-    "workout_obj_exercise_list VARCHAR(255) , " +
+    "workout_obj_exercise_list VARCHAR(1500) , " +
     "message_list VARCHAR(255) " +
     " )";
   con.query(sql, function (err, result) {

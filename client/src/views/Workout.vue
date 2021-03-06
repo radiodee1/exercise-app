@@ -44,11 +44,14 @@
                 <tr v-for="(i, id) in items" :key="i.id">
                   <td>
                     <button
-                      class="button is-primary is-small "
+                      class="button is-primary is-small"
                       v-if="chosen_list[id].chosen === false"
                       @click="use(id)"
                     >
                       Use
+                    </button>
+                    <button class="button is-primary is-small" v-else>
+                      Selected
                     </button>
                   </td>
                   <td>
@@ -57,7 +60,7 @@
                   </td>
                 </tr>
               </table>
-              
+
               <div class="control">
                 <nav class="level">
                   <div class="level-left">
@@ -100,11 +103,14 @@
             <tr v-for="(i, id) in items" :key="i.id">
               <td>
                 <button
-                  class="button is-primary is-small "
+                  class="button is-primary is-small"
                   v-if="chosen_list[id].chosen === false"
                   @click="use(id)"
                 >
                   Use
+                </button>
+                <button class="button is-primary is-small" v-else>
+                  Selected
                 </button>
               </td>
               <td>
@@ -134,7 +140,7 @@ export default {
     //search_list: [],
     items: [],
     submit_list: [],
-    chosen_list: []
+    chosen_list: [],
   }),
   props: {
     newsfeed: Boolean,
@@ -178,12 +184,11 @@ export default {
       }
     },
     use: function (id) {
-      this.submit_list.push({
-        message: this.items[id].message,
-        date: null,
-      });
+      //this.submit_list.push({
+      //  message: this.items[id].message,
+      //  date: null,
+      //});
       this.chosen_list[id].chosen = true;
-
     },
     getItems: function () {
       const port = this.backend_port;
@@ -207,13 +212,13 @@ export default {
 
           console.log(response.data);
           response = JSON.parse(response.data);
-          
+
           vm.items = [...response];
           vm.submit_list = [];
           vm.chosen_list = [];
-          for(let i = 0; i < vm.items.length; i ++) {
+          for (let i = 0; i < vm.items.length; i++) {
             vm.chosen_list.push({
-              chosen: false
+              chosen: false,
             });
           }
           //vm.items = [...response];
@@ -235,13 +240,15 @@ export default {
     submit: function () {
       // submit
       let l = "";
-      for (let x = 0; x < this.submit_list.length; x++) {
-        l = l + this.submit_list[x].message;
-        if (x < this.submit_list.length - 1) {
-          l = l + "\t";
+      for (let x = 0; x < this.chosen_list.length; x++) {
+        if (this.chosen_list[x].chosen === true) {
+          l = l + this.items[x].message + "\t";
         }
+        //if (x < this.submit_list.length - 1) {
+        //  l = l + "\t";
+        //}
       }
-      console.log(l);
+      console.log(l.length + " len");
       this.checkType("review");
       this.useFormSubmitWorkout(l);
       this.show_picture = false;

@@ -120,7 +120,8 @@ export default {
         msg = "no data";
       }
       let msg_lst = msg.split("\t");
-
+      //console.log(msg_lst.length);
+      msg_lst.pop();
       return msg_lst;
     },
     
