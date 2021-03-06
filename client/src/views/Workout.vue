@@ -4,13 +4,39 @@
     <div class="columns">
       <div class="column"></div>
       <div class="column is-half" v-if="form_workout">
-        <div class="select">
-          <select>
-            <option @click="searchDay(0)">Select Today</option>
-            <option @click="searchDay(-1)">Select Yesterday</option>
-            <option @click="searchDay(-2)">Select Two Days Ago</option>
-            <option @click="searchDay(-99)">All Time</option>
-          </select>
+        <div
+          class="dropdown"
+          :class="{ 'is-active': isActive }"
+          @click="isActive = !isActive"
+        >
+          <div class="dropdown-trigger">
+            <button
+              class="button"
+              aria-haspopup="true"
+              aria-controls="dropdown-menu"
+            >
+              <span>{{ searchDays }}</span>
+              <span class="icon is-small">
+                <i class="fas fa-angle-down" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+          <div class="dropdown-menu" id="dropdown-menu" role="menu">
+            <div class="dropdown-content">
+              <a href="#" class="dropdown-item" @click="searchDay(-1)">
+                Today
+              </a>
+              <a class="dropdown-item" @click="searchDay(-2)"> Yesterday </a>
+              <a href="#" class="dropdown-item" @click="searchDay(-3)">
+                Two Days Ago
+              </a>
+
+              <hr class="dropdown-divider" />
+              <a href="#" class="dropdown-item" @click="searchDay(-99)">
+                All Time
+              </a>
+            </div>
+          </div>
         </div>
         <div class="control box">
           <label class="radio">
@@ -50,8 +76,8 @@
                     >
                       Use
                     </button>
-                    <button class="button is-primary is-small" v-else>
-                      Selected
+                    <button class="button is-small" v-else @click="not(id)">
+                      Not
                     </button>
                   </td>
                   <td>
@@ -100,18 +126,21 @@
         </div>
         <div id="review-div" v-if="review_div">
           <table>
-            <tr v-for="(i, id) in items" :key="i.id">
+            <tr v-for="(i, id) in items" :key="id">
               <td>
-                <button
-                  class="button is-primary is-small"
+                <!-- button
+                  class="button  is-small"
                   v-if="chosen_list[id].chosen === false"
-                  @click="use(id)"
                 >
-                  Use
-                </button>
-                <button class="button is-primary is-small" v-else>
-                  Selected
-                </button>
+                  View
+                </button -->
+                <!-- button
+                  class="button  is-small"
+                  v-else
+                  @click="not(id)"
+                >
+                  Not
+                </button -->
               </td>
               <td>
                 <pre>{{ i.message }}</pre>
@@ -133,7 +162,10 @@ let axios = require("axios").default;
 export default {
   name: "workout",
   data: () => ({
-    search_day: 0,
+    isActive: false,
+    searchDays: "Search Days",
+
+    search_day: -1,
     share_div: false,
     review_div: true,
     show_picture: false,
@@ -167,7 +199,14 @@ export default {
       else return "invis";
     },
     searchDay: function (day) {
-      this.search_day = day;
+      if (+day !== this.search_day) {
+        this.items = [];
+        this.chosen_list = [];
+      }
+      //this.isActive = false;
+      this.search_day = +day;
+      console.log(this.search_day + " search day");
+      this.searchDays = "Search " + this.search_day * -1 + " Days";
     },
     search: function () {
       this.getItems();
@@ -175,6 +214,7 @@ export default {
     },
     checkType: function (check) {
       this.items = [];
+      this.chosen_list = [];
       if (check == "share") {
         this.share_div = true;
         this.review_div = false;
@@ -190,6 +230,9 @@ export default {
       //});
       this.chosen_list[id].chosen = true;
     },
+    not: function (id) {
+      this.chosen_list[id].chosen = false;
+    },
     getItems: function () {
       const port = this.backend_port;
       const url = this.backend_url;
@@ -202,6 +245,7 @@ export default {
       const f_obj = {
         params: {
           id: id,
+          days: this.search_day,
         },
       };
 
@@ -248,7 +292,7 @@ export default {
         //  l = l + "\t";
         //}
       }
-      console.log(l.length + " len");
+      //console.log(l.length + " len");
       this.checkType("review");
       this.useFormSubmitWorkout(l);
       this.show_picture = false;

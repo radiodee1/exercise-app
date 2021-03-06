@@ -9,7 +9,8 @@ const feed_all = {
 
     num: 0,
 
-    date_now: "",
+    //date_now: "",
+    "CAST(date_now AS DATE) AS `date_now` " : null,
 
     show_message: false,
     show_exercise: false,
@@ -38,11 +39,16 @@ workoutRouterGet.get('/', function (req, res, next) {
     res.set('Content-Type', 'application/json');
     //console.log(res.req.query);
     const id = res.req.query.id;
+    const days = res.req.query.days;
     const columns = [];
     for (let i in feed_all) {
       columns.push(i);
     }
-    let x = sql.makeSelect('feed', columns, 'WHERE from_user_id = '+ id + ' AND show_exercise = "1" ORDER BY date_now DESC ', false);
+    if (days === 0 || days === "0"){
+      days = "+0";
+    }
+    let xx = 'WHERE from_user_id = '+ id + ' AND show_exercise = "1" AND `date_now` >= CURTIME()' + ( days ) + '  ORDER BY date_now DESC ';
+    let x = sql.makeSelect('feed', columns, xx, false);
     //let x = sql.sqlMakeFriendFeedSelect(columns, id);
     console.log(x);
     let con = sql.connection();
