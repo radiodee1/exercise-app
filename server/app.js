@@ -10,10 +10,14 @@ var indexRouterGet = require('./routes/index.js');
 var {usersRouterGet, usersRouterPost} = require('./routes/users.js');
 var {feedRouterGet, feedRouterPost} = require("./routes/feed.js");
 var {friendRouterGet, friendRouterPost, friendRouterPatch} = require("./routes/friends.js");
+var {workoutRouterGet } = require("./routes/workouts.js");
 
 var app = express();
 
+//console.log(process.env);
+
 app.listen(3010);
+//app.listen(process.env.VUE_APP_BACKEND_PORT );
 
 app.use(function (req, res, next) {
 
@@ -59,6 +63,8 @@ app.use('/feed', feedRouterPost);
 app.use('/friends', friendRouterGet);
 app.use('/friends', friendRouterPost);
 app.use('/friends', friendRouterPatch);
+
+app.use('/workout', workoutRouterGet);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

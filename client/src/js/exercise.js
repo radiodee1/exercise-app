@@ -355,7 +355,7 @@ export function doLoad() {
         form_workout: false,
         form_friends: false,
 
-        backend_port: process.env.VUE_APP_BACKEND_PORT || 3010,
+        backend_port: ( +process.env.VUE_APP_BACKEND_PORT) || 3010,
         backend_url: process.env.VUE_APP_BACKEND_URL || "http://localhost:",
 
         items: feed_array,

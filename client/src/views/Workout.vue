@@ -40,18 +40,24 @@
               ></button>
             </div>
             <div class="message-body gray">
-              <ul>
-                <li v-for="i in search_list" :key="i">
-                  <pre>{{ i }}</pre>
-                  <br />
-                </li>
-              </ul>
-              <!-- textarea
-                id="message_txt"
-                class="textarea"
-                placeholder="What's on your mind?!"
-                rows="10"
-              ></textarea -->
+              <table>
+                <tr v-for="(i, id) in items" :key="i.id">
+                  <td>
+                    <button
+                      class="button is-primary is-small "
+                      v-if="chosen_list[id].chosen === false"
+                      @click="use(id)"
+                    >
+                      Use
+                    </button>
+                  </td>
+                  <td>
+                    <pre>{{ i.message }}</pre>
+                    <br />
+                  </td>
+                </tr>
+              </table>
+              
               <div class="control">
                 <nav class="level">
                   <div class="level-left">
@@ -80,7 +86,7 @@
                   </div>
                 </nav>
               </div>
-              <figure class="image " v-show="show_picture">
+              <figure class="image" v-show="show_picture">
                 <img id="myImg3" src="//:0" class="invis" />
                 <!-- img src="./pic/app.png" alt="Placeholder image" -->
               </figure>
@@ -90,12 +96,23 @@
           <!-- -->
         </div>
         <div id="review-div" v-if="review_div">
-          <ul>
-            <li v-for="i in search_list" :key="i">
-              <pre>{{ i }}</pre>
-              <br />
-            </li>
-          </ul>
+          <table>
+            <tr v-for="(i, id) in items" :key="i.id">
+              <td>
+                <button
+                  class="button is-primary is-small "
+                  v-if="chosen_list[id].chosen === false"
+                  @click="use(id)"
+                >
+                  Use
+                </button>
+              </td>
+              <td>
+                <pre>{{ i.message }}</pre>
+                <br />
+              </td>
+            </tr>
+          </table>
         </div>
         <button class="button" @click="cancel()">Done</button>
       </div>
@@ -105,6 +122,8 @@
 </template>
 
 <script>
+let axios = require("axios").default;
+
 export default {
   name: "workout",
   data: () => ({
@@ -112,7 +131,10 @@ export default {
     share_div: false,
     review_div: true,
     show_picture: false,
-    search_list: [],
+    //search_list: [],
+    items: [],
+    submit_list: [],
+    chosen_list: []
   }),
   props: {
     newsfeed: Boolean,
@@ -123,6 +145,8 @@ export default {
     _preview_image_wrk: Function,
     feed_divs: Array,
     tree: Object,
+    backend_port: Number,
+    backend_url: String,
   },
   mounted() {
     //console.log("message");
@@ -140,10 +164,11 @@ export default {
       this.search_day = day;
     },
     search: function () {
-      this.search_list = this.makeList();
+      this.getItems();
+      //this.search_list = this.makeList();
     },
     checkType: function (check) {
-      this.search_list = [];
+      this.items = [];
       if (check == "share") {
         this.share_div = true;
         this.review_div = false;
@@ -152,19 +177,71 @@ export default {
         this.review_div = true;
       }
     },
-    makeList: function () {
-      return ["part 1", "part 2", "part 3"];
+    use: function (id) {
+      this.submit_list.push({
+        message: this.items[id].message,
+        date: null,
+      });
+      this.chosen_list[id].chosen = true;
+
     },
+    getItems: function () {
+      const port = this.backend_port;
+      const url = this.backend_url;
+      const id = this.$root.user.id;
+      const vm = this;
+      //let items = [];
+      if (this.items.length > 0) {
+        return;
+      }
+      const f_obj = {
+        params: {
+          id: id,
+        },
+      };
+
+      axios
+        .get(url + port + "/workout", f_obj)
+        .then(function (response) {
+          // handle success
+
+          console.log(response.data);
+          response = JSON.parse(response.data);
+          
+          vm.items = [...response];
+          vm.submit_list = [];
+          vm.chosen_list = [];
+          for(let i = 0; i < vm.items.length; i ++) {
+            vm.chosen_list.push({
+              chosen: false
+            });
+          }
+          //vm.items = [...response];
+          //vm.submit_list = [];
+          //vm.tree.feed = [... response];
+          //items = [... response];
+          console.log(vm.items.length + " len");
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .then(function () {
+          // always executed
+        });
+      //return items;
+    },
+
     submit: function () {
       // submit
       let l = "";
-      for (let x = 0; x < this.search_list.length; x++) {
-        l = l + this.search_list[x];
-        if (x < this.search_list.length - 1) {
+      for (let x = 0; x < this.submit_list.length; x++) {
+        l = l + this.submit_list[x].message;
+        if (x < this.submit_list.length - 1) {
           l = l + "\t";
         }
       }
-      //console.log(l);
+      console.log(l);
       this.checkType("review");
       this.useFormSubmitWorkout(l);
       this.show_picture = false;
@@ -183,3 +260,8 @@ export default {
 };
 </script>
 
+<style scoped>
+button.green {
+  height: 100%;
+}
+</style>
