@@ -1,6 +1,11 @@
 var mysql = require('mysql');
 
-const config = require('../mysql-login.json')
+let config = require('../mysql-login.js');
+
+//import config from "../mysql-login.js";
+
+//config = JSON.stringify(config);
+//config = JSON.parse(config);
 
 console.log(config)
 
