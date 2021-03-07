@@ -55,7 +55,7 @@ workoutRouterGet.get('/', function (req, res, next) {
     try {
       let y = sql.xquery(con, x);
       y.then(function (value) {
-        console.log(value);
+        //console.log(value);
         let yy = JSON.stringify(value);
         res.json(yy);
         sql.end(con);
