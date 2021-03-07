@@ -10,8 +10,8 @@ const feed_all = {
     num: 0,
 
     //date_now: "",
-    "CAST(date_now AS DATE) AS `date_now` " : null,
-
+    //"CAST(date_now AS DATE) AS `date_now` " : null,
+    "CAST(CURTIME() AS DATE)+0 AS `date_now` " : null,
     show_message: false,
     show_exercise: false,
     show_workout: false,
@@ -47,7 +47,7 @@ workoutRouterGet.get('/', function (req, res, next) {
     if (days === 0 || days === "0"){
       days = "+0";
     }
-    let xx = 'WHERE from_user_id = '+ id + ' AND show_exercise = "1" AND `date_now` >= CURTIME()' + ( days ) + '  ORDER BY date_now DESC ';
+    let xx = 'WHERE from_user_id = '+ id + ' AND show_exercise = "1" AND `date_now` > CAST(CURTIME() AS DATE)' + ( days ) + '  ORDER BY date_now DESC ';
     let x = sql.makeSelect('feed', columns, xx, false);
     //let x = sql.sqlMakeFriendFeedSelect(columns, id);
     console.log(x);

@@ -93,7 +93,7 @@ export default {
         .then(function (response) {
           // handle success
 
-          console.log(response.data);
+          //console.log(response.data);
           response = JSON.parse(response.data);
 
           vm.items = [...response];
