@@ -1,6 +1,6 @@
 var mysql = require('mysql');
 
-let config = require('../mysql-login.js');
+let config = require('../../mysql-login.js');
 
 //import config from "../mysql-login.js";
 
