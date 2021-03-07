@@ -7,7 +7,7 @@ module.exports = {
     makeInsertFormat,
     makeSelect,
     makeSelectFormat,
-    //query,
+    query,
     xquery,
     connection,
     end,
@@ -128,7 +128,7 @@ function makeSelectFormat(table_name, columns_list, where_clause = '', mult_rows
     return xx
 }
 
-/*
+
 function query(connection, sql, mod=modSelectFunction) {
     var m = "";
     con = connection;
@@ -167,7 +167,7 @@ function query(connection, sql, mod=modSelectFunction) {
     //console.log("m " + mm);
     return mm;
 }
-*/
+
 
 function xquery(connection, sql, mod = modSelectFunction) {
     var m = "";

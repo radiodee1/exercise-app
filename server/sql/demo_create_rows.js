@@ -30,6 +30,6 @@ con = sql.connection();
 
 x = sql.makeSelect(post_ids.name, post_ids.columns_list, "", post_ids.mult_rows);
 
-sql.query(con, x);
+sql.xquery(con, x);
 
 sql.end(con);
