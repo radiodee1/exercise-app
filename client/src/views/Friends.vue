@@ -223,19 +223,27 @@ export default {
               dict1.id,
             ]);
             if (!(dict1.username in highest)) {
+
               highest[dict1.username] = `${dict1.status}`;
               console.log(dict1.username + " " + highest[dict1.username]);
+
             } else if (
-              order[highest[dict1.username].status] <= order[dict1.status]
+              order[highest[dict1.username]] < order[dict1.status]
             ) {
+              highest[dict1.username] = `${dict1.status}`;
               console.log(
                 "repeat " +
                   order[`${highest[dict1.username].status}`] +
                   " " +
                   order[dict1.status]
               );
-              //continue;
+              continue;
             }
+          //}
+          ///////////////////////
+          //for (let i in highest ) {
+          //  const dict1 = highest[i];
+          //  console.log(dict1);
 
             if (
               dict1.username != null &&
@@ -292,11 +300,13 @@ export default {
               
               if (
                 dict1.friend_user_id !== user_id &&
-                dict1.user_id !== user_id //&&
-                //dict1.status === "confirmed"
+                dict1.user_id !== user_id &&
+                dict1.status !== "confirmed"
+                //(dict1.friend_user_id == null || dict1.user_id == null)
+                
               ) {
                 dict1.status = "new";
-                //console.log("new " + dict1.username);
+                console.log("new " + dict1.username);
               }
               
               ////
