@@ -82,7 +82,7 @@
                   </td>
                   <td>
                     <pre>{{ i.message }}</pre>
-                    <br />{{i.date_now}}
+                    <br />
                   </td>
                 </tr>
               </table>
@@ -144,7 +144,7 @@
               </td>
               <td>
                 <pre>{{ i.message }}</pre>
-                <br /> {{i.date_now}}
+                <br /> 
               </td>
             </tr>
           </table>
