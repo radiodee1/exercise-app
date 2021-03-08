@@ -33,13 +33,13 @@
                   </button>
                   <button
                     class="button is-primary is-small"
-                    v-if="l.status === 'asked'"
+                    v-if="l.status === 'waiting'"
                     @click="confirm(k)"
                   >
                     Approve
                   </button>
                   <span v-if="l.status === 'confirmed'">Confirmed</span>
-                  <span v-if="l.status === 'waiting'">Waiting</span>
+                  <span v-if="l.status === 'asked'">Waiting</span>
                 </td>
               </tr>
             </table>
@@ -93,7 +93,7 @@ export default {
 
       const user_id = this.$root.user.id;
 
-      this.list[num].status = "waiting"; // <-- asked???
+      this.list[num].status = "asked"; // <-- asked???
 
       const f_obj = {
         user_id: user_id, // this.list[num].id,
@@ -222,15 +222,33 @@ export default {
               dict1.user_id,
               dict1.id,
             ]);
+
             if (!(dict1.username in highest)) {
-
               highest[dict1.username] = `${dict1.status}`;
-              console.log(dict1.username + " " + highest[dict1.username]);
-
-            } else if (
-              order[highest[dict1.username]] < order[dict1.status]
-            ) {
+              //console.log(dict1.username + " " + highest[dict1.username]);
+            } else if (order[highest[dict1.username]] < order[dict1.status]) {
               highest[dict1.username] = `${dict1.status}`;
+
+              /*
+              if (
+                dict1.friend_user_id === user_id ||
+                dict1.user_id === user_id
+              ) {
+                if (
+                  dict1.friend_user_id === user_id &&
+                  dict1.status === "waiting"
+                ) {
+                  // this is the same ID!!
+                  dict1.status = "asked";
+                } else if (
+                  dict1.friend_user_id !== user_id && // !==
+                  dict1.status === "asked"
+                ) {
+                  // this is not the ID!!
+                  dict1.status = "waiting";
+                }
+              }
+              */
               console.log(
                 "repeat " +
                   order[`${highest[dict1.username].status}`] +
@@ -239,11 +257,6 @@ export default {
               );
               continue;
             }
-          //}
-          ///////////////////////
-          //for (let i in highest ) {
-          //  const dict1 = highest[i];
-          //  console.log(dict1);
 
             if (
               dict1.username != null &&
@@ -256,6 +269,7 @@ export default {
               //l.push(dict1);
               d[dict1.username] = dict1;
 
+              /*
               if (
                 dict1.friend_user_id === user_id ||
                 dict1.user_id === user_id
@@ -274,6 +288,8 @@ export default {
                   d[dict1.username].status = "waiting";
                 }
               }
+              */
+              
 
               const test_for_status = true;
               if (
@@ -297,17 +313,15 @@ export default {
                 dict1.status = "new";
               }
               ////
-              
+
               if (
                 dict1.friend_user_id !== user_id &&
                 dict1.user_id !== user_id //&&
-                
-                
               ) {
                 dict1.status = "new";
                 //console.log("new " + dict1.username);
               }
-              
+
               ////
               dict1.user_id = user_id;
               d[dict1.username] = dict1;
@@ -316,9 +330,9 @@ export default {
           for (let key in d) {
             l.push(d[key]);
           }
-          console.log(user_id + " user");
-          console.log(count);
-          console.log(highest);
+          //console.log(user_id + " user");
+          //console.log(count);
+          //console.log(highest);
         })
         .catch(function (error) {
           // handle error
