@@ -219,6 +219,7 @@ export default {
             //if (dict1.friend_user_id !== null && dict1.friend_user_id === user_id) {
             if (!(dict1.username in highest)) {
               highest[dict1.username] = dict1;
+
               highest[dict1.username].status = `${dict1.status}`;
               //console.log(dict1.username + " " + highest[dict1.username]);
             } else if (
@@ -243,9 +244,9 @@ export default {
               typeof highest[dict1.username].username == "string" &&
               typeof vm.$root.user.username == "string" &&
               highest[dict1.username].username.trim() !=
-                vm.$root.user.username.trim() &&
-              (highest[dict1.username].friend_user_id === user_id ||
-                highest[dict1.username].user_id === user_id) 
+                vm.$root.user.username.trim() //&&
+              //(highest[dict1.username].friend_user_id === user_id ||
+              //  highest[dict1.username].user_id === user_id) 
             ) {
               
 
@@ -261,7 +262,7 @@ export default {
                 highest[dict1.username].status = "new";
                 //dict1.status = "new";
               }
-              if (highest[dict1.username].friend_user_id === user_id) {
+              if (highest[dict1.username].friend_user_id !== user_id) { // <---- ????
                 highest[dict1.username].status = "new";
               }
 
