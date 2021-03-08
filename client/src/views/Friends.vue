@@ -216,17 +216,31 @@ export default {
             dict1.id = response[i].id;
             dict1.user_id = response[i].user_id;
 
-            //if (dict1.friend_user_id !== null && dict1.friend_user_id === user_id) {
-            if (!(dict1.username in highest)) {
-              highest[dict1.username] = dict1;
+            let associated = dict1.user_id === user_id || dict1.friend_user_id === user_id;
 
-              highest[dict1.username].status = `${dict1.status}`;
+            if (!(dict1.username in highest)) {
+
+              highest[dict1.username] = dict1;
+              //highest[dict1.username].status = 'new';
+
+              if (!associated) {
+
+                highest[dict1.username].status = 'new';// `${dict1.status}`;
+              }
+              
               //console.log(dict1.username + " " + highest[dict1.username]);
             } else if (
-              order[highest[dict1.username].status] < order[dict1.status]
+              order[highest[dict1.username].status] < order[dict1.status] //&& associated
             ) {
-              highest[dict1.username] = dict1;
-              highest[dict1.username].status = `${dict1.status}`;
+
+              if (associated) {
+                highest[dict1.username] = dict1;
+                highest[dict1.username].status = `${dict1.status}`;
+                //continue;
+              }
+              else {
+                highest[dict1.username].status = 'new';
+              }
 
               console.log(
                 "repeat " +
@@ -236,8 +250,8 @@ export default {
                   " " +
                   order[dict1.status]
               );
-              continue;
-            }
+              //continue;
+            } 
 
             if (
               highest[dict1.username].username != null &&
@@ -246,10 +260,8 @@ export default {
               highest[dict1.username].username.trim() !=
                 vm.$root.user.username.trim() //&&
               //(highest[dict1.username].friend_user_id === user_id ||
-              //  highest[dict1.username].user_id === user_id) 
+              //  highest[dict1.username].user_id === user_id)
             ) {
-              
-
               const test_for_status = true;
               if (
                 highest[dict1.username].status !== "confirmed" &&
@@ -262,21 +274,14 @@ export default {
                 highest[dict1.username].status = "new";
                 //dict1.status = "new";
               }
-              if (highest[dict1.username].friend_user_id !== user_id) { // <---- ????
-                highest[dict1.username].status = "new";
-              }
-
+              
             } //else
             if (
-              
               highest[dict1.username].username.trim() ===
-                vm.$root.user.username.trim()
+              vm.$root.user.username.trim()
             ) {
-
               delete highest[dict1.username];
-              
             }
-
           }
           for (let key in highest) {
             l.push(highest[key]);
