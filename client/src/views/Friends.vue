@@ -300,13 +300,12 @@ export default {
               
               if (
                 dict1.friend_user_id !== user_id &&
-                dict1.user_id !== user_id &&
-                dict1.status !== "confirmed"
-                //(dict1.friend_user_id == null || dict1.user_id == null)
+                dict1.user_id !== user_id //&&
+                
                 
               ) {
                 dict1.status = "new";
-                console.log("new " + dict1.username);
+                //console.log("new " + dict1.username);
               }
               
               ////
