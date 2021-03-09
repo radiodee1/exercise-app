@@ -18,8 +18,6 @@
 
 <script>
 
-
-//import { doLoad, visibility, classOption } from "../js/v.js";
 import about from "../components/About.vue";
 import Session from '../models/Session';
 
