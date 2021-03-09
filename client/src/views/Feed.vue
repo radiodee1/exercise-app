@@ -108,6 +108,7 @@ export default {
       this.sortFeed = false;
       this.sortPosts = true;
       this.sortFriends = false;
+      this.getPostItems();
       this.items = this.postItems;
       console.log('posts');
     },
@@ -115,6 +116,7 @@ export default {
       this.sortFeed = false;
       this.sortPosts = false;
       this.sortFriends = true;
+      this.getFriendItems();
       this.items = this.friendItems;
       console.log('friends')
     },
@@ -164,10 +166,13 @@ export default {
         });
       //return items;
     },
-    //addNewPost: function(val) {
-    //console.log("pre submitpost");
-    //this.items.unshift(val);
-    //}
+    getPostItems: function () {
+      // return items that you have authored
+    },
+    getFriendItems: function () {
+      // return items from others that are 
+      // your friend and confirmed as friend
+    }
   },
   mounted: function () {
     //this.fillPictures();
