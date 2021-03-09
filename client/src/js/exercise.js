@@ -385,7 +385,7 @@ export function doLoad() {
         this.register = true;
         this.login = false;
         this.newsfeed = false;
-        this.home = false;
+        this.home = true;
         this.form_exercise = false;
         this.form_message = false;
         this.form_workout = false;
@@ -395,7 +395,7 @@ export function doLoad() {
         this.login = true;
         this.register = false;
         this.newsfeed = false;
-        this.home = false;
+        this.home = true;
         this.form_exercise = false;
         this.form_message = false;
         this.form_workout = false;
@@ -406,7 +406,7 @@ export function doLoad() {
         this.login = false;
         this.register = false;
         this.newsfeed = true;
-        this.home = false;
+        this.home = true;
         this.form_exercise = false;
         this.form_message = false;
         this.form_workout = false;
@@ -429,7 +429,7 @@ export function doLoad() {
         this.login = false;
         this.register = false;
         this.newsfeed = false;
-        this.home = false;
+        this.home = true;
         this.banner = true;
         this.form_exercise = true;
         this.form_message = false;
@@ -440,7 +440,7 @@ export function doLoad() {
         this.login = false;
         this.register = false;
         this.newsfeed = false;
-        this.home = false;
+        this.home = true;
         this.banner = true;
         this.form_exercise = false;
         this.form_message = true;
@@ -451,7 +451,7 @@ export function doLoad() {
         this.login = false;
         this.register = false;
         this.newsfeed = false;
-        this.home = false;
+        this.home = true;
         this.banner = true;
         this.form_exercise = false;
         this.form_message = false;
@@ -462,7 +462,7 @@ export function doLoad() {
         this.login = false;
         this.register = false;
         this.newsfeed = false;
-        this.home = false;
+        this.home = true;
         this.banner = true;
         this.form_exercise = false;
         this.form_message = false;
@@ -578,7 +578,7 @@ export function makeUser() {
     state: "",
     zip: "",
     email: "",
-    username: "",
+    username: "jdoe",
     password: "",
     height_inches: 74,
     weight_lbs: 150,

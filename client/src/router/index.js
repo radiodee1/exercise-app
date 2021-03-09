@@ -1,8 +1,10 @@
 
+//import visibility from "../js/exercise.js";
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-//import appx from '../App.vue'
-//import bannercomponent from "../views/Banner.vue";
+
+
 import home from "../views/Home.vue";
 import login from "../views/Login.vue";
 import register from "../views/Register.vue"
@@ -12,6 +14,7 @@ import exercise from "../views/Exercise.vue";
 import message from "../views/Message.vue";
 import workout from "../views/Workout.vue";
 import friends from "../views/Friends.vue";
+import Session from "../models/Session.js";
 
 Vue.use(VueRouter)
 
@@ -62,6 +65,17 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+
+router.beforeEach((to, from, next) => {
+  console.log({ from, to })
+  if (to.path !== '/login' && to.path !== '/register' && to.path !== "/" && !Session.user) {
+    //visibility.focusReset();
+    next('/');
+  } else {
+    next();
+  }
 })
 
 export default router
