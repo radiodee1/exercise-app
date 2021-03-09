@@ -139,6 +139,7 @@ export default {
               vm.$root.user.username = username;
               vm.$root.user.password = password;
               vm.$root.user.id = response[i].id;
+              Session.user = response[i];
             }
           }
           //console.log(response);

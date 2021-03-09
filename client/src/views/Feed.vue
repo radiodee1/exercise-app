@@ -24,6 +24,7 @@
                   :makeId="makeId"
                   :feed_divs="feed_divs"
                   :item="item"
+                  @delete="deletePost(i)"
                 >
                 </inner>
               </li>
@@ -41,6 +42,8 @@
 <script>
 import inner from "../components/FeedInner.vue";
 import { feed_full_length } from "../js/exercise";
+import Session from '../models/Session';
+//import Session from '../models/Session';
 let axios = require("axios").default;
 
 export default {
@@ -73,6 +76,13 @@ export default {
       if (x === true) return "visi";
       else return "invis";
     },
+    deletePost(i) {
+      //console.log(this.items[i]);
+      if (this.items[i].from_user_id !== Session.user.id ) {
+        return;
+      }
+      this.items.splice(i,1);
+    },
     getItems: function () {
       const port = this.backend_port;
       const url = this.backend_url;
@@ -98,24 +108,18 @@ export default {
 
           vm.items = [...response];
           //vm.tree.feed = [... response];
-          //items = [... response];
+
           console.log(vm.items.length + " len");
-          //console.log(vm.items[0]);
-          //feed_full_length = vm.items.length;
-          //vm.$root.user.id = response.insertId;
-          //console.log(vm.$root.user.id);
-          //success = true;
+          
         })
         .catch(function (error) {
           // handle error
           console.log(error);
+          vm.items = vm.tree.feed;
         })
         .then(function () {
           // always executed
-          //if (success) {
-          //vm.focusNews();
-          //}
-          //return items;
+          
         });
       //return items;
     },

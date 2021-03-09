@@ -6,7 +6,7 @@
         <strong>Sign up</strong>
       </a>
       <a class="button is-light" @click="focusLogin()"> Log in </a>
-      <a class="button is-light" @click="focusNews()"> Skip Log In </a>
+      <a class="button is-light" @click="skipLogin()"> Skip Log In </a>
       <a class="button is-light" @click="focusDev()">  Development </a>
 
     </div>
@@ -21,6 +21,7 @@
 
 //import { doLoad, visibility, classOption } from "../js/v.js";
 import about from "../components/About.vue";
+import Session from '../models/Session';
 
 export default {
   name: "home",
@@ -58,6 +59,10 @@ export default {
       if (x === true) return "visi";
       else return "invis";
     },
+    skipLogin: function () {
+      Session.user = this.$root.user;
+      this.focusNews();
+    }
   },
   mounted () {
     //console.log(this.home + " home");

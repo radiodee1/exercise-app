@@ -286,6 +286,7 @@
 <script>
 //import { focusNews } from '../js/exercise';
 let axios = require("axios").default;
+import Session from "../models/Session.js"
 
 export default {
   name: "register",
@@ -431,6 +432,8 @@ export default {
             record.username = username;
             record.password = password;
 
+            Session.user = record;
+
             axios
               .post(url + port + "/users", record)
               .then(function (response_raw) {
@@ -457,6 +460,9 @@ export default {
         .catch(function (error) {
           // handle error
           console.log(error);
+          vm.$root.user.id = 0;
+          vm.focusNews();
+
         })
         .then(function () {
           // always executed
