@@ -129,11 +129,13 @@ export default {
       this.items.splice(i, 1);
     },
     getFeedItems: function () {
+      // return items that are 
+      // grouped by your friend connections
       const port = this.backend_port;
       const url = this.backend_url;
       const id = this.$root.user.id;
       const vm = this;
-      //let items = [];
+      
       if (this.items.length > 0) {
         return;
       }
@@ -168,10 +170,84 @@ export default {
     },
     getPostItems: function () {
       // return items that you have authored
+
+      const port = this.backend_port;
+      const url = this.backend_url;
+      const id = this.$root.user.id;
+      const vm = this;
+      
+      if (this.items.length > 0) {
+        return;
+      }
+      const f_obj = {
+        params: {
+          id: id,
+        },
+      };
+
+      axios
+        .get(url + port + "/feedme", f_obj)
+        .then(function (response) {
+          // handle success
+
+          //console.log(response.data);
+          response = JSON.parse(response.data);
+
+          vm.postItems = [...response];
+          //vm.tree.feed = [... response];
+
+          console.log(vm.postItems.length + " len");
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+          vm.items = vm.tree.feed;
+        })
+        .then(function () {
+          // always executed
+        });
+      //return items;
     },
     getFriendItems: function () {
       // return items from others that are 
       // your friend and confirmed as friend
+
+      const port = this.backend_port;
+      const url = this.backend_url;
+      const id = this.$root.user.id;
+      const vm = this;
+      
+      if (this.items.length > 0) {
+        return;
+      }
+      const f_obj = {
+        params: {
+          id: id,
+        },
+      };
+
+      axios
+        .get(url + port + "/feedfriend", f_obj)
+        .then(function (response) {
+          // handle success
+
+          //console.log(response.data);
+          response = JSON.parse(response.data);
+
+          vm.friendItems = [...response];
+          //vm.tree.feed = [... response];
+
+          console.log(vm.friendItems.length + " len");
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+          vm.items = vm.tree.feed;
+        })
+        .then(function () {
+          // always executed
+        });
+      //return items;
     }
   },
   mounted: function () {
