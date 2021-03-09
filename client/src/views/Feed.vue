@@ -5,6 +5,12 @@
       <div class="columns">
         <div class="column">
           <!-- blank column-->
+          <feedselector
+            @feed="doFeed()"
+            @posts="doPosts()"
+            @friends="doFriends()"
+          ></feedselector>
+
           <!-- end blank column -->
         </div>
 
@@ -15,22 +21,25 @@
           <!-- div id="components">
 
         </div -->
-          <div id="listing">
-            <ul>
-              <!-- template here ? -->
-              <li v-for="(item, i) in items" :key="i">
-                <inner
-                  :i="i"
-                  :makeId="makeId"
-                  :feed_divs="feed_divs"
-                  :item="item"
-                  @delete="deletePost(i)"
-                >
-                </inner>
-              </li>
-            </ul>
+          <div class="" v-show="sortFeed">
+            <div id="listing" class="">
+              <ul>
+                <!-- template here ? -->
+                <li v-for="(item, i) in items" :key="i">
+                  <inner
+                    :i="i"
+                    :makeId="makeId"
+                    :feed_divs="feed_divs"
+                    :item="item"
+                    @delete="deletePost(i)"
+                  >
+                  </inner>
+                </li>
+              </ul>
+            </div>
           </div>
           <!-- vue end -->
+          
         </div>
         <div class="column"></div>
       </div>
@@ -41,8 +50,10 @@
 
 <script>
 import inner from "../components/FeedInner.vue";
+import feedselector from "../components/FeedSelector.vue";
+
 import { feed_full_length } from "../js/exercise";
-import Session from '../models/Session';
+import Session from "../models/Session";
 //import Session from '../models/Session';
 let axios = require("axios").default;
 
@@ -52,6 +63,14 @@ export default {
   data() {
     return {
       items: [],
+
+      feedItems: [],
+      postItems: [],
+      friendItems: [],
+
+      sortFeed: true,
+      sortPosts: false,
+      sortFriends: false,
     };
   },
   props: {
@@ -68,6 +87,7 @@ export default {
   },
   components: {
     inner: inner,
+    feedselector: feedselector,
   },
   methods: {
     classOption: function (i) {
@@ -76,14 +96,37 @@ export default {
       if (x === true) return "visi";
       else return "invis";
     },
+    doFeed() {
+      this.sortFeed = true;
+      this.sortPosts = false;
+      this.sortFriends = false;
+      this.getFeedItems();
+      this.items = this.feedItems;
+      console.log('feed');
+    },
+    doPosts() {
+      this.sortFeed = false;
+      this.sortPosts = true;
+      this.sortFriends = false;
+      this.items = this.postItems;
+      console.log('posts');
+    },
+    doFriends() {
+      this.sortFeed = false;
+      this.sortPosts = false;
+      this.sortFriends = true;
+      this.items = this.friendItems;
+      console.log('friends')
+    },
+
     deletePost(i) {
       //console.log(this.items[i]);
-      if (this.items[i].from_user_id !== Session.user.id ) {
+      if (this.items[i].from_user_id !== Session.user.id) {
         return;
       }
-      this.items.splice(i,1);
+      this.items.splice(i, 1);
     },
-    getItems: function () {
+    getFeedItems: function () {
       const port = this.backend_port;
       const url = this.backend_url;
       const id = this.$root.user.id;
@@ -106,11 +149,10 @@ export default {
           //console.log(response.data);
           response = JSON.parse(response.data);
 
-          vm.items = [...response];
+          vm.feedItems = [...response];
           //vm.tree.feed = [... response];
 
           console.log(vm.items.length + " len");
-          
         })
         .catch(function (error) {
           // handle error
@@ -119,7 +161,6 @@ export default {
         })
         .then(function () {
           // always executed
-          
         });
       //return items;
     },
@@ -131,22 +172,30 @@ export default {
   mounted: function () {
     //this.fillPictures();
     console.log(feed_full_length);
-    this.getItems();
+    this.getFeedItems();
+
+    
   },
   created: function () {
     //this.addNewPost();
     //this.$on('submitpost', function (val) {
     //  this.items.unshift(val);
     //});
-    this.getItems();
+    this.getFeedItems();
   },
   computed: {
     //itemsx: function () {
     //  return this.getItems(); //  this.tree.feed;
-      //return this.feed_divs;
+    //return this.feed_divs;
     //},
-
     //tree.feed,
   },
 };
 </script>
+
+<style scoped>
+.scrollable {
+  overflow-y: scroll;
+  height: 1250px;
+}
+</style>
