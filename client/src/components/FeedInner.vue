@@ -1,7 +1,7 @@
 <template>
   <div :id="makeId(i)" class="card" v-show="visible" :ref="makeId(i)">
     <div class="card-image">
-      <figure class="image " v-show="show_pic()">
+      <figure class="image" v-show="show_pic()">
         <img
           :src="picture_large"
           alt="Placeholder image"
@@ -10,14 +10,15 @@
       </figure>
     </div>
     <div class="card-content">
-       <button class="delete is-pulled-right is-danger" @click.prevent="$emit('delete')"></button>
+      <button
+        class="delete is-pulled-right is-danger"
+        @click.prevent="$emit('delete')"
+        v-show="candelete"
+      ></button>
       <div class="media">
         <div class="media-left">
           <figure class="image is-48x48">
-            <img
-              src="../assets/app.png"
-              alt="Placeholder image"
-            />
+            <img src="../assets/app.png" alt="Placeholder image" />
           </figure>
         </div>
         <div class="media-content">
@@ -59,6 +60,7 @@
 </template>
 
 <script>
+import Session from "../models/Session";
 //import { feed_full_length } from '../js/exercise';
 //import { feed_divs } from '../js/exercise';
 
@@ -75,11 +77,9 @@ export default {
   },
   computed: {
     show_workout: function () {
-
       const z = this.item.show_workout;
       if (z == "1") return true;
       else return false;
-
     },
     show_exercise: function () {
       const z = this.item.show_exercise;
@@ -87,28 +87,28 @@ export default {
       else return false;
     },
     show_message: function () {
-      const z =  this.item.show_message;
+      const z = this.item.show_message;
       if (z == "1") return true;
       else return false;
     },
     date_now: function () {
-      const z =  this.item.date_now;
+      const z = this.item.date_now;
       return z;
       //if (z == "1") return true;
       //else return false;
     },
     message_obj_from: function () {
-      const z =  this.item.message_obj_from;
+      const z = this.item.message_obj_from;
       return z;
       //if (z == "1") return true;
       //else return false;
     },
     message_obj_message: function () {
-      const z =  this.item.message_obj_message;
+      const z = this.item.message_obj_message;
       return z;
     },
     exercise_obj_message: function () {
-      const z =  this.item.exercise_obj_message;
+      const z = this.item.exercise_obj_message;
       return z;
       //if (z == "1") return true;
       //else return false;
@@ -125,22 +125,24 @@ export default {
       msg_lst.pop();
       return msg_lst;
     },
-    
+
     visible: function () {
       let vis = this.item.visible;
       if (vis == "1") {
         console.log("no visible checking");
         vis = true;
         //vis = vis
-      }
-      else {
+      } else {
         vis = false;
       }
-      return vis;// this.item.visible;
+      return vis; // this.item.visible;
     },
     picture_large: function () {
       return this.item.picture_large;
-    }
+    },
+    candelete: function () {
+      return this.item.from_user_id == Session.user.id;
+    },
   },
   //watch: { show_pic },
   props: {
@@ -148,7 +150,7 @@ export default {
     makeId: Function,
     i: Number,
     feed_divs: Array,
-    item: Object
+    item: Object,
     //classOption: Function
   },
   methods: {
@@ -168,14 +170,12 @@ export default {
       return this.classOption(x);
     },
     show_pic: function () {
-      
-      const t = this.item.picture_large; 
-      
+      const t = this.item.picture_large;
+
       if (t != null && t.length > 50) {
         //console.log("true app.png");
         return true;
-      }
-      else {
+      } else {
         //console.log("false pic " );
         return false;
       }

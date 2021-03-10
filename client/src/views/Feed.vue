@@ -113,7 +113,7 @@ export default {
       this.sortFeed = false;
       this.sortPosts = false;
       this.sortFriends = true;
-      this.getFriendItems();
+      this.getFriendItems(0);
       //this.items = this.friendItems;
       console.log('friends')
     },
