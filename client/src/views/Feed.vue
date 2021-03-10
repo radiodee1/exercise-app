@@ -171,9 +171,7 @@ export default {
       const id = this.$root.user.id;
       const vm = this;
       
-      if (this.items.length > 0) {
-        return;
-      }
+      
       const f_obj = {
         params: {
           id: id,
@@ -250,9 +248,6 @@ export default {
       //const id = this.$root.user.id;
       const vm = this;
       
-      if (this.items.length > 0) {
-        return;
-      }
       const f_obj = {
         params: {
           id: id,
@@ -310,8 +305,5 @@ export default {
 </script>
 
 <style scoped>
-.scrollable {
-  overflow-y: scroll;
-  height: 1250px;
-}
+
 </style>
