@@ -3,12 +3,15 @@ var feedRouterGet = express.Router();
 var feedRouterPost = express.Router();
 var feedRouterGetUser = express.Router();
 var feedRouterGetFriend = express.Router();
+var feedRouterDelete = express.Router();
 var sql = require('../public/javascripts/sql_populate.js');
 //require('promise');
 
 var app = express();
 
 const feed_all = {
+    id: 0,
+
     visible: false,
 
     num: 0,
@@ -89,7 +92,7 @@ feedRouterGet.get('/', function (req, res, next) {
     }
   });
   
-  /* GET feed listing. */
+  /* GET feed listing just for my posts. */
 feedRouterGetUser.get('/', function (req, res, next) {
   res.set('Content-Type', 'application/json');
   //console.log(res.req.query);
@@ -98,7 +101,7 @@ feedRouterGetUser.get('/', function (req, res, next) {
   for (let i in feed_all) {
     columns.push(i);
   }
-  let x = sql.makeSelect('feed', columns, 'WHERE from_user_id = ' + id+ ' ORDER BY date_now DESC ', false);
+  let x = sql.makeSelect('feed', columns, 'WHERE from_user_id = ' + id + ' ORDER BY date_now DESC ', false);
   //let x = sql.sqlMakeFriendFeedSelect(columns, id);
   console.log(x);
   let con = sql.connection();
@@ -117,7 +120,7 @@ feedRouterGetUser.get('/', function (req, res, next) {
   }
 });
 
-/* GET feed listing. */
+/* GET feed listing just for a friend's post. */
 feedRouterGetFriend.get('/', function (req, res, next) {
   res.set('Content-Type', 'application/json');
   //console.log(res.req.query);
@@ -126,7 +129,35 @@ feedRouterGetFriend.get('/', function (req, res, next) {
   for (let i in feed_all) {
     columns.push(i);
   }
-  let x = sql.makeSelect('feed', columns, 'ORDER BY date_now DESC ', false);
+  let x = sql.makeSelect('feed', columns, 'WHERE from_user_id = ' + id + ' ORDER BY date_now DESC ', false);
+  //let x = sql.sqlMakeFriendFeedSelect(columns, id);
+  console.log(x);
+  let con = sql.connection();
+  try {
+    let y = sql.xquery(con, x);
+    y.then(function (value) {
+      console.log(value);
+      let yy = JSON.stringify(value);
+      res.json(yy);
+      sql.end(con);
+
+    });
+  }
+  catch (v) {
+    console.log(v);
+  }
+});
+
+/* DELETE feed listing. */
+feedRouterDelete.delete('/', function (req, res, next) {
+  res.set('Content-Type', 'application/json');
+  //console.log(res.req.query);
+  const id = req.body.id;
+  //const columns = [];
+  //for (let i in feed_all) {
+  //  columns.push(i);
+  //}
+  let x = 'DELETE FROM feed WHERE id = ' + id + ' ';
   //let x = sql.sqlMakeFriendFeedSelect(columns, id);
   console.log(x);
   let con = sql.connection();
@@ -146,9 +177,11 @@ feedRouterGetFriend.get('/', function (req, res, next) {
 });
 
 
+
 module.exports = {
     feedRouterGet,
     feedRouterPost,
     feedRouterGetUser,
-    feedRouterGetFriend
+    feedRouterGetFriend,
+    feedRouterDelete
 }

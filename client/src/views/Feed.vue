@@ -15,13 +15,9 @@
         </div>
 
         <div class="column is-half">
-          <!-- div @submitpost="addNewPost"></div -->
           <!-- vue start -->
 
-          <!-- div id="components">
-
-        </div -->
-          <div class="" >
+          <div class="">
             <div id="listing" class="">
               <ul>
                 <!-- template here ? -->
@@ -39,7 +35,6 @@
             </div>
           </div>
           <!-- vue end -->
-          
         </div>
         <div class="column"></div>
       </div>
@@ -63,10 +58,6 @@ export default {
   data() {
     return {
       items: [],
-
-      //feedItems: [],
-      //postItems: [],
-      //friendItems: [],
 
       sortFeed: true,
       sortPosts: false,
@@ -132,6 +123,44 @@ export default {
       if (this.items[i].from_user_id !== Session.user.id) {
         return;
       }
+
+      const port = this.backend_port;
+      const url = this.backend_url;
+      const id = this.items[i].id;
+      //const vm = this;
+      console.log(id + " id");
+      
+      const f_obj = {
+        data: {
+          id: id,
+        },
+      };
+
+      axios
+        .delete(url + port + "/feed", f_obj)
+        .then(function (response) {
+          // handle success
+
+          //console.log(response.data);
+          response = JSON.parse(response.data);
+
+          //vm.items = [...response];
+          //vm.tree.feed = [... response];
+
+          console.log(response.length + " len");
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+          //vm.items = vm.tree.feed;
+        })
+        .then(function () {
+          // always executed
+        });
+      //return items;
+    
+
+
       this.items.splice(i, 1);
     },
     getFeedItems: function () {
