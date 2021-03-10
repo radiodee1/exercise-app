@@ -8,11 +8,19 @@
           <!-- v-if="form_exercise" -->
           <div class="message-header">
             <p>Exercise</p>
-            <button class="delete" aria-label="delete" @click="cancel();"></button>
+            <button
+              class="delete"
+              aria-label="delete"
+              @click="cancel()"
+            ></button>
           </div>
           <div class="message-body gray">
             <!-- start first dropdown -->
-            <div class="dropdown" id="exercise_type">
+            <div
+              class="dropdown"
+              id="exercise_type"
+              :class="{ 'is-active': eTypeIsActive }"
+            >
               <!-- class="is-active" -->
               <div class="dropdown-trigger">
                 <button
@@ -21,7 +29,7 @@
                   aria-controls="dropdown-menu"
                   @click="controlDropdownType()"
                 >
-                  <span id="exercise_type_label">Exercise Type</span>
+                  <span id="exercise_type_label">{{ exerciseType }}</span>
                   <span class="icon is-small">
                     <i class="fas fa-angle-down" aria-hidden="true"></i>
                   </span>
@@ -62,7 +70,11 @@
             </div>
             <!-- end first dropdown-->
             <!-- start second dropdown -->
-            <div class="dropdown" id="exercise_type_deet">
+            <div
+              class="dropdown"
+              id="exercise_type_deet"
+              :class="{ 'is-active': eTypeDeetIsActive }"
+            >
               <!-- class="is-active" -->
               <div class="dropdown-trigger">
                 <button
@@ -71,7 +83,9 @@
                   aria-controls="dropdown-menu"
                   @click="controlDropdownDeet()"
                 >
-                  <span id="exercise_type_deet_label">Exercise Details</span>
+                  <span id="exercise_type_deet_label">{{
+                    exerciseTypeDeet
+                  }}</span>
                   <span class="icon is-small">
                     <i class="fas fa-angle-down" aria-hidden="true"></i>
                   </span>
@@ -124,6 +138,7 @@
               style="width: 100px"
               min="0"
               id="exercise_num"
+              v-model="valueNumber"
             />
             <nav class="level">
               <div class="level-left">
@@ -134,19 +149,20 @@
                   style="width: 100px"
                   min="0"
                   id="exercise_weight"
-                  :value="this.$root.user.weight_lbs"
+                  v-model="valueWeight"
                 /><span class="label">Your weight in LBS</span>
-                
-
               </div>
             </nav>
-            <div v-if="show_message"><br>
-                  {{ weight_message }}
-                </div>
-            <button class="button " @click="formFinishExercise()">
-              Report
-            </button>
-            <pre id="exercise_pre" style="visibility: hidden"></pre>
+            <div v-if="show_message">
+              <br />
+              {{ weight_message }}
+            </div>
+            <button class="button" @click="formFinishExercise()">Report</button>
+            <pre
+              id="exercise_pre"
+              
+              v-show="exerciseShowSubmit"
+            >{{exerciseReport}}</pre>
 
             <div class="invis">
               <textarea
@@ -164,8 +180,9 @@
                   <button
                     class="button is-primary"
                     id="exercise_submit"
-                    style="visibility: hidden; display: none"
+                    style="visibility: visible; display: block"
                     @click="submit()"
+                    v-show="exerciseShowSubmit"
                   >
                     Submit
                   </button>
@@ -190,7 +207,7 @@
                 </div>
               </nav>
             </div>
-            <figure class="image " v-show="show_picture">
+            <figure class="image" v-show="show_picture">
               <img id="myImg2" src="//:0" class="invis" />
             </figure>
           </div>
@@ -212,7 +229,19 @@ export default {
       lbs_margin: 19,
       weight_message: "",
       show_message: false,
-      show_picture: false
+      show_picture: false,
+
+      exerciseType: "Exercise Type",
+      exerciseTypeDeet: "Exercise Details",
+
+      eTypeIsActive: false,
+      eTypeDeetIsActive: false,
+
+      valueNumber: null,
+      valueWeight: this.$root.user.weight_lbs,
+
+      exerciseReport: "",
+      exerciseShowSubmit: false,
     };
   },
   props: {
@@ -233,54 +262,37 @@ export default {
       else return "invis";
     },
     formChooseType: function (i) {
-      document.getElementById("exercise_type_label").textContent = i;
+      this.exerciseType = i;
       this.controlDropdownType();
     },
     formChooseDeet: function (i) {
-      document.getElementById("exercise_type_deet_label").textContent = i;
+      this.exerciseTypeDeet = i;
       this.controlDropdownDeet();
     },
     controlDropdownType: function () {
-      if (
-        document.getElementById("exercise_type").classList.contains("is-active")
-      ) {
-        document.getElementById("exercise_type").classList.remove("is-active");
-      } else {
-        document.getElementById("exercise_type").classList.add("is-active");
-      }
+      this.eTypeIsActive = !this.eTypeIsActive;
     },
 
     controlDropdownDeet: function () {
-      if (
-        document
-          .getElementById("exercise_type_deet")
-          .classList.contains("is-active")
-      ) {
-        document
-          .getElementById("exercise_type_deet")
-          .classList.remove("is-active");
-      } else {
-        document
-          .getElementById("exercise_type_deet")
-          .classList.add("is-active");
-      }
+      this.eTypeDeetIsActive = !this.eTypeDeetIsActive;
     },
 
     formFinishExercise: function () {
-      const type = document.getElementById("exercise_type_label").textContent;
-      const deet = document.getElementById("exercise_type_deet_label")
-        .textContent;
-      const num = document.getElementById("exercise_num").value;
-      const weight = document.getElementById("exercise_weight").value;
+      const type = this.exerciseType; 
+      const deet = this.exerciseTypeDeet; 
+      const num = this.valueNumber; 
+      const weight = this.valueWeight; 
       //console.log(weight);
       if (weight != this.$root.user.weight_lbs) {
         this.changeWeight(weight);
       }
       const i = `Exercise Type: ${type}\nExercise Details: ${deet}\nRepitions: ${num}\nWeight: ${weight} LBS\n`;
-      document.getElementById("exercise_pre").textContent = `Exercise Report:\n` +  i;
-      document.getElementById("exercise_pre").style.visibility = "visible";
-      document.getElementById("exercise_submit").style.visibility = "visible";
-      document.getElementById("exercise_submit").style.display = "block";
+      this.exerciseReport = `Exercise Report:\n` + i;
+      this.exerciseShowSubmit = ! this.exerciseShowSubmit;
+      if (this.exerciseShowSubmit === false) {
+        this.valueNumber = null;
+        this.valueWeight = this.$root.user.weight_lbs;
+      }
     },
     showPicture: function (e) {
       this.show_picture = true;
@@ -298,23 +310,21 @@ export default {
     },
     changeWeight: function (new_weight) {
       //console.log(new_weight);
-      const w = + new_weight;
+      const w = +new_weight;
       const goal = this.$root.user.height_inches * this.lbs_inch;
-      if(w > goal + this.lbs_margin) {
+      if (w > goal + this.lbs_margin) {
         this.weight_message = "Your weight is too high.";
         this.show_message = true;
-      }
-      else if (w < goal - this.lbs_margin) {
+      } else if (w < goal - this.lbs_margin) {
         this.weight_message = "Your weight is too low.";
         this.show_message = true;
-      }
-      else {
+      } else {
         this.weight_message = "Your weight is good.";
         this.show_message = true;
       }
       // save to db!!
       this.$root.user.weight_lbs = new_weight;
-    }
+    },
   },
 };
 </script>
