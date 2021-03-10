@@ -14,5 +14,8 @@
     "morgan": "^1.10.0",
     "body-parser": "^1.19.0",
     "promise": "8.1.0"
+  },
+  "engines": {
+    "node": "12.x"
   }
 }

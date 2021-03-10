@@ -53,5 +53,8 @@
     "last 2 versions",
     "not dead"
   ],
-  "main": "./webpack-vue/src/main.js"
+  "main": "./webpack-vue/src/main.js",
+  "engines": {
+    "node": "12.x"
+  }
 }
