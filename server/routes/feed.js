@@ -1,6 +1,8 @@
 var express = require('express');
 var feedRouterGet = express.Router();
 var feedRouterPost = express.Router();
+var feedRouterGetUser = express.Router();
+var feedRouterGetFriend = express.Router();
 var sql = require('../public/javascripts/sql_populate.js');
 //require('promise');
 
@@ -87,8 +89,66 @@ feedRouterGet.get('/', function (req, res, next) {
     }
   });
   
-  
+  /* GET feed listing. */
+feedRouterGetUser.get('/', function (req, res, next) {
+  res.set('Content-Type', 'application/json');
+  //console.log(res.req.query);
+  const id = res.req.query.id;
+  const columns = [];
+  for (let i in feed_all) {
+    columns.push(i);
+  }
+  let x = sql.makeSelect('feed', columns, 'WHERE from_user_id = ' + id+ ' ORDER BY date_now DESC ', false);
+  //let x = sql.sqlMakeFriendFeedSelect(columns, id);
+  console.log(x);
+  let con = sql.connection();
+  try {
+    let y = sql.xquery(con, x);
+    y.then(function (value) {
+      console.log(value);
+      let yy = JSON.stringify(value);
+      res.json(yy);
+      sql.end(con);
+
+    });
+  }
+  catch (v) {
+    console.log(v);
+  }
+});
+
+/* GET feed listing. */
+feedRouterGetFriend.get('/', function (req, res, next) {
+  res.set('Content-Type', 'application/json');
+  //console.log(res.req.query);
+  const id = res.req.query.id;
+  const columns = [];
+  for (let i in feed_all) {
+    columns.push(i);
+  }
+  let x = sql.makeSelect('feed', columns, 'ORDER BY date_now DESC ', false);
+  //let x = sql.sqlMakeFriendFeedSelect(columns, id);
+  console.log(x);
+  let con = sql.connection();
+  try {
+    let y = sql.xquery(con, x);
+    y.then(function (value) {
+      console.log(value);
+      let yy = JSON.stringify(value);
+      res.json(yy);
+      sql.end(con);
+
+    });
+  }
+  catch (v) {
+    console.log(v);
+  }
+});
+
+
 module.exports = {
     feedRouterGet,
-    feedRouterPost
+    feedRouterPost,
+    feedRouterGetUser,
+    feedRouterGetFriend
 }

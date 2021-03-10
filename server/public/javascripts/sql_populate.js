@@ -356,20 +356,7 @@ function sqlMakeUpdate(table_name, obj_identity, obj_change) {
     return xx;
 }
 
-/*
-function sqlMakeFriendFeedSelect2(feed_columns, profile_id ) {
-    tablename_friends = "friends";
-    tablename_feed = "feed";
-    zz = "";
-    zz = zz + "WHERE feed.from_user_id IN ( SELECT DISTINCT CONCAT(friends.user_id, ', ', friends.friend_user_id, ', ', " + profile_id + ") FROM friends WHERE "
-    zz = zz + "( friends.user_id = "+ profile_id+ " OR friends.friend_user_id = " + profile_id + ") AND friends.friend_status = 'confirmed' ) ";
-    zz = zz + "ORDER BY feed.date_now DESC ";
 
-    xx = "";
-    xx = xx + makeSelectFormat(tablename_feed, feed_columns, zz, false);
-    return xx;
-}
-*/
 
 function sqlMakeFriendFeedSelect(feed_columns, profile_id) {
     tablename_friends = "friends";

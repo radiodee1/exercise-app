@@ -21,7 +21,7 @@
           <!-- div id="components">
 
         </div -->
-          <div class="" v-show="sortFeed">
+          <div class="" >
             <div id="listing" class="">
               <ul>
                 <!-- template here ? -->
@@ -64,9 +64,9 @@ export default {
     return {
       items: [],
 
-      feedItems: [],
-      postItems: [],
-      friendItems: [],
+      //feedItems: [],
+      //postItems: [],
+      //friendItems: [],
 
       sortFeed: true,
       sortPosts: false,
@@ -89,6 +89,11 @@ export default {
     inner: inner,
     feedselector: feedselector,
   },
+  watch: {
+    items: function(newItems, oldItems) {
+      console.log('items watch ' + newItems.length + " " + oldItems.length);
+    }
+  },
   methods: {
     classOption: function (i) {
       //console.log(i);
@@ -101,15 +106,16 @@ export default {
       this.sortPosts = false;
       this.sortFriends = false;
       this.getFeedItems();
-      this.items = this.feedItems;
+      //this.items = this.feedItems;
       console.log('feed');
     },
     doPosts() {
       this.sortFeed = false;
       this.sortPosts = true;
       this.sortFriends = false;
+      //this.items = [];
       this.getPostItems();
-      this.items = this.postItems;
+      //this.items = this.postItems;
       console.log('posts');
     },
     doFriends() {
@@ -117,7 +123,7 @@ export default {
       this.sortPosts = false;
       this.sortFriends = true;
       this.getFriendItems();
-      this.items = this.friendItems;
+      //this.items = this.friendItems;
       console.log('friends')
     },
 
@@ -153,7 +159,7 @@ export default {
           //console.log(response.data);
           response = JSON.parse(response.data);
 
-          vm.feedItems = [...response];
+          vm.items = [...response];
           //vm.tree.feed = [... response];
 
           console.log(vm.items.length + " len");
@@ -176,9 +182,7 @@ export default {
       const id = this.$root.user.id;
       const vm = this;
       
-      if (this.items.length > 0) {
-        return;
-      }
+      
       const f_obj = {
         params: {
           id: id,
@@ -186,35 +190,35 @@ export default {
       };
 
       axios
-        .get(url + port + "/feedme", f_obj)
+        .get(url + port + "/feed/user", f_obj)
         .then(function (response) {
           // handle success
 
-          //console.log(response.data);
           response = JSON.parse(response.data);
+          console.log(response.length + " post");
 
-          vm.postItems = [...response];
+          vm.items = [...response];
           //vm.tree.feed = [... response];
 
-          console.log(vm.postItems.length + " len");
+          console.log(vm.items.length + " len");
         })
         .catch(function (error) {
           // handle error
           console.log(error);
-          vm.items = vm.tree.feed;
+          //vm.items = vm.tree.feed;
         })
         .then(function () {
           // always executed
         });
       //return items;
     },
-    getFriendItems: function () {
+    getFriendItems: function (id) {
       // return items from others that are 
       // your friend and confirmed as friend
 
       const port = this.backend_port;
       const url = this.backend_url;
-      const id = this.$root.user.id;
+      //const id = this.$root.user.id;
       const vm = this;
       
       if (this.items.length > 0) {
@@ -227,14 +231,14 @@ export default {
       };
 
       axios
-        .get(url + port + "/feedfriend", f_obj)
+        .get(url + port + "/feed/friend", f_obj)
         .then(function (response) {
           // handle success
 
           //console.log(response.data);
           response = JSON.parse(response.data);
 
-          vm.friendItems = [...response];
+          vm.items = [...response];
           //vm.tree.feed = [... response];
 
           console.log(vm.friendItems.length + " len");
@@ -253,7 +257,8 @@ export default {
   mounted: function () {
     //this.fillPictures();
     console.log(feed_full_length);
-    this.getFeedItems();
+    //this.items = [];
+    //this.doFeed();
 
     
   },
@@ -262,7 +267,8 @@ export default {
     //this.$on('submitpost', function (val) {
     //  this.items.unshift(val);
     //});
-    this.getFeedItems();
+    this.items = [];
+    this.doFeed();
   },
   computed: {
     //itemsx: function () {

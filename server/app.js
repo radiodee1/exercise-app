@@ -8,7 +8,7 @@ require('promise');
 
 var indexRouterGet = require('./routes/index.js');
 var {usersRouterGet, usersRouterPost} = require('./routes/users.js');
-var {feedRouterGet, feedRouterPost} = require("./routes/feed.js");
+var {feedRouterGet, feedRouterPost, feedRouterGetUser, feedRouterGetFriend} = require("./routes/feed.js");
 var {friendRouterGet, friendRouterPost, friendRouterPatch} = require("./routes/friends.js");
 var {workoutRouterGet } = require("./routes/workouts.js");
 
@@ -59,6 +59,8 @@ app.use('/users', usersRouterPost);
 
 app.use('/feed', feedRouterGet); 
 app.use('/feed', feedRouterPost);
+app.use('/feed/user', feedRouterGetUser);
+app.use('/feed/friend', feedRouterGetFriend);
 
 app.use('/friends', friendRouterGet);
 app.use('/friends', friendRouterPost);
