@@ -17,7 +17,7 @@ var app = express();
 
 //console.log(process.env);
 
-app.listen(3010);
+app.listen( (+ process.env.VUE_APP_BACKEND_PORT) || 3010);
 //app.listen(process.env.VUE_APP_BACKEND_PORT );
 
 app.use(function (req, res, next) {
