@@ -195,32 +195,36 @@ export default {
 
       this.$router.push("/friends").catch(err => {});
     },
-    useFormSubmitMessage: function () {
+    useFormSubmitMessage: function (z = null) {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
       const b = this.$router.app.$root.useFormSubmitMessage(feed_divs, tree);
+      b.picture_large = z;
       //this.$emit('submitpost', b);
       this.copyVals();
       this.$router.push("/feed").catch(err => {});
       this.focusNews();
 
     },
-    useFormSubmitExercise: function () {
+    useFormSubmitExercise: function (z = null) {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
       const b = this.$router.app.$root.useFormSubmitExercise(feed_divs, tree);
+      b.picture_large = z;
       this.copyVals();
       this.$router.push("/feed").catch(err => {});
       this.focusNews();
     },
-    useFormSubmitWorkout: function (msg) {
+    useFormSubmitWorkout: function (msg, z = null) {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
       const b = this.$router.app.$root.useFormSubmitWorkout(msg, feed_divs, tree);
+      b.picture_large = z;
       this.copyVals();
       this.$router.push("/feed").catch(err => {});
       this.focusNews();
     },
+    /*
     _preview_image_msg: function (e) {
       //console.log("at message");
       //console.log(e);
@@ -239,6 +243,7 @@ export default {
       this.$router.app.$root.preview_image_wrk(e);
       this.copyVals();
     },
+    */
     makeId: function (num, prefix = "feed-num-") {
       return prefix + num;
     },

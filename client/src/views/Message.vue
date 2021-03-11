@@ -30,7 +30,7 @@
                     Submit
                   </button>
 
-                  <div class="file">
+                  <!-- div class="file">
                     <label class="file-label">
                       <input
                         class="file-input is-primary"
@@ -47,14 +47,16 @@
                         <span class="file-label"> Choose a picture </span>
                       </span>
                     </label>
-                  </div>
+                  </div -->
                 </div>
               </nav>
             </div>
-            <figure class="image " v-show="show_picture">
+
+            <imageview @load="loading" />
+            <!-- figure class="image " v-show="show_picture">
               <img id="myImg1" src="//:0" class="invis" />
-              <!-- img src="./pic/app.png" alt="Placeholder image" -->
-            </figure>
+
+            </figure -->
           </div>
         </article>
       </div>
@@ -64,10 +66,16 @@
 </template>
 
 <script>
+//import Image from '../components/Image.vue';
+import imageview from '../components/Image.vue';
 export default {
+  components: {  
+    imageview : imageview
+  },
   name: "message",
   data: () => ({
     show_picture: false,
+    file : null
   }),
   props: {
     newsfeed: Boolean,
@@ -92,14 +100,14 @@ export default {
       if (x === true) return "visi";
       else return "invis";
     },
-    showPicture: function (e) {
+    showPicture: function () {
       this.show_picture = true;
       //console.log(e.inputType + " type");
-      this._preview_image_msg(e);
+      //this._preview_image_msg(e);
     },
     submit: function () {
       this.show_picture = false;
-      this.useFormSubmitMessage();
+      this.useFormSubmitMessage(this.file);
     },
     cancel: function () {
       this.show_picture = false;
@@ -107,6 +115,10 @@ export default {
 
       this.focusNews();
     },
+    loading: function(f) {
+      this.file = f;
+      //console.log('file ' + f);
+    }
     
   },
 };

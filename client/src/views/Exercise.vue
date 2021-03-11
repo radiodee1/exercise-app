@@ -20,16 +20,13 @@
               class="dropdown"
               id="exercise_type"
               :class="{ 'is-active': eTypeIsActive }"
-            >
-              <!-- class="is-active" -->
-              <div class="dropdown-trigger">
+            ><div class="dropdown-trigger">
                 <button
                   class="button"
                   aria-haspopup="true"
                   aria-controls="dropdown-menu"
                   @click="controlDropdownType()"
-                >
-                  <span id="exercise_type_label">{{ exerciseType }}</span>
+                ><span id="exercise_type_label">{{exerciseType}}</span>
                   <span class="icon is-small">
                     <i class="fas fa-angle-down" aria-hidden="true"></i>
                   </span>
@@ -82,10 +79,7 @@
                   aria-haspopup="true"
                   aria-controls="dropdown-menu"
                   @click="controlDropdownDeet()"
-                >
-                  <span id="exercise_type_deet_label">{{
-                    exerciseTypeDeet
-                  }}</span>
+                ><span id="exercise_type_deet_label">{{exerciseTypeDeet}}</span>
                   <span class="icon is-small">
                     <i class="fas fa-angle-down" aria-hidden="true"></i>
                   </span>
@@ -187,7 +181,7 @@
                     Submit
                   </button>
 
-                  <div class="file">
+                  <!-- div class="file">
                     <label class="file-label">
                       <input
                         class="file-input is-primary"
@@ -203,13 +197,14 @@
                         <span class="file-label"> Choose a picture </span>
                       </span>
                     </label>
-                  </div>
+                  </div -->
                 </div>
               </nav>
             </div>
-            <figure class="image" v-show="show_picture">
+            <imageview @load="loading" ></imageview>
+            <!-- figure class="image" v-show="show_picture">
               <img id="myImg2" src="//:0" class="invis" />
-            </figure>
+            </figure -->
           </div>
         </article>
       </div>
@@ -221,8 +216,14 @@
 </template>
 
 <script>
+import imageview from '../components/Image.vue';
+
+
 export default {
   name: "exercise",
+  components: {
+    imageview: imageview
+  },
   data() {
     return {
       lbs_inch: 2.25,
@@ -242,6 +243,8 @@ export default {
 
       exerciseReport: "",
       exerciseShowSubmit: false,
+
+      file: null
     };
   },
   props: {
@@ -294,9 +297,9 @@ export default {
         this.valueWeight = this.$root.user.weight_lbs;
       }
     },
-    showPicture: function (e) {
+    showPicture: function () {
       this.show_picture = true;
-      this._preview_image_ex(e);
+      //this._preview_image_ex(e);
     },
     cancel: function () {
       this.show_message = false;
@@ -306,7 +309,7 @@ export default {
     submit: function () {
       this.show_picture = false;
       this.show_message = false;
-      this.useFormSubmitExercise();
+      this.useFormSubmitExercise(this.file);
     },
     changeWeight: function (new_weight) {
       //console.log(new_weight);
@@ -325,6 +328,10 @@ export default {
       // save to db!!
       this.$root.user.weight_lbs = new_weight;
     },
+    loading: function(f) {
+      this.file = f;
+      //console.log('file ' + f);
+    }
   },
 };
 </script>

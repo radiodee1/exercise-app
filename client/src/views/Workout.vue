@@ -94,7 +94,7 @@
                       Submit
                     </button>
 
-                    <div class="file">
+                    <!-- div class="file">
                       <label class="file-label">
                         <input
                           class="file-input is-primary"
@@ -111,14 +111,16 @@
                           <span class="file-label"> Choose a picture </span>
                         </span>
                       </label>
-                    </div>
+                    </div -->
                   </div>
                 </nav>
               </div>
-              <figure class="image" v-show="show_picture">
+              <imageview @load="loading" />
+
+              <!-- figure class="image" v-show="show_picture">
                 <img id="myImg3" src="//:0" class="invis" />
-                <!-- img src="./pic/app.png" alt="Placeholder image" -->
-              </figure>
+                
+              </figure -->
             </div>
           </article>
 
@@ -157,10 +159,15 @@
 </template>
 
 <script>
+import imageview from '../components/Image.vue';
+
 let axios = require("axios").default;
 
 export default {
   name: "workout",
+  components: {
+    imageview: imageview
+  },
   data: () => ({
     isActive: false,
     searchDays: "Search Days",
@@ -173,6 +180,8 @@ export default {
     items: [],
     submit_list: [],
     chosen_list: [],
+
+    file: null
   }),
   props: {
     newsfeed: Boolean,
@@ -294,19 +303,23 @@ export default {
       }
       //console.log(l.length + " len");
       this.checkType("review");
-      this.useFormSubmitWorkout(l);
+      this.useFormSubmitWorkout(l, this.file);
       this.show_picture = false;
       this.focusNews();
     },
-    showPicture: function (e) {
+    showPicture: function () {
       this.show_picture = true;
-      this._preview_image_wrk(e);
+      //this._preview_image_wrk(e);
     },
     cancel: function () {
       this.checkType("review");
       this.show_picture = false;
       this.focusNews();
     },
+    loading: function(f) {
+      this.file = f;
+      //console.log('file ' + f);
+    }
   },
 };
 </script>
