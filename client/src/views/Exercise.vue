@@ -20,13 +20,15 @@
               class="dropdown"
               id="exercise_type"
               :class="{ 'is-active': eTypeIsActive }"
-            ><div class="dropdown-trigger">
+            >
+              <div class="dropdown-trigger">
                 <button
                   class="button"
                   aria-haspopup="true"
                   aria-controls="dropdown-menu"
                   @click="controlDropdownType()"
-                ><span id="exercise_type_label">{{exerciseType}}</span>
+                >
+                  <span id="exercise_type_label">{{ exerciseType }}</span>
                   <span class="icon is-small">
                     <i class="fas fa-angle-down" aria-hidden="true"></i>
                   </span>
@@ -65,8 +67,7 @@
                 </div>
               </div>
             </div>
-            <!-- end first dropdown-->
-            <!-- start second dropdown -->
+            <!-- end first dropdown -->
             <div
               class="dropdown"
               id="exercise_type_deet"
@@ -79,7 +80,10 @@
                   aria-haspopup="true"
                   aria-controls="dropdown-menu"
                   @click="controlDropdownDeet()"
-                ><span id="exercise_type_deet_label">{{exerciseTypeDeet}}</span>
+                >
+                  <span id="exercise_type_deet_label">{{
+                    exerciseTypeDeet
+                  }}</span>
                   <span class="icon is-small">
                     <i class="fas fa-angle-down" aria-hidden="true"></i>
                   </span>
@@ -152,11 +156,9 @@
               {{ weight_message }}
             </div>
             <button class="button" @click="formFinishExercise()">Report</button>
-            <pre
-              id="exercise_pre"
-              
-              v-show="exerciseShowSubmit"
-            >{{exerciseReport}}</pre>
+            <pre id="exercise_pre" v-show="exerciseShowSubmit">{{
+              exerciseReport
+            }}</pre>
 
             <div class="invis">
               <textarea
@@ -172,7 +174,7 @@
               <nav class="level">
                 <div class="level-left">
                   <button
-                    class="button is-primary"
+                    class="button is-dark"
                     id="exercise_submit"
                     style="visibility: visible; display: block"
                     @click="submit()"
@@ -180,7 +182,7 @@
                   >
                     Submit
                   </button>
-
+                  <imageview @load="loading"></imageview>
                   <!-- div class="file">
                     <label class="file-label">
                       <input
@@ -201,10 +203,9 @@
                 </div>
               </nav>
             </div>
-            <imageview @load="loading" ></imageview>
-            <!-- figure class="image" v-show="show_picture">
-              <img id="myImg2" src="//:0" class="invis" />
-            </figure -->
+            <figure class="image" v-show="show_picture">
+              <img id="myImg2" :src="file"  />
+            </figure>
           </div>
         </article>
       </div>
@@ -216,13 +217,12 @@
 </template>
 
 <script>
-import imageview from '../components/Image.vue';
-
+import imageview from "../components/Image.vue";
 
 export default {
   name: "exercise",
   components: {
-    imageview: imageview
+    imageview: imageview,
   },
   data() {
     return {
@@ -244,7 +244,7 @@ export default {
       exerciseReport: "",
       exerciseShowSubmit: false,
 
-      file: null
+      file: null,
     };
   },
   props: {
@@ -281,17 +281,17 @@ export default {
     },
 
     formFinishExercise: function () {
-      const type = this.exerciseType; 
-      const deet = this.exerciseTypeDeet; 
-      const num = this.valueNumber; 
-      const weight = this.valueWeight; 
+      const type = this.exerciseType;
+      const deet = this.exerciseTypeDeet;
+      const num = this.valueNumber;
+      const weight = this.valueWeight;
       //console.log(weight);
       if (weight != this.$root.user.weight_lbs) {
         this.changeWeight(weight);
       }
       const i = `Exercise Type: ${type}\nExercise Details: ${deet}\nRepitions: ${num}\nWeight: ${weight} LBS\n`;
       this.exerciseReport = `Exercise Report:\n` + i;
-      this.exerciseShowSubmit = ! this.exerciseShowSubmit;
+      this.exerciseShowSubmit = !this.exerciseShowSubmit;
       if (this.exerciseShowSubmit === false) {
         this.valueNumber = null;
         this.valueWeight = this.$root.user.weight_lbs;
@@ -309,7 +309,7 @@ export default {
     submit: function () {
       this.show_picture = false;
       this.show_message = false;
-      this.useFormSubmitExercise(this.file);
+      this.useFormSubmitExercise(this.exerciseReport, this.file);
     },
     changeWeight: function (new_weight) {
       //console.log(new_weight);
@@ -328,10 +328,11 @@ export default {
       // save to db!!
       this.$root.user.weight_lbs = new_weight;
     },
-    loading: function(f) {
+    loading: function (f) {
       this.file = f;
+      this.showPicture();
       //console.log('file ' + f);
-    }
+    },
   },
 };
 </script>

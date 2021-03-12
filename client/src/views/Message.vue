@@ -19,12 +19,13 @@
               class="textarea"
               placeholder="What's on your mind?!"
               rows="10"
+              v-model="msg"
             ></textarea>
             <div class="control">
               <nav class="level">
                 <div class="level-left">
                   <button
-                    class="button is-primary"
+                    class="button is-dark"
                     @click="submit()"
                   >
                     Submit
@@ -48,15 +49,17 @@
                       </span>
                     </label>
                   </div -->
+
+            <imageview @load="loading" />
+
                 </div>
               </nav>
             </div>
 
-            <imageview @load="loading" />
-            <!-- figure class="image " v-show="show_picture">
-              <img id="myImg1" src="//:0" class="invis" />
+            <figure class="image " v-show="show_picture">
+              <img id="myImg1" :src="file"  />
 
-            </figure -->
+            </figure>
           </div>
         </article>
       </div>
@@ -75,7 +78,8 @@ export default {
   name: "message",
   data: () => ({
     show_picture: false,
-    file : null
+    file : null,
+    msg: ""
   }),
   props: {
     newsfeed: Boolean,
@@ -107,7 +111,7 @@ export default {
     },
     submit: function () {
       this.show_picture = false;
-      this.useFormSubmitMessage(this.file);
+      this.useFormSubmitMessage(this.msg, this.file);
     },
     cancel: function () {
       this.show_picture = false;
@@ -117,6 +121,7 @@ export default {
     },
     loading: function(f) {
       this.file = f;
+      this.showPicture();
       //console.log('file ' + f);
     }
     

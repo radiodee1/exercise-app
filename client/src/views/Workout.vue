@@ -90,37 +90,22 @@
               <div class="control">
                 <nav class="level">
                   <div class="level-left">
-                    <button class="button is-primary" @click="submit()">
+                    <button class="button is-dark" @click="submit()">
                       Submit
                     </button>
 
-                    <!-- div class="file">
-                      <label class="file-label">
-                        <input
-                          class="file-input is-primary"
-                          type="file"
-                          name="resume"
-                          id="pic-button"
-                          ref="picButton"
-                          @change="showPicture"
-                        />
-                        <span class="file-cta">
-                          <span class="file-icon">
-                            <i class="fas fa-upload"></i>
-                          </span>
-                          <span class="file-label"> Choose a picture </span>
-                        </span>
-                      </label>
-                    </div -->
+                    
+
+              <imageview @load="loading" />
+
                   </div>
                 </nav>
               </div>
-              <imageview @load="loading" />
 
-              <!-- figure class="image" v-show="show_picture">
-                <img id="myImg3" src="//:0" class="invis" />
+              <figure class="image" v-show="show_picture">
+                <img id="myImg3" :src="file"  />
                 
-              </figure -->
+              </figure>
             </div>
           </article>
 
@@ -130,19 +115,7 @@
           <table>
             <tr v-for="(i, id) in items" :key="id">
               <td>
-                <!-- button
-                  class="button  is-small"
-                  v-if="chosen_list[id].chosen === false"
-                >
-                  View
-                </button -->
-                <!-- button
-                  class="button  is-small"
-                  v-else
-                  @click="not(id)"
-                >
-                  Not
-                </button -->
+                
               </td>
               <td>
                 <pre>{{ i.message }}</pre>
@@ -318,6 +291,7 @@ export default {
     },
     loading: function(f) {
       this.file = f;
+      this.showPicture();
       //console.log('file ' + f);
     }
   },

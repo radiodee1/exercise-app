@@ -14,7 +14,7 @@ let axios = require("axios").default;
   console.log(process.env.BACKEND_URL);
 //}
 
-/* eslint-disable-x */
+
 
 /* -------------- populate feed ---------------  */
 
@@ -186,14 +186,7 @@ function setPic(pic_orig) {
 */
 
 
-export function formSubmitMessage(feed_divs, tree, ob = null) {
-
-  const msg_orig = document.getElementById("message_txt");
-  //console.log(msg_orig.value);
-  const msg = msg_orig.value;
-  //const pic_orig = document.getElementById('myImg1');
-
-  //const pic = setPic(pic_orig);
+export function formSubmitMessage(msg, feed_divs, tree, ob = null) {
 
   const d = new Date();
   //console.log("here 3");
@@ -258,13 +251,8 @@ function formSubmitWorkout(msg, feed_divs, tree, ob = null) {
   return b;
 }
 
-function formSubmitExercise(feed_divs, tree, ob = null) {
-  //console.log("exercise submit");
-  const msg = document.getElementById('exercise_pre').textContent;
-  //const pic_orig = document.getElementById('myImg2');
-
-  //const pic = setPic(pic_orig);
-
+function formSubmitExercise(msg, feed_divs, tree, ob = null) {
+  
   const d = new Date();
 
   let obj = null;
@@ -474,21 +462,21 @@ export function doLoad() {
         this.form_friends = true;
       },
 
-      useFormSubmitMessage: function (feed_divs, tree, pic=null) {
+      useFormSubmitMessage: function (msg, feed_divs, tree, pic=null) {
         const obj = JSON.parse(subtreeStr);
         obj.from_user_id = this.user.id;
         obj.picture_large = pic;
         obj.message_obj_from = this.user.firstname + " " + this.user.lastname;
-        return formSubmitMessage(feed_divs, tree, obj);
+        return formSubmitMessage(msg, feed_divs, tree, obj);
 
       },
-      useFormSubmitExercise: function (feed_divs, tree, pic = null) {
+      useFormSubmitExercise: function (msg, feed_divs, tree, pic = null) {
         const obj = JSON.parse(subtreeStr);
         obj.from_user_id = this.user.id;
         obj.picture_large = pic;
         obj.message_obj_from = this.user.firstname + " " + this.user.lastname;
 
-        return formSubmitExercise(feed_divs, tree, obj);
+        return formSubmitExercise(msg, feed_divs, tree, obj);
 
       },
       useFormSubmitWorkout: function (msg, feed_divs, tree, pic = null) {
