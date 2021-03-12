@@ -48,9 +48,10 @@ import inner from "../components/FeedInner.vue";
 import feedselector from "../components/FeedSelector.vue";
 
 import { feed_full_length } from "../js/exercise";
-import Session from "../models/Session";
+//import Session from "../models/Session";
+import {DeletePost, GetFriendsFeed, GetMyFeed, GetSingleFriendsFeed, SetItems} from "../models/feed.js"
 //import Session from '../models/Session';
-let axios = require("axios").default;
+//let axios = require("axios").default;
 
 export default {
   name: "feedview",
@@ -83,6 +84,7 @@ export default {
   watch: {
     items: function(newItems, oldItems) {
       console.log('items watch ' + newItems.length + " " + oldItems.length);
+      //this.$forceUpdate();
     }
   },
   methods: {
@@ -118,180 +120,54 @@ export default {
       console.log('friends')
     },
 
-    deletePost(i) {
-      //console.log(this.items[i]);
-      if (this.items[i].from_user_id !== Session.user.id) {
-        return;
-      }
-
-      const port = this.backend_port;
-      const url = this.backend_url;
-      const id = this.items[i].id;
-      //const vm = this;
-      console.log(id + " id");
+    deletePost: async function (i) {
       
-      const f_obj = {
-        data: {
-          id: id,
-        },
-      };
+      SetItems(this.items);
+      this.items = await DeletePost(i, this.$root.user.id);
 
-      axios
-        .delete(url + port + "/feed", f_obj)
-        .then(function (response) {
-          // handle success
-
-          //console.log(response.data);
-          response = JSON.parse(response.data);
-
-          //vm.items = [...response];
-          //vm.tree.feed = [... response];
-
-          console.log(response.length + " len");
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-          //vm.items = vm.tree.feed;
-        })
-        .then(function () {
-          // always executed
-        });
-      //return items;
-    
-
-
-      this.items.splice(i, 1);
+      
     },
-    getFeedItems: function () {
+    getFeedItems: async function () {
       // return items that are 
       // grouped by your friend connections
-      const port = this.backend_port;
-      const url = this.backend_url;
+      
       const id = this.$root.user.id;
-      const vm = this;
+
+      this.items = await GetFriendsFeed(id);
+      //this.items =  GetItems();
+
       
-      
-      const f_obj = {
-        params: {
-          id: id,
-        },
-      };
-
-      axios
-        .get(url + port + "/feed", f_obj)
-        .then(function (response) {
-          // handle success
-
-          //console.log(response.data);
-          response = JSON.parse(response.data);
-
-          vm.items = [...response];
-          //vm.tree.feed = [... response];
-
-          console.log(vm.items.length + " len");
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-          vm.items = vm.tree.feed;
-        })
-        .then(function () {
-          // always executed
-        });
-      //return items;
     },
-    getPostItems: function () {
+    getPostItems: async function () {
       // return items that you have authored
 
-      const port = this.backend_port;
-      const url = this.backend_url;
       const id = this.$root.user.id;
-      const vm = this;
       
+      this.items = await GetMyFeed(id);
+
       
-      const f_obj = {
-        params: {
-          id: id,
-        },
-      };
-
-      axios
-        .get(url + port + "/feed/user", f_obj)
-        .then(function (response) {
-          // handle success
-
-          response = JSON.parse(response.data);
-          console.log(response.length + " post");
-
-          vm.items = [...response];
-          //vm.tree.feed = [... response];
-
-          console.log(vm.items.length + " len");
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-          //vm.items = vm.tree.feed;
-        })
-        .then(function () {
-          // always executed
-        });
-      //return items;
     },
-    getFriendItems: function (id) {
+    getFriendItems: async function (id) {
       // return items from others that are 
       // your friend and confirmed as friend
 
-      const port = this.backend_port;
-      const url = this.backend_url;
-      //const id = this.$root.user.id;
-      const vm = this;
       
-      const f_obj = {
-        params: {
-          id: id,
-        },
-      };
+      this.items = await GetSingleFriendsFeed(id);
 
-      axios
-        .get(url + port + "/feed/friend", f_obj)
-        .then(function (response) {
-          // handle success
-
-          //console.log(response.data);
-          response = JSON.parse(response.data);
-
-          vm.items = [...response];
-          //vm.tree.feed = [... response];
-
-          console.log(vm.friendItems.length + " len");
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-          vm.items = vm.tree.feed;
-        })
-        .then(function () {
-          // always executed
-        });
-      //return items;
+      
     }
   },
   mounted: function () {
     //this.fillPictures();
     console.log(feed_full_length);
     //this.items = [];
-    //this.doFeed();
+    this.doFeed();
 
     
   },
   created: function () {
-    //this.addNewPost();
-    //this.$on('submitpost', function (val) {
-    //  this.items.unshift(val);
-    //});
-    this.items = [];
+    
+    //this.items = [];
     this.doFeed();
   },
   computed: {

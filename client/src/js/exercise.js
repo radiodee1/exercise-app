@@ -4,8 +4,9 @@ import Vue from "vue";
 import router from '../router'
 
 import appx from "../App.vue";
+import {PostFeed} from "../models/feed"
 
-let axios = require("axios").default;
+//let axios = require("axios").default;
 
 //if (process.env.NODE_ENV !== 'production') {
   //require("dotenv").config();
@@ -105,29 +106,15 @@ export function insertFeed(dict, feed_divs, tree) {
 
   listMaint(dict, feed_divs, tree);
 
-  const port = visibility.backend_port;
-  const url = visibility.backend_url;
+  //const port = visibility.backend_port;
+  //const url = visibility.backend_url;
 
   dict.from_user_id = visibility.user.id;
 
-  console.log(port + " port");
-  axios
-    .post(url + port + "/feed", dict)
-    .then(function (response) {
-      // handle success
-      const response_raw = response;
-      //console.log(response_raw.data);
-      const response_out = JSON.parse(response_raw.data);
-      console.log(response_out);
-      
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
-    });
+  //console.log(port + " port");
+
+  PostFeed(dict);
+  
   return;
 }
 
@@ -171,19 +158,6 @@ export function setWorkout(obj, msg = "workout here.") {
 
 /* ---------------- controls next ---------------- */
 
-/*
-function setPic(pic_orig) {
-  let pic = null;
-  if (pic_orig != null && pic_orig.src != null && typeof pic_orig !== 'undefined') {
-    pic = pic_orig.src;
-  }
-  else {
-    pic = null; //"../assets/app.png";
-  }
-  //console.log("p " + pic);
-  return pic;
-}
-*/
 
 
 export function formSubmitMessage(msg, feed_divs, tree, ob = null) {
@@ -283,42 +257,7 @@ function formSubmitExercise(msg, feed_divs, tree, ob = null) {
   return b;
 }
 
-/* --------- support fn -------------  */
 
-/*
-export function preview_image_msg(event) {
-  const reader = new FileReader();
-  reader.onload = function () {
-    const output = document.getElementById('myImg1');
-    output.style.visibility = "visible";
-    output.src = reader.result;
-  }
-  //console.log(event.target.files[0].name + " name");
-  //if (! event.target.files[0].name.endsWith("app.png")) 
-  reader.readAsDataURL(event.target.files[0]);
-  //else reader.feadAsDataURL(null);
-}
-
-export function preview_image_ex(event) {
-  const reader = new FileReader();
-  reader.onload = function () {
-    const output = document.getElementById('myImg2');
-    output.style.visibility = "visible";
-    output.src = reader.result;
-  }
-  reader.readAsDataURL(event.target.files[0]);
-}
-
-export function preview_image_wrk(event) {
-  const reader = new FileReader();
-  reader.onload = function () {
-    const output = document.getElementById('myImg3');
-    output.style.visibility = "visible";
-    output.src = reader.result;
-  }
-  reader.readAsDataURL(event.target.files[0]);
-}
-*/
 
 /* --------------- vue functions ------------------- */
 

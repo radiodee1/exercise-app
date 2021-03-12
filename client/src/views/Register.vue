@@ -443,6 +443,7 @@ export default {
                 response = JSON.parse(response_raw.data);
                 vm.$root.user.id = response.insertId;
                 console.log(vm.$root.user.id);
+                Session.user.id = response.insertId;
                 success = true;
               })
               .catch(function (error) {
