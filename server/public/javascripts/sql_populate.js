@@ -22,16 +22,16 @@ module.exports = {
 
 function connection() {
     var mysql = require('mysql');
-
-    const config = require('../../../mysql-login.js')
+    console.log("here...");
+    //const config = require('../../../mysql-login.js')
 
     //console.log(config)
 
     var con = mysql.createConnection({
-        host: config.host,
-        user: config.user,
-        port: config.port,
-        password: config.password,
+        host: process.env.VUE_APP_MYSQL_HOST, // config.host,
+        user: process.env.VUE_APP_MYSQL_USER,  //config.user,
+        port: process.env.VUE_APP_MYSQL_PORT, //config.port,
+        password: process.env.VUE_APP_MYSQL_PASSWORD, //config.password,
         database: "web",
     });
 

@@ -83,7 +83,7 @@ export default {
     form_message: Boolean,
     useFormSubmitMessage: Function,
     focusNews: Function,
-    _preview_image_msg: Function,
+    //_preview_image_msg: Function,
     feed_divs: Array,
     tree: Object,
   },

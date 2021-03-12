@@ -15,16 +15,13 @@
       :focusLogin="focusLogin"
       :focusFormMessage="focusFormMessage"
       :useFormSubmitMessage="useFormSubmitMessage"
-      :_preview_image_msg="_preview_image_msg"
       :makeId="makeId"
       :items="items"
       :feed_divs="feed_divs"
       :tree="tree"
       :focusFormExercise="focusFormExercise"
-      :_preview_image_ex="_preview_image_ex"
       :useFormSubmitExercise="useFormSubmitExercise"
       :focusFormWorkout="focusFormWorkout"
-      :_preview_image_wrk="_preview_image_wrk"
       :useFormSubmitWorkout="useFormSubmitWorkout"
       :focusFormFriends="focusFormFriends"
       :form_friends="form_friends"
@@ -51,16 +48,13 @@
       :focusLogin="focusLogin"
       :focusFormMessage="focusFormMessage"
       :useFormSubmitMessage="useFormSubmitMessage"
-      :_preview_image_msg="_preview_image_msg"
       :makeId="makeId"
       :items="items"
       :feed_divs="feed_divs"
       :tree="tree"
       :focusFormExercise="focusFormExercise"
-      :_preview_image_ex="_preview_image_ex"
       :useFormSubmitExercise="useFormSubmitExercise"
       :focusFormWorkout="focusFormWorkout"
-      :_preview_image_wrk="_preview_image_wrk"
       :useFormSubmitWorkout="useFormSubmitWorkout"
       :focusFormFriends="focusFormFriends"
       :form_friends="form_friends"
@@ -262,4 +256,5 @@ export default {
 </script>
 
 <style>
+
 </style>

@@ -34,8 +34,10 @@ usersRouterGet.get('/', function (req, res, next) {
   for (let i in user_all) {
     columns.push(i);
   }
+  
   let x = sql.makeSelect('profiles', columns, '', false);
   let con = sql.connection();
+  console.log(con);
   try {
     let y = sql.xquery(con, x);
     y.then(function (value) {
@@ -43,7 +45,7 @@ usersRouterGet.get('/', function (req, res, next) {
       let yy = JSON.stringify(value);
       res.json(yy);
       sql.end(con);
-
+      console.log(yy);
     });
   }
   catch (v) {

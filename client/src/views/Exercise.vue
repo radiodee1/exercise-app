@@ -253,7 +253,7 @@ export default {
     form_exercise: Boolean,
     useFormSubmitExercise: Function,
     focusNews: Function,
-    _preview_image_ex: Function,
+    //_preview_image_ex: Function,
     feed_divs: Array,
     tree: Object,
   },

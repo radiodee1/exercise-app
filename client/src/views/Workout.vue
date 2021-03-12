@@ -189,7 +189,7 @@ export default {
     form_workout: Boolean,
     useFormSubmitWorkout: Function,
     focusNews: Function,
-    _preview_image_wrk: Function,
+    //_preview_image_wrk: Function,
     feed_divs: Array,
     tree: Object,
     backend_port: Number,
