@@ -171,6 +171,7 @@ export function setWorkout(obj, msg = "workout here.") {
 
 /* ---------------- controls next ---------------- */
 
+/*
 function setPic(pic_orig) {
   let pic = null;
   if (pic_orig != null && pic_orig.src != null && typeof pic_orig !== 'undefined') {
@@ -182,6 +183,7 @@ function setPic(pic_orig) {
   //console.log("p " + pic);
   return pic;
 }
+*/
 
 
 export function formSubmitMessage(feed_divs, tree, ob = null) {
@@ -189,9 +191,9 @@ export function formSubmitMessage(feed_divs, tree, ob = null) {
   const msg_orig = document.getElementById("message_txt");
   //console.log(msg_orig.value);
   const msg = msg_orig.value;
-  const pic_orig = document.getElementById('myImg1');
+  //const pic_orig = document.getElementById('myImg1');
 
-  const pic = setPic(pic_orig);
+  //const pic = setPic(pic_orig);
 
   const d = new Date();
   //console.log("here 3");
@@ -212,7 +214,7 @@ export function formSubmitMessage(feed_divs, tree, ob = null) {
   obj.message = msg;
   obj.message_obj_message = msg;
   //obj.message_obj_from = "John Doe";
-  obj.picture_large = pic;
+  //obj.picture_large = pic;
   obj.date_now = d;
 
   const b = setMessage(obj, msg);
@@ -225,9 +227,9 @@ export function formSubmitMessage(feed_divs, tree, ob = null) {
 function formSubmitWorkout(msg, feed_divs, tree, ob = null) {
   //console.log("workout submit + " + msg);
   //const msg = document.getElementById('workout_hidden').textContent;
-  const pic_orig = document.getElementById('myImg3');
+  //const pic_orig = document.getElementById('myImg3');
   //const pic = pic_orig.src;
-  const pic = setPic(pic_orig);
+  //const pic = setPic(pic_orig);
 
   const d = new Date();
 
@@ -247,7 +249,7 @@ function formSubmitWorkout(msg, feed_divs, tree, ob = null) {
   obj.message = msg;
   obj.workout_obj_exercise_list = msg;
   //obj.workout_obj_from = "John Doe";
-  obj.picture_large = pic;
+  //obj.picture_large = pic;
   obj.date_now = d;
 
   const b = setWorkout(obj, msg);
@@ -259,9 +261,9 @@ function formSubmitWorkout(msg, feed_divs, tree, ob = null) {
 function formSubmitExercise(feed_divs, tree, ob = null) {
   //console.log("exercise submit");
   const msg = document.getElementById('exercise_pre').textContent;
-  const pic_orig = document.getElementById('myImg2');
+  //const pic_orig = document.getElementById('myImg2');
 
-  const pic = setPic(pic_orig);
+  //const pic = setPic(pic_orig);
 
   const d = new Date();
 
@@ -281,7 +283,7 @@ function formSubmitExercise(feed_divs, tree, ob = null) {
   obj.message = msg;
   obj.exercise_obj_message = msg;
   //obj.message_obj_from = "John Doe";
-  obj.picture_large = pic;
+  //obj.picture_large = pic;
   obj.date_now = d;
 
   //console.log(obj.length + " len");
@@ -295,6 +297,7 @@ function formSubmitExercise(feed_divs, tree, ob = null) {
 
 /* --------- support fn -------------  */
 
+/*
 export function preview_image_msg(event) {
   const reader = new FileReader();
   reader.onload = function () {
@@ -327,6 +330,7 @@ export function preview_image_wrk(event) {
   }
   reader.readAsDataURL(event.target.files[0]);
 }
+*/
 
 /* --------------- vue functions ------------------- */
 
@@ -470,38 +474,41 @@ export function doLoad() {
         this.form_friends = true;
       },
 
-      useFormSubmitMessage: function (feed_divs, tree) {
+      useFormSubmitMessage: function (feed_divs, tree, pic=null) {
         const obj = JSON.parse(subtreeStr);
         obj.from_user_id = this.user.id;
+        obj.picture_large = pic;
         obj.message_obj_from = this.user.firstname + " " + this.user.lastname;
         return formSubmitMessage(feed_divs, tree, obj);
 
       },
-      useFormSubmitExercise: function (feed_divs, tree) {
+      useFormSubmitExercise: function (feed_divs, tree, pic = null) {
         const obj = JSON.parse(subtreeStr);
         obj.from_user_id = this.user.id;
+        obj.picture_large = pic;
         obj.message_obj_from = this.user.firstname + " " + this.user.lastname;
 
         return formSubmitExercise(feed_divs, tree, obj);
 
       },
-      useFormSubmitWorkout: function (msg, feed_divs, tree) {
+      useFormSubmitWorkout: function (msg, feed_divs, tree, pic = null) {
         const obj = JSON.parse(subtreeStr);
         //console.log(this.user);
         obj.from_user_id = this.user.id;
+        obj.picture_large = pic;
         obj.message_obj_from = this.user.firstname + " " + this.user.lastname;
 
         return formSubmitWorkout(msg, feed_divs, tree, obj);
 
       },
-      preview_image_msg: function (e) {
-        preview_image_msg(e);
+      preview_image_msg: function () {
+        //preview_image_msg(e);
       },
-      preview_image_ex: function (e) {
-        preview_image_ex(e);
+      preview_image_ex: function () {
+        //preview_image_ex(e);
       },
-      preview_image_wrk: function (e) {
-        preview_image_wrk(e);
+      preview_image_wrk: function () {
+        //preview_image_wrk(e);
       },
       makeUser: function () {
         return makeUser();

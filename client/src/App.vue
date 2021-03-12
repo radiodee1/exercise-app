@@ -192,8 +192,8 @@ export default {
     useFormSubmitMessage: function (z = null) {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
-      const b = this.$router.app.$root.useFormSubmitMessage(feed_divs, tree);
-      b.picture_large = z;
+      const b = this.$router.app.$root.useFormSubmitMessage(feed_divs, tree, z);
+      //b.picture_large = z;
       //this.$emit('submitpost', b);
       this.copyVals();
       this.$router.push("/feed").catch(err => {});
@@ -203,8 +203,8 @@ export default {
     useFormSubmitExercise: function (z = null) {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
-      const b = this.$router.app.$root.useFormSubmitExercise(feed_divs, tree);
-      b.picture_large = z;
+      const b = this.$router.app.$root.useFormSubmitExercise(feed_divs, tree, z);
+      //b.picture_large = z;
       this.copyVals();
       this.$router.push("/feed").catch(err => {});
       this.focusNews();
@@ -212,8 +212,8 @@ export default {
     useFormSubmitWorkout: function (msg, z = null) {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
-      const b = this.$router.app.$root.useFormSubmitWorkout(msg, feed_divs, tree);
-      b.picture_large = z;
+      const b = this.$router.app.$root.useFormSubmitWorkout(msg, feed_divs, tree, z);
+      //b.picture_large = z;
       this.copyVals();
       this.$router.push("/feed").catch(err => {});
       this.focusNews();
