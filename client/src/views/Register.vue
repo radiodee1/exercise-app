@@ -285,8 +285,9 @@
 
 <script>
 //import { focusNews } from '../js/exercise';
-let axios = require("axios").default;
-import Session from "../models/Session.js"
+//let axios = require("axios").default;
+import Session from "../models/Session.js";
+import {GetUserRegister, PostUserRegister} from "../models/users.js";
 
 export default {
   name: "register",
@@ -329,9 +330,9 @@ export default {
       else return "invis";
     },
     //focusNewsx: function () { this.focusNews();},
-    submit: function () {
-      const vm = this;
-      let success = false;
+    submit: async function () {
+      //const vm = this;
+      //let success = false;
 
       this.message_password_1 = false;
       this.message_username_1 = false;
@@ -352,8 +353,8 @@ export default {
       const password = this.password;
       const password2 = this.password2;
 
-      const port = this.backend_port;
-      const url =  this.backend_url;
+      //const port = this.backend_port;
+      //const url =  this.backend_url;
       if (
         password != password2 ||
         password2.length == 0 ||
@@ -392,6 +393,41 @@ export default {
       //var focusNewsx = this.focusNews
       //check if this (username) already exists!!
       let username_taken = false;
+
+      let username_ok = await GetUserRegister(this.$root.user);
+
+      if (username_ok) {
+            console.log("post ");
+            let record = {};
+            record.firstname = firstname;
+            record.lastname = lastname;
+            record.address = address;
+            record.city = city;
+            record.state = state;
+            record.zip = zip;
+
+            let num = +feet * 12 + +inches;
+
+            if (typeof num !== "number") {
+              num = 0;
+            }
+            record.height_inches = num;
+            record.weight_lbs = lbs;
+
+            record.email = email;
+            record.username = username;
+            record.password = password;
+
+            Session.user = record;
+            
+            record = await PostUserRegister(record);
+      }
+      else {
+        username_taken = true;
+        this.message_username_1 = true;
+      }
+      ////////////////////
+      /*
       axios
         .get(url + port + "/users")
         .then(function (response_raw) {
@@ -469,6 +505,10 @@ export default {
           // always executed
           //focusNewsx();
         });
+      */
+      if(! username_taken) {
+        this.focusNews();
+      }
     },
   },
 };

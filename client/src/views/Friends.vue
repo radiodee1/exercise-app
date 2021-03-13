@@ -246,16 +246,6 @@ export default {
               );
             }
 
-            /*
-            if (dict1.status === "asked") {
-              if (associated && dict1.user_id !== user_id) {
-                dict1.status = "waiting";
-              } else if (associated && dict1.friend_user_id !== user_id) {
-                dict1.status = "waiting";
-              }
-            }
-            */
-
             if (
               highest[dict1.username].username != null &&
               typeof highest[dict1.username].username == "string" &&
