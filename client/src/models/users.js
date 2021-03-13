@@ -67,7 +67,7 @@ export async function GetUserLogin(username_in, password_in) {
             //}
         });
     //this.focusNews();
-    console.log(user);
+    //console.log(user);
     return user;
 }
 

@@ -62,7 +62,8 @@
 
 <script>
 //import { delete } from 'vue/types/umd';
-let axios = require("axios").default;
+//let axios = require("axios").default;
+import { GetFriendList, GetList, PatchConfirmFriend, PostNewFriendAsk, SetList } from "../models/friends.js";
 
 export default {
   name: "friends",
@@ -81,6 +82,15 @@ export default {
     user: Object,
     //classOption: Function
   },
+  computed: {},
+  watch: {
+    list: function () {
+      //this.makeList();
+      //this.$forceUpdate();
+      console.log("----");
+      console.log(this.list);
+    },
+  },
   methods: {
     classOption: function (i) {
       //console.log(i);
@@ -88,206 +98,34 @@ export default {
       if (x === true) return "visi";
       else return "invis";
     },
-    ask: function (num) {
-      const port = this.backend_port;
-      const url = this.backend_url;
+    ask: async function (num) {
 
       const user_id = this.$root.user.id;
 
-      this.list[num].status = "asked"; // <-- asked???
-
-      const f_obj = {
-        user_id: user_id, // this.list[num].id,
-        friend_user_id: this.list[num].id,
-        //id: this.list[num].id,
-        friend_status: this.list[num].status,
-        date: this.list[num].date,
-      };
-      //console.log({ fobj: f_obj });
-
-      // post first friend request here -- insert db
-      axios
-        .post(url + port + "/friends", f_obj)
-        .then(function (response) {
-          // handle success
-
-          console.log(response.data);
-          response = JSON.parse(response.data);
-          //vm.$root.user.id = response.insertId;
-          //console.log(vm.$root.user.id);
-          //success = true;
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .then(function () {
-          // always executed
-          //if (success) {
-          //vm.focusNews();
-          //}
-        });
-        this.list[num].status = "waiting";
+      SetList(this.list);
+      this.list = await PostNewFriendAsk(num, user_id);
+      this.list = GetList();
+     
     },
-    confirm: function (num) {
-      //console.log(num);
-      const port = this.backend_port;
-      const url = this.backend_url;
-      //const user_id = this.$root.user.id;
+    confirm: async function (num) {
+      
+      SetList(this.list);
+      this.list = await PatchConfirmFriend(num);
 
-      const f_obj = {
-        change: {
-          friend_status: "confirmed",
-        },
-        ident: {
-          user_id: this.list[num].user_id,
-          //id: this.list[num].id,
-          friend_user_id: this.list[num].friend_user_id,
-        },
-
-        //date: this.list[num].date,
-      };
-      console.log(f_obj);
-      console.log("----");
-      this.list[num].status = "confirmed";
-      // patch friend request here -- update db
-      axios
-        .patch(url + port + "/friends", f_obj)
-        .then(function (response) {
-          // handle success
-
-          console.log(response.data);
-          response = JSON.parse(response.data);
-          //vm.$root.user.id = response.insertId;
-          //console.log(vm.$root.user.id);
-          //success = true;
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .then(function () {
-          // always executed
-          //if (success) {
-          //vm.focusNews();
-          //}
-        });
+      
     },
     refresh: function () {
       this.list = this.makeList();
     },
-    makeList: function () {
-      const port = this.backend_port;
-      const url = this.backend_url;
+    makeList: async function () {
+
       const user_id = this.$root.user.id;
-      let l = [];
-      //let d = {};
-      //let count = [];
-      const vm = this;
+      
 
-      const order = {
-        new: 0,
-        asked: 1,
-        waiting: 2,
-        confirmed: 3,
-      };
-
-      const highest = {};
-
-      const p_list = {
-        params: {
-          id: user_id,
-        },
-      };
-      axios
-        .get(url + port + "/friends", p_list)
-        .then(function (response) {
-          // handle success
-          //const response_raw = response;
-
-          response = JSON.parse(response.data);
-          //console.log(response);
-          for (let i = 0; i < response.length; i++) {
-            const dict1 = {};
-            dict1.firstname = response[i].firstname;
-            dict1.lastname = response[i].lastname;
-            dict1.username = response[i].username;
-            dict1.status = response[i].friend_status;
-            dict1.friend_user_id = response[i].friend_user_id;
-            dict1.id = response[i].id;
-            dict1.user_id = response[i].user_id;
-
-            let associated =
-              dict1.user_id === user_id || dict1.friend_user_id === user_id;
-
-            if (!(dict1.username in highest)) {
-              highest[dict1.username] = dict1;
-
-              if (!associated) {
-                highest[dict1.username].status = "new";
-              }
-            } else if (
-              order[highest[dict1.username].status] < order[dict1.status]
-            ) {
-              if (associated) {
-                highest[dict1.username] = dict1;
-                highest[dict1.username].status = `${dict1.status}`;
-              } else {
-                highest[dict1.username].status = "new";
-              }
-
-              console.log(
-                "repeat " +
-                  dict1.username +
-                  " " +
-                  order[`${highest[dict1.username].status}`] +
-                  " " +
-                  order[dict1.status]
-              );
-            }
-
-            if (
-              highest[dict1.username].username != null &&
-              typeof highest[dict1.username].username == "string" &&
-              typeof vm.$root.user.username == "string" &&
-              highest[dict1.username].username.trim() !=
-                vm.$root.user.username.trim()
-            ) {
-              const test_for_status = true;
-              if (
-                highest[dict1.username].status !== "confirmed" &&
-                highest[dict1.username].status !== "asked" &&
-                highest[dict1.username].status !== "waiting" &&
-                highest[dict1.username].status !== "new" &&
-                //highest[dict1.username].user_id === user_id &&
-                test_for_status
-              ) {
-                highest[dict1.username].status = "new";
-                //dict1.status = "new";
-              }
-            } //else
-            if (
-              highest[dict1.username].username.trim() ===
-              vm.$root.user.username.trim()
-            ) {
-              delete highest[dict1.username];
-            }
-          }
-          for (let key in highest) {
-            l.push(highest[key]);
-          }
-          //console.log(user_id + " user");
-          //console.log(count);
-          console.log(highest);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .then(function () {
-          // always executed
-        });
-
+      let l = await GetFriendList(user_id, this.$root.user.username);
+      //console.log(response);
+      
+      this.list = l;
       return l;
     },
     cancel: function () {
