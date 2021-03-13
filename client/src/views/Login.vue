@@ -67,7 +67,8 @@
 <script>
 import development from "../components/Development.vue";
 import Session from "../models/Session.js";
-let axios = require("axios").default;
+import { GetUserLogin } from '../models/users';
+//let axios = require("axios").default;
 
 export default {
   name: "login",
@@ -96,68 +97,24 @@ export default {
       if (x === true) return "visi";
       else return "invis";
     },
-    submit: function () {
+    submit: async function () {
       const username = this.username;
       const password = this.password; 
 
-      const port = this.backend_port;
-      const url = this.backend_url;
-      const vm = this;
-      let success = false;
-      axios
-        .get(url + port + "/users")
-        .then(function (response_raw) {
-          // handle success
-          //console.log(response);
-          let response = JSON.parse(response_raw.data);
-          for (let i = 0; i < response.length; i++) {
-            let username_saved = response[i].username;
-            let password_saved = response[i].password;
-            if (username_saved === null || username_saved === undefined) {
-              username_saved = "";
-            }
-            if (password_saved === null || password_saved === undefined) {
-              password_saved = "";
-            }
-            //console.log(username_saved + " " + username);
-            if (
-              username_saved.trim() === username.trim() &&
-              password_saved.trim() === password.trim()
-            ) {
-              success = true;
-              vm.$root.user.firstname = response[i].firstname;
-              vm.$root.user.lastname = response[i].lastname;
-              vm.$root.user.address = response[i].address;
-              vm.$root.user.city = response[i].city;
-              vm.$root.user.state = response[i].state;
-              vm.$root.user.zip = response[i].zip;
-
-              vm.$root.user.height_inches = response[i].height_inches;
-              vm.$root.user.weight_lbs = response[i].weight_lbs;
-
-              vm.$root.user.email = response[i].email;
-              vm.$root.user.username = username;
-              vm.$root.user.password = password;
-              vm.$root.user.id = response[i].id;
-              Session.user = response[i];
-              console.log(Session.user);
-            }
-          }
-          //console.log(response);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .then(function () {
-          // always executed
-          //focusNewsx();
-          if (success) {
-            console.log(vm.$root.user.id);
-            vm.focusNews();
-          }
-        });
-      //this.focusNews();
+      let user_reply = await GetUserLogin(username, password)
+      if (typeof user_reply.id === "number") {
+        for (let i in user_reply) {
+          this.$root.user[i] = user_reply[i];
+          //Session.user[i] = user_reply[i];
+        }
+        //this.$root.user = user_reply;
+        Session.user = user_reply;
+        console.log(Session.user);
+        this.focusNews();
+      }
+      else {
+        console.log("bad login");
+      }
     },
     //login_dev_check: function () {
     //make hardcoded develpment enabled
