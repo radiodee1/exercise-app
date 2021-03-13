@@ -47,7 +47,7 @@
 import inner from "../components/FeedInner.vue";
 import feedselector from "../components/FeedSelector.vue";
 
-import { feed_full_length } from "../js/exercise";
+import { feed_full_length } from "../js/ExerciseApp.js";
 //import Session from "../models/Session";
 import {DeletePost, GetFriendsFeed, GetMyFeed, GetSingleFriendsFeed, SetItems} from "../models/feed.js"
 //import Session from '../models/Session';

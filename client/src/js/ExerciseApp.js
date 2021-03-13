@@ -4,7 +4,9 @@ import Vue from "vue";
 import router from '../router'
 
 import appx from "../App.vue";
-import {PostFeed} from "../models/feed"
+//import {PostFeed} from "../models/feed"
+
+import {subtreeStr, tree, feed_limit, formSubmitMessage, formSubmitExercise, formSubmitWorkout, makeUser} from "./FeedMethods.js"
 
 //let axios = require("axios").default;
 
@@ -15,11 +17,11 @@ import {PostFeed} from "../models/feed"
   //console.log(process.env.BACKEND_URL);
 //}
 
-
-
-/* -------------- populate feed ---------------  */
-
 export let feed_full_length = 0;
+
+
+/* -------------- populate feed ---------------  
+
 export const feed_limit = 1;
 // hard coded output
 
@@ -253,11 +255,11 @@ function formSubmitExercise(msg, feed_divs, tree, ob = null) {
   return b;
 }
 
-
+*/
 
 /* --------------- vue functions ------------------- */
 
-let visibility = null;
+export let visibility = null;
 
 var feed_array = [];
 for (var x = 0; x < feed_limit; x++) {
@@ -450,12 +452,15 @@ export function doLoad() {
 //window.onload = doLoad;
 //doLoad();
 
+/*
+
 export function classOption(i) {
   //console.log(i);
   const x = Boolean(i);
   if (x === true) return 'visi';
   else return 'invis';
 }
+
 
 
 export function focusNews() {
@@ -497,7 +502,9 @@ export function focusFormWorkout() {
   visibility.form_workout = true;
 }
 
-/* ---------- sql etc -----------  */
+*/
+
+/* ---------- sql etc -----------  
 
 export function makeUser() {
   return {
@@ -517,3 +524,5 @@ export function makeUser() {
   };
 
 }
+
+*/

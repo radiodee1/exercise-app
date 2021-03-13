@@ -8,7 +8,7 @@ import "@fortawesome/fontawesome-free/js/all.js";
 import Buefy from 'buefy';
 import 'buefy/dist/buefy.css';
 
-import { doLoad } from "./js/exercise.js";
+import { doLoad } from "./js/ExerciseApp.js";
 import Vue from 'vue';
 
 /* eslint-disable */

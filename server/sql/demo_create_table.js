@@ -3,7 +3,7 @@ require('dotenv').config({path:__dirname+ "/../../client/.env"});
 
 //const config = require('../../mysql-login.js')
 
-console.log(process.env)
+//console.log(process.env)
 
 var con = mysql.createConnection({
   'host': process.env.VUE_APP_MYSQL_HOST, 

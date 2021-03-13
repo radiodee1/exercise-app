@@ -77,7 +77,7 @@ import "./assets/bulma.css";
 import bannercomponent from "./views/Banner.vue";
 
 //import { makeInvocation } from "./js/exercise.js";
-import { feed_full_length } from './js/exercise.js';
+import { feed_full_length } from './js/ExerciseApp.js';
 
 export default {
   name: "appx",
