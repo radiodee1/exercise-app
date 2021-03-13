@@ -127,6 +127,7 @@ export default {
           //vm.focusNews();
           //}
         });
+        this.list[num].status = "waiting";
     },
     confirm: function (num) {
       //console.log(num);
@@ -244,6 +245,16 @@ export default {
                   order[dict1.status]
               );
             }
+
+            /*
+            if (dict1.status === "asked") {
+              if (associated && dict1.user_id !== user_id) {
+                dict1.status = "waiting";
+              } else if (associated && dict1.friend_user_id !== user_id) {
+                dict1.status = "waiting";
+              }
+            }
+            */
 
             if (
               highest[dict1.username].username != null &&
