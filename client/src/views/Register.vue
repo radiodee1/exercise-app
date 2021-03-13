@@ -426,86 +426,8 @@ export default {
         username_taken = true;
         this.message_username_1 = true;
       }
-      ////////////////////
-      /*
-      axios
-        .get(url + port + "/users")
-        .then(function (response_raw) {
-          // handle success
-          //console.log(response);
-          let response = JSON.parse(response_raw.data);
-          for (let i = 0; i < response.length; i++) {
-            let username_saved = response[i].username;
-            if (username_saved === null || username_saved === undefined) {
-              username_saved = "";
-            }
-            //console.log(username_saved + " " + username);
-            if (username_saved.trim() === username.trim()) {
-              username_taken = true;
-              vm.message_username_1 = true;
-            }
-          }
-          //console.log(response);
-          if (!username_taken) {
-            console.log("post ");
-            const record = {};
-            record.firstname = firstname;
-            record.lastname = lastname;
-            record.address = address;
-            record.city = city;
-            record.state = state;
-            record.zip = zip;
-
-            let num = +feet * 12 + +inches;
-
-            if (typeof num !== "number") {
-              num = 0;
-            }
-            record.height_inches = num;
-            record.weight_lbs = lbs;
-
-            record.email = email;
-            record.username = username;
-            record.password = password;
-
-            Session.user = record;
-
-            axios
-              .post(url + port + "/users", record)
-              .then(function (response_raw) {
-                // handle success
-
-                console.log(response_raw.data);
-                response = JSON.parse(response_raw.data);
-                vm.$root.user.id = response.insertId;
-                console.log(vm.$root.user.id);
-                Session.user.id = response.insertId;
-                success = true;
-              })
-              .catch(function (error) {
-                // handle error
-                console.log(error);
-              })
-              .then(function () {
-                // always executed
-                if (success) {
-                  vm.focusNews();
-                }
-              });
-          }
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-          vm.$root.user.id = 0;
-          vm.focusNews();
-
-        })
-        .then(function () {
-          // always executed
-          //focusNewsx();
-        });
-      */
+      
+      
       if(! username_taken) {
         this.focusNews();
       }

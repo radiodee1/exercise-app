@@ -74,67 +74,7 @@ export async function GetUserLogin(username_in, password_in) {
 export async function GetUserRegister(user) {
     const vm = this;
     //let success = false;
-    /*
-    this.message_password_1 = false;
-    this.message_username_1 = false;
-    const firstname = this.firstname;
-    //console.log(firstname);
-    const lastname = this.lastname;
-    const address = this.address;
-    const city = this.city;
-    const state = this.state;
-    const zip = this.zip;
-    const email = this.email;
-
-    const feet = this.feet;
-    const inches = this.inches;
-    const lbs = this.lbs;
-
-    const username = this.username;
-    const password = this.password;
-    const password2 = this.password2;
-
-    const port = this.backend_port;
-    const url = this.backend_url;
     
-
-    if (
-        password != password2 ||
-        password2.length == 0 ||
-        password.length == 0
-    ) {
-        //show an error message about the password.
-        this.message_password_1 = true;
-        return;
-    }
-    const id = 0;
-
-    if (username_taken) {
-        this.message_username_1 = true;
-        return;
-    }
-    
-    this.$root.user.firstname = firstname;
-    this.$root.user.lastname = lastname;
-    this.$root.user.address = address;
-    this.$root.user.city = city;
-    this.$root.user.state = state;
-    this.$root.user.zip = zip;
-
-    let num = +feet * 12 + +inches;
-
-    if (typeof num !== "number") {
-        num = 0;
-    }
-    this.$root.user.height_inches = num;
-    this.$root.user.weight_lbs = lbs;
-
-    this.$root.user.email = email;
-    this.$root.user.username = username;
-    this.$root.user.password = password;
-    this.$root.user.id = id;
-    */
-    //var focusNewsx = this.focusNews
     //check if this (username) already exists!!
     let username_taken = false;
     await axios
@@ -156,55 +96,7 @@ export async function GetUserRegister(user) {
             }
             //console.log(response);
 
-            /*
-            if (!username_taken) {
-                console.log("post ");
-                const record = {};
-                record.firstname = user.firstname;
-                record.lastname = user.lastname;
-                record.address = user.address;
-                record.city = user.city;
-                record.state = user.state;
-                record.zip = user.zip;
-
-                let num = +user.feet * 12 + +user.inches;
-
-                if (typeof num !== "number") {
-                    num = 0;
-                }
-                record.height_inches = num;
-                record.weight_lbs = user.lbs;
-
-                record.email = user.email;
-                record.username = user.username;
-                record.password = user.password;
-
-                //Session.user = record;
-
-                await axios
-                    .post(url + port + "/users", record)
-                    .then(function (response_raw) {
-                        // handle success
-
-                        console.log(response_raw.data);
-                        response = JSON.parse(response_raw.data);
-                        record.id = response.insertId;
-                        //console.log(vm.$root.user.id);
-                        //Session.user.id = response.insertId;
-                        success = true;
-                    })
-                    .catch(function (error) {
-                        // handle error
-                        console.log(error);
-                    })
-                    .then(function () {
-                        // always executed
-                        if (success) {
-                            vm.focusNews();
-                        }
-                    });
-            }
-            */
+            
         })
         .catch(function (error) {
             // handle error
