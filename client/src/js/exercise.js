@@ -12,7 +12,7 @@ import {PostFeed} from "../models/feed"
   //require("dotenv").config();
   //import  "dotenv/config";
   //dotenv.config();
-  console.log(process.env.BACKEND_URL);
+  //console.log(process.env.BACKEND_URL);
 //}
 
 
@@ -153,10 +153,6 @@ export function setWorkout(obj, msg = "workout here.") {
   subtree.visible = true;
   return subtree;
 }
-
-
-
-/* ---------------- controls next ---------------- */
 
 
 

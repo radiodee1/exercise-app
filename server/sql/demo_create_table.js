@@ -1,15 +1,20 @@
 var mysql = require('mysql');
+require('dotenv').config({path:__dirname+ "/../../client/.env"});
 
-const config = require('../../mysql-login.js')
+//const config = require('../../mysql-login.js')
 
-console.log(config)
+console.log(process.env)
 
 var con = mysql.createConnection({
-  host: config.host,
-  user: config.user,
-  port: config.port,
-  password: config.password,
-  database: "web"
+  'host': process.env.VUE_APP_MYSQL_HOST, 
+  'user': process.env.VUE_APP_MYSQL_USER,
+  'password': process.env.VUE_APP_MYSQL_PASSWORD,
+  'port': process.env.VUE_APP_MYSQL_PORT,
+  //host: config.host,
+  //user: config.user,
+  //port: config.port,
+  //password: config.password,
+  'database': "web"
 });
 
 
