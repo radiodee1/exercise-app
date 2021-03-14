@@ -7,8 +7,8 @@ var bodyParser = require('body-parser');
 require('promise');
 require('dotenv').config({ path: __dirname + "/../client/.env"});
 
-var indexRouterGet = require('./routes/index.js');
-var {usersRouterGet, usersRouterPost} = require('./routes/users.js');
+//var {indexRouterGet} = require('./routes/index.js');
+var {usersRouterGet, usersRouterPost, usersRouterFriendGet} = require('./routes/users.js');
 var {feedRouterGet, feedRouterPost, feedRouterGetUser, feedRouterGetFriend, feedRouterDelete} = require("./routes/feed.js");
 var {friendRouterGet, friendRouterPost, friendRouterPatch} = require("./routes/friends.js");
 var {workoutRouterGet } = require("./routes/workouts.js");
@@ -56,9 +56,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-app.use('/', indexRouterGet);
+//app.use('/', indexRouterGet);
+
 app.use('/users', usersRouterGet);
 app.use('/users', usersRouterPost);
+app.use('/users/friends', usersRouterFriendGet);
 
 app.use('/feed', feedRouterGet); 
 app.use('/feed', feedRouterPost);

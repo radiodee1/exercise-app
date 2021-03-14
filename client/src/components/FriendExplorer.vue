@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { GetUserFriendList } from '../models/users'
     export default {
         name: "friendexplorer",
         data() {
@@ -48,6 +49,15 @@
                         .indexOf(this.name.toLowerCase()) >= 0
                 })
             }
+        },
+        methods: {
+            getData: async function() {
+                let user_id = this.$root.user.id;
+                this.data = await GetUserFriendList(user_id);
+            }
+        },
+        mounted: function () {
+            this.getData();
         }
     }
 </script>

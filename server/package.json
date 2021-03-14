@@ -17,6 +17,12 @@
     "dotenv": "^8.2.0",
     "mysql": "2.18.1"
   },
+  "eslintConfig": {
+    "rules": {
+      "no-console": "off",
+      "no-unused-vars": "off"
+    }
+  },
   "engines": {
     "node": "12.x"
   }

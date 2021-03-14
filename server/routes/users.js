@@ -1,6 +1,7 @@
 var express = require('express');
 var usersRouterGet = express.Router();
 var usersRouterPost = express.Router();
+var usersRouterFriendGet = express.Router();
 var sql = require('../public/javascripts/sql_populate.js');
 //require('promise');
 
@@ -76,7 +77,36 @@ usersRouterPost.post('/', function (req, res, next) {
 });
 
 
+/* GET users listing. */
+usersRouterFriendGet.get('/', function (req, res, next) {
+  res.set('Content-Type', 'application/json');
+  let profile_id = req.query.id;
+
+  const columns = [];
+  for (let i in user_all) {
+    columns.push(i);
+  }
+  let x = sql.sqlMakeFriendSearchSelect(columns, profile_id);
+  //let x = sql.makeSelect('profiles', columns, '', false);
+  let con = sql.connection();
+  //console.log(con);
+  try {
+    let y = sql.xquery(con, x);
+    y.then(function (value) {
+      console.log(value);
+      let yy = JSON.stringify(value);
+      res.json(yy);
+      sql.end(con);
+      //console.log(yy);
+    });
+  }
+  catch (v) {
+    console.log(v);
+  }
+});
+
 module.exports = {
   usersRouterGet,
-  usersRouterPost
+  usersRouterPost,
+  usersRouterFriendGet
 }

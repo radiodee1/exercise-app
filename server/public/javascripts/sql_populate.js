@@ -16,7 +16,8 @@ module.exports = {
     sqlSelectObjJSON,
     selectLeftOuterJoin,
     sqlMakeUpdate,
-    sqlMakeFriendFeedSelect
+    sqlMakeFriendFeedSelect,
+    sqlMakeFriendSearchSelect
 }
 
 
@@ -374,5 +375,26 @@ function sqlMakeFriendFeedSelect(feed_columns, profile_id) {
 
     xx = "";
     xx = xx + makeSelectFormat(tablename_feed, feed_columns, zz, false);
+    return xx;
+}
+
+
+// users/friends
+function sqlMakeFriendSearchSelect(profile_columns, profile_id) {
+    tablename_friends = "friends";
+    tablename_profile = "profiles";
+    zz = "";
+    zz = zz + "WHERE " + tablename_profile + ".id IN ( SELECT friends.user_id FROM friends WHERE ( friends.user_id = " + profile_id + " OR friends.friend_user_id = " + profile_id + " ) ";
+    zz = zz + "AND friends.friend_status = 'confirmed'   ";
+
+    zz = zz + "UNION SELECT friends.friend_user_id FROM friends  WHERE ( friends.user_id = " + profile_id + " OR friends.friend_user_id = " + profile_id + " ) ";
+    zz = zz + "AND friends.friend_status = 'confirmed'   ";
+
+
+    zz = zz + " ) ";
+    zz = zz + "ORDER BY feed.date_now DESC ";
+
+    xx = "";
+    xx = xx + makeSelectFormat(tablename_profile, profile_columns, zz, false);
     return xx;
 }

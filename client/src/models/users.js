@@ -1,6 +1,11 @@
+/* eslint-disable-x */
+
+//import { response } from "../../../server/app";
+
 let axios = require("axios").default;
 //let Session = require("./Session");
 
+/* eslint-disable */
 //var items = [];
 
 const port = process.env.VUE_APP_BACKEND_PORT;
@@ -136,4 +141,37 @@ export async function PostUserRegister(record) {
             //}
         });
     return record;
+}
+
+export async function GetUserFriendList(user_id) {
+    let response = null;
+    const p_list = {
+        params: {
+            id: user_id,
+        },
+    };
+    await axios
+        .get(url + port + "/users/friends", p_list)
+        .then(function (response_raw) {
+            // handle success
+
+            console.log(response_raw.data);
+            response = JSON.parse(response_raw.data);
+            //return response;
+            //record.id = response.insertId;
+            //console.log(vm.$root.user.id);
+            //Session.user.id = response.insertId;
+            //success = true;
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+        .then(function () {
+            // always executed
+            //if (success) {
+                //vm.focusNews();
+            //}
+        });
+    return response;
 }
