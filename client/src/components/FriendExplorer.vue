@@ -22,22 +22,11 @@ import { GetUserFriendList } from '../models/users'
         name: "friendexplorer",
         data() {
             return {
-                data: [
-                    'Angular',
-                    'Angular 2',
-                    'Aurelia',
-                    'Backbone',
-                    'Ember',
-                    'jQuery',
-                    'Meteor',
-                    'Node.js',
-                    'Polymer',
-                    'React',
-                    'RxJS',
-                    'Vue.js'
-                ],
+                data: [ ],
                 name: '',
-                selected: null
+                selected: null,
+                search_id : null,
+                users_id: {}
             }
         },
         computed: {
@@ -53,11 +42,28 @@ import { GetUserFriendList } from '../models/users'
         methods: {
             getData: async function() {
                 let user_id = this.$root.user.id;
-                this.data = await GetUserFriendList(user_id);
+                let users = await GetUserFriendList(user_id);
+                this.data = [];
+                for (let i = 0; i < users.length; i ++) {
+                    if (users[i].username != this.$root.user.username) {
+                        this.data.push(users[i].username);
+                        this.users_id[users[i].username] = users[i].id;
+                    }
+                }
             }
         },
         mounted: function () {
             this.getData();
+        },
+        watch: {
+            selected: function() {
+                this.search_id = this.users_id[this.selected];
+                console.log(this.selected + " selected " + this.search_id);
+                //console.log(val);
+                if (this.search_id != null && this.search_id != undefined) {
+                    this.$emit('selected', this.search_id);
+                }
+            }
         }
     }
 </script>

@@ -19,7 +19,7 @@
     </div>
     <!-- friend search box here -->
     <br>
-    <friendexplorer v-if="myFriends"></friendexplorer>
+    <friendexplorer v-if="myFriends" @selected="selected" ></friendexplorer>
   </div>
 </template>
 
@@ -62,6 +62,10 @@ export default {
       this.myFriends = true;
       
       this.$emit('friends');
+    },
+    selected: function (val) {
+      console.log("selected "+ val);
+      this.$emit('selected', val);
     }
   },
   

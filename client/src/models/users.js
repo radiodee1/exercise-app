@@ -155,9 +155,9 @@ export async function GetUserFriendList(user_id) {
         .then(function (response_raw) {
             // handle success
 
-            console.log(response_raw.data);
+            //console.log(response_raw.data);
             response = JSON.parse(response_raw.data);
-            //return response;
+            return response;
             //record.id = response.insertId;
             //console.log(vm.$root.user.id);
             //Session.user.id = response.insertId;

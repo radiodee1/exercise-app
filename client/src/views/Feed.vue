@@ -9,6 +9,7 @@
             @feed="doFeed()"
             @posts="doPosts()"
             @friends="doFriends()"
+            @selected="setSelected"
           ></feedselector>
 
           <!-- end blank column -->
@@ -115,7 +116,7 @@ export default {
       this.sortFeed = false;
       this.sortPosts = false;
       this.sortFriends = true;
-      this.getFriendItems(0);
+      //this.getFriendItems(0);
       //this.items = this.friendItems;
       console.log('friends')
     },
@@ -155,6 +156,9 @@ export default {
       this.items = await GetSingleFriendsFeed(id);
 
       
+    },
+    setSelected: function (id) {
+      this.getFriendItems(id);
     }
   },
   mounted: function () {

@@ -392,7 +392,7 @@ function sqlMakeFriendSearchSelect(profile_columns, profile_id) {
 
 
     zz = zz + " ) ";
-    zz = zz + "ORDER BY feed.date_now DESC ";
+    //zz = zz + "ORDER BY feed.date_now DESC ";
 
     xx = "";
     xx = xx + makeSelectFormat(tablename_profile, profile_columns, zz, false);
