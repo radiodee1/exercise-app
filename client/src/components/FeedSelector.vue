@@ -18,10 +18,15 @@
       </label>
     </div>
     <!-- friend search box here -->
+    <br>
+    <friendexplorer v-if="myFriends"></friendexplorer>
   </div>
 </template>
 
 <script>
+
+import friendexplorer from "./FriendExplorer.vue";
+
 export default {
   name: "feedselector",
   data: function () {
@@ -32,6 +37,9 @@ export default {
 
       
     }
+  },
+  components: {
+    friendexplorer: friendexplorer
   },
   methods: {
     selectFeed: function () {
