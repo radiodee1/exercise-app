@@ -92,7 +92,7 @@ friendRouterPost.post('/', function (req, res, next) {
     }
 });
 
-/* POST friends listing. */
+/* PATCH friends listing. */
 friendRouterPatch.patch('/', function (req, res, next) {
     res.set('Content-Type', 'application/json');
 
