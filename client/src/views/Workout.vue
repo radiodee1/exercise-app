@@ -94,17 +94,13 @@
                       Submit
                     </button>
 
-                    
-
-              <imageview @load="loading" />
-
+                    <imageview @load="loading" />
                   </div>
                 </nav>
               </div>
 
               <figure class="image" v-show="show_picture">
-                <img id="myImg3" :src="file"  />
-                
+                <img id="myImg3" :src="file" />
               </figure>
             </div>
           </article>
@@ -114,12 +110,10 @@
         <div id="review-div" v-if="review_div">
           <table>
             <tr v-for="(i, id) in items" :key="id">
-              <td>
-                
-              </td>
+              <td></td>
               <td>
                 <pre>{{ i.message }}</pre>
-                <br /> 
+                <br />
               </td>
             </tr>
           </table>
@@ -132,14 +126,14 @@
 </template>
 
 <script>
-import imageview from '../components/Image.vue';
-
-let axios = require("axios").default;
+import imageview from "../components/Image.vue";
+import {GetWorkoutList} from "../models/workout.js";
+//let axios = require("axios").default;
 
 export default {
   name: "workout",
   components: {
-    imageview: imageview
+    imageview: imageview,
   },
   data: () => ({
     isActive: false,
@@ -154,7 +148,7 @@ export default {
     submit_list: [],
     chosen_list: [],
 
-    file: null
+    file: null,
   }),
   props: {
     newsfeed: Boolean,
@@ -215,52 +209,24 @@ export default {
     not: function (id) {
       this.chosen_list[id].chosen = false;
     },
-    getItems: function () {
-      const port = this.backend_port;
-      const url = this.backend_url;
+    getItems: async function () {
+      //const port = this.backend_port;
+      //const url = this.backend_url;
       const id = this.$root.user.id;
-      const vm = this;
+      //const vm = this;
       //let items = [];
       if (this.items.length > 0) {
         return;
       }
-      const f_obj = {
-        params: {
-          id: id,
-          days: this.search_day,
-        },
-      };
-
-      axios
-        .get(url + port + "/workout", f_obj)
-        .then(function (response) {
-          // handle success
-
-          console.log(response.data);
-          response = JSON.parse(response.data);
-
-          vm.items = [...response];
-          vm.submit_list = [];
-          vm.chosen_list = [];
-          for (let i = 0; i < vm.items.length; i++) {
-            vm.chosen_list.push({
-              chosen: false,
-            });
-          }
-          //vm.items = [...response];
-          //vm.submit_list = [];
-          //vm.tree.feed = [... response];
-          //items = [... response];
-          console.log(vm.items.length + " len");
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .then(function () {
-          // always executed
+      this.items = await GetWorkoutList(id, this.search_day);
+      this.submit_list = [];
+      this.chosen_list = [];
+      for (let i = 0; i < this.items.length; i++) {
+        this.chosen_list.push({
+          chosen: false,
         });
-      //return items;
+      }
+      
     },
 
     submit: function () {
@@ -289,11 +255,11 @@ export default {
       this.show_picture = false;
       this.focusNews();
     },
-    loading: function(f) {
+    loading: function (f) {
       this.file = f;
       this.showPicture();
       //console.log('file ' + f);
-    }
+    },
   },
 };
 </script>
