@@ -50,7 +50,7 @@ workoutRouterGet.get('/', function (req, res, next) {
     let xx = 'WHERE from_user_id = '+ id + ' AND show_exercise = "1" AND `date_now` > CAST(CURTIME() AS DATE)+0 + ' + ( days ) + '  ORDER BY date_now DESC ';
     let x = sql.makeSelect('feed', columns, xx, false);
     //let x = sql.sqlMakeFriendFeedSelect(columns, id);
-    console.log(x);
+    //console.log(x);
     let con = sql.connection();
     try {
       let y = sql.xquery(con, x);

@@ -24,26 +24,11 @@ export async function GetWorkoutList(i, search_day) {
         .then(function (response) {
             // handle success
 
-            console.log(response.data);
+            //console.log(response.data);
             response = JSON.parse(response.data);
             out = response;
             //return response;
-            /*
-            vm.items = [...response];
-            vm.submit_list = [];
-            vm.chosen_list = [];
-            for (let i = 0; i < vm.items.length; i++) {
-              vm.chosen_list.push({
-                chosen: false,
-              });
-            }
-            */
-
-            //vm.items = [...response];
-            //vm.submit_list = [];
-            //vm.tree.feed = [... response];
-            //items = [... response];
-            //console.log(vm.items.length + " len");
+            
         })
         .catch(function (error) {
             // handle error
