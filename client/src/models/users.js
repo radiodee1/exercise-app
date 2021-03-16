@@ -23,7 +23,7 @@ export async function GetUserLogin(username_in, password_in) {
         .get(url + port + "/users")
         .then(function (response_raw) {
             // handle success
-            //console.log(response);
+            console.log(response);
             let response = JSON.parse(response_raw.data);
             for (let i = 0; i < response.length; i++) {
                 let username_saved = response[i].username;

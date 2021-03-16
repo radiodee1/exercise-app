@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "nodemon --watch server server/app.js"
   },
   "dependencies": {
     "cookie-parser": "^1.4.5",
@@ -15,7 +16,8 @@
     "body-parser": "^1.19.0",
     "promise": "8.1.0",
     "dotenv": "^8.2.0",
-    "mysql": "2.18.1"
+    "mysql": "2.18.1",
+    "nodemon": "2.0.7"
   },
   "eslintConfig": {
     "rules": {

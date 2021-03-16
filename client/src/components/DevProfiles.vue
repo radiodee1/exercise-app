@@ -58,7 +58,7 @@ export default {
         .then(function (response_raw) {
           // handle success
           //console.log(response);
-          response = JSON.parse(response_raw.data);
+          response =  JSON.parse(response_raw.data);
           //console.log(response);
           for(let i = 0; i < response.length; i ++) {
             response[i].picture = null;

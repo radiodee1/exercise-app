@@ -7,11 +7,12 @@ var bodyParser = require('body-parser');
 require('promise');
 require('dotenv').config({ path: __dirname + "/../client/.env"});
 
-//var {indexRouterGet} = require('./routes/index.js');
-var {usersRouterGet, usersRouterPost, usersRouterFriendGet} = require('./routes/users.js');
-var {feedRouterGet, feedRouterPost, feedRouterGetUser, feedRouterGetFriend, feedRouterDelete} = require("./routes/feed.js");
-var {friendRouterGet, friendRouterPost, friendRouterPatch} = require("./routes/friends.js");
-var {workoutRouterGet } = require("./routes/workouts.js");
+
+
+var feedCtrl = require('./controllers/feed')
+var friendCtrl = require('./controllers/friends')
+var userCtrl = require('./controllers/users')
+var workoutCtrl = require('./controllers/workouts')
 
 var app = express();
 
@@ -57,7 +58,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 //app.use('/', indexRouterGet);
-
+/*
 app.use('/users', usersRouterGet);
 app.use('/users', usersRouterPost);
 app.use('/users/friends', usersRouterFriendGet);
@@ -73,6 +74,14 @@ app.use('/friends', friendRouterPost);
 app.use('/friends', friendRouterPatch);
 
 app.use('/workout', workoutRouterGet);
+*/
+
+app.use(userCtrl);
+//app.use(feedCtrl)
+//app.use( friendCtrl)
+//app.use('/workout',workoutCtrl)
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
