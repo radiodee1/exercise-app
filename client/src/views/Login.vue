@@ -101,7 +101,9 @@ export default {
       const username = this.username;
       const password = this.password; 
 
-      let user_reply = await GetUserLogin(username, password)
+      var user_reply = await GetUserLogin(username, password)
+      //user_reply = JSON.parse(user_reply);
+      console.log(user_reply);
       if (typeof user_reply.id === "number") {
         for (let i in user_reply) {
           this.$root.user[i] = user_reply[i];

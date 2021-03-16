@@ -29,7 +29,7 @@
   </div>
 </template>
 <script>
-let axios = require("axios").default;
+//let axios = require("axios").default;
 
 export default {
   name: "devprofiles",
@@ -48,11 +48,13 @@ export default {
   },
   methods: {
     getUsers: function () {
+      /*
       let response = [];
       const port = this.backend_port;
       const url = this.backend_url;
       console.log(url+port);
       let vm = this;
+      
       axios
         .get(url + port + "/users")
         .then(function (response_raw) {
@@ -79,6 +81,7 @@ export default {
           //vm.focusNews();
           //}
         });
+      */
     },
     confirm: function (num) {
         this.single = this.items[num];

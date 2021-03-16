@@ -1,5 +1,5 @@
 var express = require('express');
-var usersRouterGet = express.Router();
+//var usersRouterGet = express.Router();
 //var usersRouterPost = express.Router();
 //var usersRouterFriendGet = express.Router();
 var sql = require('../public/javascripts/sql_populate.js');
@@ -25,12 +25,13 @@ const user_all = {
   picture: null
 };
 
+//var yy = null;
 
 
 /* GET users listing. */
-module.exports.usersRouterGet = function (req, res, next) {
-  res.set('Content-Type', 'application/json');
-  let yy = null;
+module.exports.usersRouterGet = async function (req, res, next) {
+  //res.set('Content-Type', 'application/json');
+  var yy = null;
   const columns = [];
   for (let i in user_all) {
     columns.push(i);
@@ -41,31 +42,34 @@ module.exports.usersRouterGet = function (req, res, next) {
   //console.log(con);
   try {
     let y = sql.xquery(con, x);
-    y.then(function (value) {
-      console.log(value);
+    //console.log("----");
+    await y.then(function (value) {
+      //console.log(value);
       yy = JSON.stringify(value);
-      res.json(yy);
+      
       sql.end(con);
-      console.log({'yy':yy});
+      
     });
+    
   }
   catch (v) {
     console.log(v);
   }
+  console.log(yy);
   return yy;
 }
 
 /* POST users listing. */
 
-module.exports.usersRouterPost =  function (req, res, next) {
-  res.set('Content-Type', 'application/json');
+module.exports.usersRouterPost = async function (req, res, next) {
+  //res.set('Content-Type', 'application/json');
 
   console.log(req.body);
   let x = sql.sqlInsertObjJSON(req.body, 'profiles');
   let con = sql.connection();
   try {
     let y = sql.xquery(con, x);
-    y.then(function (value) {
+    await y.then(function (value) {
       console.log(value);
       let yy = JSON.stringify(value);
       res.json(yy);
