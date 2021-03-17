@@ -15,8 +15,14 @@ router
     //next();
 })
 
-.post('/users', (req, res) => res.send(model.usersRouterPost(req, res)))
+.post('/users', async function (req, res, next)  {
+    yy = await model.usersRouterPost(req, res, next);
+    res.send(yy);
+})
 //.get('/users/friends', usersRouterFriendGet)
-.get('/users/friends', (req, res) => res.send(model.usersRouterFriendGet(req, res)))
+.get('/users/friends', async function (req, res, next)  {
+    yy = await model.usersRouterFriendGet(req, res);
+    res.send(yy);
+})
 
 module.exports = router;

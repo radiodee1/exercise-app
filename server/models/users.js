@@ -87,10 +87,10 @@ module.exports.usersRouterPost = async function (req, res, next) {
 /* GET users listing. */
 
 
-module.exports.usersRouterFriendGet = function (req, res, next) {
+module.exports.usersRouterFriendGet = async function (req, res, next) {
   res.set('Content-Type', 'application/json');
   let profile_id = req.query.id;
-
+  let out = [];
   const columns = [];
   for (let i in user_all) {
     columns.push(i);
@@ -101,19 +101,20 @@ module.exports.usersRouterFriendGet = function (req, res, next) {
   //console.log(con);
   try {
     let y = sql.xquery(con, x);
-    y.then(function (value) {
+    await y.then(function (value) {
       console.log(value);
       let yy = JSON.stringify(value);
-      res.json(yy);
+      //res.json(yy);
       sql.end(con);
       //console.log(yy);
+      out = yy;
     });
   }
   catch (v) {
     console.log(v);
   }
    //next();
-   return yy;
+   return out;
 };
 
 

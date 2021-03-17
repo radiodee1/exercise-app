@@ -52,7 +52,7 @@ export async function GetMyFeed(id) {
         .then(function (response) {
             // handle success
 
-            response = JSON.parse(response.data);
+            response = response.data;//JSON.parse(response.data);
             console.log(response.length + " post");
 
             items = [...response];
@@ -90,7 +90,7 @@ export async function GetFriendsFeed(id) {
           // handle success
 
           //console.log(response.data);
-          response = JSON.parse(response.data);
+          response = response.data; //JSON.parse(response.data);
 
           items = [...response];
           //vm.tree.feed = [... response];
@@ -131,7 +131,7 @@ export async function GetSingleFriendsFeed(id) {
             // handle success
 
             //console.log(response.data);
-            response = JSON.parse(response.data);
+            response = response.data;// JSON.parse(response.data);
 
             items = [...response];
             //vm.tree.feed = [... response];
@@ -171,7 +171,7 @@ export async function DeletePost(i, session_user_id) {
         .then(function (response) {
             // handle success
 
-            response = JSON.parse(response.data);
+            response = response.data;//JSON.parse(response.data);
 
             console.log(response.length + " len");
         })

@@ -84,6 +84,9 @@ export default {
   },
   watch: {
     items: function(newItems, oldItems) {
+      if (newItems == null || oldItems == null) {
+        return;
+      }
       console.log('items watch ' + newItems.length + " " + oldItems.length);
       //this.$forceUpdate();
     }

@@ -4,14 +4,33 @@ const express = require("express");
 const app = express.Router();
 
 
-var {feedRouterGet, feedRouterPost, feedRouterGetUser, feedRouterGetFriend, feedRouterDelete} = require("../models/feed.js");
+var model = require("../models/feed.js");
 
 
 app
-.get('/feed', feedRouterGet)
-.post('/feed', feedRouterPost)
-.get('/feed/user', feedRouterGetUser)
-.get('/feed/friend', feedRouterGetFriend)
-.delete('/feed', feedRouterDelete)
+.get('/feed', async function (req, res, next) {
+    let yy = await model.feedRouterGet(req, res, next);
+    res.send(yy);
+})
+
+.post('/feed', async function (req, res, next)  {
+    let yy = await model.feedRouterPost(req, res, next);
+    res.send(yy);
+})
+
+.get('/feed/user', async function (req, res, next) {
+    let yy = await model.feedRouterGetUser(req, res, next);
+    res.send(yy)
+})
+
+.get('/feed/friend', async function (req, res, next) {
+    let yy = await model.feedRouterGetFriend(req, res, next);
+    res.send(yy);
+})
+
+.delete('/feed', async function (req, res, next) {
+    let yy = await model.feedRouterDelete(req, res, next);
+    res.send(yy);
+})
 
 module.exports = app;

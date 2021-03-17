@@ -76,8 +76,8 @@ app.use('/friends', friendRouterPatch);
 app.use('/workout', workoutRouterGet);
 */
 
-app.use('/',userCtrl);
-//app.use(feedCtrl)
+app.use('/', userCtrl);
+app.use('/', feedCtrl)
 //app.use( friendCtrl)
 //app.use('/workout',workoutCtrl)
 

@@ -1,9 +1,9 @@
 var express = require('express');
-var feedRouterGet = express.Router();
-var feedRouterPost = express.Router();
-var feedRouterGetUser = express.Router();
-var feedRouterGetFriend = express.Router();
-var feedRouterDelete = express.Router();
+//var feedRouterGet = express.Router();
+//var feedRouterPost = express.Router();
+//var feedRouterGetUser = express.Router();
+//var feedRouterGetFriend = express.Router();
+//var feedRouterDelete = express.Router();
 var sql = require('../public/javascripts/sql_populate.js');
 //require('promise');
 
@@ -43,8 +43,9 @@ const feed_all = {
 
 
 /* GET feed listing. */
-feedRouterGet.get('/', function (req, res, next) {
+module.exports.feedRouterGet = async function (req, res, next) {
     res.set('Content-Type', 'application/json');
+    let out = [];
     //console.log(res.req.query);
     const id = res.req.query.id;
     const columns = [];
@@ -57,21 +58,22 @@ feedRouterGet.get('/', function (req, res, next) {
     let con = sql.connection();
     try {
       let y = sql.xquery(con, x);
-      y.then(function (value) {
+      await y.then(function (value) {
         console.log(value);
         let yy = JSON.stringify(value);
-        res.json(yy);
+        //res.json(yy);
         sql.end(con);
-  
+        out = yy;
       });
     }
     catch (v) {
       console.log(v);
     }
-  });
+    return out;
+  };
   
   /* POST feed listing. */
-  feedRouterPost.post('/', function (req, res, next) {
+  module.exports.feedRouterPost = async function (req, res, next) {
     res.set('Content-Type', 'application/json');
   
     console.log(req.body);
@@ -79,7 +81,7 @@ feedRouterGet.get('/', function (req, res, next) {
     let con = sql.connection();
     try {
       let y = sql.xquery(con, x);
-      y.then(function (value) {
+      await y.then(function (value) {
         console.log(value);
         let yy = JSON.stringify(value);
         res.json(yy);
@@ -90,12 +92,13 @@ feedRouterGet.get('/', function (req, res, next) {
     catch (v) {
       console.log(v);
     }
-  });
+  };
   
   /* GET feed listing just for my posts. */
-feedRouterGetUser.get('/', function (req, res, next) {
+module.exports.feedRouterGetUser = async function (req, res, next) {
   res.set('Content-Type', 'application/json');
   //console.log(res.req.query);
+  let out = [];
   const id = res.req.query.id;
   const columns = [];
   for (let i in feed_all) {
@@ -107,23 +110,26 @@ feedRouterGetUser.get('/', function (req, res, next) {
   let con = sql.connection();
   try {
     let y = sql.xquery(con, x);
-    y.then(function (value) {
-      console.log(value);
+    await y.then(function (value) {
+      //console.log(value);
       let yy = JSON.stringify(value);
-      res.json(yy);
+      //res.json(yy);
       sql.end(con);
-
+      out = yy;
+      //console.log(out);
     });
   }
   catch (v) {
     console.log(v);
   }
-});
+  return out;
+};
 
 /* GET feed listing just for a friend's post. */
-feedRouterGetFriend.get('/', function (req, res, next) {
+module.exports.feedRouterGetFriend = async function (req, res, next) {
   res.set('Content-Type', 'application/json');
   //console.log(res.req.query);
+  let out = [];
   const id = res.req.query.id;
   const columns = [];
   for (let i in feed_all) {
@@ -135,21 +141,22 @@ feedRouterGetFriend.get('/', function (req, res, next) {
   let con = sql.connection();
   try {
     let y = sql.xquery(con, x);
-    y.then(function (value) {
+    await y.then(function (value) {
       console.log(value);
       let yy = JSON.stringify(value);
-      res.json(yy);
+      //res.json(yy);
       sql.end(con);
-
+      out = yy;
     });
   }
   catch (v) {
     console.log(v);
   }
-});
+  return out;
+};
 
 /* DELETE feed listing. */
-feedRouterDelete.delete('/', function (req, res, next) {
+module.exports.feedRouterDelete = async function (req, res, next) {
   res.set('Content-Type', 'application/json');
   //console.log(res.req.query);
   const id = req.body.id;
@@ -163,7 +170,7 @@ feedRouterDelete.delete('/', function (req, res, next) {
   let con = sql.connection();
   try {
     let y = sql.xquery(con, x);
-    y.then(function (value) {
+    await y.then(function (value) {
       console.log(value);
       let yy = JSON.stringify(value);
       res.json(yy);
@@ -174,14 +181,6 @@ feedRouterDelete.delete('/', function (req, res, next) {
   catch (v) {
     console.log(v);
   }
-});
+};
 
 
-
-module.exports = {
-    feedRouterGet,
-    feedRouterPost,
-    feedRouterGetUser,
-    feedRouterGetFriend,
-    feedRouterDelete
-}
