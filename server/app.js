@@ -7,8 +7,6 @@ var bodyParser = require('body-parser');
 require('promise');
 require('dotenv').config({ path: __dirname + "/../client/.env"});
 
-
-
 var feedCtrl = require('./controllers/feed')
 var friendCtrl = require('./controllers/friends')
 var userCtrl = require('./controllers/users')
@@ -19,9 +17,6 @@ var app = express();
 //console.log(process.env);
 
 app.listen( (+ process.env.VUE_APP_BACKEND_PORT) || 3010);
-
-//app.listen(3010);
-//app.listen(process.env.VUE_APP_BACKEND_PORT );
 
 app.use(function (req, res, next) {
 
@@ -57,29 +52,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-//app.use('/', indexRouterGet);
-/*
-app.use('/users', usersRouterGet);
-app.use('/users', usersRouterPost);
-app.use('/users/friends', usersRouterFriendGet);
 
-app.use('/feed', feedRouterGet); 
-app.use('/feed', feedRouterPost);
-app.use('/feed/user', feedRouterGetUser);
-app.use('/feed/friend', feedRouterGetFriend);
-app.use('/feed', feedRouterDelete);
-
-app.use('/friends', friendRouterGet);
-app.use('/friends', friendRouterPost);
-app.use('/friends', friendRouterPatch);
-
-app.use('/workout', workoutRouterGet);
-*/
 
 app.use('/', userCtrl);
-app.use('/', feedCtrl)
-app.use( '/',friendCtrl)
-app.use('/',workoutCtrl)
+app.use('/', feedCtrl);
+app.use( '/',friendCtrl);
+app.use('/',workoutCtrl);
 
 
 
