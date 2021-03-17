@@ -29,6 +29,8 @@
   </div>
 </template>
 <script>
+import { GetUserDevList } from '../models/users';
+//import { GetUserLogin } from '../models/users';
 //let axios = require("axios").default;
 
 export default {
@@ -47,41 +49,10 @@ export default {
     //items: [],//this.getUsers(),
   },
   methods: {
-    getUsers: function () {
-      /*
-      let response = [];
-      const port = this.backend_port;
-      const url = this.backend_url;
-      console.log(url+port);
-      let vm = this;
-      
-      axios
-        .get(url + port + "/users")
-        .then(function (response_raw) {
-          // handle success
-          //console.log(response);
-          response =  JSON.parse(response_raw.data);
-          //console.log(response);
-          for(let i = 0; i < response.length; i ++) {
-            response[i].picture = null;
-          }
+    getUsers: async function () {
 
-          vm.items = response;
-          //console.log(response);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .then(function () {
-          // always executed
-          //focusNewsx();
-          //if (success) {
-          //console.log(vm.$root.user.id);
-          //vm.focusNews();
-          //}
-        });
-      */
+      this.items = await GetUserDevList();
+      
     },
     confirm: function (num) {
         this.single = this.items[num];

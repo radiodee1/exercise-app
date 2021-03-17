@@ -118,10 +118,3 @@ module.exports.usersRouterFriendGet = async function (req, res, next) {
 };
 
 
-/*
-module.exports = {
-  usersRouterGet,
-  //usersRouterPost,
-  //usersRouterFriendGet
-}
-*/

@@ -177,3 +177,26 @@ export async function GetUserFriendList(user_id) {
         });
     return response;
 }
+
+export async function GetUserDevList() {
+    let list = [];
+    await axios
+        .get(url + port + "/users")
+        .then(function (response_raw) {
+            // handle success
+            //console.log(response);
+            let response = response_raw.data;// JSON.parse(response_raw.data);
+            console.log(response);
+            //console.log("----");
+            list = response;
+            //console.log(response);
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+        .then(function () {
+            
+        });
+    return list;
+}
