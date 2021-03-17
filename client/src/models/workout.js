@@ -25,7 +25,7 @@ export async function GetWorkoutList(i, search_day) {
             // handle success
 
             //console.log(response.data);
-            response = JSON.parse(response.data);
+            response = response.data;// JSON.parse(response.data);
             out = response;
             //return response;
             
