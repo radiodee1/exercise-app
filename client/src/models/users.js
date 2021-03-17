@@ -89,7 +89,7 @@ export async function GetUserRegister(user) {
         .then(function (response_raw) {
             // handle success
             //console.log(response);
-            let response = JSON.parse(response_raw.data);
+            let response = response_raw.data;// JSON.parse(response_raw.data);
             for (let i = 0; i < response.length; i++) {
                 let username_saved = response[i].username;
                 if (username_saved === null || username_saved === undefined) {
@@ -126,7 +126,7 @@ export async function PostUserRegister(record) {
             // handle success
 
             console.log(response_raw.data);
-            let response = JSON.parse(response_raw.data);
+            let response = response_raw.data;// JSON.parse(response_raw.data);
             record.id = response.insertId;
             //console.log(vm.$root.user.id);
             //Session.user.id = response.insertId;
@@ -158,7 +158,7 @@ export async function GetUserFriendList(user_id) {
             // handle success
 
             //console.log(response_raw.data);
-            response = JSON.parse(response_raw.data);
+            response = response_raw.data;// JSON.parse(response_raw.data);
             return response;
             //record.id = response.insertId;
             //console.log(vm.$root.user.id);

@@ -1,7 +1,7 @@
 var express = require('express');
-var friendRouterGet = express.Router();
-var friendRouterPost = express.Router();
-var friendRouterPatch = express.Router();
+//var friendRouterGet = express.Router();
+//var friendRouterPost = express.Router();
+//var friendRouterPatch = express.Router();
 var sql = require('../public/javascripts/sql_populate.js');
 //require('promise');
 
@@ -31,11 +31,11 @@ const friends_all = {
 };
 
 /* GET friends listing. */
-friendRouterGet.get('/', function (req, res, next) {
+module.exports.friendRouterGet = async function (req, res, next) {
     res.set('Content-Type', 'application/json');
     //console.log(req);
     //console.log("---");
-
+    let out = [];
     let id = req.query.id;
     //console.log(id);
     //save for later??
@@ -57,66 +57,63 @@ friendRouterGet.get('/', function (req, res, next) {
     let con = sql.connection();
     try {
         let y = sql.xquery(con, x);
-        y.then(function (value) {
+        await y.then(function (value) {
             //console.log(value);
             let yy = JSON.stringify(value);
-            res.json(yy);
+            //res.json(yy);
             sql.end(con);
-
+            out = yy;
         });
     }
     catch (v) {
         console.log(v);
     }
-});
+    return out;
+};
 
 /* POST friends listing. */
-friendRouterPost.post('/', function (req, res, next) {
+module.exports.friendRouterPost = async function (req, res, next) {
     res.set('Content-Type', 'application/json');
-
+    let out = [];
     //console.log(req.body);
     let x = sql.sqlInsertObjJSON(req.body, 'friends');
     let con = sql.connection();
     try {
         let y = sql.xquery(con, x);
-        y.then(function (value) {
+        await y.then(function (value) {
             //console.log(value);
             let yy = JSON.stringify(value);
-            res.json(yy);
+            //res.json(yy);
             sql.end(con);
-
+            out = yy;
         });
     }
     catch (v) {
         console.log(v);
     }
-});
+    return out;
+};
 
 /* PATCH friends listing. */
-friendRouterPatch.patch('/', function (req, res, next) {
+module.exports.friendRouterPatch = async function (req, res, next) {
     res.set('Content-Type', 'application/json');
-
+    let out = [];
     //console.log(req.body);
     //let x = sql.sqlInsertObjJSON(req.body, 'friends');
     let x = sql.sqlMakeUpdate('friends', req.body.ident, req.body.change);
     let con = sql.connection();
     try {
         let y = sql.xquery(con, x);
-        y.then(function (value) {
+        await y.then(function (value) {
             //console.log(value);
             let yy = JSON.stringify(value);
-            res.json(yy);
+            //res.json(yy);
             sql.end(con);
-
+            out = yy;
         });
     }
     catch (v) {
         console.log(v);
     }
-});
-
-module.exports = {
-    friendRouterGet,
-    friendRouterPost,
-    friendRouterPatch
-}
+    return out;
+};

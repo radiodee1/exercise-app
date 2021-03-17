@@ -36,7 +36,7 @@ export async function PostNewFriendAsk(num, user_id) {
             // handle success
 
             console.log(response.data);
-            response = JSON.parse(response.data);
+            response = response.data;// JSON.parse(response.data);
             list[num].status = "waiting";
 
             //vm.$root.user.id = response.insertId;
@@ -55,7 +55,7 @@ export async function PostNewFriendAsk(num, user_id) {
         });
     console.log("----");
     console.log(list);
-    //list[num].status = "waiting";
+    list[num].status = "waiting";
 
     return list;
 }
@@ -83,7 +83,7 @@ export async function PatchConfirmFriend(num) {
             // handle success
 
             console.log(response.data);
-            response = JSON.parse(response.data);
+            response = response.data;// JSON.parse(response.data);
             //vm.$root.user.id = response.insertId;
             //console.log(vm.$root.user.id);
             //success = true;
@@ -130,7 +130,7 @@ export async function GetFriendList(user_id, root_username) {
             // handle success
             //const response_raw = response;
 
-            response = JSON.parse(response.data);
+            response = response.data;// JSON.parse(response.data);
             //console.log(response);
             for (let i = 0; i < response.length; i++) {
                 const dict1 = {};
@@ -169,6 +169,10 @@ export async function GetFriendList(user_id, root_username) {
                         " " +
                         order[dict1.status]
                     );
+                }
+
+                if (associated && dict1.friend_user_id !== user_id && order[highest[dict1.username].status] < order['confirmed']) {
+                    highest[dict1.username].status = "waiting";
                 }
 
                 if (

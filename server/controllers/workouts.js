@@ -1,12 +1,15 @@
-const { request } = require("express");
+//const { request } = require("express");
 const express = require("express");
 
 
 const app = express.Router();
 
-var {workoutRouterGet } = require("../models/workouts.js");
+var model = require("../models/workouts.js");
 
 
-app.use('/workout', workoutRouterGet);
+app.get('/workout', async function (req, res, next) {
+    let yy = await model.workoutRouterGet(req, res, next);
+    res.send(yy);
+});
 
 module.exports = app;

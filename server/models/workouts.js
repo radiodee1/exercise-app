@@ -1,5 +1,5 @@
 var express = require('express');
-var workoutRouterGet = express.Router();
+//var workoutRouterGet = express.Router();
 //var workoutRouterPost = express.Router();
 var sql = require('../public/javascripts/sql_populate.js');
 //require('promise');
@@ -35,9 +35,10 @@ const feed_all = {
 }
 
 /* GET feed listing. */
-workoutRouterGet.get('/', function (req, res, next) {
+module.exports.workoutRouterGet = async function (req, res, next) {
     res.set('Content-Type', 'application/json');
     //console.log(res.req.query);
+    let out = [];
     const id = res.req.query.id;
     const days = res.req.query.days;
     const columns = [];
@@ -54,19 +55,17 @@ workoutRouterGet.get('/', function (req, res, next) {
     let con = sql.connection();
     try {
       let y = sql.xquery(con, x);
-      y.then(function (value) {
+      await y.then(function (value) {
         //console.log(value);
         let yy = JSON.stringify(value);
-        res.json(yy);
+        //res.json(yy);
         sql.end(con);
-  
+        out = yy;
       });
     }
     catch (v) {
       console.log(v);
     }
-  });
+    return out;
+  };
   
-  module.exports = {
-    workoutRouterGet
-}
