@@ -67,3 +67,10 @@ import { GetUserFriendList } from '../models/users'
         }
     }
 </script>
+<style scoped>
+section {
+    border: 1px solid black;
+    background-color: lightgray;
+    padding: 15px;
+}
+</style>
