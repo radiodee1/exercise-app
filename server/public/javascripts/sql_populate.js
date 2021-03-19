@@ -15,6 +15,7 @@ module.exports = {
     sqlInsertObjJSON,
     sqlSelectObjJSON,
     selectLeftOuterJoin,
+    selectLeftOuterJoinRaw,
     sqlMakeUpdate,
     sqlMakeFriendFeedSelect,
     sqlMakeFriendSearchSelect
@@ -306,6 +307,22 @@ function selectLeftOuterJoin(table_name_left, table_name_right, table_name_left_
     xx = xx + " FROM " + table_name_right + " ";
     xx = xx + " ) AS t2 ON ";
     xx = xx + on_clause;
+
+    return xx;
+}
+
+
+function selectLeftOuterJoinRaw(lower_timestamp, upper_timestamp) {
+    xx = `
+    SELECT t1.firstname, t1.lastname, t1.username, t1.id,  
+    UNIX_TIMESTAMP(t2.date_now) AS unix_time, t2.date_now ,    
+    t2.num, t2.from_user_id, t2.count FROM profiles      
+    AS t1 LEFT JOIN (  SELECT DISTINCT num,  date_now, from_user_id,      
+    COUNT(from_user_id) AS count  FROM feed WHERE  
+    UNIX_TIMESTAMP(date_now) > ${lower_timestamp} AND 
+    UNIX_TIMESTAMP(date_now) < ${upper_timestamp} GROUP BY from_user_id  )      
+    AS t2 ON t1.id = t2.from_user_id ORDER BY t1.username;
+    `
 
     return xx;
 }
