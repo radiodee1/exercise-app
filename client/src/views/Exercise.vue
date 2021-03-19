@@ -29,8 +29,8 @@
                   @click="controlDropdownType()"
                 >
                   <span id="exercise_type_label">{{ exerciseType }}</span>
-                  <span class="icon is-small">
-                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  <span class="icon is-small"
+                    ><i class="fas fa-angle-down" aria-hidden="true"></i>
                   </span>
                 </button>
               </div>
@@ -68,12 +68,12 @@
               </div>
             </div>
             <!-- end first dropdown -->
+            <br>
             <div
               class="dropdown"
               id="exercise_type_deet"
               :class="{ 'is-active': eTypeDeetIsActive }"
             >
-              <!-- class="is-active" -->
               <div class="dropdown-trigger">
                 <button
                   class="button"
@@ -83,9 +83,9 @@
                 >
                   <span id="exercise_type_deet_label">{{
                     exerciseTypeDeet
-                  }}</span>
-                  <span class="icon is-small">
-                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  }}</span
+                  ><span class="icon is-small"
+                    ><i class="fas fa-angle-down" aria-hidden="true"></i>
                   </span>
                 </button>
               </div>
@@ -183,28 +183,11 @@
                     Submit
                   </button>
                   <imageview @load="loading"></imageview>
-                  <!-- div class="file">
-                    <label class="file-label">
-                      <input
-                        class="file-input is-primary"
-                        type="file"
-                        name="resume"
-                        id="pic-button"
-                        @change="showPicture"
-                      />
-                      <span class="file-cta">
-                        <span class="file-icon">
-                          <i class="fas fa-upload"></i>
-                        </span>
-                        <span class="file-label"> Choose a picture </span>
-                      </span>
-                    </label>
-                  </div -->
                 </div>
               </nav>
             </div>
             <figure class="image" v-show="show_picture">
-              <img id="myImg2" :src="file"  />
+              <img id="myImg2" :src="file" />
             </figure>
           </div>
         </article>
@@ -218,7 +201,7 @@
 
 <script>
 import imageview from "../components/Image.vue";
-import { PatchStoreWeight } from '../models/users';
+import { PatchStoreWeight } from "../models/users";
 
 export default {
   name: "exercise",
@@ -328,7 +311,7 @@ export default {
       }
       // save to db!!
       this.$root.user.weight_lbs = new_weight;
-      
+
       await PatchStoreWeight(this.$root.user.id, w);
     },
     loading: function (f) {
