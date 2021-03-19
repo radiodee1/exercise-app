@@ -118,3 +118,29 @@ module.exports.usersRouterFriendGet = async function (req, res, next) {
 };
 
 
+module.exports.usersRouterWeightPatch = async function (req, res, next) {
+  res.set('Content-Type', 'application/json');
+  let profile_id = req.body.ident.id;
+  let weight = req.body.change.weight_lbs;
+  
+  let x = sql.sqlUserUpdateRaw( profile_id, weight);
+
+  let con = sql.connection();
+  //console.log(con);
+  try {
+    let y = sql.xquery(con, x);
+    await y.then(function (value) {
+      console.log(value);
+      let yy = JSON.stringify(value);
+      //res.json(yy);
+      sql.end(con);
+      //console.log(yy);
+      out = yy;
+    });
+  }
+  catch (v) {
+    console.log(v);
+  }
+   //next();
+   return out;
+}

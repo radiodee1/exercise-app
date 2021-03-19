@@ -18,7 +18,8 @@ module.exports = {
     selectLeftOuterJoinRaw,
     sqlMakeUpdate,
     sqlMakeFriendFeedSelect,
-    sqlMakeFriendSearchSelect
+    sqlMakeFriendSearchSelect,
+    sqlUserUpdateRaw
 }
 
 
@@ -413,5 +414,10 @@ function sqlMakeFriendSearchSelect(profile_columns, profile_id) {
 
     xx = "";
     xx = xx + makeSelectFormat(tablename_profile, profile_columns, zz, false);
+    return xx;
+}
+
+function sqlUserUpdateRaw(id, weight) {
+    xx = `UPDATE profiles SET weight_lbs = ${weight} WHERE id = ${id}`;
     return xx;
 }

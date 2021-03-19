@@ -59,8 +59,11 @@ export default {
         console.log(num);
     },
   },
-  created: function () {
+  mounted: function () {
     this.getUsers();
+  },
+  created: function () {
+    //this.getUsers();
   },
 };
 </script>

@@ -200,3 +200,37 @@ export async function GetUserDevList() {
         });
     return list;
 }
+
+
+export async function PatchStoreWeight(id, w) {
+    const f_obj = {
+        change: {
+            weight_lbs: w,
+        },
+        ident: {
+            id: id,
+
+        },
+
+    };
+    let out = [];
+    console.log(f_obj);
+    console.log("----");
+    await axios
+        .patch(url + port + "/users/weight", f_obj)
+        .then(function (response) {
+            // handle success
+
+            console.log(response.data);
+            response = response.data;// JSON.parse(response.data);
+            out = response;
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+        .then(function () {
+            
+        });
+    return out;
+}

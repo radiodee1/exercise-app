@@ -23,4 +23,9 @@ router
     res.send(yy);
 })
 
+.patch('/users/weight', async function (req, res, next) {
+    let yy = await model.usersRouterWeightPatch(req, res, next);
+    res.send(yy);
+})
+
 module.exports = router;

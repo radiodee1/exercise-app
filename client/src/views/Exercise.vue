@@ -218,6 +218,7 @@
 
 <script>
 import imageview from "../components/Image.vue";
+import { PatchStoreWeight } from '../models/users';
 
 export default {
   name: "exercise",
@@ -311,7 +312,7 @@ export default {
       this.show_message = false;
       this.useFormSubmitExercise(this.exerciseReport, this.file);
     },
-    changeWeight: function (new_weight) {
+    changeWeight: async function (new_weight) {
       //console.log(new_weight);
       const w = +new_weight;
       const goal = this.$root.user.height_inches * this.lbs_inch;
@@ -327,6 +328,8 @@ export default {
       }
       // save to db!!
       this.$root.user.weight_lbs = new_weight;
+      
+      await PatchStoreWeight(this.$root.user.id, w);
     },
     loading: function (f) {
       this.file = f;
