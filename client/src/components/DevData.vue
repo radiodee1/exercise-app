@@ -56,13 +56,13 @@
       <tr>
         <th class="">Name</th>
         <th class="">User Name</th>
-        <th class="">Email</th>
+        <th class="">Sample Date</th>
         <th class="">Posts</th>
       </tr>
       <tr v-for="item in list" :key="item.id">
         <td>{{item.firstname}} {{item.lastname}}</td>
         <td> {{item.username}}</td>
-        <td> {{item.email}} </td>
+        <td> {{item.date_now}} </td>
         <td>{{item.count}}</td>
       </tr>
     </table>
@@ -137,6 +137,7 @@ export default {
       for (let i = 0; i < this.list.length; i ++ ) {
         if (this.list[i].count == null) {
           this.list[i].count = 0;
+          this.list[i].date_now = "--";
         }
       }
     },
