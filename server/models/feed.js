@@ -6,6 +6,7 @@ var express = require('express');
 //var feedRouterDelete = express.Router();
 var sql = require('../public/javascripts/sql_populate.js');
 //require('promise');
+var control = require('../public/javascripts/sql_control.js');
 
 var app = express();
 
@@ -55,14 +56,14 @@ module.exports.feedRouterGet = async function (req, res, next) {
     //let x = sql.makeSelect('feed', columns, 'ORDER BY date_now DESC ', false);
     let x = sql.sqlMakeFriendFeedSelect(columns, id);
     console.log(x);
-    let con = sql.connection();
+    let con = control.connection();
     try {
-      let y = sql.xquery(con, x);
+      let y = control.xquery(con, x);
       await y.then(function (value) {
         console.log(value);
         let yy = JSON.stringify(value);
         //res.json(yy);
-        sql.end(con);
+        control.end(con);
         out = yy;
       });
     }
@@ -78,14 +79,14 @@ module.exports.feedRouterGet = async function (req, res, next) {
   
     console.log(req.body);
     let x = sql.sqlInsertObjJSON(req.body, 'feed');
-    let con = sql.connection();
+    let con = control.connection();
     try {
-      let y = sql.xquery(con, x);
+      let y = control.xquery(con, x);
       await y.then(function (value) {
         console.log(value);
         let yy = JSON.stringify(value);
         res.json(yy);
-        sql.end(con);
+        control.end(con);
   
       });
     }
@@ -107,14 +108,14 @@ module.exports.feedRouterGetUser = async function (req, res, next) {
   let x = sql.makeSelect('feed', columns, 'WHERE from_user_id = ' + id + ' ORDER BY date_now DESC ', false);
   //let x = sql.sqlMakeFriendFeedSelect(columns, id);
   console.log(x);
-  let con = sql.connection();
+  let con = control.connection();
   try {
-    let y = sql.xquery(con, x);
+    let y = control.xquery(con, x);
     await y.then(function (value) {
       //console.log(value);
       let yy = JSON.stringify(value);
       //res.json(yy);
-      sql.end(con);
+      control.end(con);
       out = yy;
       //console.log(out);
     });
@@ -138,14 +139,14 @@ module.exports.feedRouterGetFriend = async function (req, res, next) {
   let x = sql.makeSelect('feed', columns, 'WHERE from_user_id = ' + id + ' ORDER BY date_now DESC ', false);
   //let x = sql.sqlMakeFriendFeedSelect(columns, id);
   console.log(x);
-  let con = sql.connection();
+  let con = control.connection();
   try {
-    let y = sql.xquery(con, x);
+    let y = control.xquery(con, x);
     await y.then(function (value) {
       console.log(value);
       let yy = JSON.stringify(value);
       //res.json(yy);
-      sql.end(con);
+      control.end(con);
       out = yy;
     });
   }
@@ -167,14 +168,14 @@ module.exports.feedRouterDelete = async function (req, res, next) {
   let x = 'DELETE FROM feed WHERE id = ' + id + ' ';
   //let x = sql.sqlMakeFriendFeedSelect(columns, id);
   console.log(x);
-  let con = sql.connection();
+  let con = control.connection();
   try {
-    let y = sql.xquery(con, x);
+    let y = control.xquery(con, x);
     await y.then(function (value) {
       console.log(value);
       let yy = JSON.stringify(value);
       res.json(yy);
-      sql.end(con);
+      control.end(con);
 
     });
   }

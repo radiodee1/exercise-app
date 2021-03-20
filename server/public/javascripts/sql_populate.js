@@ -7,10 +7,9 @@ module.exports = {
     makeInsertFormat,
     makeSelect,
     makeSelectFormat,
-    //query,
-    xquery,
-    connection,
-    end,
+    //xquery,
+    //connection,
+    //end,
     modSelectFunction,
     sqlInsertObjJSON,
     sqlSelectObjJSON,
@@ -22,6 +21,7 @@ module.exports = {
     sqlUserUpdateRaw
 }
 
+/*
 
 function connection() {
     var mysql = require('mysql');
@@ -40,6 +40,7 @@ function connection() {
 
     return con;
 }
+*/
 
 
 function makeInsert(table_name, columns_list, values_list, mult_rows = false) {
@@ -132,45 +133,6 @@ function makeSelectFormat(table_name, columns_list, where_clause = '', mult_rows
 }
 
 /*
-function query(connection, sql, mod=modSelectFunction) {
-    var m = "";
-    con = connection;
-    if (!connection._connectionCalled) {
-        con.query(sql, function (err, result, fields) {
-            if (err) throw err;
-            //console.log("sql run");
-            //console.log(" here " + fields);
-
-            m = mod(result);
-            //console.log(m + " m " + m.length);
-
-            if (m.length > 0) return m;
-            
-        });
-    }
-    else {
-
-        con.connect(function(err) {
-            if (err) throw err;
-            //console.log("Connected!");
-
-            con.query(sql, function (err, result, fields) {
-                if (err) throw err;
-                //console.log("sql run " + result);
-                //console.log("x here " );
-                m = mod(result);
-                //console.log(m + " m " + m.length);
-                if (m.length > 0) return m;
-            });
-            
-            
-            
-        });
-    }
-    //console.log("m " + mm);
-    return mm;
-}
-*/
 
 function xquery(connection, sql, mod = modSelectFunction) {
     var m = "";
@@ -222,17 +184,20 @@ function xquery(connection, sql, mod = modSelectFunction) {
     return promise;//  promise;
 }
 
+*/
+
 function modSelectFunction(i) {
     return i;
 }
 
-
+/*
 
 function end(con) {
     con.end((err) => {
         //end connection.
     });
 }
+*/
 
 /* ---------------- very specific fn ------------------ */
 

@@ -3,6 +3,7 @@ var express = require('express');
 //var workoutRouterPost = express.Router();
 var sql = require('../public/javascripts/sql_populate.js');
 //require('promise');
+var control = require('../public/javascripts/sql_control.js');
 
 const feed_all = {
     visible: false,
@@ -52,14 +53,14 @@ module.exports.workoutRouterGet = async function (req, res, next) {
     let x = sql.makeSelect('feed', columns, xx, false);
     //let x = sql.sqlMakeFriendFeedSelect(columns, id);
     //console.log(x);
-    let con = sql.connection();
+    let con = control.connection();
     try {
-      let y = sql.xquery(con, x);
+      let y = control.xquery(con, x);
       await y.then(function (value) {
         //console.log(value);
         let yy = JSON.stringify(value);
         //res.json(yy);
-        sql.end(con);
+        control.end(con);
         out = yy;
       });
     }

@@ -171,7 +171,7 @@ export async function GetFriendList(user_id, root_username) {
                     );
                 }
 
-                if (associated && dict1.friend_user_id !== user_id && order[highest[dict1.username].status] < order['confirmed']) {
+                if (associated && dict1.friend_user_id != user_id && order[highest[dict1.username].status] < order['confirmed']) {
                     highest[dict1.username].status = "waiting";
                 }
 

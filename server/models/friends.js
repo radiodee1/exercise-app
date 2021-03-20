@@ -4,6 +4,7 @@ var express = require('express');
 //var friendRouterPatch = express.Router();
 var sql = require('../public/javascripts/sql_populate.js');
 //require('promise');
+var control = require('../public/javascripts/sql_control.js');
 
 var app = express();
 
@@ -54,14 +55,14 @@ module.exports.friendRouterGet = async function (req, res, next) {
     //console.log(x);
     //let x = sql.makeSelect('profiles', columns_profile, "", false);
 
-    let con = sql.connection();
+    let con = control.connection();
     try {
-        let y = sql.xquery(con, x);
+        let y = control.xquery(con, x);
         await y.then(function (value) {
             //console.log(value);
             let yy = JSON.stringify(value);
             //res.json(yy);
-            sql.end(con);
+            control.end(con);
             out = yy;
         });
     }
@@ -77,14 +78,14 @@ module.exports.friendRouterPost = async function (req, res, next) {
     let out = [];
     //console.log(req.body);
     let x = sql.sqlInsertObjJSON(req.body, 'friends');
-    let con = sql.connection();
+    let con = control.connection();
     try {
-        let y = sql.xquery(con, x);
+        let y = control.xquery(con, x);
         await y.then(function (value) {
             //console.log(value);
             let yy = JSON.stringify(value);
             //res.json(yy);
-            sql.end(con);
+            control.end(con);
             out = yy;
         });
     }
@@ -101,14 +102,14 @@ module.exports.friendRouterPatch = async function (req, res, next) {
     //console.log(req.body);
     //let x = sql.sqlInsertObjJSON(req.body, 'friends');
     let x = sql.sqlMakeUpdate('friends', req.body.ident, req.body.change);
-    let con = sql.connection();
+    let con = control.connection();
     try {
-        let y = sql.xquery(con, x);
+        let y = control.xquery(con, x);
         await y.then(function (value) {
             //console.log(value);
             let yy = JSON.stringify(value);
             //res.json(yy);
-            sql.end(con);
+            control.end(con);
             out = yy;
         });
     }

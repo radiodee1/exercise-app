@@ -2,6 +2,7 @@ var express = require('express');
 //var workoutRouterGet = express.Router();
 //var workoutRouterPost = express.Router();
 var sql = require('../public/javascripts/sql_populate.js');
+var control = require('../public/javascripts/sql_control.js');
 //require('promise');
 
 /* GET feed listing. */
@@ -17,14 +18,14 @@ module.exports.devRouterGet = async function (req, res, next) {
     let x = sql.selectLeftOuterJoinRaw(lower, upper);
     //let x = sql.sqlMakeFriendFeedSelect(columns, id);
     //console.log(x);
-    let con = sql.connection();
+    let con = control.connection();
     try {
-      let y = sql.xquery(con, x);
+      let y = control.xquery(con, x);
       await y.then(function (value) {
         //console.log(value);
         let yy = JSON.stringify(value);
         //res.json(yy);
-        sql.end(con);
+        control.end(con);
         out = yy;
       });
     }

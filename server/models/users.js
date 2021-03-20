@@ -4,6 +4,7 @@ var express = require('express');
 //var usersRouterFriendGet = express.Router();
 var sql = require('../public/javascripts/sql_populate.js');
 //require('promise');
+var control = require('../public/javascripts/sql_control.js');
 
 var app = express();
 
@@ -38,16 +39,16 @@ module.exports.usersRouterGet = async function (req, res, next) {
   }
   //let yy = null;
   let x = sql.makeSelect('profiles', columns, '', false);
-  let con = sql.connection();
+  let con = control.connection();
   //console.log(con);
   try {
-    let y = sql.xquery(con, x);
+    let y = control.xquery(con, x);
     //console.log("----");
     await y.then(function (value) {
       //console.log(value);
       yy = JSON.stringify(value);
       
-      sql.end(con);
+      control.end(con);
       
     });
     
@@ -66,14 +67,14 @@ module.exports.usersRouterPost = async function (req, res, next) {
 
   console.log(req.body);
   let x = sql.sqlInsertObjJSON(req.body, 'profiles');
-  let con = sql.connection();
+  let con = control.connection();
   try {
-    let y = sql.xquery(con, x);
+    let y = control.xquery(con, x);
     await y.then(function (value) {
       console.log(value);
       let yy = JSON.stringify(value);
       res.json(yy);
-      sql.end(con);
+      control.end(con);
 
     });
   }
@@ -97,15 +98,15 @@ module.exports.usersRouterFriendGet = async function (req, res, next) {
   }
   let x = sql.sqlMakeFriendSearchSelect(columns, profile_id);
   //let x = sql.makeSelect('profiles', columns, '', false);
-  let con = sql.connection();
+  let con = control.connection();
   //console.log(con);
   try {
-    let y = sql.xquery(con, x);
+    let y = control.xquery(con, x);
     await y.then(function (value) {
       console.log(value);
       let yy = JSON.stringify(value);
       //res.json(yy);
-      sql.end(con);
+      control.end(con);
       //console.log(yy);
       out = yy;
     });
@@ -125,15 +126,15 @@ module.exports.usersRouterWeightPatch = async function (req, res, next) {
   
   let x = sql.sqlUserUpdateRaw( profile_id, weight);
 
-  let con = sql.connection();
+  let con = control.connection();
   //console.log(con);
   try {
-    let y = sql.xquery(con, x);
+    let y = control.xquery(con, x);
     await y.then(function (value) {
       console.log(value);
       let yy = JSON.stringify(value);
       //res.json(yy);
-      sql.end(con);
+      control.end(con);
       //console.log(yy);
       out = yy;
     });
