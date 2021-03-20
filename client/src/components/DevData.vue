@@ -51,7 +51,7 @@
     />
     <b-button type="is-primary" @click.prevent="fillList()">Submit</b-button>
     <div class="box">{{ lowerStandardTime }} - {{ upperStandardTime }}</div>
-
+    <div class="scrollable">
     <table>
       <tr>
         <th class="">Name</th>
@@ -66,6 +66,7 @@
         <td>{{item.count}}</td>
       </tr>
     </table>
+    </div>
   </div>
 </template>
 
@@ -156,5 +157,10 @@ td,
 th {
   border: solid 1px black;
   padding: 10px;
+}
+
+.scrollable {
+  overflow-y: scroll;
+  height: 550px;
 }
 </style>
