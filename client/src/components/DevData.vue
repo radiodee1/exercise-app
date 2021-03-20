@@ -49,42 +49,48 @@
       id="previous_num"
       v-model="spans"
     />
+    <b-button type="is-primary" @click.prevent="fillList()">Submit</b-button>
+    <div class="box">{{ lowerStandardTime }} - {{ upperStandardTime }}</div>
 
-    {{ lowerStandardTime }} - {{ upperStandardTime }}
     <table>
       <tr>
         <th class="">Name</th>
-        <th class="">First Week</th>
-        <th class="">Second Week</th>
+        <th class="">User Name</th>
+        <th class="">Email</th>
+        <th class="">Posts</th>
       </tr>
-      <tr>
-        <td>David Liebman</td>
-        <td>33 posts</td>
-        <td>4 posts</td>
+      <tr v-for="item in list" :key="item.id">
+        <td>{{item.firstname}} {{item.lastname}}</td>
+        <td> {{item.username}}</td>
+        <td> {{item.email}} </td>
+        <td>{{item.count}}</td>
       </tr>
     </table>
   </div>
 </template>
 
 <script>
+import { GetDevList } from "../models/dev.js";
+
 export default {
   name: "devdata",
   data: function () {
     return {
       eTypeIsActive: false,
       timeLength: "Days",
-      //prevNumber: 0,
 
       lowerStandardTime: 0,
       upperStandardTime: 0,
 
-      lowerUnixTime: 0,
-      upperUnixTime: 0,
+      lowerMillisecondTime: 0,
+      upperMillisecondTime: 0,
 
-      totalUnixSpanTime: 0,
-      unixTimeNow: 0,
+      totalMillisecondSpanTime: 0,
+      MillisecondTimeNow: 0,
 
       spans: 1,
+
+      list: [],
     };
   },
   props: {},
@@ -104,25 +110,44 @@ export default {
         Months: 24 * 30,
         Years: 24 * 365,
       };
-      this.totalUnixSpanTime = hours[this.timeLength] * 60 * 60 * 1000; // hours * mins * secs * 1000
-      this.unixTimeNow = Date.now(); // * 1000;
-      let start = this.spans * this.totalUnixSpanTime;
+      this.totalMillisecondSpanTime = hours[this.timeLength] * 60 * 60 * 1000; // hours * mins * secs * 1000
+      this.MillisecondTimeNow = Date.now(); // * 1000;
+      let start = this.spans * this.totalMillisecondSpanTime;
+
+      this.lowerMillisecondTime = this.MillisecondTimeNow - start;
+      this.upperMillisecondTime =
+        this.MillisecondTimeNow - start + this.totalMillisecondSpanTime;
+
       this.lowerStandardTime = new Date(
-        this.unixTimeNow - start
+        this.lowerMillisecondTime
       ).toLocaleString();
       this.upperStandardTime = new Date(
-        this.unixTimeNow - start + this.totalUnixSpanTime
+        this.upperMillisecondTime
       ).toLocaleString();
+    },
+    fillList: async function () {
+      this.setSpanTime();
+      //console.log(this.lowerMillisecondTime + " " + this.upperMillisecondTime);
+      //this.setSpanTime();
+      this.list = await GetDevList(
+        this.lowerMillisecondTime,
+        this.upperMillisecondTime
+      );
+      for (let i = 0; i < this.list.length; i ++ ) {
+        if (this.list[i].count == null) {
+          this.list[i].count = 0;
+        }
+      }
     },
   },
   watch: {
     spans: function () {
       this.setSpanTime();
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     this.setSpanTime();
-  }
+  },
 };
 </script>
 <style scoped>

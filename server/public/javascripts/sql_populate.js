@@ -315,7 +315,7 @@ function selectLeftOuterJoin(table_name_left, table_name_right, table_name_left_
 
 function selectLeftOuterJoinRaw(lower_timestamp, upper_timestamp) {
     xx = `
-    SELECT t1.firstname, t1.lastname, t1.username, t1.id,  
+    SELECT t1.firstname, t1.lastname, t1.username, t1.id, t1.email, 
     UNIX_TIMESTAMP(t2.date_now) AS unix_time, t2.date_now ,    
     t2.num, t2.from_user_id, t2.count FROM profiles      
     AS t1 LEFT JOIN (  SELECT DISTINCT num,  date_now, from_user_id,      

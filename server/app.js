@@ -11,6 +11,7 @@ var feedCtrl = require('./controllers/feed')
 var friendCtrl = require('./controllers/friends')
 var userCtrl = require('./controllers/users')
 var workoutCtrl = require('./controllers/workouts')
+var devCtrl = require('./controllers/dev')
 
 var app = express();
 
@@ -58,7 +59,7 @@ app.use('/', userCtrl);
 app.use('/', feedCtrl);
 app.use( '/',friendCtrl);
 app.use('/',workoutCtrl);
-
+app.use('/', devCtrl);
 
 
 // catch 404 and forward to error handler
