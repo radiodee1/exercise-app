@@ -7,5 +7,7 @@ module.exports = {
     devServer: {
       disableHostCheck: true
     },
-    chainWebpack: config => config.resolve.symlinks(false)
+    chainWebpack: config => config.resolve.symlinks(false),
+    
+    outputDir: '../docs'
   }
