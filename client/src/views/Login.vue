@@ -57,15 +57,15 @@
         Remember me
       </label>
     </section>
-    <div v-show="show_dev" class="box">
+    <!-- div v-show="show_dev" class="box">
       <development :backend_port="backend_port" :backend_url="backend_url" ></development>
-    </div>
+    </div -->
   </div>
   <!-- end login -->
 </template>
 
 <script>
-import development from "../components/Development.vue";
+//import development from "../components/Development.vue";
 import Session from "../models/Session.js";
 import { GetUserLogin } from '../models/users';
 //let axios = require("axios").default;
@@ -128,6 +128,7 @@ export default {
       if (this.username == process.env.VUE_APP_DEV_USERNAME && this.password == process.env.VUE_APP_DEV_PASSWORD) {
         //this.$router.app.$root.login = false;
         //this.show_dev = true;
+        this.$router.push("/dev");//.catch(err => {});
         return true
       }
     //this.show_development = true;
@@ -135,7 +136,7 @@ export default {
     },
   },
   components: {
-    development: development,
+    //development: development,
   },
 };
 </script>

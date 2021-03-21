@@ -159,9 +159,9 @@ export default {
       this.$router.push("/login").catch(err => {});
     },
     focusDev: function () {
-      this.show_development = true;
-      console.log("dev here.")
-      this.$router.push("/login").catch(err => {});
+      //this.show_development = true;
+      //console.log("dev here.")
+      //this.$router.push("/login").catch(err => {});
 
     },
     focusFormMessage: function () {

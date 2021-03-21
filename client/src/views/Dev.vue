@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import development from "../components/Development.vue"
+
 export default {
 name: "dev",
   data() {
@@ -25,10 +27,10 @@ name: "dev",
     },
   },
   components: {
-    devprofiles: devprofiles,
-    devdata: devdata
+    //devprofiles: devprofiles,
+    development: development
   }
-};
+
 }
 </script>
 

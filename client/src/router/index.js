@@ -14,6 +14,7 @@ import exercise from "../views/Exercise.vue";
 import message from "../views/Message.vue";
 import workout from "../views/Workout.vue";
 import friends from "../views/Friends.vue";
+import dev from "../views/Dev.vue";
 import Session from "../models/Session.js";
 
 Vue.use(VueRouter)
@@ -58,6 +59,11 @@ const routes = [
     path: '/friends',
     name: 'friends',
     component: friends
+  },
+  {
+    path: '/dev',
+    name: 'dev',
+    component: dev
   }
 ]
 
@@ -70,7 +76,11 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   //console.log({ from, to })
-  if (to.path !== '/login' && to.path !== '/register' && to.path !== "/" && !Session.user) {
+  //if(to.path === '/dev' && from.path ==='/login') {
+    //next('/dev');
+  //}
+  
+  if (to.path !== '/login' && to.path !== '/register' && to.path !== "/" && to.path !== '/dev' && !Session.user) {
     //visibility.focusReset();
     next('/');
   } else {
