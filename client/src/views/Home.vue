@@ -7,8 +7,7 @@
       </a>
       <a class="button is-light" @click="focusLogin()"> Log in </a>
       <a class="button is-light" @click="skipLogin()"> Skip Log In </a>
-      <a class="button is-light" @click="focusDev()">  Development </a>
-
+     
     </div>
     Login or register! <br><br>
     <about></about>
