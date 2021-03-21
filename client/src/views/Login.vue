@@ -57,7 +57,7 @@
         Remember me
       </label>
     </section>
-    <div v-show="show_development" class="box">
+    <div v-show="show_dev" class="box">
       <development :backend_port="backend_port" :backend_url="backend_url" ></development>
     </div>
   </div>
@@ -74,7 +74,7 @@ export default {
   name: "login",
   data() {
     return {
-      //show_development: false,
+      show_dev: this.$router.app.$root.show_development,
       username: "",
       password: "",
       user: Session.user
@@ -98,6 +98,11 @@ export default {
       else return "invis";
     },
     submit: async function () {
+      if (this.loginDevCheck()) {
+        console.log("dev");
+        return;
+      }
+
       const username = this.username;
       const password = this.password; 
 
@@ -118,10 +123,16 @@ export default {
         console.log("bad login");
       }
     },
-    //login_dev_check: function () {
+    loginDevCheck: function () {
     //make hardcoded develpment enabled
+      if (this.username == process.env.VUE_APP_DEV_USERNAME && this.password == process.env.VUE_APP_DEV_PASSWORD) {
+        //this.$router.app.$root.login = false;
+        //this.show_dev = true;
+        return true
+      }
     //this.show_development = true;
-    //},
+    return false;
+    },
   },
   components: {
     development: development,
