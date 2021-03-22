@@ -145,6 +145,22 @@ export async function GetFriendList(user_id, root_username) {
                 let associated =
                     dict1.user_id === user_id || dict1.friend_user_id === user_id;
 
+                let bad_assoc = dict1.user_id === user_id && dict1.friend_user_id == user_id;
+
+                if (bad_assoc) {
+                    //console.log("bad " + dict1.user_id)
+                    continue;
+                }
+
+                if (! associated) {
+                    if (!(dict1.username in highest)) {
+                        dict1.status = "new";
+                        highest[dict1.username] = dict1;
+                    }
+                    //console.log("skip " + dict1.user_id);
+                    continue;
+                }
+
                 if (!(dict1.username in highest)) {
                     highest[dict1.username] = dict1;
 
@@ -171,9 +187,10 @@ export async function GetFriendList(user_id, root_username) {
                     );
                 }
 
-                if (associated && dict1.friend_user_id != user_id && order[highest[dict1.username].status] < order['confirmed']) {
-                    highest[dict1.username].status = "waiting";
-                }
+                //if (associated && dict1.friend_user_id != user_id && order[highest[dict1.username].status] < order['confirmed']) {
+                //    //highest[dict1.username].status = "waiting";
+                //    console.log("wait?");
+                //}
 
                 if (
                     highest[dict1.username].username != null &&

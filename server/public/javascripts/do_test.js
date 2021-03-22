@@ -1,14 +1,16 @@
 var sql = require('./sql_populate.js');
 
 var update = {
-    name : "friends",
-    change : [
-        'status',
+    //name : "friends",
+    profiles : [
+        //'status',
         'date'
     ],
-    ident: [
+    friends : [
         'id',
-        'user_id'
+        'user_id',
+        'friend_user_id',
+        'friend_status'
     ]
 };
 
@@ -60,13 +62,13 @@ const user_all = [
     //'picture'
 ];
 
-//x = sql.selectLeftOuterJoin('profiles', 'friends',update.change, update.ident, 'status = id');
-x = sql.sqlMakeFriendSearchSelect(feed_all, 25);
+x = sql.selectLeftOuterJoin('profiles', 'friends',user_all, update.friends, 't2.friend_user_id = t1.id');
+//x = sql.sqlMakeFriendSearchSelect(feed_all, 25);
 console.log(x);
 
 console.log('\n');
 
-x = sql.selectLeftOuterJoinRaw(0, 1715057981)
+//x = sql.selectLeftOuterJoinRaw(0, 1715057981)
 
-console.log(x);
+//console.log(x);
 
