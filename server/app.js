@@ -53,7 +53,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-
+app.use(express.static('../docs'));
 
 app.use('/', userCtrl);
 app.use('/', feedCtrl);
@@ -61,6 +61,9 @@ app.use( '/',friendCtrl);
 app.use('/',workoutCtrl);
 app.use('/', devCtrl);
 
+app.get('*', (req, res) => {
+  res.sendFile( path.join( __dirname, '../docs/index.html'));
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
