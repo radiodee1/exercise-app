@@ -77,10 +77,11 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   //console.log({ from, to })
   //if(to.path === '/dev' && from.path ==='/login') {
-    //next('/dev');
+  //next('/dev');
   //}
-  
-  if (to.path !== '/login' && to.path !== '/register' && to.path !== "/" && to.path !== '/dev' && !Session.user) {
+
+  if ((to.path !== '/login' && to.path !== '/register' && to.path !== "/"  && !Session.user) || 
+    (to.path === '/dev' && (Session.user.password !== process.env.VUE_APP_DEV_PASSWORD || Session.user.username !== process.env.VUE_APP_DEV_USERNAME))) {
     //visibility.focusReset();
     next('/');
   } else {

@@ -128,6 +128,11 @@ export default {
       if (this.username == process.env.VUE_APP_DEV_USERNAME && this.password == process.env.VUE_APP_DEV_PASSWORD) {
         //this.$router.app.$root.login = false;
         //this.show_dev = true;
+        const user_info = {
+          username: this.username,
+          password: this.password
+        }
+        Session.user = user_info;
         this.$router.push("/dev");//.catch(err => {});
         return true
       }
