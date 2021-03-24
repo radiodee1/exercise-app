@@ -35,35 +35,15 @@
                 </button>
               </div>
               <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                <div class="dropdown-content">
+                <div class="dropdown-content" v-for="type in listType" :key="type.id">
                   <a
                     href="#"
                     class="dropdown-item"
-                    @click="formChooseType('reps')"
+                    @click="formChooseType(type)"
                   >
-                    reps
+                    {{type}}
                   </a>
-                  <a class="dropdown-item" @click="formChooseType('miles')">
-                    miles
-                  </a>
-                  <a
-                    class="dropdown-item"
-                    @click="formChooseType('kilometers')"
-                  >
-                    kilometers
-                  </a>
-                  <a class="dropdown-item" @click="formChooseType('steps')">
-                    steps
-                  </a>
-                  <a class="dropdown-item" @click="formChooseType('laps')">
-                    laps
-                  </a>
-                  <a class="dropdown-item" @click="formChooseType('lbs')">
-                    lbs
-                  </a>
-                  <a class="dropdown-item" @click="formChooseType('kg')">
-                    kg
-                  </a>
+                  <!--  -->
                 </div>
               </div>
             </div>
@@ -90,40 +70,18 @@
                 </button>
               </div>
               <div class="dropdown-menu" id="dropdown-menu-deet" role="menu">
-                <div class="dropdown-content">
+                <div class="dropdown-content" v-for="deet in listDeet" :key="deet.id">
                   <a
                     href="#"
                     class="dropdown-item"
-                    @click="formChooseDeet('running')"
+                    @click="formChooseDeet(deet)"
                   >
-                    running
+                    {{deet}}
                   </a>
-                  <a class="dropdown-item" @click="formChooseDeet('walking')">
-                    walking
-                  </a>
-                  <a class="dropdown-item" @click="formChooseDeet('swimming')">
-                    swimming
-                  </a>
-                  <a class="dropdown-item" @click="formChooseDeet('cycling')">
-                    cycling
-                  </a>
-                  <a class="dropdown-item" @click="formChooseDeet('curls')">
-                    curls
-                  </a>
-                  <a class="dropdown-item" @click="formChooseDeet('pushups')">
-                    pushups
-                  </a>
-                  <a class="dropdown-item" @click="formChooseDeet('chinups')">
-                    chinups
-                  </a>
-                  <a class="dropdown-item" @click="formChooseDeet('lifts')">
-                    lifts
-                  </a>
-                  <a class="dropdown-item" @click="formChooseDeet('situps')">
-                    situps
-                  </a>
+                  <!-- -->
                 </div>
               </div>
+              
             </div>
             <!-- end second dropdown-->
 
@@ -229,6 +187,10 @@ export default {
       exerciseShowSubmit: false,
 
       file: null,
+
+      listType: [],
+      listDeet: [],
+      dictDeet: {}
     };
   },
   props: {
@@ -250,6 +212,8 @@ export default {
     },
     formChooseType: function (i) {
       this.exerciseType = i;
+      this.listDeet = this.dictDeet[i];
+      this.exerciseTypeDeet = 'Exercise Details';
       this.controlDropdownType();
     },
     formChooseDeet: function (i) {
@@ -319,6 +283,21 @@ export default {
       this.showPicture();
       //console.log('file ' + f);
     },
+    mounting: function () {
+      this.listType = ['reps', 'miles', 'kilometers', 'steps', 'laps', 'lbs', 'kg'];
+      this.dictDeet ={
+        'reps': ['curls', 'pushups', 'chinups', 'situps'], 
+        'miles': ['running', 'walking', 'swimming', 'cycling'], 
+        'kilometers': ['running', 'walking', 'swimming', 'cycling'], 
+        'steps': ['running', 'walking'], 
+        'laps': ['swimming'], 
+        'lbs': ['curls', 'lifts'], 
+        'kg': ['curls', 'lifts']
+      };
+    }
   },
+  mounted: function() {
+    this.mounting();
+  }
 };
 </script>
