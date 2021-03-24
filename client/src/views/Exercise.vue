@@ -113,7 +113,7 @@
               <br />
               {{ weight_message }}
             </div>
-            <button class="button" @click="formFinishExercise()">Report</button>
+            <button class="button" @click.prevent="formFinishExercise()">Report</button>
             <pre id="exercise_pre" v-show="exerciseShowSubmit">{{
               exerciseReport
             }}</pre>
@@ -135,7 +135,7 @@
                     class="button is-dark"
                     id="exercise_submit"
                     style="visibility: visible; display: block"
-                    @click="submit()"
+                    @click.prevent="submit()"
                     v-show="exerciseShowSubmit"
                   >
                     Submit
@@ -241,7 +241,7 @@ export default {
       this.exerciseReport = `Exercise Report:\n` + i;
       this.exerciseShowSubmit = !this.exerciseShowSubmit;
       if (this.exerciseShowSubmit === false) {
-        this.valueNumber = null;
+        //this.valueNumber = null;
         this.valueWeight = this.$root.user.weight_lbs;
       }
     },
