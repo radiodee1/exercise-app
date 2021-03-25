@@ -284,16 +284,26 @@ export default {
       //console.log('file ' + f);
     },
     mounting: function () {
-      this.listType = ['reps', 'miles', 'kilometers', 'steps', 'laps', 'lbs', 'kg'];
+      //this.listType = ['reps', 'miles', 'kilometers', 'steps', 'laps', 'lbs', 'kg'];
       this.dictDeet ={
         'reps': ['curls', 'pushups', 'chinups', 'situps'], 
         'miles': ['running', 'walking', 'swimming', 'cycling'], 
         'kilometers': ['running', 'walking', 'swimming', 'cycling'], 
         'steps': ['running', 'walking'], 
         'laps': ['swimming'], 
-        'lbs': ['curls', 'lifts'], 
-        'kg': ['curls', 'lifts']
+        '2lbs': ['curls', 'lifts'], 
+        '5lbs': ['curls', 'lifts'], 
+        '10lbs': ['curls', 'lifts'], 
+        '20lbs': ['curls', 'lifts'], 
+        '30lbs': ['curls', 'lifts'], 
+        '5kg': ['curls', 'lifts'],
+        '10kg': ['curls', 'lifts'],
+        '15kg': ['curls', 'lifts'],
+        '20kg': ['curls', 'lifts']
       };
+      for(let i in this.dictDeet) {
+        this.listType.push(i);
+      }
     }
   },
   mounted: function() {
