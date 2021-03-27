@@ -150,6 +150,9 @@ export default {
   components: {
     //development: development,
   },
+  mounted: function () {
+    console.log(process.env);
+  }
 };
 </script>
 

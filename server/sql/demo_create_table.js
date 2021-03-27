@@ -14,7 +14,7 @@ var con = mysql.createConnection({
   //user: config.user,
   //port: config.port,
   //password: config.password,
-  'database': "web"
+  'database': process.env.VUE_APP_MYSQL_DATABASE
 });
 
 
