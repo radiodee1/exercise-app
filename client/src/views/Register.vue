@@ -424,7 +424,10 @@ export default {
             console.log(record_out);
             console.log("rrr");
 
-            Session.user.id = record_out.insertId;
+            Session.user.id = record_out.id;
+            this.$root.user.id = record_out.id;
+            console.log(Session.user);
+
             //Session.user = record;
       }
       else {

@@ -96,11 +96,12 @@ module.exports.usersRouterPost = async function (req, res, next) {
       console.log(value);
       yy = JSON.stringify(value);
       //res.json(yy);
+      console.log(yy);
 
-      let yyy = { ...body, id: yy.insertId }
-      //console.log(yyy);
-      //console.log("^^^");
-      res.send(yyy);
+      let yyy = { ...body, id: JSON.parse(yy).insertId }
+      console.log(yyy);
+      console.log("^^^");
+      res.send(JSON.stringify(yyy));
       control.end(con);
 
     });

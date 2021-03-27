@@ -136,7 +136,9 @@ export default {
       // grouped by your friend connections
       
       const id = this.$root.user.id;
-
+      if(typeof id !== Number) {
+        return;
+      }
       this.items = await GetFriendsFeed(id);
       //this.items =  GetItems();
 
@@ -146,7 +148,9 @@ export default {
       // return items that you have authored
 
       const id = this.$root.user.id;
-      
+      if(typeof id !== Number) {
+        return;
+      }
       this.items = await GetMyFeed(id);
 
       
@@ -154,7 +158,9 @@ export default {
     getFriendItems: async function (id) {
       // return items from others that are 
       // your friend and confirmed as friend
-
+      if (typeof id !== Number) {
+        return;
+      }
       
       this.items = await GetSingleFriendsFeed(id);
 

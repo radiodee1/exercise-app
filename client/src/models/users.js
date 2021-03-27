@@ -115,8 +115,9 @@ export async function PostUserRegister(record) {
 
             //console.log(response_raw.data);
             let response = response_raw.data;// JSON.parse(response_raw.data);
-            record.id = response.insertId;
-            //console.log(vm.$root.user.id);
+            //record.id = response.insertId;
+            record = response;
+            console.log(response);
             //Session.user.id = response.insertId;
             //success = true;
             rec = record;
