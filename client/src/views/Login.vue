@@ -57,9 +57,9 @@
         Remember me
       </label>
     </section>
-    <!-- div v-show="show_dev" class="box">
-      <development :backend_port="backend_port" :backend_url="backend_url" ></development>
-    </div -->
+    <div v-show="message_1" class="box">
+      <span class="red" >Your login attempt failed!</span>
+    </div >
   </div>
   <!-- end login -->
 </template>
@@ -77,7 +77,9 @@ export default {
       show_dev: this.$router.app.$root.show_development,
       username: "",
       password: "",
-      user: Session.user
+      user: Session.user,
+
+      message_1: false
     };
   },
   props: {
@@ -98,6 +100,7 @@ export default {
       else return "invis";
     },
     submit: async function () {
+      this.message_1 = false;
       if (this.loginDevCheck()) {
         console.log("dev");
         return;
@@ -123,6 +126,8 @@ export default {
       }
       else {
         console.log("bad login");
+        this.message_1 = true;
+        this.password = '';
       }
     },
     loginDevCheck: function () {
@@ -147,3 +152,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.red {
+  color: red;
+}
+</style>

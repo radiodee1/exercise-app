@@ -218,6 +218,7 @@ module.exports.usersRouterPostLogin = async function (req, res, next) {
       else if (!result) {
         console.log("no result");
         y_val = [{}];
+        res.send(y_val);
         throw "No good password"
       }
 
