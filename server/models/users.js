@@ -57,7 +57,7 @@ module.exports.usersRouterGet = async function (req, res, next) {
   catch (v) {
     console.log(v);
   }
-  console.log(yy);
+  //console.log(yy);
   return yy;
 }
 
@@ -66,8 +66,8 @@ module.exports.usersRouterGet = async function (req, res, next) {
 module.exports.usersRouterPost = async function (req, res, next) {
   res.set('Content-Type', 'application/json');
   let yy = null;
-  console.log(req.body);
-  console.log("---");
+  //console.log(req.body);
+  //console.log("---");
 
   const password = req.body.password;
   const hash = await bcrypt.hash(password, 5);
@@ -80,9 +80,9 @@ module.exports.usersRouterPost = async function (req, res, next) {
     }
   }
   //body.password = hash;
-  console.log(body.password + " <ooo");
+  //console.log(body.password + " <ooo");
 
-  console.log(bcrypt.getRounds(hash) + " <++++");
+  //console.log(bcrypt.getRounds(hash) + " <++++");
 
   let x = sql.sqlInsertObjJSON(body, 'profiles');
   let con = control.connection();
@@ -98,8 +98,8 @@ module.exports.usersRouterPost = async function (req, res, next) {
       //res.json(yy);
 
       let yyy = { ...body, id: yy.insertId }
-      console.log(yyy);
-      console.log("^^^");
+      //console.log(yyy);
+      //console.log("^^^");
       res.send(yyy);
       control.end(con);
 
@@ -130,7 +130,7 @@ module.exports.usersRouterFriendGet = async function (req, res, next) {
   try {
     let y = control.xquery(con, x);
     await y.then(function (value) {
-      console.log(value);
+      //console.log(value);
       let yy = JSON.stringify(value);
       //res.json(yy);
       control.end(con);
@@ -158,10 +158,10 @@ module.exports.usersRouterWeightPatch = async function (req, res, next) {
   try {
     let y = control.xquery(con, x);
     await y.then(function (value) {
-      console.log(value);
+      //console.log(value);
       let yy = JSON.stringify(value);
       //res.json(yy);
-      control.end(con);
+      //control.end(con);
       //console.log(yy);
       out = yy;
     });
@@ -183,7 +183,7 @@ module.exports.usersRouterPostLogin = async function (req, res, next) {
   //const hash = await bcrypt.hash(password, 8);
   //console.log(hash);
 
-  console.log(req.body);
+  //console.log(req.body);
 
   user_list = [];
   for (let i in user_all) {
@@ -193,17 +193,17 @@ module.exports.usersRouterPostLogin = async function (req, res, next) {
   }
   //let x = sql.sqlInsertObjJSON(req.body, 'profiles');
   let x = sql.makeSelectFormat('profiles', user_list, `WHERE username = '${req.body.username}'`)
-  console.log(x);
-  console.log("#####");
+  //console.log(x);
+  //console.log("#####");
   let con = control.connection();
   try {
     let y = control.xquery(con, x);
     await y.then(async function (value) {
-      console.log(value);
+      //console.log(value);
       let yy = JSON.stringify(value);
 
       y_val = JSON.parse(yy);
-      console.log(y_val);
+      //console.log(y_val);
       result = await bcrypt.compare(password, y_val[0].password ); 
       
       if (result) {

@@ -30,42 +30,25 @@ export async function GetUserLogin(username_in, password_in) {
             // handle success
             //console.log(response);
             let response = response_raw.data;// JSON.parse(response_raw.data);
-            console.log(response);
+            //console.log(response);
             //console.log("----");
             for (let i = 0; i < response.length; i++) {
-                //let username_saved = response[i].username;
-                //let password_saved = response[i].password;
-                /*
-                if (username_saved === null || username_saved === undefined) {
-                    username_saved = "";
-                }
-                if (password_saved === null || password_saved === undefined) {
-                    password_saved = "";
-                }
-                //console.log(username_saved + " " + username);
-                if (
-                    username_saved.trim() === username.trim() &&
-                    password_saved.trim() === password.trim()
-                ) {
-                */
-                    //success = true;
-                    user.firstname = response[i].firstname;
-                    user.lastname = response[i].lastname;
-                    user.address = response[i].address;
-                    user.city = response[i].city;
-                    user.state = response[i].state;
-                    user.zip = response[i].zip;
+                
+                user.firstname = response[i].firstname;
+                user.lastname = response[i].lastname;
+                user.address = response[i].address;
+                user.city = response[i].city;
+                user.state = response[i].state;
+                user.zip = response[i].zip;
 
-                    user.height_inches = response[i].height_inches;
-                    user.weight_lbs = response[i].weight_lbs;
+                user.height_inches = response[i].height_inches;
+                user.weight_lbs = response[i].weight_lbs;
 
-                    user.email = response[i].email;
-                    user.username = username;
-                    user.password = null;
-                    user.id = response[i].id;
-                    //Session.user = response[i];
-                    //console.log(Session.user);
-                //}
+                user.email = response[i].email;
+                user.username = username;
+                user.password = null;
+                user.id = response[i].id;
+                
             }
             //console.log(response);
         })
@@ -75,10 +58,7 @@ export async function GetUserLogin(username_in, password_in) {
         })
         .then(function () {
             // always executed
-            //if (success) {
-            //    console.log(vm.$root.user.id);
-            //    vm.focusNews();
-            //}
+            
         });
     //this.focusNews();
     //console.log(user);
@@ -133,7 +113,7 @@ export async function PostUserRegister(record) {
         .then(function (response_raw) {
             // handle success
 
-            console.log(response_raw.data);
+            //console.log(response_raw.data);
             let response = response_raw.data;// JSON.parse(response_raw.data);
             record.id = response.insertId;
             //console.log(vm.$root.user.id);
@@ -195,7 +175,7 @@ export async function GetUserDevList() {
             // handle success
             //console.log(response);
             let response = response_raw.data;// JSON.parse(response_raw.data);
-            console.log(response);
+            //console.log(response);
             //console.log("----");
             list = response;
             //console.log(response);
@@ -223,14 +203,14 @@ export async function PatchStoreWeight(id, w) {
 
     };
     let out = [];
-    console.log(f_obj);
-    console.log("----");
+    //console.log(f_obj);
+    //console.log("----");
     await axios
         .patch(url + port + "/users/weight", f_obj)
         .then(function (response) {
             // handle success
 
-            console.log(response.data);
+            //console.log(response.data);
             response = response.data;// JSON.parse(response.data);
             out = response;
         })
