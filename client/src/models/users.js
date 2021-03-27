@@ -11,7 +11,7 @@ let axios = require("axios").default;
 const port = process.env.VUE_APP_BACKEND_PORT;
 const url = process.env.VUE_APP_BACKEND_URL;
 
-export async function GetUserLogin(username_in, password_in) {
+export async function PostUserLogin(username_in, password_in) {
     const username = username_in.trim();
     const password = password_in.trim();
 

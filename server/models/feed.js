@@ -55,12 +55,12 @@ module.exports.feedRouterGet = async function (req, res, next) {
     }
     //let x = sql.makeSelect('feed', columns, 'ORDER BY date_now DESC ', false);
     let x = sql.sqlMakeFriendFeedSelect(columns, id);
-    console.log(x);
+    //console.log(x);
     let con = control.connection();
     try {
       let y = control.xquery(con, x);
       await y.then(function (value) {
-        console.log(value);
+        //console.log(value);
         let yy = JSON.stringify(value);
         //res.json(yy);
         control.end(con);
@@ -77,13 +77,13 @@ module.exports.feedRouterGet = async function (req, res, next) {
   module.exports.feedRouterPost = async function (req, res, next) {
     res.set('Content-Type', 'application/json');
   
-    console.log(req.body);
+    //console.log(req.body);
     let x = sql.sqlInsertObjJSON(req.body, 'feed');
     let con = control.connection();
     try {
       let y = control.xquery(con, x);
       await y.then(function (value) {
-        console.log(value);
+        //console.log(value);
         let yy = JSON.stringify(value);
         res.json(yy);
         control.end(con);
@@ -107,7 +107,7 @@ module.exports.feedRouterGetUser = async function (req, res, next) {
   }
   let x = sql.makeSelect('feed', columns, 'WHERE from_user_id = ' + id + ' ORDER BY date_now DESC ', false);
   //let x = sql.sqlMakeFriendFeedSelect(columns, id);
-  console.log(x);
+  //console.log(x);
   let con = control.connection();
   try {
     let y = control.xquery(con, x);
@@ -138,12 +138,12 @@ module.exports.feedRouterGetFriend = async function (req, res, next) {
   }
   let x = sql.makeSelect('feed', columns, 'WHERE from_user_id = ' + id + ' ORDER BY date_now DESC ', false);
   //let x = sql.sqlMakeFriendFeedSelect(columns, id);
-  console.log(x);
+  //console.log(x);
   let con = control.connection();
   try {
     let y = control.xquery(con, x);
     await y.then(function (value) {
-      console.log(value);
+      //console.log(value);
       let yy = JSON.stringify(value);
       //res.json(yy);
       control.end(con);
@@ -167,12 +167,12 @@ module.exports.feedRouterDelete = async function (req, res, next) {
   //}
   let x = 'DELETE FROM feed WHERE id = ' + id + ' ';
   //let x = sql.sqlMakeFriendFeedSelect(columns, id);
-  console.log(x);
+  //console.log(x);
   let con = control.connection();
   try {
     let y = control.xquery(con, x);
     await y.then(function (value) {
-      console.log(value);
+      //console.log(value);
       let yy = JSON.stringify(value);
       res.json(yy);
       control.end(con);

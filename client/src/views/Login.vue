@@ -67,7 +67,7 @@
 <script>
 //import development from "../components/Development.vue";
 import Session from "../models/Session.js";
-import { GetUserLogin } from '../models/users';
+import { PostUserLogin } from '../models/users';
 //let axios = require("axios").default;
 
 export default {
@@ -106,7 +106,7 @@ export default {
       let username = this.username;
       let password = this.password; 
 
-      var user_reply = await GetUserLogin(username, password)
+      var user_reply = await PostUserLogin(username, password)
       //user_reply = JSON.parse(user_reply);
       console.log(user_reply);
       console.log("*****");
