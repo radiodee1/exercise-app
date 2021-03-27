@@ -27,7 +27,7 @@ function connection() {
         user: process.env.VUE_APP_MYSQL_USER,  //config.user,
         port: process.env.VUE_APP_MYSQL_PORT, //config.port,
         password: process.env.VUE_APP_MYSQL_PASSWORD, //config.password,
-        database: "web",
+        database: process.env.VUE_APP_MYSQL_DATABASE // "web",
     });
 
     return con;
