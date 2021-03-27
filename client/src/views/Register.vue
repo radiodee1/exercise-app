@@ -387,7 +387,7 @@ export default {
 
       this.$root.user.email = email;
       this.$root.user.username = username;
-      this.$root.user.password = password;
+      this.$root.user.password = password; // <---
       this.$root.user.id = id;
 
       //var focusNewsx = this.focusNews
@@ -420,7 +420,12 @@ export default {
 
             Session.user = record;
             
-            record = await PostUserRegister(record);
+            const record_out = await PostUserRegister(record);
+            console.log(record_out);
+            console.log("rrr");
+
+            Session.user.id = record_out.insertId;
+            //Session.user = record;
       }
       else {
         username_taken = true;

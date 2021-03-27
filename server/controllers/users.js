@@ -9,13 +9,18 @@ var model = require('../models/users.js');
 router
 .get('/users', async function (req, res, next) {
     let yy = await model.usersRouterGet(req, res);
-    res.send(yy);
+    //res.send(yy);
     
 })
 
-.post('/users', async function (req, res, next)  {
+.post('/users/register', async function (req, res, next)  {
     let yy = await model.usersRouterPost(req, res, next);
-    res.send(yy);
+    //res.send(yy);
+})
+
+.post('/users/login', async function (req, res, next)  {
+    let yy = await model.usersRouterPostLogin(req, res, next);
+    //res.send(yy);
 })
 
 .get('/users/friends', async function (req, res, next)  {

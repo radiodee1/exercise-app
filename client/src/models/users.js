@@ -18,9 +18,14 @@ export async function GetUserLogin(username_in, password_in) {
     //const port = this.backend_port;
     //const url = this.backend_url;
     const user = {};
+
+    const user_record = {
+        "username" : username,
+        "password" : password
+    }
     //let success = false;
     await axios
-        .get(url + port + "/users")
+        .post(url + port + "/users/login", user_record)
         .then(function (response_raw) {
             // handle success
             //console.log(response);
@@ -28,8 +33,9 @@ export async function GetUserLogin(username_in, password_in) {
             console.log(response);
             //console.log("----");
             for (let i = 0; i < response.length; i++) {
-                let username_saved = response[i].username;
-                let password_saved = response[i].password;
+                //let username_saved = response[i].username;
+                //let password_saved = response[i].password;
+                /*
                 if (username_saved === null || username_saved === undefined) {
                     username_saved = "";
                 }
@@ -41,6 +47,7 @@ export async function GetUserLogin(username_in, password_in) {
                     username_saved.trim() === username.trim() &&
                     password_saved.trim() === password.trim()
                 ) {
+                */
                     //success = true;
                     user.firstname = response[i].firstname;
                     user.lastname = response[i].lastname;
@@ -54,11 +61,11 @@ export async function GetUserLogin(username_in, password_in) {
 
                     user.email = response[i].email;
                     user.username = username;
-                    user.password = password;
+                    user.password = null;
                     user.id = response[i].id;
                     //Session.user = response[i];
                     //console.log(Session.user);
-                }
+                //}
             }
             //console.log(response);
         })
@@ -120,8 +127,9 @@ export async function GetUserRegister(user) {
 }
 
 export async function PostUserRegister(record) {
+    let rec = null;
     await axios
-        .post(url + port + "/users", record)
+        .post(url + port + "/users/register", record)
         .then(function (response_raw) {
             // handle success
 
@@ -131,6 +139,7 @@ export async function PostUserRegister(record) {
             //console.log(vm.$root.user.id);
             //Session.user.id = response.insertId;
             //success = true;
+            rec = record;
         })
         .catch(function (error) {
             // handle error
@@ -142,7 +151,7 @@ export async function PostUserRegister(record) {
                 //vm.focusNews();
             //}
         });
-    return record;
+    return rec;
 }
 
 export async function GetUserFriendList(user_id) {

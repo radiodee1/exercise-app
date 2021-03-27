@@ -103,19 +103,21 @@ export default {
         return;
       }
 
-      const username = this.username;
-      const password = this.password; 
+      let username = this.username;
+      let password = this.password; 
 
       var user_reply = await GetUserLogin(username, password)
       //user_reply = JSON.parse(user_reply);
       console.log(user_reply);
-      if (typeof user_reply.id === "number") {
-        for (let i in user_reply) {
-          this.$root.user[i] = user_reply[i];
+      console.log("*****");
+      const user_obj = user_reply;
+      if (typeof user_obj.id === "number") {
+        for (let i in user_obj) {
+          this.$root.user[i] = user_obj[i];
           //Session.user[i] = user_reply[i];
         }
         //this.$root.user = user_reply;
-        Session.user = user_reply;
+        Session.user = user_obj;
         console.log(Session.user);
         this.focusNews();
       }
