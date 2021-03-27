@@ -421,12 +421,12 @@ export default {
             Session.user = record;
             
             const record_out = await PostUserRegister(record);
-            console.log(record_out);
-            console.log("rrr");
+            //console.log(record_out);
+            //console.log("rrr");
 
             Session.user.id = record_out.id;
             this.$root.user.id = record_out.id;
-            console.log(Session.user);
+            //console.log(Session.user);
 
             //Session.user = record;
       }
