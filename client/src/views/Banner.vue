@@ -41,6 +41,8 @@
             <a class="navbar-item" @click="focusFormMessage()"> Message </a>
 
             <a class="navbar-item" @click="focusFormFriends()"> Friends </a>
+
+            <router-link class="navbar-item" to="/dev" v-show="isDevUser"> Dev </router-link>
           </div>
           <div class="navbar-end"></div>
         </div>
@@ -84,6 +86,11 @@ export default {
     "form_workout",
     "form_friends",
   ],
+  computed: {
+    isDevUser: function () {
+      return this.$root.user.username === process.env.VUE_APP_DEV_USERNAME;
+    }
+  }
 };
 </script>
 

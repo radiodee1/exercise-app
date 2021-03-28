@@ -101,10 +101,10 @@ export default {
     },
     submit: async function () {
       this.message_1 = false;
-      if (this.loginDevCheck()) {
-        console.log("dev");
-        return;
-      }
+      //if (this.loginDevCheck()) {
+      //  console.log("dev");
+      //  return;
+      //}
 
       let username = this.username;
       let password = this.password; 
@@ -130,6 +130,7 @@ export default {
         this.password = '';
       }
     },
+    /*
     loginDevCheck: function () {
     //make hardcoded develpment enabled
       if (this.username == process.env.VUE_APP_DEV_USERNAME && this.password == process.env.VUE_APP_DEV_PASSWORD) {
@@ -146,6 +147,7 @@ export default {
     //this.show_development = true;
     return false;
     },
+    */
   },
   components: {
     //development: development,
