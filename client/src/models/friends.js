@@ -147,6 +147,8 @@ export async function GetFriendList(user_id, root_username) {
 
                 let bad_assoc = dict1.user_id === user_id && dict1.friend_user_id == user_id;
 
+                const TRUE = true;
+
                 if (bad_assoc) {
                     //console.log("bad " + dict1.user_id)
                     continue;
@@ -168,7 +170,7 @@ export async function GetFriendList(user_id, root_username) {
                         highest[dict1.username].status = "new";
                     }
                 } else if (
-                    order[highest[dict1.username].status] < order[dict1.status]
+                    order[highest[dict1.username].status] < order[dict1.status] || TRUE
                 ) {
                     if (associated) {
                         highest[dict1.username] = dict1;
@@ -220,14 +222,24 @@ export async function GetFriendList(user_id, root_username) {
                 }
             }
             for (let key in highest) {
-                l.push(highest[key]);
+                if (highest[key].friend_user_id === user_id) {
+                    // received
+                    if (highest[key].status === "asked" || highest[key].status === "waiting") {
+                        highest[key].status = "asked";
+                    }
+                }
+                else {
+                    // sent
+                    if (highest[key].status === "asked" || highest[key].status === "waiting") {
+                        highest[key].status = "waiting";
+                    }
+                }
+                if (highest[key].username.trim() !== root_username.trim()) {
+                    l.push(highest[key]);
+                }
+                //l.push(highest[key]);
             }
-            //console.log(user_id + " user");
-            //console.log(count);
-            //console.log(l);
-            //console.log(user_id + " user");
-            //console.log(count);
-            //console.log(highest);
+            ///////////////////////////////////////
         })
         .catch(function (error) {
             // handle error
