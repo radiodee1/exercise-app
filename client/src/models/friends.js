@@ -147,7 +147,7 @@ export async function GetFriendList(user_id, root_username) {
 
                 let bad_assoc = dict1.user_id === user_id && dict1.friend_user_id == user_id;
 
-                const TRUE = true;
+                //const TRUE = true;
 
                 if (bad_assoc) {
                     //console.log("bad " + dict1.user_id)
@@ -169,9 +169,7 @@ export async function GetFriendList(user_id, root_username) {
                     if (!associated) {
                         highest[dict1.username].status = "new";
                     }
-                } else if (
-                    order[highest[dict1.username].status] < order[dict1.status] || TRUE
-                ) {
+                } else  {
                     if (associated) {
                         highest[dict1.username] = dict1;
                         highest[dict1.username].status = `${dict1.status}`;
