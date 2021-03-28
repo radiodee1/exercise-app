@@ -103,10 +103,7 @@ export async function PatchConfirmFriend(num) {
 
 export async function GetFriendList(user_id, root_username) {
     let l = [];
-    //let d = {};
-    //let count = [];
-    //const vm = this;
-
+    
     const order = {
         new: 0,
         asked: 1,
@@ -115,8 +112,6 @@ export async function GetFriendList(user_id, root_username) {
     };
 
     const highest = {};
-
-    //var response = null;
 
     const p_list = {
         params: {
@@ -187,10 +182,6 @@ export async function GetFriendList(user_id, root_username) {
                     );
                 }
 
-                //if (associated && dict1.friend_user_id != user_id && order[highest[dict1.username].status] < order['confirmed']) {
-                //    //highest[dict1.username].status = "waiting";
-                //    console.log("wait?");
-                //}
 
                 if (
                     highest[dict1.username].username != null &&
@@ -219,6 +210,8 @@ export async function GetFriendList(user_id, root_username) {
                     delete highest[dict1.username];
                 }
             }
+
+            /* --------------- second pass ----------------- */
             for (let key in highest) {
                 if (highest[key].friend_user_id === user_id) {
                     // received
@@ -235,7 +228,7 @@ export async function GetFriendList(user_id, root_username) {
                 if (highest[key].username.trim() !== root_username.trim()) {
                     l.push(highest[key]);
                 }
-                //l.push(highest[key]);
+                
             }
             ///////////////////////////////////////
         })
