@@ -176,8 +176,8 @@ module.exports.usersRouterWeightPatch = async function (req, res, next) {
 
 module.exports.usersRouterPostLogin = async function (req, res, next) {
   res.set('Content-Type', 'application/json');
-  console.log(req.body.password + " <---");
-  console.log(req.body.username + " <###");
+  //console.log(req.body.password + " <---");
+  //console.log(req.body.username + " <###");
   const password = req.body.password;
 
   let y_val = null;
