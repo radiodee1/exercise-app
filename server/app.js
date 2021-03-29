@@ -19,10 +19,12 @@ var app = express();
 
 app.listen( (+ process.env.VUE_APP_BACKEND_PORT) || 3010);
 
+const host_port = process.env.VUE_APP_BACKEND_HOST + process.env.VUE_APP_BACKEND_PORT;
+
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+  res.setHeader('Access-Control-Allow-Origin', host_port);
 
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
