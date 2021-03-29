@@ -19,7 +19,7 @@ var app = express();
 
 app.listen( (+ process.env.VUE_APP_BACKEND_PORT) || 3010);
 
-const host_port = process.env.VUE_APP_BACKEND_HOST + process.env.VUE_APP_BACKEND_PORT;
+const host_port = process.env.VUE_APP_BACKEND_URL + process.env.VUE_APP_BACKEND_PORT;
 
 app.use(function (req, res, next) {
 
