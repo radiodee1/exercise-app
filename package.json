@@ -1,32 +1,56 @@
 {
-  "name": "server",
-  "version": "0.0.0",
+  "name": "client",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon --watch server server/app.js",
-    "app": "node app.js"
+    "serve": "vue-cli-service serve",
+    "build": "cp ../client/package.json .. && vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "cookie-parser": "^1.4.5",
-    "debug": "^4.3.1",
-    "express": "^4.17.1",
-    "http-errors": "^1.8.0",
-    "jade": "^1.11.0",
-    "morgan": "^1.10.0",
-    "body-parser": "^1.19.0",
-    "promise": "8.1.0",
+    "@fortawesome/fontawesome-free": "^5.15.2",
+    "core-js": "^3.6.5",
+    "vue": "^2.6.11",
+    "vue-router": "^3.2.0",
+    "bulma": "0.9.2",
+    "vue-template-compiler": "^2.6.11",
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0",
-    "mysql": "2.18.1",
-    "bcrypt": "^5.0.1",
-    "nodemon": "2.0.7"
+    "buefy": "0.9.4",
+    "@vue/cli-service": "^4.5.12"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^7.6.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.2",
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0"
   },
   "eslintConfig": {
-    "rules": {
-      "no-console": "off",
-      "no-unused-vars": "off"
-    }
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
   },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
   "engines": {
     "node": "12.x"
   }
