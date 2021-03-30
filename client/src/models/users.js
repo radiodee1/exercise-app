@@ -10,7 +10,7 @@ let axios = require("axios").default;
 
 const port = process.env.PORT || process.env.VUE_APP_BACKEND_PORT;
 const url = process.env.VUE_APP_BACKEND_URL;
-console.log(port);
+console.log(port + " " + process.env.PORT);
 
 export async function PostUserLogin(username_in, password_in) {
     const username = username_in.trim();
