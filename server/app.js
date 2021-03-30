@@ -17,7 +17,9 @@ var app = express();
 
 //console.log(process.env);
 
-app.listen( (+ process.env.VUE_APP_BACKEND_PORT) || 3010);
+const assigned_port = process.env.PORT || process.env.VUE_APP_BACKEND_PORT;
+
+app.listen( (+ assigned_port) || 3010);
 
 const host_port = process.env.VUE_APP_BACKEND_URL + process.env.VUE_APP_BACKEND_PORT;
 
