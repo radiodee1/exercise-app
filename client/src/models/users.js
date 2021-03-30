@@ -8,7 +8,7 @@ let axios = require("axios").default;
 /* eslint-disable */
 //var items = [];
 
-const port = process.env.VUE_APP_BACKEND_PORT;
+const port = process.env.PORT || process.env.VUE_APP_BACKEND_PORT;
 const url = process.env.VUE_APP_BACKEND_URL;
 
 export async function PostUserLogin(username_in, password_in) {
