@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon --watch ../server ../server/app.js",
-    "app": "node ./app.js"
+    "app": "node ./server/app.js"
   },
   "dependencies": {
     "cookie-parser": "^1.4.5",
