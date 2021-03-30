@@ -9,6 +9,9 @@ Maybe make your own one of these. Put it at the root of `client`.
 VUE_APP_BACKEND_PORT=3010
 VUE_APP_BACKEND_URL=http://localhost:
 
+PORT=8080 
+## this is the html server for testing, etc
+
 VUE_APP_MYSQL_PORT=3306
 VUE_APP_MYSQL_USER=root
 VUE_APP_MYSQL_HOST=http://172.17.0.2:
