@@ -1,2 +1,2 @@
-web: cd client && npm run serve
-worker: node ./server/app.js
+web: cd client && npm run build
+worker: cd server && npm run start
