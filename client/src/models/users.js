@@ -7,7 +7,7 @@ let axios = require("axios").default;
 
 //var items = [];
 
-const port = process.env.VUE_APP_BACKEND_PORT;
+const port = process.env.VUE_APP_BACKEND_PORT || process.env.PORT;
 const url = process.env.VUE_APP_BACKEND_URL;
 console.log(port + " >" + process.env.PORT);
 
