@@ -1,6 +1,8 @@
 mysql-login.json
 *.txt
 
+docs
+
 # Logs
 logs
 *.log
