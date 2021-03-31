@@ -21,7 +21,7 @@ const assigned_port =  process.env.VUE_APP_BACKEND_PORT || 3010;
 
 app.listen(assigned_port);
 
-const host_port = process.env.VUE_APP_BACKEND_URL + process.env.PORT; //this is the port that the html is served on. (8080??)
+const host_port = '*' ;//process.env.VUE_APP_BACKEND_URL + process.env.PORT; //this is the port that the html is served on. (8080??)
 
 app.use(function (req, res, next) {
 
