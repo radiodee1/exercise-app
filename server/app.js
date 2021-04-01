@@ -19,6 +19,8 @@ var app = express();
 
 const assigned_port = process.env.PORT || process.env.VUE_APP_BACKEND_PORT ;
 
+console.log(assigned_port + "<----");
+
 app.listen(assigned_port);
 
 const host_port = '*' ;//process.env.VUE_APP_BACKEND_URL + process.env.PORT; //this is the port that the html is served on. (8080??)
