@@ -21,8 +21,11 @@ const assigned_port = process.env.PORT || process.env.VUE_APP_BACKEND_PORT ;
 
 console.log(assigned_port + " <----");
 
-//app.listen(assigned_port); // <----- remove for heroku???
+const using_heroku = true;
 
+if( ! using_heroku ) {
+  app.listen(assigned_port); // <----- remove for heroku???
+}
 const host_port = '*' ;////this is the port that the html is served on. (8080??)
 
 app.use(function (req, res, next) {
