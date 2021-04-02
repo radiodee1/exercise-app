@@ -17,19 +17,19 @@ var app = express();
 
 //console.log(process.env);
 
-const assigned_port = process.env.PORT;// || process.env.VUE_APP_BACKEND_PORT ;
+const assigned_port = process.env.PORT;
 
-console.log(assigned_port + " <----");
+//console.log(assigned_port + " <----");
 
 const using_heroku = "production" == process.env.NODE_ENV;
 
 if( ! using_heroku ) {
-  app.listen(assigned_port); // <----- remove for heroku???
+  app.listen(assigned_port); 
 }
 else {
-  //app.listen(8080);
+  //app.listen(8080); // <----- remove for heroku???
 }
-const host_port = '*' ;////this is the port that the html is served on. (8080??)
+const host_port = '*' ;
 
 app.use(function (req, res, next) {
 

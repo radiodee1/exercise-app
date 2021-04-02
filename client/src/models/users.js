@@ -17,7 +17,7 @@ export async function PostUserLogin(username_in, password_in) {
 
     //const port = this.backend_port;
     //const url = this.backend_url;
-    const user = {};
+    let user = {};
 
     const user_record = {
         "username" : username,
@@ -29,27 +29,13 @@ export async function PostUserLogin(username_in, password_in) {
         .then(function (response_raw) {
             // handle success
             //console.log(response);
-            let response = response_raw.data;// JSON.parse(response_raw.data);
+            let response = response_raw.data;
             //console.log(response);
             //console.log("----");
-            for (let i = 0; i < response.length; i++) {
-                
-                user.firstname = response[i].firstname;
-                user.lastname = response[i].lastname;
-                user.address = response[i].address;
-                user.city = response[i].city;
-                user.state = response[i].state;
-                user.zip = response[i].zip;
+            user = response[response.length -1];
+            user.username = username;
+            user.password = null;
 
-                user.height_inches = response[i].height_inches;
-                user.weight_lbs = response[i].weight_lbs;
-
-                user.email = response[i].email;
-                user.username = username;
-                user.password = null;
-                user.id = response[i].id;
-                
-            }
             //console.log(response);
         })
         .catch(function (error) {
