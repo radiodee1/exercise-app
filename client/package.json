@@ -26,6 +26,7 @@
     "sass-loader": "^8.0.2",
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
+    "jsonwebtoken": "^8.5.1",
     "http-errors": "^1.8.0"
   },
   "eslintConfig": {

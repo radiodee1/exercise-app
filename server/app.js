@@ -7,11 +7,14 @@ var bodyParser = require('body-parser');
 require('promise');
 require('dotenv').config({ path: __dirname + "/../client/.env"});
 
-var feedCtrl = require('./controllers/feed')
-var friendCtrl = require('./controllers/friends')
-var userCtrl = require('./controllers/users')
-var workoutCtrl = require('./controllers/workouts')
-var devCtrl = require('./controllers/dev')
+const { LoginRequired  } = require('./controllers/security');
+const usersModel = require('./models/users');
+
+var feedCtrl = require('./controllers/feed');
+var friendCtrl = require('./controllers/friends');
+var userCtrl = require('./controllers/users');
+var workoutCtrl = require('./controllers/workouts');
+var devCtrl = require('./controllers/dev');
 
 var app = express();
 
@@ -65,13 +68,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-app.use(express.static('../docs'));
+app.use(express.static('../docs'))
+
+app.use((req, res, next)=>{         
+  const token = req.headers.authorization?.split(' ')[1];
+  //console.log(req.headers);
+  req.user = token && usersModel.FromJWT(token);
+  next();
+}) 
 
 app.use('/', userCtrl);
-app.use('/', feedCtrl);
-app.use( '/',friendCtrl);
-app.use('/',workoutCtrl);
-app.use('/', devCtrl);
+app.use('/', LoginRequired, feedCtrl);
+app.use('/', LoginRequired, friendCtrl);
+app.use('/', LoginRequired, workoutCtrl);
+app.use('/', LoginRequired, devCtrl);
 
 app.get('*', (req, res) => {
   res.sendFile( path.join( __dirname, '../docs/index.html'));

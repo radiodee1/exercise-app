@@ -4,7 +4,6 @@
 
 let axios = require("axios").default;
 //let Session = require("./Session");
-
 //var items = [];
 
 const port = process.env.VUE_APP_BACKEND_PORT ;
@@ -30,7 +29,7 @@ export async function PostUserLogin(username_in, password_in) {
             // handle success
             //console.log(response);
             let response = response_raw.data;
-            //console.log(response);
+            console.log(response);
             //console.log("----");
             user = response[response.length -1];
             user.username = username;
@@ -220,3 +219,4 @@ export async function PatchStoreWeight(id, w) {
         });
     return out;
 }
+

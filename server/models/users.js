@@ -1,4 +1,6 @@
 var express = require('express');
+const jwt = require('jsonwebtoken');
+
 //var usersRouterGet = express.Router();
 //var usersRouterPost = express.Router();
 //var usersRouterFriendGet = express.Router();
@@ -9,7 +11,9 @@ var control = require('../public/javascripts/sql_control.js');
 var app = express();
 const bcrypt = require('bcrypt');
 
-const SALT_ROUNDS = 5;
+const SALT_ROUNDS = process.env.SALT_ROUNDS;
+const JWT_SECRET = process.env.JWT_SECRET;
+
 
 const user_all = {
   firstname: "John",
@@ -110,7 +114,7 @@ module.exports.usersRouterPost = async function (req, res, next) {
   const password = req.body.password;
   const hash = await bcrypt.hash(password, SALT_ROUNDS);
 
-  let body = { ... req.body, password: hash};
+  let body = { ...req.body, password: hash };
   //for (let i in req.body) {
   //  body[i] = req.body[i];
   //  if (i === "password") {
@@ -219,18 +223,9 @@ module.exports.usersRouterPostLogin = async function (req, res, next) {
   const password = req.body.password;
 
   let y_val = null;
-  //const hash = await bcrypt.hash(password, 8);
-  //console.log(hash);
-
-  //console.log(req.body);
-
+  
   user_list = ['*'];
-  //for (let i in user_all) {
-    //if (i !== "password") {
-  //  user_list.push(i);
-    //}
-  //}
-  //let x = sql.sqlInsertObjJSON(req.body, 'profiles');
+  
   let x = sql.makeSelectFormat('profiles', user_list, `WHERE username = '${req.body.username}'`)
   //console.log(x);
   //console.log("#####");
@@ -242,12 +237,12 @@ module.exports.usersRouterPostLogin = async function (req, res, next) {
       let yy = JSON.stringify(value);
 
       y_val = JSON.parse(yy);
-      console.log(y_val);
+      //console.log(y_val);
 
       result = false;
 
       if (y_val.length > 0) {
-        result = await bcrypt.compare(password, y_val[0].password ); 
+        result = await bcrypt.compare(password, y_val[0].password);
       }
       if (result) {
         if (!y_val[0].firstname) {
@@ -255,24 +250,36 @@ module.exports.usersRouterPostLogin = async function (req, res, next) {
         }
         y_val[0].password = null;
         console.log("send user...");
-        res.send(y_val);
-        
+        const data = { ... y_val[0], password: undefined };
+        const token = jwt.sign(data, JWT_SECRET);
+        return {y_val, token};
+        //res.send({y_val, token});
+
       }
       else if (!result) {
         console.log("no result");
         y_val = [{}];
-        res.send(y_val);
+        //return {y_val, null};
         throw "No good password"
       }
-
-
-    control.end(con);
-
-  });
-}
+      control.end(con);
+      
+    });
+  }
   catch (v) {
-  console.log(v);
-}
+    console.log(v);
+  }
   return y_val;
-   //next();
+  //next();
+}
+
+module.exports.FromJWT = async (token) => {
+  try {
+    const user = jwt.verify(token, JWT_SECRET);
+    return user;
+  } catch (error) {
+    console.log({ error });
+    return null;
+  }
+
 }
