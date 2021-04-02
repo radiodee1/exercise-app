@@ -52,29 +52,39 @@ export async function PostUserLogin(username_in, password_in) {
 }
 
 export async function GetUserRegister(user) {
-    const vm = this;
+    //const vm = this;
     //let success = false;
-    
+    const p_list = {
+        params: {
+            username: user.username,
+        },
+    };
     //check if this (username) already exists!!
     let username_taken = false;
     await axios
-        .get(url + port + "/users")
+        .get(url + port + "/users/username", p_list)
         .then(function (response_raw) {
             // handle success
             //console.log(response);
             let response = response_raw.data;// JSON.parse(response_raw.data);
-            for (let i = 0; i < response.length; i++) {
-                let username_saved = response[i].username;
+            console.log(response.length );
+            console.log(response);
+            if (response.length === 0) {
+                username_taken = false;
+            }
+            else {
+            
+                let username_saved = response[0].username;
                 if (username_saved === null || username_saved === undefined) {
                     username_saved = "";
                 }
-                //console.log(username_saved + " " + username);
+                
                 if (username_saved.trim() === user.username.trim()) {
                     username_taken = true;
-                //    vm.message_username_1 = true;
+                
                 }
             }
-            //console.log(response);
+            
 
             
         })
@@ -82,7 +92,7 @@ export async function GetUserRegister(user) {
             // handle error
             console.log(error);
             user.id = 0;
-            vm.focusNews();
+            //vm.focusNews();
 
         })
         .then(function () {

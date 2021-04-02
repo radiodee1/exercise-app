@@ -13,6 +13,12 @@ router
     
 })
 
+.get('/users/username', async function (req, res, next) {
+    let yy = await model.usersRouterGetUsername(req, res);
+    //res.send(yy);
+    
+})
+
 .post('/users/register', async function (req, res, next)  {
     let yy = await model.usersRouterPost(req, res, next);
     //res.send(yy);

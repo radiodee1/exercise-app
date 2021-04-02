@@ -50,6 +50,42 @@ module.exports.usersRouterGet = async function (req, res, next) {
     await y.then(function (value) {
       //console.log(value);
       yy = JSON.stringify(value);
+      console.log(yy + " <---");
+
+      if (yy.length === 0) {
+        yy = [{}];
+      }
+      res.send(yy);
+      control.end(con);
+
+    });
+
+  }
+  catch (v) {
+    console.log(v);
+  }
+  //console.log(yy);
+  return yy;
+}
+
+module.exports.usersRouterGetUsername = async function (req, res, next) {
+  res.set('Content-Type', 'application/json');
+  var yy = null;
+  const columns = ['*'];
+  //for (let i in user_all) {
+  //  columns.push(i);
+  //}
+  //let yy = null;
+  const where_clause = ` WHERE username = '${req.query.username}' `;
+  let x = sql.makeSelect('profiles', columns, where_clause, false);
+  let con = control.connection();
+  //console.log(con);
+  try {
+    let y = control.xquery(con, x);
+    //console.log("----");
+    await y.then(function (value) {
+      //console.log(value);
+      yy = JSON.stringify(value);
       res.send(yy);
       control.end(con);
 
@@ -206,9 +242,13 @@ module.exports.usersRouterPostLogin = async function (req, res, next) {
       let yy = JSON.stringify(value);
 
       y_val = JSON.parse(yy);
-      //console.log(y_val);
-      result = await bcrypt.compare(password, y_val[0].password ); 
-      
+      console.log(y_val);
+
+      result = false;
+
+      if (y_val.length > 0) {
+        result = await bcrypt.compare(password, y_val[0].password ); 
+      }
       if (result) {
         if (!y_val[0].firstname) {
           throw "Must have first name"
