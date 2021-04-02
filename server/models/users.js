@@ -9,6 +9,8 @@ var control = require('../public/javascripts/sql_control.js');
 var app = express();
 const bcrypt = require('bcrypt');
 
+const SALT_ROUNDS = 5;
+
 const user_all = {
   firstname: "John",
   lastname: "Doe",
@@ -34,10 +36,10 @@ const user_all = {
 module.exports.usersRouterGet = async function (req, res, next) {
   res.set('Content-Type', 'application/json');
   var yy = null;
-  const columns = [];
-  for (let i in user_all) {
-    columns.push(i);
-  }
+  const columns = ['*'];
+  //for (let i in user_all) {
+  //  columns.push(i);
+  //}
   //let yy = null;
   let x = sql.makeSelect('profiles', columns, '', false);
   let con = control.connection();
@@ -70,15 +72,15 @@ module.exports.usersRouterPost = async function (req, res, next) {
   //console.log("---");
 
   const password = req.body.password;
-  const hash = await bcrypt.hash(password, 5);
+  const hash = await bcrypt.hash(password, SALT_ROUNDS);
 
-  let body = {};
-  for (let i in req.body) {
-    body[i] = req.body[i];
-    if (i === "password") {
-      body[i] = hash;
-    }
-  }
+  let body = { ... req.body, password: hash};
+  //for (let i in req.body) {
+  //  body[i] = req.body[i];
+  //  if (i === "password") {
+  //    body[i] = hash;
+  //  }
+  //}
   //body.password = hash;
   //console.log(body.password + " <ooo");
 
@@ -120,10 +122,10 @@ module.exports.usersRouterFriendGet = async function (req, res, next) {
   res.set('Content-Type', 'application/json');
   let profile_id = req.query.id;
   let out = [];
-  const columns = [];
-  for (let i in user_all) {
-    columns.push(i);
-  }
+  const columns = ['*'];
+  //for (let i in user_all) {
+  //  columns.push(i);
+  //}
   let x = sql.sqlMakeFriendSearchSelect(columns, profile_id);
   //let x = sql.makeSelect('profiles', columns, '', false);
   let con = control.connection();
@@ -186,12 +188,12 @@ module.exports.usersRouterPostLogin = async function (req, res, next) {
 
   //console.log(req.body);
 
-  user_list = [];
-  for (let i in user_all) {
+  user_list = ['*'];
+  //for (let i in user_all) {
     //if (i !== "password") {
-    user_list.push(i);
+  //  user_list.push(i);
     //}
-  }
+  //}
   //let x = sql.sqlInsertObjJSON(req.body, 'profiles');
   let x = sql.makeSelectFormat('profiles', user_list, `WHERE username = '${req.body.username}'`)
   //console.log(x);
