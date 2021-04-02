@@ -29,15 +29,15 @@ function connection() {
     //console.log(config)
 
     var con = mysql.createConnection({
-        'host': process.env.VUE_APP_MYSQL_HOST, 
-        'user': process.env.VUE_APP_MYSQL_USER,
-        'password': process.env.VUE_APP_MYSQL_PASSWORD,
-        'port': process.env.VUE_APP_MYSQL_PORT,
+        'host': process.env.MYSQL_HOST, 
+        'user': process.env.MYSQL_USER,
+        'password': process.env.MYSQL_PASSWORD,
+        'port': process.env.MYSQL_PORT,
         //host: config.host,
         //user: config.user,
         //port: config.port,
         //password: config.password,
-        'database': process.env.VUE_APP_MYSQL_DATABASE //"web",
+        'database': process.env.MYSQL_DATABASE //"web",
     });
 
     return con;

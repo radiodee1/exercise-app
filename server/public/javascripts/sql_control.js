@@ -23,11 +23,11 @@ function connection() {
     //console.log(config)
 
     var con = mysql.createConnection({
-        host: process.env.VUE_APP_MYSQL_HOST, // config.host,
-        user: process.env.VUE_APP_MYSQL_USER,  //config.user,
-        port: process.env.VUE_APP_MYSQL_PORT, //config.port,
-        password: process.env.VUE_APP_MYSQL_PASSWORD, //config.password,
-        database: process.env.VUE_APP_MYSQL_DATABASE // "web",
+        host: process.env.MYSQL_HOST, // config.host,
+        user: process.env.MYSQL_USER,  //config.user,
+        port: process.env.MYSQL_PORT, //config.port,
+        password: process.env.MYSQL_PASSWORD, //config.password,
+        database: process.env.MYSQL_DATABASE // "web",
     });
 
     return con;
