@@ -1,0 +1,25 @@
+http://localhost:8010/users
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "firstName": "Joe",
+    "lastName": "Biden",
+    "handle": "@potus",
+    "password": "DrJill"
+}
+
+###
+
+http://localhost:3000/posts/2
+
+###
+http://localhost:8010/users/login
+
+{
+    "username" : "",
+    "password": ""
+}
