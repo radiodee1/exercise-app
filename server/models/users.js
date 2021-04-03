@@ -249,10 +249,11 @@ module.exports.usersRouterPostLogin = async function (req, res, next) {
           throw "Must have first name"
         }
         y_val[0].password = null;
+        const user = y_val;
         console.log("send user...");
         const data = { ... y_val[0], password: undefined };
         const token = jwt.sign(data, JWT_SECRET);
-        return {y_val, token};
+        return {user, token};
         //res.send({y_val, token});
 
       }
