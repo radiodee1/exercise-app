@@ -39,4 +39,8 @@ router
     res.send(yy);
 })
 
+.post('/users/delete', async function (req, res, next)  {
+    let yy = await model.usersRouterPostDelete(req, res, next);
+    //res.send(yy);
+})
 module.exports = router;

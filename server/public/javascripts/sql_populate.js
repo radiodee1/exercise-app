@@ -18,7 +18,11 @@ module.exports = {
     sqlMakeUpdate,
     sqlMakeFriendFeedSelect,
     sqlMakeFriendSearchSelect,
-    sqlUserUpdateRaw
+    sqlUserUpdateRaw,
+    
+    sqlFeedDeleteRaw,
+    sqlFriendsDeleteRaw,
+    sqlUserDeleteRaw
 }
 
 
@@ -307,4 +311,18 @@ function sqlMakeFriendSearchSelect(profile_columns, profile_id) {
 function sqlUserUpdateRaw(id, weight) {
     xx = `UPDATE profiles SET weight_lbs = ${weight} WHERE id = ${id}`;
     return xx;
+}
+
+////////////////////// three delete functions ////////////////////
+
+function sqlUserDeleteRaw(id) {
+    return `DELETE FROM profiles WHERE id = ${id}`;
+}
+
+function sqlFeedDeleteRaw(id) {
+    return `DELETE FROM feed WHERE from_user_id = ${id}`;
+}
+
+function sqlFriendsDeleteRaw(id) {
+    return `DELETE FROM friends WHERE user_id = ${id} OR friend_user_id = ${id}`;
 }

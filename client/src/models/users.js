@@ -220,3 +220,35 @@ export async function PatchStoreWeight(id, w) {
     return out;
 }
 
+export async function PostUserDelete(id) {
+    //let rec = null;
+    const record = {
+        id: id
+    }
+
+    await axios
+        .post(url + port + "/users/delete", record)
+        .then(function (response_raw) {
+            // handle success
+
+            //console.log(response_raw.data);
+            let response = response_raw.data;// JSON.parse(response_raw.data);
+            //record.id = response.insertId;
+            //record = response;
+            console.log(response);
+            //Session.user.id = response.insertId;
+            //success = true;
+            //rec = record;
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+        .then(function () {
+            // always executed
+            //if (success) {
+                //vm.focusNews();
+            //}
+        });
+    return;
+}

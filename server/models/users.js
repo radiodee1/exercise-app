@@ -112,7 +112,7 @@ module.exports.usersRouterPost = async function (req, res, next) {
   //console.log("---");
 
   const password = req.body.password;
-  const hash = await bcrypt.hash(password, SALT_ROUNDS);
+  const hash = await bcrypt.hash(password, +SALT_ROUNDS);
 
   let body = { ...req.body, password: hash };
   //for (let i in req.body) {
@@ -266,6 +266,58 @@ module.exports.usersRouterPostLogin = async function (req, res, next) {
       control.end(con);
       
     });
+  }
+  catch (v) {
+    console.log(v);
+  }
+  return y_val;
+  //next();
+}
+
+module.exports.usersRouterPostDelete = async function (req, res, next) {
+  res.set('Content-Type', 'application/json');
+  
+  const id = req.body.id;
+
+  let y_val = null;
+  
+  const xuser = sql.sqlUserDeleteRaw(id);
+  const xfeed = sql.sqlFeedDeleteRaw(id);
+  const xfriend = sql.sqlFriendsDeleteRaw(id);
+
+  let con = control.connection();
+  try {
+    let x = control.xquery(con, xuser);
+    await x.then(async function (value) {
+      //console.log(value);
+      let xx = JSON.stringify(value);
+
+      x_val = JSON.parse(xx);
+      console.log(x_val);
+      
+    });
+
+    let y = control.xquery(con, xfeed);
+    await y.then(async function (value) {
+      //console.log(value);
+      let yy = JSON.stringify(value);
+
+      y_val = JSON.parse(yy);
+      console.log(y_val);
+      
+    });
+
+    let z = control.xquery(con, xfriend);
+
+    await z.then(async function (value) {
+      //console.log(value);
+      let zz = JSON.stringify(value);
+
+      z_val = JSON.parse(zz);
+      console.log(z_val);
+      
+    });
+    control.end(con);
   }
   catch (v) {
     console.log(v);
