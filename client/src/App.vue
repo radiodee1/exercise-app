@@ -31,6 +31,7 @@
       :focusDev="focusDev"
       :show_development="show_development"
       :user="user"
+      :copyVals="copyVals"
     ></bannercomponent>
 
     <router-view
@@ -64,6 +65,7 @@
       :focusDev="focusDev"
       :show_development="show_development"
       :user="user"
+      :copyVals="copyVals"
     ></router-view>
   </div>
 </template>

@@ -317,6 +317,8 @@ module.exports.usersRouterPostDelete = async function (req, res, next) {
       console.log(z_val);
       
     });
+
+    res.send({})
     control.end(con);
   }
   catch (v) {

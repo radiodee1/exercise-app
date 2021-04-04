@@ -60,6 +60,7 @@ export default {
       console.log(num);
     },
     delete_user: async function () {
+      const vm = this;
       let num = this.index;
       if (num === undefined || num === null) {
         return;
@@ -71,12 +72,12 @@ export default {
         id !== null &&
         username != process.env.VUE_APP_DEV_USERNAME
       ) {
-        await PostUserDelete(id).then(function () {
+        await PostUserDelete(id).then(async function () {
           console.log("deleted " + id);
 
-          this.items = []; //await GetUserDevList();
-          this.single = { message: "deleted" };
-          //this.$root.app.$forceUpdate();
+          vm.items = await GetUserDevList();
+          vm.single = { };
+
         });
       }
     },

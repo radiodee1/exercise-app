@@ -23,6 +23,7 @@ export default {
     backend_port: Number,
     backend_url: String,
     //classOption: Function
+    copyVals: Function
   },
   methods: {
     classOption: function (i) {
@@ -32,6 +33,9 @@ export default {
       else return "invis";
     },
     exit: function () {
+      this.$router.app.$root.newsfeed = false;
+      this.$router.app.$root.focusLogin();
+      this.copyVals();
       this.$router.push("/"); //.catch(err => {});
     },
   },
@@ -39,6 +43,7 @@ export default {
     //devprofiles: devprofiles,
     development: development,
   },
+  
 };
 </script>
 
