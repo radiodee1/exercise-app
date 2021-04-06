@@ -12,7 +12,9 @@ const feed_all = {
 
     //date_now: "",
     //"CAST(date_now AS DATE) AS `date_now` " : null,
-    "CAST(CURTIME() AS DATE)+0 AS `date_now` " : null,
+    "CAST(CURTIME() AS DATE)+0 AS `date_cast` " : null,
+
+    "date_now" : null,
     show_message: false,
     show_exercise: false,
     show_workout: false,
@@ -49,7 +51,12 @@ module.exports.workoutRouterGet = async function (req, res, next) {
     if (days === 0 || days === "0"){
       days = "+0";
     }
-    let xx = 'WHERE from_user_id = '+ id + ' AND show_exercise = "1" AND `date_now` > CAST(CURTIME() AS DATE)+0 + ' + ( days ) + '  ORDER BY date_now DESC ';
+    const millisecond = Date.now();
+    const second_compare = millisecond * 1000 - (days * 60 * 60 * 24 ); // seconds * mins * hours
+
+    //let xx = 'WHERE from_user_id = '+ id + ' AND show_exercise = "1" AND `date_now` > CAST(CURTIME() AS DATE)+0 + ' + ( days ) + '  ORDER BY date_now DESC ';
+    let xx = 'WHERE from_user_id = '+ id + ' AND show_exercise = "1" AND UNIX_TIMESTAMP(date_now) > ' + (- second_compare ) + '  ORDER BY date_now DESC ';
+
     let x = sql.makeSelect('feed', columns, xx, false);
     //let x = sql.sqlMakeFriendFeedSelect(columns, id);
     //console.log(x);
@@ -57,7 +64,7 @@ module.exports.workoutRouterGet = async function (req, res, next) {
     try {
       let y = control.xquery(con, x);
       await y.then(function (value) {
-        //console.log(value);
+        console.log(value);
         let yy = JSON.stringify(value);
         //res.json(yy);
         control.end(con);
