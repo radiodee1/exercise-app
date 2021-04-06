@@ -118,7 +118,7 @@
             </tr>
           </table>
         </div>
-        <button class="button" @click="cancel()">Done</button>
+        <button class="button" @click="cancel()">Cancel</button>
       </div>
       <div class="column"></div>
     </div>

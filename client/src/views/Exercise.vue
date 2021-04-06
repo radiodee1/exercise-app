@@ -148,6 +148,9 @@
               <img id="myImg2" :src="file" />
             </figure>
           </div>
+            <button class="button" @click.prevent="cancel()">Cancel</button>
+
+
         </article>
       </div>
       <div class="column"></div>
