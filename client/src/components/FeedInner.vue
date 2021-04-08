@@ -23,7 +23,9 @@
         </div>
         <div class="media-content">
           <p class="title is-4">{{ message_obj_from }}</p>
-          <!-- p class="subtitle is-6">@johnsmith</p -->
+          <p v-if="show_workout">Workout</p>
+          <p v-if="show_exercise">Exercise</p>
+          <p v-if="show_message">Message</p>
         </div>
       </div>
       <!-- three contents -->
@@ -36,7 +38,7 @@
       </div>
 
       <div class="content" v-bind:class="classMessage(show_message)">
-        message - {{ message_obj_message }}
+         {{ message_obj_message }}
         <!-- a>@bulmaio</a>.
         <a href="#">#css</a> <a href="#">#responsive</a -->
         <br />
@@ -44,6 +46,7 @@
       </div>
 
       <div class="content" v-bind:class="classWorkout(show_workout)">
+        
         <ul>
           <li v-for="ob in workout_obj_exercise_list" :key="ob">
             <pre>{{ ob }}</pre>
