@@ -7,9 +7,10 @@ const app = express.Router();
 var model = require("../models/dev.js");
 
 
-app.get('/dev', async function (req, res, next) {
-    let yy = await model.devRouterGet(req, res, next);
-    res.send(yy);
+app.get('/dev',  function (req, res, next) {
+    let yy =  model.devRouterGet(req, res, next);
+    yy.then(x => {res.send(x)});
+    //res.send(yy);
 });
 
 module.exports = app;

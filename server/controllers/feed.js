@@ -8,29 +8,34 @@ var model = require("../models/feed.js");
 
 
 app
-.get('/feed', async function (req, res, next) {
-    let yy = await model.feedRouterGet(req, res, next);
-    res.send(yy);
+.get('/feed',  function (req, res, next) {
+    let yy =  model.feedRouterGet(req, res, next);
+    yy.then(x => {res.send(x)});
+    //res.send(yy);
 })
 
-.post('/feed', async function (req, res, next)  {
-    let yy = await model.feedRouterPost(req, res, next);
-    res.send(yy);
+.post('/feed',  function (req, res, next)  {
+    let yy =  model.feedRouterPost(req, res, next);
+    yy.then(x => {res.send(x)});
+    //res.send(yy);
 })
 
-.get('/feed/user', async function (req, res, next) {
-    let yy = await model.feedRouterGetUser(req, res, next);
-    res.send(yy)
+.get('/feed/user',  function (req, res, next) {
+    let yy =  model.feedRouterGetUser(req, res, next);
+    yy.then(x => {res.send(x)});
+    //res.send(yy)
 })
 
-.get('/feed/friend', async function (req, res, next) {
-    let yy = await model.feedRouterGetFriend(req, res, next);
-    res.send(yy);
+.get('/feed/friend',  function (req, res, next) {
+    let yy =  model.feedRouterGetFriend(req, res, next);
+    yy.then(x => {res.send(x)});
+    //res.send(yy);
 })
 
-.delete('/feed', async function (req, res, next) {
-    let yy = await model.feedRouterDelete(req, res, next);
-    res.send(yy);
+.delete('/feed',  function (req, res, next) {
+    let yy =  model.feedRouterDelete(req, res, next);
+    yy.then(x => {res.send(x)});
+    //res.send(yy);
 })
 
 module.exports = app;

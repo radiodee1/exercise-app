@@ -9,38 +9,41 @@ const { LoginRequired  } = require('./security');
 
 
 router
-.get('/users', async function (req, res, next) { //return all users -- I think this is used in dev.
-    let yy = await model.usersRouterGet(req, res);
+.get('/users',  function (req, res, next) { //return all users -- I think this is used in dev.
+    let yy =  model.usersRouterGet(req, res);
     //res.send(yy);
 })
 
-.get('/users/username', async function (req, res, next) {
-    let yy = await model.usersRouterGetUsername(req, res);
+.get('/users/username',  function (req, res, next) {
+    let yy =  model.usersRouterGetUsername(req, res);
     //res.send(yy);
 })
 
-.post('/users/register', async function (req, res, next)  {
-    let yy = await model.usersRouterPost(req, res, next);
+.post('/users/register',  function (req, res, next)  {
+    let yy =  model.usersRouterPost(req, res, next);
     //res.send(yy);
 })
 
-.post('/users/login', async function (req, res, next)  {
-    let yy = await model.usersRouterPostLogin(req, res, next);
-    res.send(yy);
+.post('/users/login',  function (req, res, next)  {
+    let yy =  model.usersRouterPostLogin(req, res, next);
+    yy.then(x => {res.send(x)});
+    //res.send(yy);
 })
 
-.get('/users/friends', async function (req, res, next)  {
-    let yy = await model.usersRouterFriendGet(req, res);
-    res.send(yy);
+.get('/users/friends',  function (req, res, next)  {
+    let yy =  model.usersRouterFriendGet(req, res);
+    yy.then(x => {res.send(x)});
+    //res.send(yy);
 })
 
-.patch('/users/weight', async function (req, res, next) {
-    let yy = await model.usersRouterWeightPatch(req, res, next);
-    res.send(yy);
+.patch('/users/weight',  function (req, res, next) {
+    let yy =  model.usersRouterWeightPatch(req, res, next);
+    yy.then(x => {res.send(x)});
+    //res.send(yy);
 })
 
-.post('/users/delete', async function (req, res, next)  {
-    let yy = await model.usersRouterPostDelete(req, res, next);
+.post('/users/delete',  function (req, res, next)  {
+    let yy =  model.usersRouterPostDelete(req, res, next);
     //res.send(yy);
 })
 module.exports = router;
