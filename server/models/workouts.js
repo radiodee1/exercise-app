@@ -6,74 +6,76 @@ var sql = require('../public/javascripts/sql_populate.js');
 var control = require('../public/javascripts/sql_control.js');
 
 const feed_all = {
-    visible: false,
+  visible: false,
 
-    num: 0,
+  num: 0,
 
-    //date_now: "",
-    //"CAST(date_now AS DATE) AS `date_now` " : null,
-    "CAST(CURTIME() AS DATE)+0 AS `date_cast` " : null,
+  //date_now: "",
+  //"CAST(date_now AS DATE) AS `date_now` " : null,
+  "CAST(CURTIME() AS DATE)+0 AS `date_cast` ": null,
 
-    "date_now" : null,
-    show_message: false,
-    show_exercise: false,
-    show_workout: false,
+  "date_now": null,
+  show_message: false,
+  show_exercise: false,
+  show_workout: false,
 
-    'CONVERT(picture_large USING utf8) AS picture_large ': null,
-    picture_small: null,
+  'CONVERT(picture_large USING utf8) AS picture_large ': null,
+  picture_small: null,
 
-    message: "hello-world",
+  message: "hello-world",
 
-    from_user_id: 0,
+  from_user_id: 0,
 
-    message_obj_from: "",
-    message_obj_to: "",
-    message_obj_message: "",
-    
-    exercise_obj_message: "",
-    
-    workout_obj_exercise_list: "",
+  message_obj_from: "",
+  message_obj_to: "",
+  message_obj_message: "",
 
-    message_list: "",
+  exercise_obj_message: "",
+
+  workout_obj_exercise_list: "",
+
+  message_list: "",
 }
 
 /* GET feed listing. */
 module.exports.workoutRouterGet = async function (req, res, next) {
-    res.set('Content-Type', 'application/json');
-    //console.log(res.req.query);
-    let out = [];
-    const id = res.req.query.id;
-    const days = res.req.query.days;
-    const columns = [];
-    for (let i in feed_all) {
-      columns.push(i);
-    }
-    if (days === 0 || days === "0"){
-      days = "+0";
-    }
-    const millisecond = Date.now();
-    const second_compare = millisecond * 1000 - (days * 60 * 60 * 24 ); // seconds * mins * hours
+  res.set('Content-Type', 'application/json');
+  //console.log(res.req.query);
+  let out = [];
+  const id = res.req.query.id;
+  const days = Math.abs(res.req.query.days);
+  const columns = [];
+  for (let i in feed_all) {
+    columns.push(i);
+  }
+  if (days === 0 || days === "0") {
+    days = "+0";
+  }
 
-    //let xx = 'WHERE from_user_id = '+ id + ' AND show_exercise = "1" AND `date_now` > CAST(CURTIME() AS DATE)+0 + ' + ( days ) + '  ORDER BY date_now DESC ';
-    let xx = 'WHERE from_user_id = '+ id + ' AND show_exercise = "1" AND UNIX_TIMESTAMP(date_now) > ' + (- second_compare ) + '  ORDER BY date_now DESC ';
+  const millisecond = Date.now();
+  const second_compare = millisecond / 1000 - (days * 60 * 60 * 24); // seconds * mins * hours
 
-    let x = sql.makeSelect('feed', columns, xx, false);
-    //let x = sql.sqlMakeFriendFeedSelect(columns, id);
-    //console.log(x);
-    let con = control.connection();
-    try {
-      let y = control.xquery(con, x);
-      await y.then(function (value) {
-        console.log(value);
-        let yy = JSON.stringify(value);
-        //res.json(yy);
-        control.end(con);
-        out = yy;
-      });
-    }
-    catch (v) {
-      console.log(v);
-    }
-    return out;
-  };
-  
+  //console.log(millisecond + " " + second_compare);
+  //let xx = 'WHERE from_user_id = '+ id + ' AND show_exercise = "1" AND `date_now` > CAST(CURTIME() AS DATE)+0 + ' + ( days ) + '  ORDER BY date_now DESC ';
+  let xx = 'WHERE from_user_id = ' + id + ' AND show_exercise = "1" AND UNIX_TIMESTAMP(date_now) > ' + (second_compare) + '  ORDER BY date_now DESC ';
+
+  let x = sql.makeSelect('feed', columns, xx, false);
+  //let x = sql.sqlMakeFriendFeedSelect(columns, id);
+  //console.log(x);
+  let con = control.connection();
+  try {
+    let y = control.xquery(con, x);
+    await y.then(function (value) {
+      //console.log(value);
+      let yy = JSON.stringify(value);
+      //res.json(yy);
+      control.end(con);
+      out = yy;
+    });
+  }
+  catch (v) {
+    console.log(v);
+  }
+  return out;
+};
+
