@@ -142,12 +142,12 @@ con.connect(function (err) {
     "date_now TIMESTAMP, " +
     "show_message VARCHAR(255), show_exercise VARCHAR(255), show_workout VARCHAR(255), " +
     "picture_large LONGBLOB, picture_small LONGBLOB, " +
-    "message VARCHAR(255), " +
+    "message VARCHAR(1500), " +
     "message_obj_from VARCHAR(255), message_obj_to INT , " +
-    "message_obj_message VARCHAR(255) , " +
-    "exercise_obj_message VARCHAR(255),  " +
+    "message_obj_message VARCHAR(1500) , " +
+    "exercise_obj_message VARCHAR(1500),  " +
     "workout_obj_exercise_list VARCHAR(1500) , " +
-    "message_list VARCHAR(255) " +
+    "message_list VARCHAR(1500) " +
     " )";
   con.query(sql, function (err, result) {
     if (err) throw err;
@@ -159,94 +159,3 @@ con.connect(function (err) {
 });
 
 ///////////////////////////////////////////
-
-
-  /*
-  messages: a table of messages between users
-  entered in some user form
-  ----
-  id
-  from_user_id (source for message)
-  to_user_id (destination and key to search on)
-  message (actual text of message)
-  date (date message was sent) 
-  
-  var sql = "CREATE TABLE messages (id INT AUTO_INCREMENT PRIMARY KEY, " +
-    "from_user_id INT, to_user_id INT, " +
-    "message VARCHAR(255), date TIMESTAMP " +
-
-    " )";
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log("Table messages created");
-  });
-  */
-
-
-  /*
-  posts: organize post list to search for with 3 complex joins
-  constructed as posts are generated, erased when exercises are combined to workouts
-  ----
-  id
-  table_name (enum for what kind of post 'messages'/'exercise'/'workout' )
-  table_id (num copied from table id of messages/exercise/workout)
-  date (date of post)
-  from_user_id (num copied from user id -and- act as one search key)
-  
-  var sql = "CREATE TABLE posts (id INT AUTO_INCREMENT PRIMARY KEY, " +
-    "table_name VARCHAR(255), table_id INT, " +
-    "date TIMESTAMP, from_user_id INT " +
-
-    " )";
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log("Table posts created");
-  });
-  */
-
-
-  /* 
-  exercises: recording of single exercise repetition
-  entered in some user form
-  ----
-  id
-  exercise_name (something like 'push-ups')
-  repititions (a number like '1' or '5')
-  unit_name (a dropdown like 'reps', or 'miles', or 'km')
-  extra_name (extra info like '30lbs', '20lbs', etc.)
-  date (a date timestamp)
-  complete (a boolean or enumeration for whether an exercise is done)
-  from_user_id (the user id of the exerciser)
-  
-  var sql = "CREATE TABLE exercises (id INT AUTO_INCREMENT PRIMARY KEY, " +
-    "exercise_name VARCHAR(255), repititions INT, " +
-    "unit_name VARCHAR(255), extra_name VARCHAR(255), date TIMESTAMP, " +
-    "complete VARCHAR(255), from_user_id INT " +
-
-    " )";
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log("Table exercises created");
-  });
-  */
-
-  /* 
-  workout: a table for lists of exercises
-  constructed days after exercises are recorded by user
-  ----
-  id
-  date
-  workout_id (can be any id from one of the linked exercises)
-  from_user_id (user)
-  exercise_id (many of these -- link to exercises)
-  
-  var sql = "CREATE TABLE workout (id INT AUTO_INCREMENT PRIMARY KEY, " +
-    "date TIMESTAMP, workout_id INT, " +
-    "from_user_id INT, exercise_id INT " +
-
-    " )";
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log("Table workout created");
-  });
-  */
