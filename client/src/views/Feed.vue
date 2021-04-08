@@ -149,7 +149,7 @@ export default {
       this.items = await GetFriendsFeed(id);
       //this.items =  GetItems();
       if(this.items.length == 0) {
-        console.log("show message");
+        //console.log("show message");
         this.messageEmpty = true;
       }
       
