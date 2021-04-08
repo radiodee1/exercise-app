@@ -49,6 +49,9 @@
                   <button class="button is-primary" @click="refresh()">
                     Refresh
                   </button>
+                  <button class="button " @click="cancel()">
+                    Exit
+                  </button>
                 </div>
               </nav>
             </div>
