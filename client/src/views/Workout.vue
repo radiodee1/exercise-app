@@ -82,7 +82,9 @@
                   </td>
                   <td>
                     <pre>{{ i.message }}</pre>
-                    <br />
+                    
+                    <p class="small">{{ i.date_now }}</p>
+                    <br/>
                   </td>
                 </tr>
               </table>
@@ -113,6 +115,7 @@
               <td></td>
               <td>
                 <pre>{{ i.message }}</pre>
+                <p class="small">{{ i.date_now }}</p>
                 <br />
               </td>
             </tr>
@@ -267,5 +270,9 @@ export default {
 <style scoped>
 button.green {
   height: 100%;
+}
+
+.small {
+  font-size: small;
 }
 </style>
