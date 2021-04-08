@@ -17,7 +17,7 @@
 
         <div class="column is-half">
           <!-- vue start -->
-
+           <p v-if="messageEmpty"> You have no friends so there is no Feed. Possibly try "My Posts"</p>
           <div class="">
             <div id="listing" class="">
               <ul>
@@ -31,6 +31,8 @@
                     @delete="deletePost(i)"
                   >
                   </inner>
+
+                 
                 </li>
               </ul>
             </div>
@@ -64,6 +66,8 @@ export default {
       sortFeed: true,
       sortPosts: false,
       sortFriends: false,
+
+      messageEmpty: false
     };
   },
   props: {
@@ -84,6 +88,7 @@ export default {
   },
   watch: {
     items: function(newItems, oldItems) {
+      
       if (newItems == null || oldItems == null) {
         return;
       }
@@ -113,6 +118,7 @@ export default {
       //this.items = [];
       this.getPostItems();
       //this.items = this.postItems;
+      this.messageEmpty = false;
       console.log('posts');
     },
     doFriends() {
@@ -121,6 +127,7 @@ export default {
       this.sortFriends = true;
       //this.getFriendItems(0);
       //this.items = this.friendItems;
+      this.messageEmpty = false;
       console.log('friends')
     },
 
@@ -141,7 +148,10 @@ export default {
       }
       this.items = await GetFriendsFeed(id);
       //this.items =  GetItems();
-
+      if(this.items.length == 0) {
+        console.log("show message");
+        this.messageEmpty = true;
+      }
       
     },
     getPostItems: async function () {
