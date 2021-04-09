@@ -70,6 +70,10 @@ import Session from "../models/Session.js";
 import { PostUserLogin } from '../models/users';
 //let axios = require("axios").default;
 
+//import axios from "../models/axios";
+//let yy = axios.api_get("/users/username", {params: {username: 'xliebman'}})
+//yy.then(x => console.log(x));
+
 export default {
   name: "login",
   data() {
