@@ -1,14 +1,12 @@
 /* eslint-disable-x */
 
-//import { response } from "../../../server/app";
-
 let axios = require("axios").default;
 //let Session = require("./Session");
 //var items = [];
 
 const port = process.env.VUE_APP_BACKEND_PORT ;
 const url = process.env.VUE_APP_BACKEND_URL;
-console.log(port + " >" + process.env.VUE_APP_BACKEND_PORT);
+//console.log(port + " >" + process.env.VUE_APP_BACKEND_PORT);
 
 export async function PostUserLogin(username_in, password_in) {
     const username = username_in.trim();
