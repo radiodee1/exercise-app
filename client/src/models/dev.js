@@ -14,8 +14,7 @@ export async function GetDevList(lower_param, upper_param) {
         },
     };
     var out = null;
-    await axios
-        .get(url + port + "/dev", f_obj)
+    await axios.get(url + port + "/dev", f_obj)
         .then(function (response) {
             // handle success
 

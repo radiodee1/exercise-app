@@ -30,8 +30,7 @@ export async function PostNewFriendAsk(num, user_id) {
     //console.log({ fobj: f_obj });
 
     // post first friend request here -- insert db
-    await axios
-        .post(url + port + "/friends", f_obj)
+    await axios.post(url + port + "/friends", f_obj)
         .then(function (response) {
             // handle success
 
@@ -77,8 +76,7 @@ export async function PatchConfirmFriend(num) {
     console.log("----");
     list[num].status = "confirmed";
     // patch friend request here -- update db
-    await axios
-        .patch(url + port + "/friends", f_obj)
+    await axios.patch(url + port + "/friends", f_obj)
         .then(function (response) {
             // handle success
 
@@ -119,8 +117,7 @@ export async function GetFriendList(user_id, root_username) {
         },
     };
 
-    await axios
-        .get(url + port + "/friends", p_list)
+    await axios.get(url + port + "/friends", p_list)
         .then(function (response) {
             // handle success
             //const response_raw = response;

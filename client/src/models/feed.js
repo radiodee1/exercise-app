@@ -16,8 +16,7 @@ export function SetItems(item_list) {
 
 export async function PostFeed(dict) {
     // insert one message/post into feed.
-    await axios
-        .post(url + port + "/feed", dict)
+    await axios.post(url + port + "/feed", dict)
         .then(function (response) {
             // handle success
             const response_raw = response;
@@ -47,8 +46,7 @@ export async function GetMyFeed(id) {
         },
     };
 
-    await axios
-        .get(url + port + "/feed/user", f_obj)
+    await axios.get(url + port + "/feed/user", f_obj)
         .then(function (response) {
             // handle success
 
@@ -84,8 +82,7 @@ export async function GetFriendsFeed(id) {
         },
     };
 
-    await axios
-        .get(url + port + "/feed", f_obj)
+    await axios.get(url + port + "/feed", f_obj)
         .then(function (response) {
           // handle success
 
@@ -125,8 +122,7 @@ export async function GetSingleFriendsFeed(id) {
         },
     };
 
-    await axios
-        .get(url + port + "/feed/friend", f_obj)
+    await axios.get(url + port + "/feed/friend", f_obj)
         .then(function (response) {
             // handle success
 
@@ -166,8 +162,7 @@ export async function DeletePost(i, session_user_id) {
         },
     };
 
-    await axios
-        .delete(url + port + "/feed", f_obj)
+    await axios.delete(url + port + "/feed", f_obj)
         .then(function (response) {
             // handle success
 

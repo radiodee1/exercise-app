@@ -19,8 +19,7 @@ export async function GetWorkoutList(i, search_day) {
         },
     };
     var out = null;
-    await axios
-        .get(url + port + "/workout", f_obj)
+    await axios.get(url + port + "/workout", f_obj)
         .then(function (response) {
             // handle success
 
