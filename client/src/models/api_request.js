@@ -4,6 +4,8 @@ require('dotenv').config({ path: __dirname + "./../../../client/.env" });
 
 const API_ROOT = process.env.VUE_APP_BACKEND_URL + process.env.VUE_APP_BACKEND_PORT;
 
+//let USER_TOKEN = "no token";
+
 module.exports = {
     API_ROOT,
     api,
@@ -21,6 +23,10 @@ async function api(url, obj = {}, axios_verb = "fetch", options_headers = {} ) {
     let response = null;
     url = API_ROOT + url;
     
+    //options_headers = { headers: {"X-Custom-Header": USER_TOKEN}};
+    
+    //console.log(options_headers);
+
     if (axios_verb === "fetch") {
         response = await api_fetch(url, obj);
     }
@@ -45,7 +51,12 @@ async function api(url, obj = {}, axios_verb = "fetch", options_headers = {} ) {
     else if (axios_verb === "raw" || axios_verb === "axios") {
         response = await api_axios(url, obj, options_headers);
     }
-
+    /*
+    if (url.endsWith("/login") || url.endsWith("/register")) {
+        // look in 'response' for token...
+        USER_TOKEN = "response token";
+    }
+    */
     return response;
 }
 
@@ -63,7 +74,7 @@ async function api_get(url, obj, headers) {
 
     let response = null;
     await axios.get( url, obj, headers).then( x => {
-        response =  x.data;
+        response =  x;
         //return response;
     });
     return response;
@@ -73,7 +84,7 @@ async function api_post(url, obj, headers) {
 
     let response = null;
     await axios.post( url, obj, headers).then( x => {
-        response =  x.data;
+        response =  x;//.data;
         //return response;
     });
     return response;
@@ -83,7 +94,7 @@ async function api_patch(url, obj, headers) {
 
     let response = null;
     await axios.patch( url, obj, headers).then( x => {
-        response =  x.data;
+        response =  x;//.data;
         //return response;
     });
     return response;
@@ -93,7 +104,7 @@ async function api_put(url, obj, headers) {
 
     let response = null;
     await axios.put( url, obj, headers).then( x => {
-        response =  x.data;
+        response =  x;//.data;
         //return response;
     });
     return response;
@@ -103,7 +114,7 @@ async function api_delete(url, obj, headers) {
 
     let response = null;
     await axios.delete( url, obj, headers).then( x => {
-        response =  x.data;
+        response =  x;//.data;
         //return response;
     });
     return response;
@@ -113,7 +124,7 @@ async function api_options(url, obj, headers) {
 
     let response = null;
     await axios.options( url, obj, headers).then( x => {
-        response =  x.data;
+        response =  x;//.data;
         //return response;
     });
     return response;
@@ -128,7 +139,7 @@ async function api_axios(url, obj, headers) {
         data: obj.data, 
         headers: headers
     }).then( x => {
-        response =  x.data;
+        response =  x;//.data;
         //return response;
     });
     return response;
