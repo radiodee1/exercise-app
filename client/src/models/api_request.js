@@ -4,7 +4,7 @@ require('dotenv').config({ path: __dirname + "./../../../client/.env" });
 
 const API_ROOT = process.env.VUE_APP_BACKEND_URL + process.env.VUE_APP_BACKEND_PORT;
 
-//let USER_TOKEN = "no token";
+let USER_TOKEN = "no-token";
 
 module.exports = {
     API_ROOT,
@@ -23,10 +23,11 @@ async function api(url, obj = {}, axios_verb = "fetch", options_headers = {} ) {
     let response = null;
     url = API_ROOT + url;
     
-    //options_headers = { headers: {"X-Custom-Header": USER_TOKEN}};
+    options_headers = { headers: {Authorization: "Bearer " + USER_TOKEN}};
+    //options_headers =  {Authorization: "Bearer " + USER_TOKEN};
     
     //console.log(options_headers);
-
+    
     if (axios_verb === "fetch") {
         response = await api_fetch(url, obj);
     }
@@ -137,7 +138,7 @@ async function api_axios(url, obj, headers) {
         method: obj.method , 
         url: url, 
         data: obj.data, 
-        headers: headers
+        headers: headers.headers
     }).then( x => {
         response =  x;//.data;
         //return response;
