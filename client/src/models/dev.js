@@ -1,9 +1,9 @@
-let axios = require("axios").default;
+//let axios = require("axios").default;
 
-//var items = [];
+const request = require('./api_request');
 
-const port = process.env.VUE_APP_BACKEND_PORT;
-const url = process.env.VUE_APP_BACKEND_URL;
+//const port = process.env.VUE_APP_BACKEND_PORT;
+//const url = process.env.VUE_APP_BACKEND_URL;
 
 export async function GetDevList(lower_param, upper_param) {
     
@@ -14,7 +14,8 @@ export async function GetDevList(lower_param, upper_param) {
         },
     };
     var out = null;
-    await axios.get(url + port + "/dev", f_obj)
+    await request.api("/dev", f_obj, "get")
+    //await axios.get(url + port + "/dev", f_obj)
         .then(function (response) {
             // handle success
 

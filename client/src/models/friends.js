@@ -1,11 +1,13 @@
-let axios = require("axios").default;
+const request = require('./api_request');
+
+//let axios = require("axios").default;
 //let Session = require("./Session");
 
 var list = [];
 //var raw_list = [];
 
-const port = process.env.VUE_APP_BACKEND_PORT;
-const url = process.env.VUE_APP_BACKEND_URL;
+//const port = process.env.VUE_APP_BACKEND_PORT;
+//const url = process.env.VUE_APP_BACKEND_URL;
 
 export function SetList(l) {
     list = l;
@@ -30,7 +32,8 @@ export async function PostNewFriendAsk(num, user_id) {
     //console.log({ fobj: f_obj });
 
     // post first friend request here -- insert db
-    await axios.post(url + port + "/friends", f_obj)
+    await request.api("/friends", f_obj, "post")
+    //await axios.post(url + port + "/friends", f_obj)
         .then(function (response) {
             // handle success
 
@@ -76,7 +79,8 @@ export async function PatchConfirmFriend(num) {
     console.log("----");
     list[num].status = "confirmed";
     // patch friend request here -- update db
-    await axios.patch(url + port + "/friends", f_obj)
+    await request.api("/friends", f_obj, "patch")
+    //await axios.patch(url + port + "/friends", f_obj)
         .then(function (response) {
             // handle success
 
@@ -117,7 +121,8 @@ export async function GetFriendList(user_id, root_username) {
         },
     };
 
-    await axios.get(url + port + "/friends", p_list)
+    await request.api("/friends", p_list, "get")
+    //await axios.get(url + port + "/friends", p_list)
         .then(function (response) {
             // handle success
             //const response_raw = response;

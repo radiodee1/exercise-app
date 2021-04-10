@@ -1,10 +1,13 @@
-let axios = require("axios").default;
+const request = require('./api_request');
+
+
+//let axios = require("axios").default;
 //let Session = require("./Session");
 
 var items = [];
 
-const port = process.env.VUE_APP_BACKEND_PORT;
-const url = process.env.VUE_APP_BACKEND_URL;
+//const port = process.env.VUE_APP_BACKEND_PORT;
+//const url = process.env.VUE_APP_BACKEND_URL;
 
 export function GetItems() {
     return items;
@@ -16,7 +19,8 @@ export function SetItems(item_list) {
 
 export async function PostFeed(dict) {
     // insert one message/post into feed.
-    await axios.post(url + port + "/feed", dict)
+    await request.api("/feed", dict, "post")
+    //await axios.post(url + port + "/feed", dict)
         .then(function (response) {
             // handle success
             const response_raw = response;
@@ -46,7 +50,8 @@ export async function GetMyFeed(id) {
         },
     };
 
-    await axios.get(url + port + "/feed/user", f_obj)
+    await request.api("/feed/user", f_obj, "get")
+    //await axios.get(url + port + "/feed/user", f_obj)
         .then(function (response) {
             // handle success
 
@@ -82,7 +87,8 @@ export async function GetFriendsFeed(id) {
         },
     };
 
-    await axios.get(url + port + "/feed", f_obj)
+    await request.api("/feed", f_obj, "get")
+    //await axios.get(url + port + "/feed", f_obj)
         .then(function (response) {
           // handle success
 
@@ -122,7 +128,8 @@ export async function GetSingleFriendsFeed(id) {
         },
     };
 
-    await axios.get(url + port + "/feed/friend", f_obj)
+    await request.api("/feed/friend", f_obj, "get")
+    //await axios.get(url + port + "/feed/friend", f_obj)
         .then(function (response) {
             // handle success
 
@@ -162,7 +169,8 @@ export async function DeletePost(i, session_user_id) {
         },
     };
 
-    await axios.delete(url + port + "/feed", f_obj)
+    await request.api("/feed", f_obj, "delete")
+    //await axios.delete(url + port + "/feed", f_obj)
         .then(function (response) {
             // handle success
 

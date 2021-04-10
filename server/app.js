@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 require('promise');
+const cors = require('cors');
 require('dotenv').config({ path: __dirname + "/../client/.env"});
 
 const { LoginRequired  } = require('./controllers/security');
@@ -69,6 +70,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.use(express.static('../docs'))
+app.use(cors())
 
 app.use((req, res, next)=>{         
   const token = req.headers.authorization?.split(' ')[1];

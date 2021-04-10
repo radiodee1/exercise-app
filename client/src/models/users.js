@@ -1,11 +1,14 @@
 /* eslint-disable-x */
 
-let axios = require("axios").default;
+const request = require('./api_request');
+
+
+//let axios = require("axios").default;
 //let Session = require("./Session");
 //var items = [];
 
-const port = process.env.VUE_APP_BACKEND_PORT ;
-const url = process.env.VUE_APP_BACKEND_URL;
+//const port = process.env.VUE_APP_BACKEND_PORT ;
+//const url = process.env.VUE_APP_BACKEND_URL;
 //console.log(port + " >" + process.env.VUE_APP_BACKEND_PORT);
 
 export async function PostUserLogin(username_in, password_in) {
@@ -21,7 +24,8 @@ export async function PostUserLogin(username_in, password_in) {
         "password" : password
     }
     //let success = false;
-    await axios.post(url + port + "/users/login", user_record)
+    await request.api("/users/login", user_record, "post")
+    //await axios.post(url + port + "/users/login", user_record)
         .then(function (response_raw) {
             // handle success
             //console.log(response);
@@ -57,7 +61,8 @@ export async function GetUserRegister(user) {
     };
     //check if this (username) already exists!!
     let username_taken = false;
-    await axios.get(url + port + "/users/username", p_list)
+    await request.api("/users/username", p_list, "get")
+    //await axios.get(url + port + "/users/username", p_list)
         .then(function (response_raw) {
             // handle success
             //console.log(response);
@@ -99,7 +104,8 @@ export async function GetUserRegister(user) {
 
 export async function PostUserRegister(record) {
     let rec = null;
-    await axios.post(url + port + "/users/register", record)
+    await request.api("/users/register", record, "post")
+    //await axios.post(url + port + "/users/register", record)
         .then(function (response_raw) {
             // handle success
 
@@ -132,7 +138,9 @@ export async function GetUserFriendList(user_id) {
             id: user_id,
         },
     };
-    await axios.get(url + port + "/users/friends", p_list)
+
+    await request.api("/users/friends", p_list, "get")
+    //await axios.get(url + port + "/users/friends", p_list)
         .then(function (response_raw) {
             // handle success
 
@@ -159,7 +167,9 @@ export async function GetUserFriendList(user_id) {
 
 export async function GetUserDevList() {
     let list = [];
-    await axios.get(url + port + "/users")
+
+    await request.api("/users", {}, "get")
+    //await axios.get(url + port + "/users")
         .then(function (response_raw) {
             // handle success
             //console.log(response);
@@ -194,7 +204,8 @@ export async function PatchStoreWeight(id, w) {
     let out = [];
     //console.log(f_obj);
     //console.log("----");
-    await axios.patch(url + port + "/users/weight", f_obj)
+    await request.api("/users/weight", f_obj, "patch")
+    //await axios.patch(url + port + "/users/weight", f_obj)
         .then(function (response) {
             // handle success
 
@@ -217,8 +228,8 @@ export async function PostUserDelete(id) {
     const record = {
         id: id
     }
-
-    await axios.post(url + port + "/users/delete", record)
+    await request.api("/users/delete", record, "post")
+    //await axios.post(url + port + "/users/delete", record)
         .then(function (response_raw) {
             // handle success
 
