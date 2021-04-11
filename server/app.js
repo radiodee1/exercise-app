@@ -35,6 +35,7 @@ else {
 }
 const host_port = '*' ;
 
+/*
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
@@ -53,6 +54,7 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
+*/
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

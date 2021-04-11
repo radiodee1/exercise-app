@@ -132,7 +132,7 @@ export default {
     visible: function () {
       let vis = this.item.visible;
       if (vis == "1") {
-        console.log("no visible checking");
+        //console.log("no visible checking");
         vis = true;
         //vis = vis
       } else {
