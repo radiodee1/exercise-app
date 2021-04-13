@@ -24,7 +24,6 @@ async function api(url, obj = {}, axios_verb = "fetch", options_headers = {} ) {
     url = API_ROOT + url;
     
     options_headers = { headers: {Authorization: "Bearer " + USER_TOKEN}};
-    //options_headers =  {Authorization: "Bearer " + USER_TOKEN};
     
     //console.log(options_headers);
     
@@ -52,12 +51,13 @@ async function api(url, obj = {}, axios_verb = "fetch", options_headers = {} ) {
     else if (axios_verb === "raw" || axios_verb === "axios") {
         response = await api_axios(url, obj, options_headers);
     }
-    /*
+    
     if (url.endsWith("/login") || url.endsWith("/register")) {
         // look in 'response' for token...
-        USER_TOKEN = "response token";
+        USER_TOKEN = response.data.token;
     }
-    */
+    //console.log(USER_TOKEN);
+
     return response;
 }
 

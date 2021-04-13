@@ -28,11 +28,12 @@ export async function PostUserLogin(username_in, password_in) {
     //await axios.post(url + port + "/users/login", user_record)
         .then(function (response_raw) {
             // handle success
-            //console.log(response);
+            //console.log(response_raw);
             let response = response_raw.data;
-            console.log(response);
+
+            //console.log(response);
             //console.log("----");
-            user = response[response.length -1];
+            user = response.user[response.user.length -1];
             user.username = username;
             user.password = null;
 

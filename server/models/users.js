@@ -250,16 +250,17 @@ module.exports.usersRouterPostLogin = async function (req, res, next) {
         }
         y_val[0].password = null;
         const user = y_val;
-        console.log("send user...");
+        //console.log("send user...");
         const data = { ... y_val[0], password: undefined };
         const token = jwt.sign(data, JWT_SECRET);
-        return {user, token};
+        //console.log({user, token});
+        //return {user, token};
         //res.send({y_val, token});
-
+        y_val = {user, token};
       }
       else if (!result) {
         console.log("no result");
-        y_val = [{}];
+        y_val = {user: [{}], token: null};
         //return {y_val, null};
         throw "No good password"
       }
