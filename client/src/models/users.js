@@ -3,14 +3,7 @@
 const request = require('./api_request');
 
 
-//let axios = require("axios").default;
-//let Session = require("./Session");
-//var items = [];
-
-//const port = process.env.VUE_APP_BACKEND_PORT ;
-//const url = process.env.VUE_APP_BACKEND_URL;
-//console.log(port + " >" + process.env.VUE_APP_BACKEND_PORT);
-
+/*
 export async function PostUserLogin(username_in, password_in) {
     const username = username_in.trim();
     const password = password_in.trim();
@@ -51,6 +44,7 @@ export async function PostUserLogin(username_in, password_in) {
     //console.log(user);
     return user;
 }
+*/
 
 export async function GetUserRegister(user) {
     //const vm = this;

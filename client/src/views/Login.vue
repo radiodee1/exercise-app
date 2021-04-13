@@ -66,8 +66,10 @@
 
 <script>
 //import development from "../components/Development.vue";
-import Session from "../models/Session.js";
-import { PostUserLogin } from '../models/users';
+import  {Login, toastError} from "../models/Session.js";
+import {Session} from "../models/Session";
+//const Session = require("../models/Session");
+//import { PostUserLogin } from '../models/users';
 //let axios = require("axios").default;
 
 //import axios from "../models/axios";
@@ -110,10 +112,11 @@ export default {
       //  return;
       //}
 
-      let username = this.username;
-      let password = this.password; 
+      let username = this.username.trim();
+      let password = this.password.trim(); 
 
-      var user_reply = await PostUserLogin(username, password)
+      //var user_reply = await PostUserLogin(username, password)
+      var user_reply = await Login(username, password);
       //user_reply = JSON.parse(user_reply);
       console.log(user_reply);
       console.log("*****");
@@ -126,32 +129,17 @@ export default {
         //this.$root.user = user_reply;
         Session.user = user_obj;
         console.log(Session.user);
+        //console.log(Session.token);
         this.focusNews();
       }
       else {
         console.log("bad login");
         this.message_1 = true;
         this.password = '';
+        toastError("bad login!!");
       }
     },
-    /*
-    loginDevCheck: function () {
-    //make hardcoded develpment enabled
-      if (this.username == process.env.VUE_APP_DEV_USERNAME && this.password == process.env.VUE_APP_DEV_PASSWORD) {
-        //this.$router.app.$root.login = false;
-        //this.show_dev = true;
-        const user_info = {
-          username: this.username,
-          password: this.password
-        }
-        Session.user = user_info;
-        this.$router.push("/dev");//.catch(err => {});
-        return true
-      }
-    //this.show_development = true;
-    return false;
-    },
-    */
+    //////
   },
   components: {
     //development: development,

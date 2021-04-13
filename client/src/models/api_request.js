@@ -2,9 +2,13 @@ const axios  = require('axios').default;
 
 require('dotenv').config({ path: __dirname + "./../../../client/.env" });
 
+const Session = require("./Session");
+
+//import {Session} from './Session';
+
 const API_ROOT = process.env.VUE_APP_BACKEND_URL + process.env.VUE_APP_BACKEND_PORT;
 
-let USER_TOKEN = "no-token";
+//let USER_TOKEN = "no-token";
 
 module.exports = {
     API_ROOT,
@@ -23,7 +27,7 @@ async function api(url, obj = {}, axios_verb = "fetch", options_headers = {} ) {
     let response = null;
     url = API_ROOT + url;
     
-    options_headers = { headers: {Authorization: "Bearer " + USER_TOKEN}};
+    options_headers = { headers: {Authorization: "Bearer " + Session.token}};
     
     //console.log(options_headers);
     
@@ -52,11 +56,7 @@ async function api(url, obj = {}, axios_verb = "fetch", options_headers = {} ) {
         response = await api_axios(url, obj, options_headers);
     }
     
-    if (url.endsWith("/login") || url.endsWith("/register")) {
-        // look in 'response' for token...
-        USER_TOKEN = response.data.token;
-    }
-    //console.log(USER_TOKEN);
+    console.log(options_headers);
 
     return response;
 }

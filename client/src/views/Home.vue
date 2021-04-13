@@ -18,7 +18,7 @@
 <script>
 
 import about from "../components/About.vue";
-import Session from '../models/Session';
+import {Session} from '../models/Session';
 
 export default {
   name: "home",

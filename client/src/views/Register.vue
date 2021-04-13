@@ -286,7 +286,7 @@
 <script>
 //import { focusNews } from '../js/exercise';
 //let axios = require("axios").default;
-import Session from "../models/Session.js";
+import {Session} from "../models/Session.js";
 import {GetUserRegister, PostUserRegister} from "../models/users.js";
 
 export default {

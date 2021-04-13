@@ -15,7 +15,7 @@ import message from "../views/Message.vue";
 import workout from "../views/Workout.vue";
 import friends from "../views/Friends.vue";
 import dev from "../views/Dev.vue";
-import Session from "../models/Session.js";
+import {Session} from "../models/Session.js";
 
 Vue.use(VueRouter)
 

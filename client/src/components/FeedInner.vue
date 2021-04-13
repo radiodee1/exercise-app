@@ -63,9 +63,7 @@
 </template>
 
 <script>
-import Session from "../models/Session";
-//import { feed_full_length } from '../js/exercise';
-//import { feed_divs } from '../js/exercise';
+import {Session} from "../models/Session";
 
 export default {
   name: "inner",
