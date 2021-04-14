@@ -33,7 +33,7 @@ export async function Login(username, password) {
                 const token = response.token;
                 Session.token = token;
             }
-            //console.log(Session.token);
+            console.log(Session.token);
             if (typeof Session.user.id === "number") {
                 toastr.open({
                     type: "is-success",

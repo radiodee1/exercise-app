@@ -1,9 +1,8 @@
 
 module.exports.LoginRequired = (req, res, next)=>{ 
-    const TRUE = true;
-    if(req.user || TRUE ){
-        console.log(req.user);
-        
+    //const MOD = false;
+    if(req.user ){
+        console.log(req.user);        
         next();
     }
     else

@@ -2,14 +2,15 @@ const axios  = require('axios').default;
 
 require('dotenv').config({ path: __dirname + "./../../../client/.env" });
 
-const Session = require("./Session");
+//const Session = require("./Session");
 
-//import {Session} from './Session';
+import {Session} from './Session';
 
 const API_ROOT = process.env.VUE_APP_BACKEND_URL + process.env.VUE_APP_BACKEND_PORT;
 
 //let USER_TOKEN = "no-token";
 
+/*
 module.exports = {
     API_ROOT,
     api,
@@ -22,8 +23,9 @@ module.exports = {
     api_options,
     api_axios
 }
+*/
 
-async function api(url, obj = {}, axios_verb = "fetch", options_headers = {} ) {
+export async function api(url, obj = {}, axios_verb = "fetch", options_headers = {} ) {
     let response = null;
     url = API_ROOT + url;
     
@@ -57,6 +59,7 @@ async function api(url, obj = {}, axios_verb = "fetch", options_headers = {} ) {
     }
     
     console.log(options_headers);
+    //console.log(response.data);
 
     return response;
 }
@@ -72,7 +75,9 @@ async function api_fetch(url, obj) {
 }
 
 async function api_get(url, obj, headers) {
-
+    //console.log(headers);
+    //console.log("***");
+    obj = { ...obj, ...headers}
     let response = null;
     await axios.get( url, obj, headers).then( x => {
         response =  x;

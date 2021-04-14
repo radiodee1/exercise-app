@@ -35,27 +35,6 @@ else {
 }
 const host_port = '*' ;
 
-/*
-app.use(function (req, res, next) {
-
-  // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', host_port);
-
-  // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-  // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
-  res.setHeader('Access-Control-Allow-Credentials', true);
-
-  // Pass to next layer of middleware
-  next();
-});
-*/
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -72,32 +51,38 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.use(express.static('../docs'))
-app.use(cors())
+.use(cors())
 
-app.use((req, res, next)=>{         
+.use((req, res, next)=>{         
   const token = req.headers.authorization?.split(' ')[1];
   //console.log(req.headers);
-  req.user = token && usersModel.FromJWT(token);
+  if (token !== null && token !== undefined) {
+    req.user = usersModel.FromJWT(token);
+    req.token = token;
+  }
+  
+  console.log("token " + token)
+  
   next();
 }) 
 
-app.use('/', userCtrl);
-app.use('/', LoginRequired, feedCtrl);
-app.use('/', LoginRequired, friendCtrl);
-app.use('/', LoginRequired, workoutCtrl);
-app.use('/', LoginRequired, devCtrl);
+.use('/', userCtrl)
+.use('/', LoginRequired, feedCtrl)
+.use('/', LoginRequired, friendCtrl)
+.use('/', LoginRequired, workoutCtrl)
+.use('/', LoginRequired, devCtrl)
 
-app.get('*', (req, res) => {
+.get('*', (req, res) => {
   res.sendFile( path.join( __dirname, '../docs/index.html'));
 })
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+.use(function(req, res, next) {
   next(createError(404));
-});
+})
 
 // error handler
-app.use(function(err, req, res, next) {
+.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -105,6 +90,6 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
-});
+})
 
 module.exports = app;
