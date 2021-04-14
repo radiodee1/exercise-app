@@ -18,6 +18,7 @@ const feed_all = {
     num: 0,
 
     date_now: "",
+    "CONVERT_TZ(date_now, 'UTC','US/EASTERN') AS date_now_tz ":null,
 
     show_message: false,
     show_exercise: false,

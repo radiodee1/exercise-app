@@ -94,6 +94,7 @@ export default {
     },
     date_now: function () {
       const z = this.item.date_now;
+      //console.log(this.item.date_now + " " + this.item.date_now_tz);
       return z;
       //if (z == "1") return true;
       //else return false;
