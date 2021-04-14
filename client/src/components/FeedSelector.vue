@@ -64,7 +64,7 @@ export default {
       this.$emit('friends');
     },
     selected: function (val) {
-      console.log("selected "+ val);
+      //console.log("selected "+ val);
       this.$emit('selected', val);
     }
   },

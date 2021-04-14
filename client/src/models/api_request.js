@@ -58,7 +58,7 @@ export async function api(url, obj = {}, axios_verb = "fetch", options_headers =
         response = await api_axios(url, obj, options_headers);
     }
     
-    console.log(options_headers);
+    //console.log(options_headers);
     //console.log(response.data);
 
     return response;

@@ -60,9 +60,7 @@ app.use(express.static('../docs'))
     req.user = usersModel.FromJWT(token);
     req.token = token;
   }
-  
-  console.log("token " + token)
-  
+  //console.log("token " + token)
   next();
 }) 
 

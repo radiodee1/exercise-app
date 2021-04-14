@@ -9,12 +9,12 @@ const { LoginRequired  } = require('./security');
 
 
 router
-.get('/users',  function (req, res, next) { //return all users -- I think this is used in dev.
+.get('/users', LoginRequired, function (req, res, next) { //return all users -- I think this is used in dev.
     let yy =  model.usersRouterGet(req, res);
     //res.send(yy);
 })
 
-.get('/users/username',  function (req, res, next) {
+.get('/users/username', LoginRequired, function (req, res, next) {
     let yy =  model.usersRouterGetUsername(req, res);
     //res.send(yy);
 })
@@ -30,19 +30,19 @@ router
     //res.send(yy);
 })
 
-.get('/users/friends',  function (req, res, next)  {
+.get('/users/friends', LoginRequired, function (req, res, next)  {
     let yy =  model.usersRouterFriendGet(req, res);
     yy.then(x => {res.send(x)});
     //res.send(yy);
 })
 
-.patch('/users/weight',  function (req, res, next) {
+.patch('/users/weight', LoginRequired, function (req, res, next) {
     let yy =  model.usersRouterWeightPatch(req, res, next);
     yy.then(x => {res.send(x)});
     //res.send(yy);
 })
 
-.post('/users/delete',  function (req, res, next)  {
+.post('/users/delete', LoginRequired,  function (req, res, next)  {
     let yy =  model.usersRouterPostDelete(req, res, next);
     //res.send(yy);
 })

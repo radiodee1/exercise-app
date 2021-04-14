@@ -118,8 +118,8 @@ export default {
       //var user_reply = await PostUserLogin(username, password)
       var user_reply = await Login(username, password);
       //user_reply = JSON.parse(user_reply);
-      console.log(user_reply);
-      console.log("*****");
+      //console.log(user_reply);
+      //console.log("*****");
       const user_obj = user_reply;
       if (typeof user_obj.id === "number") {
         for (let i in user_obj) {
@@ -128,7 +128,7 @@ export default {
         }
         //this.$root.user = user_reply;
         Session.user = user_obj;
-        console.log(Session.user);
+        //console.log(Session.user);
         //console.log(Session.token);
         this.focusNews();
       }
@@ -145,7 +145,7 @@ export default {
     //development: development,
   },
   mounted: function () {
-    console.log(process.env);
+    //console.log(process.env);
   }
 };
 </script>

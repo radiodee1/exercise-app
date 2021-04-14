@@ -7,7 +7,7 @@
       id="banner"
     >
       <div class="navbar-brand">
-        <a class="navbar-item" href="/">
+        <a class="navbar-item" @click.prevent="logout"> 
           <img src="../assets/app.png" width="56" height="56" />
         </a>
 
@@ -62,6 +62,8 @@
 </template>
 
 <script>
+
+import {Logout} from "../models/Session"
 export default {
   name: "bannercomponent",
   data() {
@@ -89,6 +91,12 @@ export default {
   computed: {
     isDevUser: function () {
       return this.$root.user.username === process.env.VUE_APP_DEV_USERNAME;
+    }
+  },
+  methods: {
+    logout: function () {
+      Logout();
+      this.$router.push("/");
     }
   }
 };

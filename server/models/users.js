@@ -54,7 +54,7 @@ module.exports.usersRouterGet = async function (req, res, next) {
     await y.then(function (value) {
       //console.log(value);
       yy = JSON.stringify(value);
-      console.log(yy + " <---");
+      //console.log(yy + " <---");
 
       if (yy.length === 0) {
         yy = [{}];
@@ -138,7 +138,7 @@ module.exports.usersRouterPost = async function (req, res, next) {
       //console.log(value);
       yy = JSON.stringify(value);
       //res.json(yy);
-      console.log(yy);
+      //console.log(yy);
 
       let yyy = { ...body, id: JSON.parse(yy).insertId }
       //console.log(yyy);
@@ -259,7 +259,7 @@ module.exports.usersRouterPostLogin = async function (req, res, next) {
         y_val = {user, token};
       }
       else if (!result) {
-        console.log("no result");
+        //console.log("no result");
         y_val = {user: [{}], token: null};
         //return {y_val, null};
         throw "No good password"
@@ -294,7 +294,7 @@ module.exports.usersRouterPostDelete = async function (req, res, next) {
       let xx = JSON.stringify(value);
 
       x_val = JSON.parse(xx);
-      console.log(x_val);
+      //console.log(x_val);
       
     });
 
@@ -304,7 +304,7 @@ module.exports.usersRouterPostDelete = async function (req, res, next) {
       let yy = JSON.stringify(value);
 
       y_val = JSON.parse(yy);
-      console.log(y_val);
+      //console.log(y_val);
       
     });
 
@@ -315,7 +315,7 @@ module.exports.usersRouterPostDelete = async function (req, res, next) {
       let zz = JSON.stringify(value);
 
       z_val = JSON.parse(zz);
-      console.log(z_val);
+      //console.log(z_val);
       
     });
 

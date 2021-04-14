@@ -58,7 +58,7 @@ import { GetUserFriendList } from '../models/users'
         watch: {
             selected: function() {
                 this.search_id = this.users_id[this.selected];
-                console.log(this.selected + " selected " + this.search_id);
+                //console.log(this.selected + " selected " + this.search_id);
                 //console.log(val);
                 if (this.search_id != null && this.search_id != undefined) {
                     this.$emit('selected', this.search_id);

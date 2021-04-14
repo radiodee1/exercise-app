@@ -56,12 +56,12 @@ export async function GetMyFeed(id) {
             // handle success
 
             response = response.data;//JSON.parse(response.data);
-            console.log(response.length + " post");
+            //console.log(response.length + " post");
 
             items = [...response];
             //vm.tree.feed = [... response];
 
-            console.log(items.length + " len");
+            //console.log(items.length + " len");
         })
         .catch(function (error) {
             // handle error
@@ -98,7 +98,7 @@ export async function GetFriendsFeed(id) {
           items = [...response];
           //vm.tree.feed = [... response];
 
-          console.log(items.length + " len");
+          //console.log(items.length + " len");
         })
         .catch(function (error) {
           // handle error
@@ -139,7 +139,7 @@ export async function GetSingleFriendsFeed(id) {
             items = [...response];
             //vm.tree.feed = [... response];
 
-            console.log(items.length + " len");
+            //console.log(items.length + " len");
         })
         .catch(function (error) {
             // handle error

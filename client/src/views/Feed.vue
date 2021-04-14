@@ -50,7 +50,7 @@
 import inner from "../components/FeedInner.vue";
 import feedselector from "../components/FeedSelector.vue";
 
-import { feed_full_length } from "../js/ExerciseApp.js";
+//import { feed_full_length } from "../js/ExerciseApp.js";
 //import Session from "../models/Session";
 import {DeletePost, GetFriendsFeed, GetMyFeed, GetSingleFriendsFeed, SetItems} from "../models/feed.js"
 //import Session from '../models/Session';
@@ -92,7 +92,7 @@ export default {
       if (newItems == null || oldItems == null) {
         return;
       }
-      console.log('items watch ' + newItems.length + " " + oldItems.length);
+      //console.log('items watch ' + newItems.length + " " + oldItems.length);
       //this.$forceUpdate();
     }
   },
@@ -109,7 +109,7 @@ export default {
       this.sortFriends = false;
       this.getFeedItems();
       //this.items = this.feedItems;
-      console.log('feed');
+      //console.log('feed');
     },
     doPosts() {
       this.sortFeed = false;
@@ -119,7 +119,7 @@ export default {
       this.getPostItems();
       //this.items = this.postItems;
       this.messageEmpty = false;
-      console.log('posts');
+      //console.log('posts');
     },
     doFriends() {
       this.sortFeed = false;
@@ -128,7 +128,7 @@ export default {
       //this.getFriendItems(0);
       //this.items = this.friendItems;
       this.messageEmpty = false;
-      console.log('friends')
+      //console.log('friends')
     },
 
     deletePost: async function (i) {
@@ -183,7 +183,7 @@ export default {
   },
   mounted: function () {
     //this.fillPictures();
-    console.log(feed_full_length);
+    //console.log(feed_full_length);
     //this.items = [];
     this.doFeed();
 
