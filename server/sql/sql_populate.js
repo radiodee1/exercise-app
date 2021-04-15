@@ -1,11 +1,14 @@
 const mysql = require('mysql');
 var Promise = require('promise');
+const bcrypt = require('bcrypt');
 require('dotenv').config({path:__dirname+ "/../../client/.env"});
 
+const SALT_ROUNDS = process.env.SALT_ROUNDS;
 
 module.exports = {
     makeInsert,
     makeInsertFormat,
+    makeInsertCrypt,
     makeSelect,
     makeSelectFormat,
     query,
@@ -69,6 +72,45 @@ function makeInsert(table_name, columns_list, values_list, mult_rows = false) {
             xx = xx + " ( ";
             for (var i = 0; i < values_list[j].length; i++) {
                 xx = xx + " '" + values_list[j][i] + "'";
+                if (i < values_list[j].length - 1) xx = xx + ",";
+            }
+            xx = xx + " ) "
+            if (j < values_list.length - 1) xx = xx + ", "
+        }
+    }
+    return xx
+}
+
+
+function makeInsertCrypt(table_name, columns_list, values_list, mult_rows = false) {
+
+    xx = "";
+    xx = xx + "INSERT INTO `";
+    xx = xx + table_name + "` ";
+    xx = xx + " ( ";
+    for (var i = 0; i < columns_list.length; i++) {
+        xx = xx + " `" + columns_list[i] + "`";
+        if (i < columns_list.length - 1) xx = xx + ",";
+    }
+    xx = xx + " ) ";
+    xx = xx + " VALUES ";
+    if (mult_rows == false) {
+        xx = xx + " ( ";
+        for (var i = 0; i < values_list.length; i++) {
+            xx = xx + " '" + values_list[i] + "'";
+            if (i < values_list.length - 1) xx = xx + ",";
+        }
+        xx = xx + " ) "
+    }
+    else {
+        for (var j = 0; j < values_list.length; j++) {
+            xx = xx + " ( ";
+            for (var i = 0; i < values_list[j].length; i++) {
+                let b = bcrypt.hashSync(values_list[j][i], +SALT_ROUNDS);
+                if (columns_list[i] !== "password") {
+                    b = values_list[j][i];
+                }
+                xx = xx + " '" + b + "'";
                 if (i < values_list[j].length - 1) xx = xx + ",";
             }
             xx = xx + " ) "

@@ -37,6 +37,8 @@ con.connect(function (err) {
   username (name)
   password (password)
   cookie (for saved logins)
+  height_inches (calculated height)
+  weight_lbs (weight)
   date (registration date)
   */
   var sql = "CREATE TABLE IF NOT EXISTS profiles (id INT AUTO_INCREMENT PRIMARY KEY, " +
