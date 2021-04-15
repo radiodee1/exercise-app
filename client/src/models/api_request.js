@@ -117,6 +117,7 @@ async function api_put(url, obj, headers) {
 }
 
 async function api_delete(url, obj, headers) {
+    obj = { ...obj, ...headers}
 
     let response = null;
     await axios.delete( url, obj, headers).then( x => {
@@ -127,6 +128,7 @@ async function api_delete(url, obj, headers) {
 }
 
 async function api_options(url, obj, headers) {
+    obj = { ...obj, ...headers}
 
     let response = null;
     await axios.options( url, obj, headers).then( x => {

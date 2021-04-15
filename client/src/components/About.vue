@@ -15,7 +15,7 @@
     <hr>
     <p>Don't use the browser 'back' arrow for site navigation. When you are done with a form, click either
       the 'submit' button or the smaller 'cancel' button to exit. If you want to go back to the login screen
-      click the Exercise-App icon in the top left of the news feed window. </p>
+      click the Exercise-App icon in the top left of the news feed window. This will log you out. </p>
   </div>
 </template>
 

@@ -287,7 +287,7 @@ export default {
       //console.log('file ' + f);
     },
     mounting: function () {
-      //this.listType = ['reps', 'miles', 'kilometers', 'steps', 'laps', 'lbs', 'kg'];
+      
       this.dictDeet ={
         'reps': ['curls', 'pushups', 'chinups', 'situps'], 
         'miles': ['running', 'walking', 'swimming', 'cycling'], 

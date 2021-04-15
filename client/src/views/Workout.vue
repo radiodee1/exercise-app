@@ -32,8 +32,8 @@
               </a>
 
               <hr class="dropdown-divider" />
-              <a href="#" class="dropdown-item" @click="searchDay(-99)">
-                All Time
+              <a href="#" class="dropdown-item" @click="searchDay(-90)">
+                Three Months
               </a>
             </div>
           </div>

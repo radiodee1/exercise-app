@@ -6,7 +6,7 @@
         <strong>Sign up</strong>
       </a>
       <a class="button is-light" @click="focusLogin()"> Log in </a>
-      <a class="button is-light" @click="skipLogin()"> Skip Log In </a>
+      <!-- a class="button is-light" @click="skipLogin()"> Skip Log In </a -->
      
     </div>
     Login or register! <br><br>

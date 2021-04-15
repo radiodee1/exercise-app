@@ -17,7 +17,7 @@
           aria-label="menu"
           aria-expanded="false"
           data-target="navbarBasicExample"
-          @click="isActive = !isActive"
+          @click.prevent="clickBurger()"
         >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -34,13 +34,13 @@
       >
         <div class="navbar-menu" :class="{ 'is-active': isActive }">
           <div class="navbar-start">
-            <a class="navbar-item" @click="focusFormExercise()"> Exercise </a>
+            <a class="navbar-item" @click="formExercise()"> Exercise </a>
 
-            <a class="navbar-item" @click="focusFormWorkout()"> Workout </a>
+            <a class="navbar-item" @click="formWorkout()"> Workout </a>
 
-            <a class="navbar-item" @click="focusFormMessage()"> Message </a>
+            <a class="navbar-item" @click="formMessage()"> Message </a>
 
-            <a class="navbar-item" @click="focusFormFriends()"> Friends </a>
+            <a class="navbar-item" @click="formFriends()"> Friends </a>
 
             <router-link class="navbar-item" to="/dev" v-show="isDevUser"> Dev </router-link>
           </div>
@@ -83,6 +83,7 @@ export default {
     "home",
     "register",
     "items",
+    "focusNews",
     "form_message",
     "form_exercise",
     "form_workout",
@@ -97,6 +98,29 @@ export default {
     logout: function () {
       Logout();
       this.$router.push("/");
+    },
+    formExercise: function () {
+      this.isActive = false;
+      this.focusFormExercise();
+    },
+    formWorkout: function () {
+      this.isActive = false;
+      this.focusFormWorkout();
+    },
+    formMessage: function () {
+      this.isActive = false;
+      this.focusFormMessage();
+    },
+    formFriends: function () {
+      this.isActive = false;
+      this.focusFormFriends();
+    },
+    clickBurger: function () {
+      this.isActive = ! this.isActive;
+      if (this.form_message || this.form_exercise || this.form_workout || this.form_friends) {
+        this.isActive = false;
+        this.focusNews();
+      }
     }
   }
 };
