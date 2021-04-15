@@ -110,6 +110,7 @@ function makeInsertCrypt(table_name, columns_list, values_list, mult_rows = fals
                 if (columns_list[i] !== "password") {
                     b = values_list[j][i];
                 }
+                //console.log(b);
                 xx = xx + " '" + b + "'";
                 if (i < values_list[j].length - 1) xx = xx + ",";
             }
