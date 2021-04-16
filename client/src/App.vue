@@ -81,6 +81,8 @@ import bannercomponent from "./views/Banner.vue";
 //import { makeInvocation } from "./js/exercise.js";
 import { feed_full_length } from './js/ExerciseApp.js';
 
+import {Logout} from "./models/Session";
+
 export default {
   name: "appx",
   data() {
@@ -155,6 +157,7 @@ export default {
       this.$router.go(-1);
     },
     focusLogin: function () {
+      Logout();
       this.$router.app.$root.focusLogin();
       this.copyVals();
 

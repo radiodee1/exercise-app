@@ -248,12 +248,17 @@ module.exports.usersRouterPostLogin = async function (req, res, next) {
         if (!y_val[0].firstname) {
           throw "Must have first name"
         }
+        let dev = false;
+        if (y_val[0].username == process.env.DEV_USERNAME) {
+          dev = true;
+        }
+        y_val[0].isDevUser = dev;
         y_val[0].password = null;
         const user = y_val;
         //console.log("send user...");
         const data = { ... y_val[0], password: undefined };
         const token = jwt.sign(data, JWT_SECRET);
-        //console.log({user, token});
+        console.log({user, token});
         //return {user, token};
         //res.send({y_val, token});
         y_val = {user, token};

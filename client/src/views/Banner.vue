@@ -42,7 +42,7 @@
 
             <a class="navbar-item" @click="formFriends()"> Friends </a>
 
-            <router-link class="navbar-item" to="/dev" v-show="isDevUser"> Dev </router-link>
+            <router-link class="navbar-item" to="/dev" v-show="isDevUser()"> Dev </router-link>
           </div>
           <div class="navbar-end"></div>
         </div>
@@ -63,7 +63,7 @@
 
 <script>
 
-import {Logout} from "../models/Session"
+import {Logout, Session} from "../models/Session";
 export default {
   name: "bannercomponent",
   data() {
@@ -89,14 +89,16 @@ export default {
     "form_workout",
     "form_friends",
   ],
-  computed: {
-    isDevUser: function () {
-      return this.$root.user.username === process.env.VUE_APP_DEV_USERNAME;
-    }
-  },
   methods: {
+    isDevUser: function () {
+      //return this.$root.user.username === process.env.VUE_APP_DEV_USERNAME;
+      console.log(this.$root.user);
+      return Session.user != null && (Session.user.isDevUser != null && Session.user.isDevUser == true);
+    },
     logout: function () {
       Logout();
+      //Session.user.isDevUser = false;
+      this.$router.app.$root.show_development = false;
       this.$router.push("/");
     },
     formExercise: function () {
@@ -117,9 +119,12 @@ export default {
     },
     clickBurger: function () {
       this.isActive = ! this.isActive;
-      if (this.form_message || this.form_exercise || this.form_workout || this.form_friends) {
+      if (this.form_message || this.form_exercise || this.form_workout || this.form_friends ) {
         this.isActive = false;
         this.focusNews();
+      }
+      if (this.isActive == false && this.isDevUser()) {
+        this.isActive = false;
       }
     }
   }

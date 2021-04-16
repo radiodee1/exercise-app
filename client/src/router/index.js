@@ -81,7 +81,7 @@ router.beforeEach((to, from, next) => {
   //}
 
   if ((to.path !== '/login' && to.path !== '/register' && to.path !== "/"  && !Session.user) || 
-    (to.path === '/dev' && ( Session.user.username !== process.env.VUE_APP_DEV_USERNAME))) {
+    (to.path === '/dev' && ( Session.user.isDevUser != true))) {
     //visibility.focusReset();
     next('/');
   } else {
