@@ -7,7 +7,7 @@
       id="banner"
     >
       <div class="navbar-brand">
-        <a class="navbar-item" @click.prevent="logout"> 
+        <a class="navbar-item" @click.prevent="logout">
           <img src="../assets/app.png" width="56" height="56" />
         </a>
 
@@ -30,22 +30,26 @@
         id="navbarBasicExample"
         class="navbar-menu"
         :class="{ 'is-active': isActive }"
-        v-if="newsfeed"
+        v-if="newsfeed && Session.user"
       >
-        <div class="navbar-menu" :class="{ 'is-active': isActive }">
-          <div class="navbar-start">
-            <a class="navbar-item" @click="formExercise()"> Exercise </a>
+        <div class="navbar-menu" :class="{ 'is-active': isActive }" >
+          
+            <div class="navbar-start">
+              <a class="navbar-item" @click="formExercise()"> Exercise </a>
 
-            <a class="navbar-item" @click="formWorkout()"> Workout </a>
+              <a class="navbar-item" @click="formWorkout()"> Workout </a>
 
-            <a class="navbar-item" @click="formMessage()"> Message </a>
+              <a class="navbar-item" @click="formMessage()"> Message </a>
 
-            <a class="navbar-item" @click="formFriends()"> Friends </a>
+              <a class="navbar-item" @click="formFriends()"> Friends </a>
 
-            <router-link class="navbar-item" to="/dev" v-show="isDevUser()"> Dev </router-link>
+              <router-link class="navbar-item" to="/dev" v-show="isDevUser()">
+                Dev
+              </router-link>
+            </div>
           </div>
           <div class="navbar-end"></div>
-        </div>
+        
       </div>
     </nav>
 
@@ -62,16 +66,18 @@
 </template>
 
 <script>
-
-import {Logout, Session} from "../models/Session";
+import { Logout, Session } from "../models/Session";
 export default {
   name: "bannercomponent",
   data() {
     return {
       isActive: false,
+      Session
     };
   },
-
+  mounted () {
+    //this.isUser = true;
+  },
   props: [
     "banner",
     "newsfeed",
@@ -90,16 +96,21 @@ export default {
     "form_friends",
   ],
   methods: {
+    
     isDevUser: function () {
-      //return this.$root.user.username === process.env.VUE_APP_DEV_USERNAME;
-      console.log(this.$root.user);
-      return Session.user != null && (Session.user.isDevUser != null && Session.user.isDevUser == true);
+      
+      return (
+        Session.user != null &&
+        Session.user.isDevUser != null &&
+        Session.user.isDevUser == true
+      );
     },
     logout: function () {
       Logout();
-      //Session.user.isDevUser = false;
-      this.$router.app.$root.show_development = false;
-      this.$router.push("/");
+      //this.isUser = false;
+      
+      this.$router.app.$root.newsfeed = false;
+      this.$router.push("/");//.catch();
     },
     formExercise: function () {
       this.isActive = false;
@@ -118,16 +129,21 @@ export default {
       this.focusFormFriends();
     },
     clickBurger: function () {
-      this.isActive = ! this.isActive;
-      if (this.form_message || this.form_exercise || this.form_workout || this.form_friends ) {
+      this.isActive = !this.isActive;
+      if (
+        this.form_message ||
+        this.form_exercise ||
+        this.form_workout ||
+        this.form_friends
+      ) {
         this.isActive = false;
         this.focusNews();
       }
       if (this.isActive == false && this.isDevUser()) {
         this.isActive = false;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
