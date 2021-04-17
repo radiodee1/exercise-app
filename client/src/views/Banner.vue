@@ -1,40 +1,39 @@
 <template>
-  <div id="bannercomponent" class="" style="width: 100%;">
-    <div class="gray" >
-    <nav
-      class="navbar gray"
-      role="navigation"
-      aria-label="main navigation"
-      id="banner"
-    >
-      <div class="navbar-brand gray">
-        <a class="navbar-item gray" @click.prevent="logout">
-          <img src="../assets/app.png" width="56" height="56" />
-        </a>
-
-        <a
-          role="button"
-          class="navbar-burger gray"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navbarBasicExample"
-          @click.prevent="clickBurger()"
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-        <div class="navbar-menu gray" id="navMenu"></div>
-      </div>
-
-      <div
-        id="navbarBasicExample"
-        class="navbar-menu gray"
-        :class="{ 'is-active': isActive }"
-        v-if="newsfeed && Session.user"
+  <div id="bannercomponent" class="" style="width: 100%">
+    <div class="gray">
+      <nav
+        class="navbar gray"
+        role="navigation"
+        aria-label="main navigation"
+        id="banner"
       >
-        <div class="navbar-menu gray" :class="{ 'is-active': isActive }" >
-          
+        <div class="navbar-brand gray">
+          <a class="navbar-item gray" @click.prevent="logout">
+            <img src="../assets/app.png" width="56" height="56" />
+          </a>
+
+          <a
+            role="button"
+            class="navbar-burger gray"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+            @click.prevent="clickBurger()"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+          <div class="navbar-menu gray" id="navMenu"></div>
+        </div>
+
+        <div
+          id="navbarBasicExample"
+          class="navbar-menu gray"
+          :class="{ 'is-active': isActive }"
+          v-if="newsfeed && Session.user"
+        >
+          <div class="navbar-menu gray" :class="{ 'is-active': isActive }">
             <div class="navbar-start gray">
               <a class="navbar-item" @click="formExercise()"> Exercise </a>
 
@@ -50,9 +49,8 @@
             </div>
           </div>
           <div class="navbar-end gray"></div>
-        
-      </div>
-    </nav>
+        </div>
+      </nav>
     </div>
     <section class="section" v-if="banner">
       <br />
@@ -73,10 +71,10 @@ export default {
   data() {
     return {
       isActive: false,
-      Session
+      Session,
     };
   },
-  mounted () {
+  mounted() {
     //this.isUser = true;
   },
   props: [
@@ -97,9 +95,7 @@ export default {
     "form_friends",
   ],
   methods: {
-    
     isDevUser: function () {
-      
       return (
         Session.user != null &&
         Session.user.isDevUser != null &&
@@ -109,9 +105,9 @@ export default {
     logout: function () {
       Logout();
       //this.isUser = false;
-      
+
       this.$router.app.$root.newsfeed = false;
-      this.$router.push("/");//.catch();
+      this.$router.push("/"); //.catch();
     },
     formExercise: function () {
       this.isActive = false;
@@ -149,7 +145,7 @@ export default {
 </script>
 
 <style scoped>
-#banner  {
+#banner {
   position: fixed;
   width: 100%;
 }
