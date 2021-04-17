@@ -1,19 +1,20 @@
 <template>
-  <div id="bannercomponent">
+  <div id="bannercomponent" class="" style="width: 100%;">
+    <div class="gray" >
     <nav
       class="navbar gray"
       role="navigation"
       aria-label="main navigation"
       id="banner"
     >
-      <div class="navbar-brand">
-        <a class="navbar-item" @click.prevent="logout">
+      <div class="navbar-brand gray">
+        <a class="navbar-item gray" @click.prevent="logout">
           <img src="../assets/app.png" width="56" height="56" />
         </a>
 
         <a
           role="button"
-          class="navbar-burger"
+          class="navbar-burger gray"
           aria-label="menu"
           aria-expanded="false"
           data-target="navbarBasicExample"
@@ -23,18 +24,18 @@
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
-        <div class="navbar-menu" id="navMenu"></div>
+        <div class="navbar-menu gray" id="navMenu"></div>
       </div>
 
       <div
         id="navbarBasicExample"
-        class="navbar-menu"
+        class="navbar-menu gray"
         :class="{ 'is-active': isActive }"
         v-if="newsfeed && Session.user"
       >
-        <div class="navbar-menu" :class="{ 'is-active': isActive }" >
+        <div class="navbar-menu gray" :class="{ 'is-active': isActive }" >
           
-            <div class="navbar-start">
+            <div class="navbar-start gray">
               <a class="navbar-item" @click="formExercise()"> Exercise </a>
 
               <a class="navbar-item" @click="formWorkout()"> Workout </a>
@@ -48,11 +49,11 @@
               </router-link>
             </div>
           </div>
-          <div class="navbar-end"></div>
+          <div class="navbar-end gray"></div>
         
       </div>
     </nav>
-
+    </div>
     <section class="section" v-if="banner">
       <br />
       <div class="container">
@@ -148,7 +149,7 @@ export default {
 </script>
 
 <style scoped>
-#banner {
+#banner  {
   position: fixed;
   width: 100%;
 }
