@@ -26,29 +26,30 @@
           </a>
           <div class="navbar-menu gray" id="navMenu"></div>
         </div>
+        <div class="gray" style="width: 100%">
+          <div
+            id="navbarBasicExample"
+            class="navbar-menu gray"
+            :class="{ 'is-active': isActive }"
+            v-if="newsfeed && Session.user"
+          >
+            <div class="navbar-menu gray" :class="{ 'is-active': isActive }">
+              <div class="navbar-start gray">
+                <a class="navbar-item" @click="formExercise()"> Exercise </a>
 
-        <div
-          id="navbarBasicExample"
-          class="navbar-menu gray"
-          :class="{ 'is-active': isActive }"
-          v-if="newsfeed && Session.user"
-        >
-          <div class="navbar-menu gray" :class="{ 'is-active': isActive }">
-            <div class="navbar-start gray">
-              <a class="navbar-item" @click="formExercise()"> Exercise </a>
+                <a class="navbar-item" @click="formWorkout()"> Workout </a>
 
-              <a class="navbar-item" @click="formWorkout()"> Workout </a>
+                <a class="navbar-item" @click="formMessage()"> Message </a>
 
-              <a class="navbar-item" @click="formMessage()"> Message </a>
+                <a class="navbar-item" @click="formFriends()"> Friends </a>
 
-              <a class="navbar-item" @click="formFriends()"> Friends </a>
-
-              <router-link class="navbar-item" to="/dev" v-show="isDevUser()">
-                Dev
-              </router-link>
+                <router-link class="navbar-item" to="/dev" v-show="isDevUser()">
+                  Dev
+                </router-link>
+              </div>
             </div>
+            <div class="navbar-end gray"></div>
           </div>
-          <div class="navbar-end gray"></div>
         </div>
       </nav>
     </div>
