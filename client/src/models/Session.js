@@ -58,7 +58,7 @@ export async function Login(username, password) {
 export function Logout() {
     Session.user = null;
     Session.token = null;
-    console.log(Session);
+    //console.log(Session);
 }
 
 export function toastError(msg) {
