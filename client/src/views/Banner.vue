@@ -26,12 +26,13 @@
           </a>
           <div class="navbar-menu gray" id="navMenu"></div>
         </div>
-        <div class="gray" style="width: 100%">
+        <div class="gray gbanner" style="width: 100%">
           <div
             id="navbarBasicExample"
             class="navbar-menu gray"
             :class="{ 'is-active': isActive }"
             v-if="newsfeed && Session.user"
+            style="height: 100%"
           >
             <div class="navbar-menu gray" :class="{ 'is-active': isActive }">
               <div class="navbar-start gray">
@@ -149,5 +150,11 @@ export default {
 #banner {
   position: fixed;
   width: 100%;
+}
+
+#gbanner {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
 }
 </style>
