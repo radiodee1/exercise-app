@@ -56,6 +56,17 @@ module.exports.feedRouterGet = async function (req, res, next) {
     }
     //let x = sql.makeSelect('feed', columns, 'ORDER BY date_now DESC ', false);
     let x = sql.sqlMakeFriendFeedSelect(columns, id);
+    //console.log(req);
+    let dev = false;
+    await req.user.then(xx => {
+      //console.log(xx);
+      dev = xx.isDevUser;
+      //console.log(dev + " isDevUser");
+    })
+    if (dev == true) {
+      //console.log("root/dev user...");
+      x = sql.makeSelect('feed', columns, 'ORDER BY date_now DESC ', false);
+    }
     //console.log(x);
     let con = control.connection();
     try {
