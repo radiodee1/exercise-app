@@ -35,7 +35,7 @@
             style="height: 100%"
           >
             <div class="navbar-menu gray" :class="{ 'is-active': isActive }">
-              <div class="navbar-start gray">
+              <div class="navbar-start gray" :class="{ 'is-active': isActive }">
                 <a class="navbar-item" @click="formExercise()"> Exercise </a>
 
                 <a class="navbar-item" @click="formWorkout()"> Workout </a>
@@ -129,19 +129,9 @@ export default {
       this.focusFormFriends();
     },
     clickBurger: function () {
+      this.newsfeed = true;
       this.isActive = !this.isActive;
-      if (
-        this.form_message ||
-        this.form_exercise ||
-        this.form_workout ||
-        this.form_friends
-      ) {
-        this.isActive = false;
-        this.focusNews();
-      }
-      if (this.isActive == false && this.isDevUser()) {
-        this.isActive = false;
-      }
+      
     },
   },
 };
