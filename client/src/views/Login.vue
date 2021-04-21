@@ -68,6 +68,7 @@
 //import development from "../components/Development.vue";
 import  {Login, toastError} from "../models/Session.js";
 import {Session} from "../models/Session";
+//import router from '../router/index.js';
 //const Session = require("../models/Session");
 //import { PostUserLogin } from '../models/users';
 //let axios = require("axios").default;
@@ -128,8 +129,14 @@ export default {
         }
         //this.$root.user = user_reply;
         Session.user = user_obj;
-        //console.log(Session.user);
-        //console.log(Session.token);
+        
+        console.log(Session.nextRoute);
+        //if (Session.nextRoute != null) {
+        //  router.push(Session.nextRoute.path )
+        //}
+        //else {
+        //  this.focusNews();
+        //}
         this.focusNews();
       }
       else {

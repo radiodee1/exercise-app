@@ -22,7 +22,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'home', //'appx'
+    name: 'home', 
     component: home,
   },
   {
@@ -75,18 +75,16 @@ const router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
-  //console.log({ from, to })
-  //if(to.path === '/dev' && from.path ==='/login') {
-  //next('/dev');
-  //}
 
   if ((to.path !== '/login' && to.path !== '/register' && to.path !== "/"  && !Session.user) || 
     (to.path === '/dev' && ( Session.user.isDevUser != true))) {
     //visibility.focusReset();
+    Session.nextRoute = to;
     next('/');
   } else {
     next();
   }
 })
+
 
 export default router
