@@ -31,24 +31,7 @@
                     Submit
                   </button>
 
-                  <!-- div class="file">
-                    <label class="file-label">
-                      <input
-                        class="file-input is-primary"
-                        type="file"
-                        name="resume"
-                        id="pic-button"
-                        ref="picButton"
-                        @change="showPicture"
-                      />
-                      <span class="file-cta">
-                        <span class="file-icon">
-                          <i class="fas fa-upload"></i>
-                        </span>
-                        <span class="file-label"> Choose a picture </span>
-                      </span>
-                    </label>
-                  </div -->
+                  
 
             <imageview @load="loading" />
 
@@ -117,7 +100,7 @@ export default {
     },
     cancel: function () {
       this.show_picture = false;
-      this.$router.go(-1);
+      this.$router.push("/feed");
 
       this.focusNews();
     },

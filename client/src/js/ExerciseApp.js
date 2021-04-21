@@ -31,15 +31,15 @@ export function doLoad() {
     render: h => h(appx),
     data() {
       return {
-        login: false,
-        register: false,
-        newsfeed: false,
+        login: true,
+        register: true,
+        newsfeed: true,
         home: true,
         banner: true,
-        form_message: false,
-        form_exercise: false,
-        form_workout: false,
-        form_friends: false,
+        form_message: true,
+        form_exercise: true,
+        form_workout: true,
+        form_friends: true,
 
         backend_port: ( +process.env.VUE_APP_BACKEND_PORT) || 3010,
         backend_url: process.env.VUE_APP_BACKEND_URL || "http://localhost:",
@@ -68,27 +68,27 @@ export function doLoad() {
 
 
       focusRegister: function () {
-        this.register = true;
-        this.login = false;
-        this.newsfeed = false;
-        this.home = true;
-        this.form_exercise = false;
-        this.form_message = false;
-        this.form_workout = false;
+        //this.register = true;
+        //this.login = false;
+        //this.newsfeed = false;
+        //this.home = true;
+        //this.form_exercise = false;
+        //this.form_message = false;
+        //this.form_workout = false;
       },
 
       focusLogin: function () {
-        this.login = true;
-        this.register = false;
-        this.newsfeed = false;
-        this.home = true;
-        this.form_exercise = false;
-        this.form_message = false;
-        this.form_workout = false;
+        //this.login = true;
+        //this.register = false;
+        //this.newsfeed = false;
+        //this.home = true;
+        //this.form_exercise = false;
+        //this.form_message = false;
+        //this.form_workout = false;
       },
 
       focusNews: function () {
-
+        /*
         this.login = false;
         this.register = false;
         this.newsfeed = true;
@@ -97,10 +97,11 @@ export function doLoad() {
         this.form_message = false;
         this.form_workout = false;
         this.form_friends = false;
-
+        */
       },
 
       focusReset: function () {
+        /*
         this.login = false;
         this.register = false;
         this.newsfeed = false;
@@ -109,9 +110,11 @@ export function doLoad() {
         this.form_exercise = false;
         this.form_message = false;
         this.form_workout = false;
+        */
       },
 
       focusFormExercise: function () {
+        /*
         this.login = false;
         this.register = false;
         this.newsfeed = false;
@@ -120,9 +123,11 @@ export function doLoad() {
         this.form_exercise = true;
         this.form_message = false;
         this.form_workout = false;
+        */
       },
 
       focusFormMessage: function () {
+        /*
         this.login = false;
         this.register = false;
         this.newsfeed = false;
@@ -131,9 +136,11 @@ export function doLoad() {
         this.form_exercise = false;
         this.form_message = true;
         this.form_workout = false;
+        */
       },
 
       focusFormWorkout: function () {
+        /*
         this.login = false;
         this.register = false;
         this.newsfeed = false;
@@ -142,9 +149,11 @@ export function doLoad() {
         this.form_exercise = false;
         this.form_message = false;
         this.form_workout = true;
+        */
       },
 
       focusFormFriends: function () {
+        /*
         this.login = false;
         this.register = false;
         this.newsfeed = false;
@@ -154,6 +163,7 @@ export function doLoad() {
         this.form_message = false;
         this.form_workout = false;
         this.form_friends = true;
+        */
       },
 
       useFormSubmitMessage: function (msg, feed_divs, tree, pic=null) {

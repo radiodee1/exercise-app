@@ -67,11 +67,12 @@ export default {
       sortPosts: false,
       sortFriends: false,
 
-      messageEmpty: false
+      messageEmpty: false,
+      newsfeed: true
     };
   },
   props: {
-    newsfeed: Boolean,
+    //newsfeed: Boolean,
     makeId: Function,
     //tree: Array,
     feed_divs: Array,

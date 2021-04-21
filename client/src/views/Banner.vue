@@ -73,6 +73,7 @@ export default {
   data() {
     return {
       isActive: false,
+      newsfeed: true,
       Session,
     };
   },
@@ -81,7 +82,7 @@ export default {
   },
   props: [
     "banner",
-    "newsfeed",
+    //"newsfeed",
     "focusFormMessage",
     "focusFormExercise",
     "focusFormWorkout",

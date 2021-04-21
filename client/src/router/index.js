@@ -81,6 +81,10 @@ router.beforeEach((to, from, next) => {
     //visibility.focusReset();
     Session.nextRoute = to;
     next('/');
+
+  //} else if ((from.path === "/message" || from.path === "/exercise" || from.path === "/workout") && Session.user) {
+  //  next("/feed");
+
   } else {
     next();
   }
