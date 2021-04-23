@@ -1,6 +1,5 @@
 # exercise-app
 
-
 ## `.env` file
 
 Maybe make your own one of these. Put it at the root of `client`. On heroku, set these variables using the online console. Also for heroku set BACKEND_PORT and BACKEND_URL to empty strings.

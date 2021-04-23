@@ -1,4 +1,4 @@
-# Exercise App
+# Exercise App Notes
 
 ## GENERAL
 The goal of this exercise site is to psychologically encourage use of the site by users. The idea is that you go to the site to report your exercises, and then you go back to convert those exercises into workouts. The repeated login for the users encourages more use in the future. Whether this works or not is not easy to calculate. It is assumed that this approach works for the purpose of the class' assignment. The github and heroku URL links are below.
