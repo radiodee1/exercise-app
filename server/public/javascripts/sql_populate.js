@@ -17,6 +17,7 @@ module.exports = {
     selectLeftOuterJoinRaw,
     sqlMakeUpdate,
     sqlMakeFriendFeedSelect,
+    sqlMakeFriendFeedSelectWithDays,
     sqlMakeFriendSearchSelect,
     sqlUserUpdateRaw,
     
@@ -273,6 +274,27 @@ function sqlMakeFriendFeedSelect(feed_columns, profile_id) {
     tablename_feed = "feed";
     zz = "";
     zz = zz + "WHERE feed.from_user_id IN ( SELECT friends.user_id FROM friends WHERE ( friends.user_id = " + profile_id + " OR friends.friend_user_id = " + profile_id + " ) ";
+    zz = zz + "AND friends.friend_status = 'confirmed'   ";
+
+    zz = zz + "UNION SELECT friends.friend_user_id FROM friends  WHERE ( friends.user_id = " + profile_id + " OR friends.friend_user_id = " + profile_id + " ) ";
+    zz = zz + "AND friends.friend_status = 'confirmed'   ";
+
+
+    zz = zz + " ) ";
+    zz = zz + "ORDER BY feed.date_now DESC ";
+
+    xx = "";
+    xx = xx + makeSelectFormat(tablename_feed, feed_columns, zz, false);
+    return xx;
+}
+
+function sqlMakeFriendFeedSelectWithDays(feed_columns, profile_id, days=90) {
+    tablename_friends = "friends";
+    tablename_feed = "feed";
+    tz_now = Date.now() / 1000; //seconds now.
+    zz = "";
+    zz = zz + "WHERE (feed.show_message = '1' OR feed.show_workout = '1' OR (feed.show_exercise = '1' AND UNIX_TIMESTAMP(feed.date_now) > " + (tz_now - days * 60 * 60 * 24 ) + ") ) ";
+    zz = zz + "AND feed.from_user_id IN ( SELECT friends.user_id FROM friends WHERE ( friends.user_id = " + profile_id + " OR friends.friend_user_id = " + profile_id + " ) ";
     zz = zz + "AND friends.friend_status = 'confirmed'   ";
 
     zz = zz + "UNION SELECT friends.friend_user_id FROM friends  WHERE ( friends.user_id = " + profile_id + " OR friends.friend_user_id = " + profile_id + " ) ";

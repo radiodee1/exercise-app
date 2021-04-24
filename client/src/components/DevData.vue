@@ -112,7 +112,7 @@ export default {
         Years: 24 * 365,
       };
       this.totalMillisecondSpanTime = hours[this.timeLength] * 60 * 60 * 1000; // hours * mins * secs * 1000
-      this.MillisecondTimeNow = Date.now(); // * 1000;
+      this.MillisecondTimeNow = Date.now(); 
       let start = this.spans * this.totalMillisecondSpanTime;
 
       this.lowerMillisecondTime = this.MillisecondTimeNow - start;

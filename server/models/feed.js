@@ -54,8 +54,8 @@ module.exports.feedRouterGet = async function (req, res, next) {
     for (let i in feed_all) {
       columns.push(i);
     }
-    //let x = sql.makeSelect('feed', columns, 'ORDER BY date_now DESC ', false);
-    let x = sql.sqlMakeFriendFeedSelect(columns, id);
+    //let x = sql.sqlMakeFriendFeedSelect(columns, id);
+    let x = sql.sqlMakeFriendFeedSelectWithDays(columns, id, 90);
     //console.log(req);
     let dev = false;
     await req.user.then(xx => {
