@@ -82,10 +82,10 @@ Pictures can be uploaded to the site. I have not uploaded many photos because th
 This page is just for general text messages. A picture can be included.
 
 ## EXERCISE
-This page is for registering a single exercise. Dropdown menus are used to describe the exercise performed. There are two major drop-down menus. The dropdown menus can be very specific, and change to more accurately describe your actions. For instance, if you start off saying you used weights in the first drop-down, the second drop-down has options for 'curls' or 'lifts'. If you start off with 'laps' the second drop-down has options for 'swimming' or 'running'. This page does a calculation if you report a weight change that tells you if you are too heavy or light. A picture can be included in 'exercise' posts.
+This page is for registering a single exercise. Dropdown menus are used to describe the exercise performed. There are two major drop-down menus. The dropdown menus can be very specific, and change to more accurately describe your actions. For instance, if you start off saying you used weights in the first drop-down, the second drop-down has options for 'curls' or 'lifts'. If you start off with 'laps' the second drop-down has options for 'swimming' or 'running'. This page does a calculation if you report a weight change that tells you if you are too heavy or light. Though all exercise posts can be seen in 'my-posts', only exercise posts younger than 90 days are seen in the shared feed. A picture can be included in 'exercise' posts.
 
 ## WORKOUT
 This form allows you to go over all your recent exercise posts and combine them into a single 'workout'. There are two modes of operation. The first just lists the exercises to the screen so that you can review them. In the second mode you list them to the screen and also choose which ones you want in the final 'workout' post. You can list exercises from the past with varying post times. Because there is so much going on in this form, a picture cannot be included.
 
-## CRON MODIFICATION
-In the future I would implement a cron job that deleted 'exercise' posts that are older than a certain number of days. I would choose a limit of 90 days. This would leave in the feed all 'workout' and 'message' posts.
+## CRON-STYLE MODIFICATION
+ Though all exercise posts can be seen in 'my-posts', only exercise posts younger than 90 days are seen in the shared feed.
