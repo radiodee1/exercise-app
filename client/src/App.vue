@@ -79,9 +79,9 @@ import "./assets/bulma.css";
 import bannercomponent from "./views/Banner.vue";
 
 //import { makeInvocation } from "./js/exercise.js";
-import { feed_full_length } from './js/ExerciseApp.js';
+import { feed_full_length } from "./js/ExerciseApp.js";
 
-import {Logout} from "./models/Session";
+import { Logout } from "./models/Session";
 
 export default {
   name: "appx",
@@ -103,12 +103,11 @@ export default {
 
       items: this.$router.app.$root.items,
       user: this.$router.app.$root.user,
-      feed_divs: []// makeInvocation(),
+      feed_divs: [], // makeInvocation(),
     };
   },
   components: {
     bannercomponent: bannercomponent,
-    
   },
   props: [],
   mounted() {
@@ -142,13 +141,13 @@ export default {
       this.$router.app.$root.focusRegister();
       this.copyVals();
 
-      this.$router.push("/register").catch(err => {});
+      this.$router.push("/register").catch((err) => {});
     },
     focusNews: function () {
       this.$router.app.$root.focusNews();
       this.copyVals();
 
-      this.$router.push("/feed").catch(err => {});
+      this.$router.push("/feed").catch((err) => {});
     },
     focusReset: function () {
       this.$router.app.$root.focusReset();
@@ -161,69 +160,81 @@ export default {
       this.$router.app.$root.focusLogin();
       this.copyVals();
 
-      this.$router.push("/login").catch(err => {});
+      this.$router.push("/login").catch((err) => {});
     },
     focusDev: function () {
       //this.show_development = true;
       //console.log("dev here.")
       //this.$router.push("/login").catch(err => {});
-
     },
     focusFormMessage: function () {
       this.$router.app.$root.focusFormMessage();
       this.copyVals();
 
-      this.$router.push("/message").catch(err => {});
+      this.$router.push("/message").catch((err) => {});
     },
     focusFormExercise: function () {
       this.$router.app.$root.focusFormExercise();
       this.copyVals();
 
-      this.$router.push("/exercise").catch(err => {});
-
+      this.$router.push("/exercise").catch((err) => {});
     },
     focusFormWorkout: function () {
       this.$router.app.$root.focusFormWorkout();
       this.copyVals();
 
-      this.$router.push("/workout").catch(err => {});
+      this.$router.push("/workout").catch((err) => {});
     },
     focusFormFriends: function () {
       this.$router.app.$root.focusFormFriends();
       this.copyVals();
 
-      this.$router.push("/friends").catch(err => {});
+      this.$router.push("/friends").catch((err) => {});
     },
     useFormSubmitMessage: function (msg, z = null) {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
-      const b = this.$router.app.$root.useFormSubmitMessage(msg, feed_divs, tree, z);
+      const b = this.$router.app.$root.useFormSubmitMessage(
+        msg,
+        feed_divs,
+        tree,
+        z
+      );
       //b.picture_large = z;
       //this.$emit('submitpost', b);
       this.copyVals();
-      this.$router.push("/feed").catch(err => {});
+      this.$router.push("/feed").catch((err) => {});
       this.focusNews();
-
     },
     useFormSubmitExercise: function (msg, z = null) {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
-      const b = this.$router.app.$root.useFormSubmitExercise(msg, feed_divs, tree, z);
+      const b = this.$router.app.$root.useFormSubmitExercise(
+        msg,
+        feed_divs,
+        tree,
+        z
+      );
       //b.picture_large = z;
       this.copyVals();
-      this.$router.push("/feed").catch(err => {});
+      this.$router.push("/feed").catch((err) => {});
       this.focusNews();
     },
     useFormSubmitWorkout: function (msg, z = null) {
       var tree = this.tree;
       var feed_divs = this.feed_divs;
-      const b = this.$router.app.$root.useFormSubmitWorkout(msg, feed_divs, tree, z);
+      const b = this.$router.app.$root.useFormSubmitWorkout(
+        msg,
+        feed_divs,
+        tree,
+        z
+      );
       //b.picture_large = z;
       this.copyVals();
-      this.$router.push("/feed").catch(err => {});
+      this.$router.push("/feed").catch((err) => {});
       this.focusNews();
     },
-    
+
     makeId: function (num, prefix = "feed-num-") {
       return prefix + num;
     },
@@ -231,16 +242,49 @@ export default {
       if (feed_full_length == 0) {
         return true;
       }
-      for (let i = 0; i <= feed_full_length; i ++) {
+      for (let i = 0; i <= feed_full_length; i++) {
         //document.getElementById(this.makeId(i, "pic")).src = this.tree.feed[ + i].picture_large;
         console.log("pic" + i);
       }
       return true;
-    }
+    },
+    
   },
 };
+
+/*global FB*/
+window.fbAsyncInit = function () {
+  FB.init({
+    appId:  process.env.VUE_APP_FACEBOOK_APP_ID, 
+    cookie: true,
+    xfbml: true,
+    version: "v10.0",
+  });
+
+  FB.AppEvents.logPageView();
+
+  FB.getLoginStatus(function (response) {
+    statusChangeCallback(response);
+  });
+};
+
+(function (d, s, id) {
+  var js,
+    fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {
+    return;
+  }
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://connect.facebook.net/en_US/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+})(document, "script", "facebook-jssdk");
+
+function statusChangeCallback (response) {
+  console.log(response);
+}
+
 </script>
 
 <style>
-
 </style>

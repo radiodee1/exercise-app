@@ -52,22 +52,31 @@
         </div>
       </div>
 
+      <br/>
+      <button
+        @click.prevent="loginFB"
+        class="button is-primary is-fullwidth is-large"
+        id="fbbutton"
+      >
+        Login with Facebook
+      </button>
+
       <label class="checkbox">
         <input type="checkbox" />
         Remember me
       </label>
     </section>
     <div v-show="message_1" class="box">
-      <span class="red" >Your login attempt failed!</span>
-    </div >
+      <span class="red">Your login attempt failed!</span>
+    </div>
   </div>
   <!-- end login -->
 </template>
 
 <script>
 //import development from "../components/Development.vue";
-import  {Login, toastError} from "../models/Session.js";
-import {Session} from "../models/Session";
+import { Login, toastError } from "../models/Session.js";
+import { Session } from "../models/Session";
 //import router from '../router/index.js';
 //const Session = require("../models/Session");
 //import { PostUserLogin } from '../models/users';
@@ -86,7 +95,7 @@ export default {
       password: "",
       user: Session.user,
 
-      message_1: false
+      message_1: false,
     };
   },
   props: {
@@ -96,7 +105,7 @@ export default {
     focusReset: Function,
     //classOption: Function
     backend_port: Number,
-    backend_url : String,
+    backend_url: String,
     show_development: Boolean,
   },
   methods: {
@@ -114,7 +123,7 @@ export default {
       //}
 
       let username = this.username.trim();
-      let password = this.password.trim(); 
+      let password = this.password.trim();
 
       //var user_reply = await PostUserLogin(username, password)
       var user_reply = await Login(username, password);
@@ -122,14 +131,14 @@ export default {
       //console.log(user_reply);
       //console.log("*****");
       const user_obj = user_reply;
-      if ( user_obj !== undefined && typeof user_obj.id === "number") {
+      if (user_obj !== undefined && typeof user_obj.id === "number") {
         for (let i in user_obj) {
           this.$root.user[i] = user_obj[i];
           //Session.user[i] = user_reply[i];
         }
         //this.$root.user = user_reply;
         Session.user = user_obj;
-        
+
         console.log(Session.nextRoute);
         //if (Session.nextRoute != null) {
         //  router.push(Session.nextRoute.path )
@@ -138,27 +147,51 @@ export default {
         //  this.focusNews();
         //}
         this.focusNews();
-      }
-      else {
+      } else {
         console.log("bad login");
         this.message_1 = true;
-        this.password = '';
+        this.password = "";
         toastError("bad login!!");
       }
     },
     //////
+    loginFB() {
+      /*global FB */
+      FB.login(
+        function (response) {
+          console.log({ response });
+          if (response.status === "connected") {
+            FB.api("me?fields=name,email,picture", function (myInfo) {
+              console.log({ myInfo });
+              Session.user = {
+                firstName: myInfo.name,
+                handle: myInfo.email,
+                profile: myInfo.picture.data.url,
+              };
+            });
+          } else {
+            // The person is not logged into your webpage or we are unable to tell.
+          }
+        },
+        { scope: "public_profile,email" }
+      );
+    },
   },
   components: {
     //development: development,
   },
   mounted: function () {
     //console.log(process.env);
-  }
+  },
 };
 </script>
 
 <style scoped>
 .red {
   color: red;
+}
+
+#fbbutton {
+  background-color: rgb(10, 30, 100);
 }
 </style>

@@ -89,3 +89,6 @@ This form allows you to go over all your recent exercise posts and combine them 
 
 ## CRON-STYLE MODIFICATION
  Though all exercise posts can be seen in 'my-posts', only exercise posts younger than 90 days are seen in the shared feed.
+
+ # NOTES:
+ The facebook APP ID is now set in the environment variables. VUE_APP_FACEBOOK_APP_ID is the name for the APP ID.
