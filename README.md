@@ -5,6 +5,8 @@
 Maybe make your own one of these. Put it at the root of `client`. On heroku, set these variables using the online console. Also for heroku set BACKEND_PORT and BACKEND_URL to empty strings.
 
 ```
+VUE_APP_FACEBOOK_APP_ID=app-id
+
 VUE_APP_BACKEND_PORT=3010
 VUE_APP_BACKEND_URL=http://localhost:
 
