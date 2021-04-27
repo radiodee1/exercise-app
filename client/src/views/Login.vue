@@ -139,7 +139,7 @@ export default {
         //this.$root.user = user_reply;
         Session.user = user_obj;
 
-        console.log(Session.nextRoute);
+        //console.log(Session.nextRoute);
         //if (Session.nextRoute != null) {
         //  router.push(Session.nextRoute.path )
         //}
@@ -155,20 +155,26 @@ export default {
       }
     },
     //////
-    loginFB() {
+    loginFB: async function () {
+      let vm = this;
+
       /*global FB */
-      FB.login(
-        function (response) {
-          console.log({ response });
+      await FB.login(
+        async function (response) {
+          //console.log({ response });
           if (response.status === "connected") {
-            LoginFB(response.authResponse.accessToken);
-            FB.api("me?fields=name,email,picture,first_name,last_name", function (myInfo) {
-              console.log({ myInfo });
+            let user_reply = await LoginFB(response.authResponse.accessToken);
+            
+            FB.api("me?fields=name,email,picture,first_name,last_name", function () {
+              //console.log({ user_reply, myInfo });
+              if (typeof user_reply.id !== "number") {
+                return;
+              }
               Session.user = {
-                firstName: myInfo.name,
-                handle: myInfo.email,
-                profile: myInfo.picture.data.url,
+                ...user_reply,
               };
+              vm.$root.user = user_reply;
+              vm.focusNews();
             });
           } else {
             // The person is not logged into your webpage or we are unable to tell.

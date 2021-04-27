@@ -61,25 +61,25 @@ export async function LoginFB(access_token) {
         .then(function (response_raw) {
             // handle success
             //console.log(response_raw);
-            let response = response_raw.data;
+            //let response = response_raw.data;
+            
+            console.log(response_raw);
+            console.log("----"); //user.id
+            user = response_raw.data.user;
+            //user.username = username;
+            //user.password = null;
 
-            //console.log(response);
-            //console.log("----");
-            user = response.user[response.user.length - 1];
-            user.username = username;
-            user.password = null;
+            Session.user = response_raw.data.user;
 
-            Session.user = user;
-
-            if (typeof response.token !== "undefined") {
-                const token = response.token;
+            if (typeof response_raw.data.token !== "undefined") {
+                const token = response_raw.data.token;
                 Session.token = token;
             }
             //console.log(Session.token);
             if (typeof Session.user.id === "number") {
                 toastr.open({
                     type: "is-success",
-                    message: `Welcome ${Session.user.firstname}`
+                    message: `Welcome ${Session.user.username}`
                 });
             }
             //console.log(response);

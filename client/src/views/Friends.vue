@@ -5,7 +5,7 @@
       <div class="column is-half">
         <article class="message box" v-if="form_friends">
           <div class="message-header">
-            <p>Friend Management - {{ user.username }}</p>
+            <p>Friend Management - {{ $root.user.username }}</p>
             <button
               class="delete"
               aria-label="delete"

@@ -1,6 +1,6 @@
 var express = require('express');
 const jwt = require('jsonwebtoken');
-
+const axios = require("axios").default;
 //var usersRouterGet = express.Router();
 //var usersRouterPost = express.Router();
 //var usersRouterFriendGet = express.Router();
@@ -115,7 +115,7 @@ module.exports.usersRouterPost = async function (req, res, next) {
   const hash = await bcrypt.hash(password, +SALT_ROUNDS);
 
   let body = { ...req.body, password: hash };
-  
+
 
   let x = sql.sqlInsertObjJSON(body, 'profiles');
   let con = control.connection();
@@ -214,9 +214,9 @@ module.exports.usersRouterPostLogin = async function (req, res, next) {
   const password = req.body.password;
 
   let y_val = null;
-  
+
   user_list = ['*'];
-  
+
   let x = sql.makeSelectFormat('profiles', user_list, `WHERE username = '${req.body.username}'`)
   //console.log(x);
   //console.log("#####");
@@ -247,21 +247,21 @@ module.exports.usersRouterPostLogin = async function (req, res, next) {
         y_val[0].password = null;
         const user = y_val;
         //console.log("send user...");
-        const data = { ... y_val[0], password: undefined };
+        const data = { ...y_val[0], password: undefined };
         const token = jwt.sign(data, JWT_SECRET);
-        console.log({user, token});
+        console.log({ user, token });
         //return {user, token};
         //res.send({y_val, token});
-        y_val = {user, token};
+        y_val = { user, token };
       }
       else if (!result) {
         //console.log("no result");
-        y_val = {user: [{}], token: null};
+        y_val = { user: [{}], token: null };
         //return {y_val, null};
         throw "No good password"
       }
       control.end(con);
-      
+
     });
   }
   catch (v) {
@@ -273,22 +273,30 @@ module.exports.usersRouterPostLogin = async function (req, res, next) {
 
 module.exports.usersRouterPostLoginFB = async function (req, res, next) {
   res.set('Content-Type', 'application/json');
-  //console.log(req.body.password + " <---");
-  //console.log(req.body.username + " <###");
-  //const password = req.body.password;
+
   const access_token = req.body.access_token;
   let obj = null;
   let out = null;
-  
+  let userFB = null;
   user_list = ['*'];
-  const userFB = await axios.get(`https://graph.facebook.com/v10.0/me?fields=first_name,last_name,email,picture&access_token=${access_token}`)
+  try {
+    await axios.get(`https://graph.facebook.com/v10.0/me?fields=first_name,last_name,email,picture&access_token=${access_token}`)
+      .then(async function (value) {
+        console.log(value);
+        userFB = value;
+      })
+  }
+  catch (v) {
+    console.log(v)
+  }
+
   console.log(userFB.data);
 
   const username = userFB.data.email;
-  
+
   let x = sql.makeSelectFormat('profiles', user_list, `WHERE username = '${username}'`)
-  //console.log(x);
-  //console.log("#####");
+  console.log(x);
+  console.log("#####");
   let con = control.connection();
   try {
     let y = control.xquery(con, x);
@@ -296,19 +304,19 @@ module.exports.usersRouterPostLoginFB = async function (req, res, next) {
       //console.log(value);
       let yy = JSON.stringify(value);
 
-      obj = JSON.parse(yy);
+      xx = JSON.parse(yy);
       console.log("----");
-      console.log(obj);
+      console.log(xx);
 
       result = false;
 
-      if (obj.length > 0) {
+      if (xx.length > 0) {
         //result = await bcrypt.compare(password, y_val[0].password);
-        obj = obj.find( x => x.email == userFB.data.email);
+        obj = xx.find(x => x.email == userFB.data.email);
       }
       if (obj) {
-        if (!obj.firstname) {
-          throw "Must have first name"
+        if (!obj.username) {
+          throw "Must have user name"
         }
         let dev = false;
         if (obj.username == process.env.DEV_USERNAME) {
@@ -316,23 +324,59 @@ module.exports.usersRouterPostLoginFB = async function (req, res, next) {
         }
         obj.isDevUser = dev;
         obj.password = null;
+
         const user = obj;
-        //console.log("send user...");
-        const data = { ... obj, password: undefined };
+        console.log("send user...");
+        const data = { ...obj, password: undefined };
         const token = jwt.sign(data, JWT_SECRET);
-        console.log({user, token});
+        console.log({ user, token });
         //return {user, token};
         //res.send({y_val, token});
-        out = {user, token};
+        out = { user, token };
+        return out;
       }
       else if (!obj) {
         //console.log("no result");
-        out = {user: [{}], token: null};
-        //return {y_val, null};
-        throw "No good password"
+        obj = {};
+        //let dev = false;
+        //if (obj.username == process.env.DEV_USERNAME) {
+        //  dev = true;
+        //}
+        //obj.isDevUser = dev;
+        obj.password = null;
+        obj.firstname = userFB.data.first_name;
+        obj.lastname = userFB.data.last_name;
+        obj.username = userFB.data.email;
+        obj.email = userFB.data.email;
+        //out = { user: [obj], token: null };
+        /////////////
+
+        let x = sql.sqlInsertObjJSON(obj, 'profiles');
+        // let con = control.connection(); // <----
+        try {
+          let y = control.xquery(con, x);
+          await y.then(function (value) {
+            //req.body.password = "";
+            //console.log(value);
+            yy = JSON.stringify(value);
+            //console.log(yy);
+
+            const user = { ...obj, id: JSON.parse(yy).insertId, password: undefined }
+            //console.log(yyy);
+            //console.log("^^^");
+            // control.end(con); // <-----
+            //const data = { ...obj, password: undefined };
+            const token = jwt.sign(user, JWT_SECRET);
+            out = {user, token}
+          });
+        }
+        catch (v) {
+          console.log(v);
+        }
+        //////////////
       }
       control.end(con);
-      
+
     });
   }
   catch (v) {
@@ -344,11 +388,11 @@ module.exports.usersRouterPostLoginFB = async function (req, res, next) {
 
 module.exports.usersRouterPostDelete = async function (req, res, next) {
   res.set('Content-Type', 'application/json');
-  
+
   const id = req.body.id;
 
   let y_val = null;
-  
+
   const xuser = sql.sqlUserDeleteRaw(id);
   const xfeed = sql.sqlFeedDeleteRaw(id);
   const xfriend = sql.sqlFriendsDeleteRaw(id);
@@ -362,7 +406,7 @@ module.exports.usersRouterPostDelete = async function (req, res, next) {
 
       x_val = JSON.parse(xx);
       //console.log(x_val);
-      
+
     });
 
     let y = control.xquery(con, xfeed);
@@ -372,7 +416,7 @@ module.exports.usersRouterPostDelete = async function (req, res, next) {
 
       y_val = JSON.parse(yy);
       //console.log(y_val);
-      
+
     });
 
     let z = control.xquery(con, xfriend);
@@ -383,7 +427,7 @@ module.exports.usersRouterPostDelete = async function (req, res, next) {
 
       z_val = JSON.parse(zz);
       //console.log(z_val);
-      
+
     });
 
     res.send({})
