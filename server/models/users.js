@@ -115,16 +115,7 @@ module.exports.usersRouterPost = async function (req, res, next) {
   const hash = await bcrypt.hash(password, +SALT_ROUNDS);
 
   let body = { ...req.body, password: hash };
-  //for (let i in req.body) {
-  //  body[i] = req.body[i];
-  //  if (i === "password") {
-  //    body[i] = hash;
-  //  }
-  //}
-  //body.password = hash;
-  //console.log(body.password + " <ooo");
-
-  //console.log(bcrypt.getRounds(hash) + " <++++");
+  
 
   let x = sql.sqlInsertObjJSON(body, 'profiles');
   let con = control.connection();
@@ -277,6 +268,76 @@ module.exports.usersRouterPostLogin = async function (req, res, next) {
     console.log(v);
   }
   return y_val;
+  //next();
+}
+
+module.exports.usersRouterPostLoginFB = async function (req, res, next) {
+  res.set('Content-Type', 'application/json');
+  //console.log(req.body.password + " <---");
+  //console.log(req.body.username + " <###");
+  //const password = req.body.password;
+  const access_token = req.body.access_token;
+  let obj = null;
+  
+  user_list = ['*'];
+  const userFB = await axios.get(`https://graph.facebook.com/v10.0/me?fields=first_name,last_name,email,picture&access_token=${access_token}`)
+  console.log(userFB.data);
+
+  const username = userFB.data.email;
+  
+  let x = sql.makeSelectFormat('profiles', user_list, `WHERE username = '${username}'`)
+  //console.log(x);
+  //console.log("#####");
+  let con = control.connection();
+  try {
+    let y = control.xquery(con, x);
+    await y.then(async function (value) {
+      //console.log(value);
+      let yy = JSON.stringify(value);
+
+      obj = JSON.parse(yy);
+      console.log("----");
+      console.log(obj);
+
+      result = false;
+
+      if (obj.length > 0) {
+        //result = await bcrypt.compare(password, y_val[0].password);
+        obj = obj.find( x => x.email == userFB.data.email);
+      }
+      if (obj) {
+        if (!obj.firstname) {
+          throw "Must have first name"
+        }
+        let dev = false;
+        if (obj.username == process.env.DEV_USERNAME) {
+          dev = true;
+        }
+        obj.isDevUser = dev;
+        obj.password = null;
+        const user = obj;
+        //console.log("send user...");
+        const data = { ... obj, password: undefined };
+        const token = jwt.sign(data, JWT_SECRET);
+        console.log({user, token});
+        //return {user, token};
+        //res.send({y_val, token});
+        y_val = {user, token};
+      }
+      else if (!obj) {
+        //console.log("no result");
+        y_val = {user: [{}], token: null};
+        //return {y_val, null};
+        throw "No good password"
+      }
+      control.end(con);
+      
+    });
+  }
+  catch (v) {
+    console.log(v);
+  }
+  return obj;
   //next();
 }
 

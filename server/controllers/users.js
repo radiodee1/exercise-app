@@ -30,6 +30,12 @@ router
     //res.send(yy);
 })
 
+.post('/users/login/fb',  function (req, res, next)  {
+    let yy =  model.usersRouterPostLoginFB(req, res, next);
+    yy.then(x => {res.send(x)});
+    //res.send(yy);
+})
+
 .get('/users/friends', LoginRequired, function (req, res, next)  {
     let yy =  model.usersRouterFriendGet(req, res);
     yy.then(x => {res.send(x)});

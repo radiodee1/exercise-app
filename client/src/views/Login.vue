@@ -75,7 +75,7 @@
 
 <script>
 //import development from "../components/Development.vue";
-import { Login, toastError } from "../models/Session.js";
+import { Login, toastError, LoginFB } from "../models/Session.js";
 import { Session } from "../models/Session";
 //import router from '../router/index.js';
 //const Session = require("../models/Session");
@@ -161,7 +161,8 @@ export default {
         function (response) {
           console.log({ response });
           if (response.status === "connected") {
-            FB.api("me?fields=name,email,picture", function (myInfo) {
+            LoginFB(response.authResponse.accessToken);
+            FB.api("me?fields=name,email,picture,first_name,last_name", function (myInfo) {
               console.log({ myInfo });
               Session.user = {
                 firstName: myInfo.name,
