@@ -278,6 +278,7 @@ module.exports.usersRouterPostLoginFB = async function (req, res, next) {
   //const password = req.body.password;
   const access_token = req.body.access_token;
   let obj = null;
+  let out = null;
   
   user_list = ['*'];
   const userFB = await axios.get(`https://graph.facebook.com/v10.0/me?fields=first_name,last_name,email,picture&access_token=${access_token}`)
@@ -322,11 +323,11 @@ module.exports.usersRouterPostLoginFB = async function (req, res, next) {
         console.log({user, token});
         //return {user, token};
         //res.send({y_val, token});
-        y_val = {user, token};
+        out = {user, token};
       }
       else if (!obj) {
         //console.log("no result");
-        y_val = {user: [{}], token: null};
+        out = {user: [{}], token: null};
         //return {y_val, null};
         throw "No good password"
       }
@@ -337,7 +338,7 @@ module.exports.usersRouterPostLoginFB = async function (req, res, next) {
   catch (v) {
     console.log(v);
   }
-  return obj;
+  return out;
   //next();
 }
 
