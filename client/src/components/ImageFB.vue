@@ -61,7 +61,7 @@ export default {
         width: 75px;
         float: left;
         padding: 3px;
-        border: 1px solid #AABBFF;
+        border: 1px solid black;
         margin: 5px;
         border-radius: 3px;
         cursor: pointer;
