@@ -1,12 +1,14 @@
 <template>
   <div class="field is-horizontal">
-    <div class="images">
+    <div class="window" >
+    <div class="images" :style="{'width': width + 'px'}">
       <img
         v-for="image in images"
         :key="image.id"
         :src="image.src"
         @click="img_click(image)"
       />
+    </div>
     </div>
   </div>
 </template>
@@ -18,6 +20,7 @@ export default {
     return {
       file: null,
       images: [],
+      width: 0
     };
   },
   mounted() {
@@ -28,7 +31,11 @@ export default {
         id: x.id,
         src: x.images[0].source,
       }));
+      this.width = 90 * this.images.length;
+      console.log(this.width);
     });
+
+    
   },
   watch: {},
   methods: {
@@ -42,9 +49,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .images {
   display: block;
+  
 }
 .images img {
   box-sizing: border-box;
@@ -55,5 +63,9 @@ export default {
   margin: 5px;
   border-radius: 3px;
   cursor: pointer;
+}
+
+.window {
+  overflow-x: scroll;
 }
 </style>
