@@ -31,6 +31,7 @@ export default {
     });
   },
   watch: {
+    /*
     file: function (o, n) {
       var reader = new FileReader();
       reader.onload = (e) => this.$emit("load", e.target.result);
@@ -38,6 +39,7 @@ export default {
       console.log(n);
       //alert();
     },
+    */
   },
   methods: {
         img_click(image){
