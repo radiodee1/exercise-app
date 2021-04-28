@@ -268,7 +268,6 @@ module.exports.usersRouterPostLogin = async function (req, res, next) {
     console.log(v);
   }
   return y_val;
-  //next();
 }
 
 module.exports.usersRouterPostLoginFB = async function (req, res, next) {
@@ -295,23 +294,18 @@ module.exports.usersRouterPostLoginFB = async function (req, res, next) {
   const username = userFB.data.email;
 
   let x = sql.makeSelectFormat('profiles', user_list, `WHERE username = '${username}'`)
-  //console.log(x);
-  //console.log("#####");
+  
   let con = control.connection();
   try {
     let y = control.xquery(con, x);
     await y.then(async function (value) {
-      //console.log(value);
       let yy = JSON.stringify(value);
 
       xx = JSON.parse(yy);
-      //console.log("----");
-      //console.log(xx);
-
+      
       result = false;
 
       if (xx.length > 0) {
-        //result = await bcrypt.compare(password, y_val[0].password);
         obj = xx.find(x => x.email == userFB.data.email);
       }
       if (obj) {
@@ -326,46 +320,30 @@ module.exports.usersRouterPostLoginFB = async function (req, res, next) {
         obj.password = null;
 
         const user = obj;
-        //console.log("send user...");
         const data = { ...obj, password: undefined };
         const token = jwt.sign(data, JWT_SECRET);
-        //console.log({ user, token });
-        //return {user, token};
-        //res.send({y_val, token});
+        
         out = { user, token };
         return out;
       }
       else if (!obj) {
-        //console.log("no result");
         obj = {};
-        //let dev = false;
-        //if (obj.username == process.env.DEV_USERNAME) {
-        //  dev = true;
-        //}
-        //obj.isDevUser = dev;
+        
         obj.password = null;
         obj.firstname = userFB.data.first_name;
         obj.lastname = userFB.data.last_name;
         obj.username = userFB.data.email;
         obj.email = userFB.data.email;
-        //out = { user: [obj], token: null };
-        /////////////
-
+        
         let x = sql.sqlInsertObjJSON(obj, 'profiles');
-        // let con = control.connection(); // <----
         try {
           let y = control.xquery(con, x);
           await y.then(function (value) {
-            //req.body.password = "";
-            //console.log(value);
+            
             yy = JSON.stringify(value);
-            //console.log(yy);
 
             const user = { ...obj, id: JSON.parse(yy).insertId, password: undefined }
-            //console.log(yyy);
-            //console.log("^^^");
-            // control.end(con); // <-----
-            //const data = { ...obj, password: undefined };
+            
             const token = jwt.sign(user, JWT_SECRET);
             out = {user, token}
           });
@@ -373,7 +351,6 @@ module.exports.usersRouterPostLoginFB = async function (req, res, next) {
         catch (v) {
           console.log(v);
         }
-        //////////////
       }
       control.end(con);
 
@@ -383,7 +360,6 @@ module.exports.usersRouterPostLoginFB = async function (req, res, next) {
     console.log(v);
   }
   return out;
-  //next();
 }
 
 module.exports.usersRouterPostDelete = async function (req, res, next) {
