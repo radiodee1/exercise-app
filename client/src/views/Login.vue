@@ -77,14 +77,7 @@
 //import development from "../components/Development.vue";
 import { Login, toastError, LoginFB } from "../models/Session.js";
 import { Session } from "../models/Session";
-//import router from '../router/index.js';
-//const Session = require("../models/Session");
-//import { PostUserLogin } from '../models/users';
-//let axios = require("axios").default;
 
-//import axios from "../models/axios";
-//let yy = axios.api_get("/users/username", {params: {username: 'xliebman'}})
-//yy.then(x => console.log(x));
 
 export default {
   name: "login",
@@ -165,7 +158,7 @@ export default {
           if (response.status === "connected") {
             let user_reply = await LoginFB(response.authResponse.accessToken);
             
-            FB.api("me?fields=name,email,picture,first_name,last_name", function () {
+            FB.api("me?fields=name,email,picture,first_name,last_name", function () { // <-- myInfo goes here.
               //console.log({ user_reply, myInfo });
               if (typeof user_reply.id !== "number") {
                 return;

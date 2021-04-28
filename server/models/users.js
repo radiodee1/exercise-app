@@ -1,11 +1,9 @@
 var express = require('express');
 const jwt = require('jsonwebtoken');
 const axios = require("axios").default;
-//var usersRouterGet = express.Router();
-//var usersRouterPost = express.Router();
-//var usersRouterFriendGet = express.Router();
+
 var sql = require('../public/javascripts/sql_populate.js');
-//require('promise');
+
 var control = require('../public/javascripts/sql_control.js');
 
 var app = express();

@@ -24,28 +24,21 @@
             <div class="control">
               <nav class="level">
                 <div class="level-left">
-                  <button
-                    class="button is-dark"
-                    @click="submit()"
-                  >
+                  <button class="button is-dark" @click="submit()">
                     Submit
                   </button>
 
+                  <imageview @load="loading" />
                   
-
-            <imageview @load="loading" />
-
                 </div>
               </nav>
             </div>
-
-            <figure class="image " v-show="show_picture">
-              <img id="myImg1" :src="file"  />
-
+            <imageviewfb @load="loading" />
+            <figure class="image" v-show="show_picture">
+              <img id="myImg1" :src="file" />
             </figure>
           </div>
-           <button class="button" @click.prevent="cancel()">Cancel</button>
-
+          <button class="button" @click.prevent="cancel()">Cancel</button>
         </article>
       </div>
       <div class="column"></div>
@@ -55,16 +48,18 @@
 
 <script>
 //import Image from '../components/Image.vue';
-import imageview from '../components/Image.vue';
+import imageview from "../components/Image.vue";
+import imageviewFB from "../components/ImageFB.vue";
 export default {
-  components: {  
-    imageview : imageview
+  components: {
+    imageview: imageview,
+    imageviewfb : imageviewFB
   },
   name: "message",
   data: () => ({
     show_picture: false,
-    file : null,
-    msg: ""
+    file: null,
+    msg: "",
   }),
   props: {
     newsfeed: Boolean,
@@ -104,12 +99,11 @@ export default {
 
       this.focusNews();
     },
-    loading: function(f) {
+    loading: function (f) {
       this.file = f;
       this.showPicture();
       //console.log('file ' + f);
-    }
-    
+    },
   },
 };
 </script>

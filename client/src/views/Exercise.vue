@@ -144,6 +144,7 @@
                 </div>
               </nav>
             </div>
+            <imageviewfb @load="loading" />
             <figure class="image" v-show="show_picture">
               <img id="myImg2" :src="file" />
             </figure>
@@ -163,11 +164,13 @@
 <script>
 import imageview from "../components/Image.vue";
 import { PatchStoreWeight } from "../models/users";
+import imageviewFB from "../components/ImageFB.vue";
 
 export default {
   name: "exercise",
   components: {
     imageview: imageview,
+    imageviewfb : imageviewFB
   },
   data() {
     return {
