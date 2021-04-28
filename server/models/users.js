@@ -295,8 +295,8 @@ module.exports.usersRouterPostLoginFB = async function (req, res, next) {
   const username = userFB.data.email;
 
   let x = sql.makeSelectFormat('profiles', user_list, `WHERE username = '${username}'`)
-  console.log(x);
-  console.log("#####");
+  //console.log(x);
+  //console.log("#####");
   let con = control.connection();
   try {
     let y = control.xquery(con, x);
@@ -305,8 +305,8 @@ module.exports.usersRouterPostLoginFB = async function (req, res, next) {
       let yy = JSON.stringify(value);
 
       xx = JSON.parse(yy);
-      console.log("----");
-      console.log(xx);
+      //console.log("----");
+      //console.log(xx);
 
       result = false;
 
@@ -326,10 +326,10 @@ module.exports.usersRouterPostLoginFB = async function (req, res, next) {
         obj.password = null;
 
         const user = obj;
-        console.log("send user...");
+        //console.log("send user...");
         const data = { ...obj, password: undefined };
         const token = jwt.sign(data, JWT_SECRET);
-        console.log({ user, token });
+        //console.log({ user, token });
         //return {user, token};
         //res.send({y_val, token});
         out = { user, token };

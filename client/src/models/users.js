@@ -3,49 +3,6 @@
 const request = require('./api_request');
 
 
-/*
-export async function PostUserLogin(username_in, password_in) {
-    const username = username_in.trim();
-    const password = password_in.trim();
-
-    //const port = this.backend_port;
-    //const url = this.backend_url;
-    let user = {};
-
-    const user_record = {
-        "username" : username,
-        "password" : password
-    }
-    //let success = false;
-    await request.api("/users/login", user_record, "post")
-    //await axios.post(url + port + "/users/login", user_record)
-        .then(function (response_raw) {
-            // handle success
-            //console.log(response_raw);
-            let response = response_raw.data;
-
-            //console.log(response);
-            //console.log("----");
-            user = response.user[response.user.length -1];
-            user.username = username;
-            user.password = null;
-
-            //console.log(response);
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-        })
-        .then(function () {
-            // always executed
-            
-        });
-    //this.focusNews();
-    //console.log(user);
-    return user;
-}
-*/
-
 export async function GetUserRegister(user) {
     //const vm = this;
     //let success = false;

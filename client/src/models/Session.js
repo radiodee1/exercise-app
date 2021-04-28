@@ -63,8 +63,8 @@ export async function LoginFB(access_token) {
             //console.log(response_raw);
             //let response = response_raw.data;
             
-            console.log(response_raw);
-            console.log("----"); //user.id
+            //console.log(response_raw);
+            //console.log("----"); //user.id
             user = response_raw.data.user;
             //user.username = username;
             //user.password = null;
