@@ -30,40 +30,30 @@ export default {
       }));
     });
   },
-  watch: {
-    /*
-    file: function (o, n) {
-      var reader = new FileReader();
-      reader.onload = (e) => this.$emit("load", e.target.result);
-      reader.readAsDataURL(o); // This line throws the error.
-      console.log(n);
-      //alert();
-    },
-    */
-  },
+  watch: {},
   methods: {
-        img_click(image){
-            //this.newPost.src = image.src;
-            //console.log(this.newPost)
-            this.file = image.src;
-            this.$emit("load", this.file);
-        }
-    }
+    img_click(image) {
+      //this.newPost.src = image.src;
+      //console.log(this.newPost)
+      this.file = image.src;
+      this.$emit("load", this.file);
+    },
+  },
 };
 </script>
 
 <style>
-    .images {
-        display: block;
-    }
-    .images img {
-        box-sizing: border-box;
-        width: 75px;
-        float: left;
-        padding: 3px;
-        border: 1px solid black;
-        margin: 5px;
-        border-radius: 3px;
-        cursor: pointer;
-    }
+.images {
+  display: block;
+}
+.images img {
+  box-sizing: border-box;
+  width: 75px;
+  float: left;
+  padding: 3px;
+  border: 1px solid black;
+  margin: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
 </style>
