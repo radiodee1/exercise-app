@@ -131,7 +131,7 @@ export default {
         }
         //this.$root.user = user_reply;
         Session.user = user_obj;
-
+        Session.isFBLogin = false;
         //console.log(Session.nextRoute);
         //if (Session.nextRoute != null) {
         //  router.push(Session.nextRoute.path )
@@ -166,6 +166,7 @@ export default {
               Session.user = {
                 ...user_reply,
               };
+              Session.isFBLogin = true;
               vm.$root.user = user_reply;
               vm.focusNews();
             });

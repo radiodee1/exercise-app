@@ -6,7 +6,8 @@ import { api } from "./api_request";
 const Session = {
     user: null,
     message: [],
-    token: null
+    token: null,
+    isFBLogin: false
 }
 
 export {Session};
