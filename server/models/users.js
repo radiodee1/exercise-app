@@ -424,3 +424,34 @@ module.exports.FromJWT = async (token) => {
   }
 
 }
+
+module.exports.usersRouterGetType = async function (req, res, next) {
+  //res.set('Content-Type', 'application/json');
+  let name = req.query.name;
+  let out = [];
+  //const columns = ['*'];
+  //for (let i in user_all) {
+  //  columns.push(i);
+  //}
+  let x = sql.sqlUserNameGetRaw( name);
+  //let x = sql.makeSelect('profiles', columns, '', false);
+  let con = control.connection();
+  console.log(x);
+  try {
+    let y = control.xquery(con, x);
+    await y.then(function (value) {
+      //console.log(value);
+      let yy = JSON.stringify(value);
+      //res.json(yy);
+      control.end(con);
+      console.log(yy);
+      out = yy;
+    });
+  }
+  catch (v) {
+    console.log(v);
+  }
+  //next();
+  console.log(out);
+  return out;
+};

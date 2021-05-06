@@ -27,6 +27,7 @@
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
+    "lodash.debounce": "4.0.8",
     "http-errors": "^1.8.0"
   },
   "eslintConfig": {

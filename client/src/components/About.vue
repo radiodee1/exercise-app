@@ -16,10 +16,14 @@
     <p>Don't use the browser 'back' arrow for site navigation. When you are done with a form, click either
       the 'submit' button or the smaller 'cancel' button to exit. If you want to go back to the login screen
       click the Exercise-App icon in the top left of the news feed window. This will log you out. </p>
+  <hr>
+  <typeahead></typeahead>
   </div>
+
 </template>
 
 <script>
+import typeahead from "./TypeAhead.vue";
 
 export default {
   name: "about",
@@ -29,6 +33,9 @@ export default {
   props: {
     newsfeed: Boolean,
     //classOption: Function
+  },
+  components: {
+    typeahead : typeahead
   },
   methods: {
     classOption: function (i) {

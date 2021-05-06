@@ -206,3 +206,31 @@ export async function PostUserDelete(id) {
         });
     return;
 }
+
+export async function GetUserTypeList(name) {
+    let list = [];
+    const p_list = {
+        params: {
+            name: name,
+        },
+    };
+    await request.api("/users/type", p_list, "get")
+    //await axios.get(url + port + "/users")
+        .then(function (response_raw) {
+            // handle success
+            //console.log(response);
+            let response = response_raw.data;// JSON.parse(response_raw.data);
+            //console.log(response);
+            //console.log("----");
+            list = response;
+            //console.log(response);
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+        .then(function () {
+            
+        });
+    return list;
+}

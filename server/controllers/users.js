@@ -52,4 +52,9 @@ router
     let yy =  model.usersRouterPostDelete(req, res, next);
     //res.send(yy);
 })
+
+.get('/users/type', function (req, res, next){
+    let yy = model.usersRouterGetType(req, res, next);
+    res.send(yy);
+}) 
 module.exports = router;

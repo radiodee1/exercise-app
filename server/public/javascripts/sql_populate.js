@@ -23,7 +23,8 @@ module.exports = {
     
     sqlFeedDeleteRaw,
     sqlFriendsDeleteRaw,
-    sqlUserDeleteRaw
+    sqlUserDeleteRaw,
+    sqlUserNameGetRaw
 }
 
 
@@ -347,4 +348,8 @@ function sqlFeedDeleteRaw(id) {
 
 function sqlFriendsDeleteRaw(id) {
     return `DELETE FROM friends WHERE user_id = ${id} OR friend_user_id = ${id}`;
+}
+
+function sqlUserNameGetRaw(name) {
+    return `SELECT firstname, lastname, username FROM profiles WHERE username LIKE '${name}%'`;
 }
